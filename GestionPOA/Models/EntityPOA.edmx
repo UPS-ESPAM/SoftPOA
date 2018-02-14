@@ -1,0 +1,1283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PEDIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoCalificacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="DepartamentoID" />
+          </Key>
+          <Property Name="DepartamentoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="ObjeEspecificosDepartamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartamentoID" Type="int" />
+          <Property Name="ObjetivosEspecificosId" Type="int" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="ObjetivosEspecificos">
+          <Key>
+            <PropertyRef Name="ObjetivosEspecificosId" />
+          </Key>
+          <Property Name="ObjetivosEspecificosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ObjetivosEstragicoId" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="ObjetivosEstrategicos">
+          <Key>
+            <PropertyRef Name="ObjetivosEstragicoId" />
+          </Key>
+          <Property Name="ObjetivosEstragicoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubsistemaId" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Subsistema">
+          <Key>
+            <PropertyRef Name="SubsistemaId" />
+          </Key>
+          <Property Name="SubsistemaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Acciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MetaID" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Estrategias">
+          <Key>
+            <PropertyRef Name="EstrategiasId" />
+          </Key>
+          <Property Name="EstrategiasId" Type="int" Nullable="false" />
+          <Property Name="ObjetivosEspecificosId" Type="int" />
+          <Property Name="PlanificacionId" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Evidencias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramacionID" Type="int" />
+          <Property Name="evidencia" Type="nvarchar" MaxLength="250" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="eliminado" Type="bit" />
+          <Property Name="valor" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Indicadores">
+          <Key>
+            <PropertyRef Name="IndicadorId" />
+          </Key>
+          <Property Name="IndicadorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstrategiasId" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="InformacioAdicional">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="metasId" Type="int" />
+          <Property Name="FormulaCalculo" Type="nvarchar" MaxLength="50" />
+          <Property Name="LineaBase" Type="nvarchar" MaxLength="50" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="intervalo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PeriodoId" Type="int" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Metas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IndicadorId" Type="int" />
+          <Property Name="Observacion" Type="nvarchar" MaxLength="250" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="tipoCalificacionId" Type="int" />
+        </EntityType>
+        <EntityType Name="Periocidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Periodo" Type="nvarchar" MaxLength="50" />
+          <Property Name="estado" Type="bit" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Planificacion">
+          <Key>
+            <PropertyRef Name="PlanificacionId" />
+          </Key>
+          <Property Name="PlanificacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartamentoID" Type="int" />
+          <Property Name="TipoPlanificacionId" Type="int" />
+          <Property Name="TipoProgramacionId" Type="int" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Presupuesto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MetaID" Type="int" />
+          <Property Name="Planificado" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Ejecutado" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Programacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="observacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="planificado" Type="int" />
+          <Property Name="ejecutado" Type="int" />
+          <Property Name="IntervaloId" Type="int" />
+          <Property Name="MetaID" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoPlanificacion">
+          <Key>
+            <PropertyRef Name="TipoPlanificacionId" />
+          </Key>
+          <Property Name="TipoPlanificacionId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Acciones_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="Acciones" Type="Self.Acciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Acciones">
+              <PropertyRef Name="MetaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estrategias_ObjetivosEspecificos1">
+          <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="0..1" />
+          <End Role="Estrategias" Type="Self.Estrategias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjetivosEspecificos">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Principal>
+            <Dependent Role="Estrategias">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estrategias_Planificacion">
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="0..1" />
+          <End Role="Estrategias" Type="Self.Estrategias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planificacion">
+              <PropertyRef Name="PlanificacionId" />
+            </Principal>
+            <Dependent Role="Estrategias">
+              <PropertyRef Name="PlanificacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidencias_Programacion">
+          <End Role="Programacion" Type="Self.Programacion" Multiplicity="0..1" />
+          <End Role="Evidencias" Type="Self.Evidencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evidencias">
+              <PropertyRef Name="ProgramacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Indicadores_Estrategias">
+          <End Role="Estrategias" Type="Self.Estrategias" Multiplicity="0..1" />
+          <End Role="Indicadores" Type="Self.Indicadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estrategias">
+              <PropertyRef Name="EstrategiasId" />
+            </Principal>
+            <Dependent Role="Indicadores">
+              <PropertyRef Name="EstrategiasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacioAdicional_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="InformacioAdicional" Type="Self.InformacioAdicional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="InformacioAdicional">
+              <PropertyRef Name="metasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_intervalo_Periodo">
+          <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
+          <End Role="intervalo" Type="Self.intervalo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periocidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="intervalo">
+              <PropertyRef Name="PeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Metas_Indicadores">
+          <End Role="Indicadores" Type="Self.Indicadores" Multiplicity="0..1" />
+          <End Role="Metas" Type="Self.Metas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indicadores">
+              <PropertyRef Name="IndicadorId" />
+            </Principal>
+            <Dependent Role="Metas">
+              <PropertyRef Name="IndicadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Metas_TipoCalificacion">
+          <End Role="TipoCalificacion" Type="Self.TipoCalificacion" Multiplicity="0..1" />
+          <End Role="Metas" Type="Self.Metas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCalificacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Metas">
+              <PropertyRef Name="tipoCalificacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjeEspecificosDepartamento_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="ObjeEspecificosDepartamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
+          <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="0..1" />
+          <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjetivosEspecificos">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Principal>
+            <Dependent Role="ObjeEspecificosDepartamento">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjetivosEspecificos_ObjetivosEstrategicos">
+          <End Role="ObjetivosEstrategicos" Type="Self.ObjetivosEstrategicos" Multiplicity="0..1" />
+          <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjetivosEstrategicos">
+              <PropertyRef Name="ObjetivosEstragicoId" />
+            </Principal>
+            <Dependent Role="ObjetivosEspecificos">
+              <PropertyRef Name="ObjetivosEstragicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjetivosEstrategicos_Subsistema">
+          <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="0..1" />
+          <End Role="ObjetivosEstrategicos" Type="Self.ObjetivosEstrategicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subsistema">
+              <PropertyRef Name="SubsistemaId" />
+            </Principal>
+            <Dependent Role="ObjetivosEstrategicos">
+              <PropertyRef Name="SubsistemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Periodo_Planificacion">
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="1" />
+          <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planificacion">
+              <PropertyRef Name="PlanificacionId" />
+            </Principal>
+            <Dependent Role="Periocidad">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planificacion_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="Planificacion">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planificacion_TipoPlanificacion">
+          <End Role="TipoPlanificacion" Type="Self.TipoPlanificacion" Multiplicity="0..1" />
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPlanificacion">
+              <PropertyRef Name="TipoPlanificacionId" />
+            </Principal>
+            <Dependent Role="Planificacion">
+              <PropertyRef Name="TipoPlanificacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuesto_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="Presupuesto" Type="Self.Presupuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Presupuesto">
+              <PropertyRef Name="MetaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programacion_intervalo">
+          <End Role="intervalo" Type="Self.intervalo" Multiplicity="0..1" />
+          <End Role="Programacion" Type="Self.Programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="intervalo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programacion">
+              <PropertyRef Name="IntervaloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programacion_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="Programacion" Type="Self.Programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programacion">
+              <PropertyRef Name="MetaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEDIModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCalificacion" EntityType="Self.TipoCalificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="gestion" store:Type="Tables" />
+          <EntitySet Name="ObjeEspecificosDepartamento" EntityType="Self.ObjeEspecificosDepartamento" Schema="gestion" store:Type="Tables" />
+          <EntitySet Name="ObjetivosEspecificos" EntityType="Self.ObjetivosEspecificos" Schema="gestion" store:Type="Tables" />
+          <EntitySet Name="ObjetivosEstrategicos" EntityType="Self.ObjetivosEstrategicos" Schema="gestion" store:Type="Tables" />
+          <EntitySet Name="Subsistema" EntityType="Self.Subsistema" Schema="gestion" store:Type="Tables" />
+          <EntitySet Name="Acciones" EntityType="Self.Acciones" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Estrategias" EntityType="Self.Estrategias" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Evidencias" EntityType="Self.Evidencias" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Indicadores" EntityType="Self.Indicadores" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="InformacioAdicional" EntityType="Self.InformacioAdicional" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="intervalo" EntityType="Self.intervalo" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Metas" EntityType="Self.Metas" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Periocidad" EntityType="Self.Periocidad" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Planificacion" EntityType="Self.Planificacion" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Presupuesto" EntityType="Self.Presupuesto" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="Programacion" EntityType="Self.Programacion" Schema="planificacion" store:Type="Tables" />
+          <EntitySet Name="TipoPlanificacion" EntityType="Self.TipoPlanificacion" Schema="planificacion" store:Type="Tables" />
+          <AssociationSet Name="FK_Acciones_Metas" Association="Self.FK_Acciones_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="Acciones" EntitySet="Acciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estrategias_ObjetivosEspecificos1" Association="Self.FK_Estrategias_ObjetivosEspecificos1">
+            <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
+            <End Role="Estrategias" EntitySet="Estrategias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estrategias_Planificacion" Association="Self.FK_Estrategias_Planificacion">
+            <End Role="Planificacion" EntitySet="Planificacion" />
+            <End Role="Estrategias" EntitySet="Estrategias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidencias_Programacion" Association="Self.FK_Evidencias_Programacion">
+            <End Role="Programacion" EntitySet="Programacion" />
+            <End Role="Evidencias" EntitySet="Evidencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Indicadores_Estrategias" Association="Self.FK_Indicadores_Estrategias">
+            <End Role="Estrategias" EntitySet="Estrategias" />
+            <End Role="Indicadores" EntitySet="Indicadores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacioAdicional_Metas" Association="Self.FK_InformacioAdicional_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="InformacioAdicional" EntitySet="InformacioAdicional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_intervalo_Periodo" Association="Self.FK_intervalo_Periodo">
+            <End Role="Periocidad" EntitySet="Periocidad" />
+            <End Role="intervalo" EntitySet="intervalo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Metas_Indicadores" Association="Self.FK_Metas_Indicadores">
+            <End Role="Indicadores" EntitySet="Indicadores" />
+            <End Role="Metas" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Metas_TipoCalificacion" Association="Self.FK_Metas_TipoCalificacion">
+            <End Role="TipoCalificacion" EntitySet="TipoCalificacion" />
+            <End Role="Metas" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjeEspecificosDepartamento_Departamento" Association="Self.FK_ObjeEspecificosDepartamento_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" Association="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
+            <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
+            <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjetivosEspecificos_ObjetivosEstrategicos" Association="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos">
+            <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
+            <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjetivosEstrategicos_Subsistema" Association="Self.FK_ObjetivosEstrategicos_Subsistema">
+            <End Role="Subsistema" EntitySet="Subsistema" />
+            <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Periodo_Planificacion" Association="Self.FK_Periodo_Planificacion">
+            <End Role="Planificacion" EntitySet="Planificacion" />
+            <End Role="Periocidad" EntitySet="Periocidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planificacion_Departamento" Association="Self.FK_Planificacion_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Planificacion" EntitySet="Planificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planificacion_TipoPlanificacion" Association="Self.FK_Planificacion_TipoPlanificacion">
+            <End Role="TipoPlanificacion" EntitySet="TipoPlanificacion" />
+            <End Role="Planificacion" EntitySet="Planificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuesto_Metas" Association="Self.FK_Presupuesto_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="Presupuesto" EntitySet="Presupuesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programacion_intervalo" Association="Self.FK_Programacion_intervalo">
+            <End Role="intervalo" EntitySet="intervalo" />
+            <End Role="Programacion" EntitySet="Programacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programacion_Metas" Association="Self.FK_Programacion_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="Programacion" EntitySet="Programacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEDIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoCalificacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_Metas_TipoCalificacion" FromRole="TipoCalificacion" ToRole="Metas" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="DepartamentoID" />
+          </Key>
+          <Property Name="DepartamentoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="ObjeEspecificosDepartamento" Relationship="Self.FK_ObjeEspecificosDepartamento_Departamento" FromRole="Departamento" ToRole="ObjeEspecificosDepartamento" />
+          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Planificacion_Departamento" FromRole="Departamento" ToRole="Planificacion" />
+        </EntityType>
+        <EntityType Name="ObjeEspecificosDepartamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartamentoID" Type="Int32" />
+          <Property Name="ObjetivosEspecificosId" Type="Int32" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_ObjeEspecificosDepartamento_Departamento" FromRole="ObjeEspecificosDepartamento" ToRole="Departamento" />
+          <NavigationProperty Name="ObjetivosEspecificos" Relationship="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" FromRole="ObjeEspecificosDepartamento" ToRole="ObjetivosEspecificos" />
+        </EntityType>
+        <EntityType Name="ObjetivosEspecificos">
+          <Key>
+            <PropertyRef Name="ObjetivosEspecificosId" />
+          </Key>
+          <Property Name="ObjetivosEspecificosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ObjetivosEstragicoId" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="ObjeEspecificosDepartamento" Relationship="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" FromRole="ObjetivosEspecificos" ToRole="ObjeEspecificosDepartamento" />
+          <NavigationProperty Name="Estrategias" Relationship="Self.FK_Estrategias_ObjetivosEspecificos1" FromRole="ObjetivosEspecificos" ToRole="Estrategias" />
+          <NavigationProperty Name="ObjetivosEstrategicos" Relationship="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos" FromRole="ObjetivosEspecificos" ToRole="ObjetivosEstrategicos" />
+        </EntityType>
+        <EntityType Name="ObjetivosEstrategicos">
+          <Key>
+            <PropertyRef Name="ObjetivosEstragicoId" />
+          </Key>
+          <Property Name="ObjetivosEstragicoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubsistemaId" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="ObjetivosEspecificos" Relationship="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos" FromRole="ObjetivosEstrategicos" ToRole="ObjetivosEspecificos" />
+          <NavigationProperty Name="Subsistema" Relationship="Self.FK_ObjetivosEstrategicos_Subsistema" FromRole="ObjetivosEstrategicos" ToRole="Subsistema" />
+        </EntityType>
+        <EntityType Name="Subsistema">
+          <Key>
+            <PropertyRef Name="SubsistemaId" />
+          </Key>
+          <Property Name="SubsistemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="ObjetivosEstrategicos" Relationship="Self.FK_ObjetivosEstrategicos_Subsistema" FromRole="Subsistema" ToRole="ObjetivosEstrategicos" />
+        </EntityType>
+        <EntityType Name="Acciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MetaID" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_Acciones_Metas" FromRole="Acciones" ToRole="Metas" />
+        </EntityType>
+        <EntityType Name="Estrategias">
+          <Key>
+            <PropertyRef Name="EstrategiasId" />
+          </Key>
+          <Property Name="EstrategiasId" Type="Int32" Nullable="false" />
+          <Property Name="ObjetivosEspecificosId" Type="Int32" />
+          <Property Name="PlanificacionId" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="ObjetivosEspecificos" Relationship="Self.FK_Estrategias_ObjetivosEspecificos1" FromRole="Estrategias" ToRole="ObjetivosEspecificos" />
+          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Estrategias_Planificacion" FromRole="Estrategias" ToRole="Planificacion" />
+          <NavigationProperty Name="Indicadores" Relationship="Self.FK_Indicadores_Estrategias" FromRole="Estrategias" ToRole="Indicadores" />
+        </EntityType>
+        <EntityType Name="Evidencias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramacionID" Type="Int32" />
+          <Property Name="evidencia" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="eliminado" Type="Boolean" />
+          <Property Name="valor" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Programacion" Relationship="Self.FK_Evidencias_Programacion" FromRole="Evidencias" ToRole="Programacion" />
+        </EntityType>
+        <EntityType Name="Indicadores">
+          <Key>
+            <PropertyRef Name="IndicadorId" />
+          </Key>
+          <Property Name="IndicadorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstrategiasId" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Estrategias" Relationship="Self.FK_Indicadores_Estrategias" FromRole="Indicadores" ToRole="Estrategias" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_Metas_Indicadores" FromRole="Indicadores" ToRole="Metas" />
+        </EntityType>
+        <EntityType Name="InformacioAdicional">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="metasId" Type="Int32" />
+          <Property Name="FormulaCalculo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LineaBase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_InformacioAdicional_Metas" FromRole="InformacioAdicional" ToRole="Metas" />
+        </EntityType>
+        <EntityType Name="intervalo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodoId" Type="Int32" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Periocidad" Relationship="Self.FK_intervalo_Periodo" FromRole="intervalo" ToRole="Periocidad" />
+          <NavigationProperty Name="Programacion" Relationship="Self.FK_Programacion_intervalo" FromRole="intervalo" ToRole="Programacion" />
+        </EntityType>
+        <EntityType Name="Metas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IndicadorId" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="tipoCalificacionId" Type="Int32" />
+          <NavigationProperty Name="TipoCalificacion" Relationship="Self.FK_Metas_TipoCalificacion" FromRole="Metas" ToRole="TipoCalificacion" />
+          <NavigationProperty Name="Acciones" Relationship="Self.FK_Acciones_Metas" FromRole="Metas" ToRole="Acciones" />
+          <NavigationProperty Name="Indicadores" Relationship="Self.FK_Metas_Indicadores" FromRole="Metas" ToRole="Indicadores" />
+          <NavigationProperty Name="InformacioAdicional" Relationship="Self.FK_InformacioAdicional_Metas" FromRole="Metas" ToRole="InformacioAdicional" />
+          <NavigationProperty Name="Presupuesto" Relationship="Self.FK_Presupuesto_Metas" FromRole="Metas" ToRole="Presupuesto" />
+          <NavigationProperty Name="Programacion" Relationship="Self.FK_Programacion_Metas" FromRole="Metas" ToRole="Programacion" />
+        </EntityType>
+        <EntityType Name="Periocidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Periodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="intervalo" Relationship="Self.FK_intervalo_Periodo" FromRole="Periocidad" ToRole="intervalo" />
+          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Periodo_Planificacion" FromRole="Periocidad" ToRole="Planificacion" />
+        </EntityType>
+        <EntityType Name="Planificacion">
+          <Key>
+            <PropertyRef Name="PlanificacionId" />
+          </Key>
+          <Property Name="PlanificacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartamentoID" Type="Int32" />
+          <Property Name="TipoPlanificacionId" Type="Int32" />
+          <Property Name="TipoProgramacionId" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Planificacion_Departamento" FromRole="Planificacion" ToRole="Departamento" />
+          <NavigationProperty Name="Estrategias" Relationship="Self.FK_Estrategias_Planificacion" FromRole="Planificacion" ToRole="Estrategias" />
+          <NavigationProperty Name="Periocidad" Relationship="Self.FK_Periodo_Planificacion" FromRole="Planificacion" ToRole="Periocidad" />
+          <NavigationProperty Name="TipoPlanificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="Planificacion" ToRole="TipoPlanificacion" />
+        </EntityType>
+        <EntityType Name="Presupuesto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MetaID" Type="Int32" />
+          <Property Name="Planificado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ejecutado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_Presupuesto_Metas" FromRole="Presupuesto" ToRole="Metas" />
+        </EntityType>
+        <EntityType Name="Programacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="planificado" Type="Int32" />
+          <Property Name="ejecutado" Type="Int32" />
+          <Property Name="IntervaloId" Type="Int32" />
+          <Property Name="MetaID" Type="Int32" />
+          <NavigationProperty Name="Evidencias" Relationship="Self.FK_Evidencias_Programacion" FromRole="Programacion" ToRole="Evidencias" />
+          <NavigationProperty Name="intervalo" Relationship="Self.FK_Programacion_intervalo" FromRole="Programacion" ToRole="intervalo" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_Programacion_Metas" FromRole="Programacion" ToRole="Metas" />
+        </EntityType>
+        <EntityType Name="TipoPlanificacion">
+          <Key>
+            <PropertyRef Name="TipoPlanificacionId" />
+          </Key>
+          <Property Name="TipoPlanificacionId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="TipoPlanificacion" ToRole="Planificacion" />
+        </EntityType>
+        <Association Name="FK_Metas_TipoCalificacion">
+          <End Role="TipoCalificacion" Type="Self.TipoCalificacion" Multiplicity="0..1" />
+          <End Role="Metas" Type="Self.Metas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCalificacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Metas">
+              <PropertyRef Name="tipoCalificacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjeEspecificosDepartamento_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="ObjeEspecificosDepartamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planificacion_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="Planificacion">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
+          <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="0..1" />
+          <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjetivosEspecificos">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Principal>
+            <Dependent Role="ObjeEspecificosDepartamento">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estrategias_ObjetivosEspecificos1">
+          <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="0..1" />
+          <End Role="Estrategias" Type="Self.Estrategias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjetivosEspecificos">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Principal>
+            <Dependent Role="Estrategias">
+              <PropertyRef Name="ObjetivosEspecificosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjetivosEspecificos_ObjetivosEstrategicos">
+          <End Role="ObjetivosEstrategicos" Type="Self.ObjetivosEstrategicos" Multiplicity="0..1" />
+          <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjetivosEstrategicos">
+              <PropertyRef Name="ObjetivosEstragicoId" />
+            </Principal>
+            <Dependent Role="ObjetivosEspecificos">
+              <PropertyRef Name="ObjetivosEstragicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjetivosEstrategicos_Subsistema">
+          <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="0..1" />
+          <End Role="ObjetivosEstrategicos" Type="Self.ObjetivosEstrategicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subsistema">
+              <PropertyRef Name="SubsistemaId" />
+            </Principal>
+            <Dependent Role="ObjetivosEstrategicos">
+              <PropertyRef Name="SubsistemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acciones_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="Acciones" Type="Self.Acciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Acciones">
+              <PropertyRef Name="MetaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estrategias_Planificacion">
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="0..1" />
+          <End Role="Estrategias" Type="Self.Estrategias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planificacion">
+              <PropertyRef Name="PlanificacionId" />
+            </Principal>
+            <Dependent Role="Estrategias">
+              <PropertyRef Name="PlanificacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Indicadores_Estrategias">
+          <End Role="Estrategias" Type="Self.Estrategias" Multiplicity="0..1" />
+          <End Role="Indicadores" Type="Self.Indicadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estrategias">
+              <PropertyRef Name="EstrategiasId" />
+            </Principal>
+            <Dependent Role="Indicadores">
+              <PropertyRef Name="EstrategiasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidencias_Programacion">
+          <End Role="Programacion" Type="Self.Programacion" Multiplicity="0..1" />
+          <End Role="Evidencias" Type="Self.Evidencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evidencias">
+              <PropertyRef Name="ProgramacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Metas_Indicadores">
+          <End Role="Indicadores" Type="Self.Indicadores" Multiplicity="0..1" />
+          <End Role="Metas" Type="Self.Metas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indicadores">
+              <PropertyRef Name="IndicadorId" />
+            </Principal>
+            <Dependent Role="Metas">
+              <PropertyRef Name="IndicadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacioAdicional_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="InformacioAdicional" Type="Self.InformacioAdicional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="InformacioAdicional">
+              <PropertyRef Name="metasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_intervalo_Periodo">
+          <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
+          <End Role="intervalo" Type="Self.intervalo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periocidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="intervalo">
+              <PropertyRef Name="PeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programacion_intervalo">
+          <End Role="intervalo" Type="Self.intervalo" Multiplicity="0..1" />
+          <End Role="Programacion" Type="Self.Programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="intervalo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programacion">
+              <PropertyRef Name="IntervaloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuesto_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="Presupuesto" Type="Self.Presupuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Presupuesto">
+              <PropertyRef Name="MetaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programacion_Metas">
+          <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
+          <End Role="Programacion" Type="Self.Programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Metas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programacion">
+              <PropertyRef Name="MetaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Periodo_Planificacion">
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="1" />
+          <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planificacion">
+              <PropertyRef Name="PlanificacionId" />
+            </Principal>
+            <Dependent Role="Periocidad">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planificacion_TipoPlanificacion">
+          <End Role="TipoPlanificacion" Type="Self.TipoPlanificacion" Multiplicity="0..1" />
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPlanificacion">
+              <PropertyRef Name="TipoPlanificacionId" />
+            </Principal>
+            <Dependent Role="Planificacion">
+              <PropertyRef Name="TipoPlanificacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEDIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoCalificacion" EntityType="Self.TipoCalificacion" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="ObjeEspecificosDepartamento" EntityType="Self.ObjeEspecificosDepartamento" />
+          <EntitySet Name="ObjetivosEspecificos" EntityType="Self.ObjetivosEspecificos" />
+          <EntitySet Name="ObjetivosEstrategicos" EntityType="Self.ObjetivosEstrategicos" />
+          <EntitySet Name="Subsistema" EntityType="Self.Subsistema" />
+          <EntitySet Name="Acciones" EntityType="Self.Acciones" />
+          <EntitySet Name="Estrategias" EntityType="Self.Estrategias" />
+          <EntitySet Name="Evidencias" EntityType="Self.Evidencias" />
+          <EntitySet Name="Indicadores" EntityType="Self.Indicadores" />
+          <EntitySet Name="InformacioAdicional" EntityType="Self.InformacioAdicional" />
+          <EntitySet Name="intervalo" EntityType="Self.intervalo" />
+          <EntitySet Name="Metas" EntityType="Self.Metas" />
+          <EntitySet Name="Periocidad" EntityType="Self.Periocidad" />
+          <EntitySet Name="Planificacion" EntityType="Self.Planificacion" />
+          <EntitySet Name="Presupuesto" EntityType="Self.Presupuesto" />
+          <EntitySet Name="Programacion" EntityType="Self.Programacion" />
+          <EntitySet Name="TipoPlanificacion" EntityType="Self.TipoPlanificacion" />
+          <AssociationSet Name="FK_Metas_TipoCalificacion" Association="Self.FK_Metas_TipoCalificacion">
+            <End Role="TipoCalificacion" EntitySet="TipoCalificacion" />
+            <End Role="Metas" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjeEspecificosDepartamento_Departamento" Association="Self.FK_ObjeEspecificosDepartamento_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planificacion_Departamento" Association="Self.FK_Planificacion_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Planificacion" EntitySet="Planificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" Association="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
+            <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
+            <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estrategias_ObjetivosEspecificos1" Association="Self.FK_Estrategias_ObjetivosEspecificos1">
+            <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
+            <End Role="Estrategias" EntitySet="Estrategias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjetivosEspecificos_ObjetivosEstrategicos" Association="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos">
+            <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
+            <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjetivosEstrategicos_Subsistema" Association="Self.FK_ObjetivosEstrategicos_Subsistema">
+            <End Role="Subsistema" EntitySet="Subsistema" />
+            <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acciones_Metas" Association="Self.FK_Acciones_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="Acciones" EntitySet="Acciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estrategias_Planificacion" Association="Self.FK_Estrategias_Planificacion">
+            <End Role="Planificacion" EntitySet="Planificacion" />
+            <End Role="Estrategias" EntitySet="Estrategias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Indicadores_Estrategias" Association="Self.FK_Indicadores_Estrategias">
+            <End Role="Estrategias" EntitySet="Estrategias" />
+            <End Role="Indicadores" EntitySet="Indicadores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidencias_Programacion" Association="Self.FK_Evidencias_Programacion">
+            <End Role="Programacion" EntitySet="Programacion" />
+            <End Role="Evidencias" EntitySet="Evidencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Metas_Indicadores" Association="Self.FK_Metas_Indicadores">
+            <End Role="Indicadores" EntitySet="Indicadores" />
+            <End Role="Metas" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacioAdicional_Metas" Association="Self.FK_InformacioAdicional_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="InformacioAdicional" EntitySet="InformacioAdicional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_intervalo_Periodo" Association="Self.FK_intervalo_Periodo">
+            <End Role="Periocidad" EntitySet="Periocidad" />
+            <End Role="intervalo" EntitySet="intervalo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programacion_intervalo" Association="Self.FK_Programacion_intervalo">
+            <End Role="intervalo" EntitySet="intervalo" />
+            <End Role="Programacion" EntitySet="Programacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuesto_Metas" Association="Self.FK_Presupuesto_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="Presupuesto" EntitySet="Presupuesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programacion_Metas" Association="Self.FK_Programacion_Metas">
+            <End Role="Metas" EntitySet="Metas" />
+            <End Role="Programacion" EntitySet="Programacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Periodo_Planificacion" Association="Self.FK_Periodo_Planificacion">
+            <End Role="Planificacion" EntitySet="Planificacion" />
+            <End Role="Periocidad" EntitySet="Periocidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planificacion_TipoPlanificacion" Association="Self.FK_Planificacion_TipoPlanificacion">
+            <End Role="TipoPlanificacion" EntitySet="TipoPlanificacion" />
+            <End Role="Planificacion" EntitySet="Planificacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEDIModelStoreContainer" CdmEntityContainer="PEDIEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PEDIModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCalificacion">
+            <EntityTypeMapping TypeName="PEDIModel.TipoCalificacion">
+              <MappingFragment StoreEntitySet="TipoCalificacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="PEDIModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjeEspecificosDepartamento">
+            <EntityTypeMapping TypeName="PEDIModel.ObjeEspecificosDepartamento">
+              <MappingFragment StoreEntitySet="ObjeEspecificosDepartamento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjetivosEspecificos">
+            <EntityTypeMapping TypeName="PEDIModel.ObjetivosEspecificos">
+              <MappingFragment StoreEntitySet="ObjetivosEspecificos">
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjetivosEstrategicos">
+            <EntityTypeMapping TypeName="PEDIModel.ObjetivosEstrategicos">
+              <MappingFragment StoreEntitySet="ObjetivosEstrategicos">
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subsistema">
+            <EntityTypeMapping TypeName="PEDIModel.Subsistema">
+              <MappingFragment StoreEntitySet="Subsistema">
+                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Acciones">
+            <EntityTypeMapping TypeName="PEDIModel.Acciones">
+              <MappingFragment StoreEntitySet="Acciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estrategias">
+            <EntityTypeMapping TypeName="PEDIModel.Estrategias">
+              <MappingFragment StoreEntitySet="Estrategias">
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="PlanificacionId" ColumnName="PlanificacionId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evidencias">
+            <EntityTypeMapping TypeName="PEDIModel.Evidencias">
+              <MappingFragment StoreEntitySet="Evidencias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProgramacionID" ColumnName="ProgramacionID" />
+                <ScalarProperty Name="evidencia" ColumnName="evidencia" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Indicadores">
+            <EntityTypeMapping TypeName="PEDIModel.Indicadores">
+              <MappingFragment StoreEntitySet="Indicadores">
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformacioAdicional">
+            <EntityTypeMapping TypeName="PEDIModel.InformacioAdicional">
+              <MappingFragment StoreEntitySet="InformacioAdicional">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="metasId" ColumnName="metasId" />
+                <ScalarProperty Name="FormulaCalculo" ColumnName="FormulaCalculo" />
+                <ScalarProperty Name="LineaBase" ColumnName="LineaBase" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="intervalo">
+            <EntityTypeMapping TypeName="PEDIModel.intervalo">
+              <MappingFragment StoreEntitySet="intervalo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Metas">
+            <EntityTypeMapping TypeName="PEDIModel.Metas">
+              <MappingFragment StoreEntitySet="Metas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="tipoCalificacionId" ColumnName="tipoCalificacionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periocidad">
+            <EntityTypeMapping TypeName="PEDIModel.Periocidad">
+              <MappingFragment StoreEntitySet="Periocidad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planificacion">
+            <EntityTypeMapping TypeName="PEDIModel.Planificacion">
+              <MappingFragment StoreEntitySet="Planificacion">
+                <ScalarProperty Name="PlanificacionId" ColumnName="PlanificacionId" />
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="TipoPlanificacionId" ColumnName="TipoPlanificacionId" />
+                <ScalarProperty Name="TipoProgramacionId" ColumnName="TipoProgramacionId" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presupuesto">
+            <EntityTypeMapping TypeName="PEDIModel.Presupuesto">
+              <MappingFragment StoreEntitySet="Presupuesto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+                <ScalarProperty Name="Planificado" ColumnName="Planificado" />
+                <ScalarProperty Name="Ejecutado" ColumnName="Ejecutado" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programacion">
+            <EntityTypeMapping TypeName="PEDIModel.Programacion">
+              <MappingFragment StoreEntitySet="Programacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="planificado" ColumnName="planificado" />
+                <ScalarProperty Name="ejecutado" ColumnName="ejecutado" />
+                <ScalarProperty Name="IntervaloId" ColumnName="IntervaloId" />
+                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPlanificacion">
+            <EntityTypeMapping TypeName="PEDIModel.TipoPlanificacion">
+              <MappingFragment StoreEntitySet="TipoPlanificacion">
+                <ScalarProperty Name="TipoPlanificacionId" ColumnName="TipoPlanificacionId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

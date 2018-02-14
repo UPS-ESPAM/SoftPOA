@@ -1,0 +1,62 @@
+﻿<div class="row" ng-controller="IndicadoresController as demo">
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">list</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title"><a class="ui teal tag label">SUBSISTEMAS</a></h4>
+                <div class="toolbar row">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="ui label">
+                                    <i class="pin icon"></i> Total de registros: {{vm.totalregistros}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom:20px;">
+                            <div class="form-group">
+                                <div class="ui icon input pull-right">
+                                    <input type="text" placeholder="Buscar..." class="form-control pull-right" ng-model="searchText">
+                                    <i class="circular search link icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                        
+                <table ng-table="demo.tableParams" class="table table-bordered table-hover col-md-12" >
+                    <colgroup>
+                        <col width="50%" />
+                        <col width="50%" />
+                        <col width="20%" />
+                    </colgroup>
+                    <tr class="ng-table-group" ng-repeat-start="group in $groups">
+                        <td colspan="3" class="text-success">
+                            <a href="" class="text-success" ng-click="group.$hideRows = !group.$hideRows">
+                                <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                                <strong>{{ group.value }}</strong>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr ng-hide="group.$hideRows" ng-repeat="u in demo.data" ng-repeat-end>
+                        <td sortable="'Estrategias'" data-title="'Estrategias'" groupable="'estrategias'" ng-if="false">
+                            {{ u.uid }}
+                        </td>
+                        <td sortable="'Indicadores'" data-title="'Indicadores'" groupable="'indicadores'">
+                            {{ u.name }}
+                        </td>
+                        <td sortable="'Area'" data-title="'Age'" groupable="'age'">
+                            {{ u.area }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,115 @@
+﻿<div ng-controller="ObjetivosEspecificosController as vm">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">note_add</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">:: Registrar Objetivo Específico ::</h4>
+                <form name="AddObjetivoEspecificoForm" ng-submit="vm.addObjetivosEspecificos()" novalidate>
+                    <div class="form-group label-floating">
+                        <label class="control-label">OBJETICO ESTRATÉGICO INSTITUCIONAL</label>
+                        <select class="form-control" ng-model="vm.objetivosEspecificos.ObjetivosEstragicoId" ng-options="arrOptionSelect.ObjetivosEstragicoId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label">OBJETIVO ESPECíFICO</label>
+                        <input type="text" class="form-control" ng-model="vm.objetivosEspecificos.Descripcion" required>
+                    </div>
+                    <input type="hidden" ng-model="vm.objetivosEspecificos.eliminado" ng-value="vm.objetivosEspecificos.eliminado = 0">
+                    <input type="submit" value="Registrar" class="btn btn-fill btn-success" ng-disabled="AddObjetivoEspecificoForm.$invalid" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">list</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title"><a class="ui teal tag label">OBJETIVOS ESPECíFICO</a></h4>
+                <div class="toolbar row">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="ui label">
+                                    <i class="pin icon"></i> Total de registros: {{vm.totalregistros}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom:20px;">
+                            <div class="form-group">
+                                <div class="ui icon input pull-right">
+                                    <input type="text" placeholder="Buscar..." class="form-control pull-right" ng-model="searchText">
+                                    <i class="circular search link icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table ng-table="vm.tableParams" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <tr ng-repeat="objetivoespecifico in vm.listObjetivosEspecificos | filter:searchText as results">
+                        <td title="'Ìtems'" class="text-center">
+                            {{objetivoespecifico.ObjetivosEspecificosId}}
+                        </td>
+                        <td title="'Objetivo Estratégico Institucional'" class="text-center">
+                            {{objetivoespecifico.DescripcionOEI}}
+                        </td>
+                        <td title="'Objetivo Específico'" class="text-center">
+                            {{objetivoespecifico.Descripcion}}
+                        </td>
+                        <td title="'Acciones'" class="td-actions text-center">
+                            <button type="button" rel="tooltip" title="Editar" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-round" ng-click="vm.ventanaModalOE(objetivoespecifico)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-round" ng-click="vm.deleteObjetivosEspecificos(objetivoespecifico.ObjetivosEspecificosId, $index)">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="animate-repeat" ng-if="results.length === 0">
+                        <td colspan="3" class="text-danger">No se encontraron registros...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Actualizar Objetivo Específico ::</h4>
+                </div>
+                <form name="updateObjetivoEstrategicoForm" class="ui form" ng-submit="vm.updateObjetivosEspecificos()" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group label-floating">
+                            <label class="control-label">OBJETICO ESTRATÉGICO INSTITUCIONAL</label>
+                            <select class="form-group" ng-model="vm.modalObjEspecificos.ObjetivosEstragicoId" ng-options="arrOptionSelect.ObjetivosEstragicoId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                                <option value="0">-- Seleccione --</option>
+                            </select>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">OBJETIVO ESPECíFICO</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="vm.modalObjEspecificos.Descripcion" required>
+                            </div>
+                        </div>
+                        <input type="hidden" ng-model="vm.modalObjEspecificos.ObjetivosEspecificosId" ng-value="vvm.modalObjEspecificos.ObjetivosEspecificosId">
+                        <input type="hidden" ng-model="vm.modalObjEspecificos.eliminado" ng-value="vm.modalObjEspecificos.eliminado = 0">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="updateObjetivoEstrategicoForm.$invalid">Actualizar <i class="refresh icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
+</div>
+    
