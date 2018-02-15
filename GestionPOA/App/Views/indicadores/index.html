@@ -12,7 +12,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="estrategias in vm.listadoEstrategias" ng-click="vm.cargarIndicadores(estrategias.EstrategiasId,estrategias.Descripcion)">
-                                <td>{{estrategias.Descripcion}}</td>
+                                <td style="cursor:pointer;" >{{estrategias.Descripcion}}</td>
                             </tr>
                         </tbody>
                     </table>

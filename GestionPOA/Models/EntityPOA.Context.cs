@@ -47,5 +47,6 @@ namespace GestionPOA.Models
         public virtual DbSet<Presupuesto> Presupuesto { get; set; }
         public virtual DbSet<Programacion> Programacion { get; set; }
         public virtual DbSet<TipoPlanificacion> TipoPlanificacion { get; set; }
+        
     }
 }

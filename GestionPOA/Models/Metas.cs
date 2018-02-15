@@ -28,6 +28,7 @@ namespace GestionPOA.Models
         public string Observacion { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> tipoCalificacionId { get; set; }
+        public Nullable<bool> eliminado { get; set; }
     
         public virtual TipoCalificacion TipoCalificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

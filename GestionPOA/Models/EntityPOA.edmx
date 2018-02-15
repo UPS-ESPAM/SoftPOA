@@ -134,6 +134,7 @@
           <Property Name="Observacion" Type="nvarchar" MaxLength="250" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="tipoCalificacionId" Type="int" />
+          <Property Name="eliminado" Type="bit" />
         </EntityType>
         <EntityType Name="Periocidad">
           <Key>
@@ -153,6 +154,7 @@
           <Property Name="TipoPlanificacionId" Type="int" />
           <Property Name="TipoProgramacionId" Type="int" />
           <Property Name="fecha" Type="datetime" />
+          <Property Name="eliminado" Type="bit" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -174,6 +176,7 @@
           <Property Name="ejecutado" Type="int" />
           <Property Name="IntervaloId" Type="int" />
           <Property Name="MetaID" Type="int" />
+          <Property Name="eliminado" Type="bit" />
         </EntityType>
         <EntityType Name="TipoPlanificacion">
           <Key>
@@ -411,7 +414,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SelectIndicadores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <EntityContainer Name="PEDIModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoCalificacion" EntityType="Self.TipoCalificacion" Schema="dbo" store:Type="Tables" />
@@ -669,6 +671,7 @@
           <NavigationProperty Name="InformacioAdicional" Relationship="Self.FK_InformacioAdicional_Metas" FromRole="Metas" ToRole="InformacioAdicional" />
           <NavigationProperty Name="Presupuesto" Relationship="Self.FK_Presupuesto_Metas" FromRole="Metas" ToRole="Presupuesto" />
           <NavigationProperty Name="Programacion" Relationship="Self.FK_Programacion_Metas" FromRole="Metas" ToRole="Programacion" />
+          <Property Name="eliminado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Periocidad">
           <Key>
@@ -694,6 +697,7 @@
           <NavigationProperty Name="Estrategias" Relationship="Self.FK_Estrategias_Planificacion" FromRole="Planificacion" ToRole="Estrategias" />
           <NavigationProperty Name="Periocidad" Relationship="Self.FK_Periodo_Planificacion" FromRole="Planificacion" ToRole="Periocidad" />
           <NavigationProperty Name="TipoPlanificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="Planificacion" ToRole="TipoPlanificacion" />
+          <Property Name="eliminado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -719,6 +723,7 @@
           <NavigationProperty Name="Evidencias" Relationship="Self.FK_Evidencias_Programacion" FromRole="Programacion" ToRole="Evidencias" />
           <NavigationProperty Name="intervalo" Relationship="Self.FK_Programacion_intervalo" FromRole="Programacion" ToRole="intervalo" />
           <NavigationProperty Name="Metas" Relationship="Self.FK_Programacion_Metas" FromRole="Programacion" ToRole="Metas" />
+          <Property Name="eliminado" Type="Boolean" />
         </EntityType>
         <EntityType Name="TipoPlanificacion">
           <Key>
@@ -1224,6 +1229,7 @@
           <EntitySetMapping Name="Metas">
             <EntityTypeMapping TypeName="PEDIModel.Metas">
               <MappingFragment StoreEntitySet="Metas">
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
@@ -1245,6 +1251,7 @@
           <EntitySetMapping Name="Planificacion">
             <EntityTypeMapping TypeName="PEDIModel.Planificacion">
               <MappingFragment StoreEntitySet="Planificacion">
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
                 <ScalarProperty Name="PlanificacionId" ColumnName="PlanificacionId" />
                 <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
                 <ScalarProperty Name="TipoPlanificacionId" ColumnName="TipoPlanificacionId" />
@@ -1267,6 +1274,7 @@
           <EntitySetMapping Name="Programacion">
             <EntityTypeMapping TypeName="PEDIModel.Programacion">
               <MappingFragment StoreEntitySet="Programacion">
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="observacion" ColumnName="observacion" />
                 <ScalarProperty Name="planificado" ColumnName="planificado" />
@@ -1285,16 +1293,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SelectIndicadores" FunctionName="PEDIModel.Store.SelectIndicadores">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.SelectIndicadores_Result3">
-                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
-                <ScalarProperty Name="Estrategia" ColumnName="Estrategia" />
-                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
-                <ScalarProperty Name="Indicador" ColumnName="Indicador" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

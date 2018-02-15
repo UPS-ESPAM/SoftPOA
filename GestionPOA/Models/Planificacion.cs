@@ -25,6 +25,7 @@ namespace GestionPOA.Models
         public Nullable<int> TipoPlanificacionId { get; set; }
         public Nullable<int> TipoProgramacionId { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<bool> eliminado { get; set; }
     
         public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
