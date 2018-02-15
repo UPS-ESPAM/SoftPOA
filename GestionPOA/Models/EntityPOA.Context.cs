@@ -12,13 +12,14 @@ namespace GestionPOA.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class PEDIEntities : DbContext
     {
         public PEDIEntities()
             : base("name=PEDIEntities")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

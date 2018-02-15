@@ -50,11 +50,9 @@
         }
 
         vm.deleteObjetivosEspecificos = function (id, index) {
-            debugger
             vm.listObjetivosEspecificos.splice(index, 1);
             vm.totalregistros -= 1;
             var requestResponse = ObjetivosEspecificosServices.deleteObjetivosEspecificos(id);
-            debugger
             requestResponse.then(function successCallback(response) {
                 swal({
                     title: 'Correcto!',
