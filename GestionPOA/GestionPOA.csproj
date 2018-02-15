@@ -150,6 +150,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
@@ -238,6 +239,7 @@
     <Content Include="App\Controller\ObjetivosEspecificosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
+    <Content Include="App\Services\IndicadoresServices.js" />
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
@@ -412,6 +414,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Indicadores\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -44,6 +44,7 @@ namespace GestionPOA
                        "~/App/Services/SubsistemasServices.js",
                        "~/App/Services/ObjetivosEspecificosServices.js",
                        "~/App/Services/ObjetivosEstrategicosServices.js",
+                       "~/App/Services/IndicadoresServices.js",
                        "~/App/Controller/SubsistemasController.js",
                        "~/App/Controller/ObjetivosEspecificosController.js",
                        "~/App/Controller/ObjetivosEstrategicosController.js",

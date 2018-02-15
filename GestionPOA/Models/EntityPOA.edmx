@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PEDIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PEDIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -79,7 +79,7 @@
           <Key>
             <PropertyRef Name="EstrategiasId" />
           </Key>
-          <Property Name="EstrategiasId" Type="int" Nullable="false" />
+          <Property Name="EstrategiasId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ObjetivosEspecificosId" Type="int" />
           <Property Name="PlanificacionId" Type="int" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
@@ -179,7 +179,7 @@
           <Key>
             <PropertyRef Name="TipoPlanificacionId" />
           </Key>
-          <Property Name="TipoPlanificacionId" Type="int" Nullable="false" />
+          <Property Name="TipoPlanificacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="eliminado" Type="bit" />
         </EntityType>
@@ -411,6 +411,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SelectIndicadores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <EntityContainer Name="PEDIModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoCalificacion" EntityType="Self.TipoCalificacion" Schema="dbo" store:Type="Tables" />
@@ -508,8 +509,7 @@
             <End Role="Programacion" EntitySet="Programacion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PEDIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1053,7 +1053,35 @@
             <End Role="TipoPlanificacion" EntitySet="TipoPlanificacion" />
             <End Role="Planificacion" EntitySet="Planificacion" />
           </AssociationSet>
+          <FunctionImport Name="SelectIndicadores" ReturnType="Collection(PEDIModel.SelectIndicadores_Result3)" />
         </EntityContainer>
+        <ComplexType Name="SelectIndicadores_Result">
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
+          <Property Type="Int32" Name="Expr1" Nullable="true" />
+          <Property Type="Boolean" Name="eliminado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SelectIndicadores_Result1">
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
+          <Property Type="Int32" Name="Indicador" Nullable="true" />
+          <Property Type="Boolean" Name="eliminado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SelectIndicadores_Result2">
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
+          <Property Type="Int32" Name="Indicador" Nullable="true" />
+          <Property Type="Boolean" Name="eliminado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SelectIndicadores_Result3">
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
+          <Property Type="String" Name="Indicador" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1257,6 +1285,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SelectIndicadores" FunctionName="PEDIModel.Store.SelectIndicadores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.SelectIndicadores_Result3">
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="Estrategia" ColumnName="Estrategia" />
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="Indicador" ColumnName="Indicador" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

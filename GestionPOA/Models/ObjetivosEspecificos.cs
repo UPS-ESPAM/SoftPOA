@@ -9,7 +9,6 @@
 
 namespace GestionPOA.Models
 {
-
     using System;
     using System.Collections.Generic;
     

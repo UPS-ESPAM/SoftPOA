@@ -11,6 +11,7 @@ namespace GestionPOA.Models
 {
     using System;
     using System.Collections.Generic;
+    
     public partial class Subsistema
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,7 @@ namespace GestionPOA.Models
         public int SubsistemaId { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> eliminado { get; set; }
-      
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ObjetivosEstrategicos> ObjetivosEstrategicos { get; set; }
     }
