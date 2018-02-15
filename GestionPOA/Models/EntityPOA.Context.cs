@@ -20,6 +20,7 @@ namespace GestionPOA.Models
         public PEDIEntities()
             : base("name=PEDIEntities")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -46,5 +47,6 @@ namespace GestionPOA.Models
         public virtual DbSet<Presupuesto> Presupuesto { get; set; }
         public virtual DbSet<Programacion> Programacion { get; set; }
         public virtual DbSet<TipoPlanificacion> TipoPlanificacion { get; set; }
+        
     }
 }

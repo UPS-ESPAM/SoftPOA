@@ -25,6 +25,10 @@ angular
               templateUrl: 'App/Views/indicadores/index.html',
               controller: 'IndicadoresController'
           })
+          .when('/Metas/Acciones', {
+              templateUrl: 'App/Views/acciones/index.html',
+              controller: 'AccionesController'
+          })
         .otherwise({
           redirectTo: '/'
         });
