@@ -234,15 +234,18 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="App\app.js" />
+    <Content Include="App\Controller\AccionesController.js" />
     <Content Include="App\Controller\HomeController.js" />
     <Content Include="App\Controller\IndicadoresController.js" />
     <Content Include="App\Controller\ObjetivosEspecificosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
+    <Content Include="App\Services\AccionesServices.js" />
     <Content Include="App\Services\IndicadoresServices.js" />
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
+    <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
     <Content Include="App\Views\objetivosestrategicos\index.html" />
