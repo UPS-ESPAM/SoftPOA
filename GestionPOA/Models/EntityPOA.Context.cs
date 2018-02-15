@@ -20,6 +20,7 @@ namespace GestionPOA.Models
         public PEDIEntities()
             : base("name=PEDIEntities")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
