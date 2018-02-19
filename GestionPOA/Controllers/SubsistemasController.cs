@@ -17,7 +17,10 @@ namespace GestionPOA.Controllers
         // GET: Subsistemas
         public JsonResult GetSubsistema()
         {
-            List<Subsistema> listSibsistemas= db.Subsistema.Where(s => s.eliminado==false).ToList();
+            var listSibsistemas = db.Subsistema.Where(s => s.eliminado == false)
+                                    .Select(s => new { SubsistemaId = s.SubsistemaId, Descripcion = s.Descripcion })
+                                    .ToList();
+   
             return Json(new { list = listSibsistemas }, JsonRequestBehavior.AllowGet);
         }
 

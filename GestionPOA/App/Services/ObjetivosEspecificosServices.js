@@ -3,13 +3,13 @@
         var fact = {};
 
         fact.getObjetivosEspecificos = function () {
-            return $http.get('ObjetivosEspecificos/getObjetivosEspecificos');
+            return $http.get('../ObjetivosEspecificos/getObjetivosEspecificos');
         }
 
         fact.addObjetivosEspecificos = function (objetivosEspecificos) {
             var request = $http({
                 method: 'POST',
-                url: 'ObjetivosEspecificos/Create',
+                url: '../ObjetivosEspecificos/Create',
                 data: objetivosEspecificos,
                 dataType: "json"
             });
@@ -19,7 +19,7 @@
         fact.updateObjetivosEspecificos = function (objetivosEspecificos) {
             var request = $http({
                 method: 'POST',
-                url: 'ObjetivosEspecificos/Update',
+                url: '../ObjetivosEspecificos/Update',
                 data: objetivosEspecificos,
                 dataType: "json"
             });
@@ -29,7 +29,7 @@
         fact.deleteObjetivosEspecificos = function (id) {
             var request = $http({
                 method: 'POST',
-                url: 'ObjetivosEspecificos/Delete/' + id,
+                url: '../ObjetivosEspecificos/Delete/' + id,
                 dataType: "json"
             });
             return request;

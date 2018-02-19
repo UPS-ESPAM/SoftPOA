@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="eliminado" Type="bit" />
         </EntityType>
@@ -28,7 +28,7 @@
             <PropertyRef Name="DepartamentoID" />
           </Key>
           <Property Name="DepartamentoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="eliminado" Type="bit" />
         </EntityType>
         <EntityType Name="ObjeEspecificosDepartamento">
@@ -58,6 +58,16 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="eliminado" Type="bit" />
         </EntityType>
+        <EntityType Name="periodo">
+          <Key>
+            <PropertyRef Name="periodoId" />
+          </Key>
+          <Property Name="periodoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="inicio" Type="date" />
+          <Property Name="fin" Type="date" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
         <EntityType Name="Subsistema">
           <Key>
             <PropertyRef Name="SubsistemaId" />
@@ -65,6 +75,7 @@
           <Property Name="SubsistemaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="eliminado" Type="bit" />
+          <Property Name="idperiodo" Type="int" />
         </EntityType>
         <EntityType Name="Acciones">
           <Key>
@@ -152,7 +163,7 @@
           <Property Name="PlanificacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartamentoID" Type="int" />
           <Property Name="TipoPlanificacionId" Type="int" />
-          <Property Name="TipoProgramacionId" Type="int" />
+          <Property Name="PeriocidadID" Type="int" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="eliminado" Type="bit" />
         </EntityType>
@@ -294,18 +305,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ObjeEspecificosDepartamento_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
-          <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="DepartamentoID" />
-            </Principal>
-            <Dependent Role="ObjeEspecificosDepartamento">
-              <PropertyRef Name="DepartamentoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
           <End Role="ObjetivosEspecificos" Type="Self.ObjetivosEspecificos" Multiplicity="0..1" />
           <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
@@ -342,27 +341,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Periodo_Planificacion">
-          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="1" />
+        <Association Name="FK_Planificacion_Periocidad">
           <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Planificacion">
-              <PropertyRef Name="PlanificacionId" />
-            </Principal>
-            <Dependent Role="Periocidad">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Planificacion_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
           <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="DepartamentoID" />
+            <Principal Role="Periocidad">
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Planificacion">
-              <PropertyRef Name="DepartamentoID" />
+              <PropertyRef Name="PeriocidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,6 +401,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Subsistema_periodo">
+          <End Role="periodo" Type="Self.periodo" Multiplicity="0..1" />
+          <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="periodo">
+              <PropertyRef Name="periodoId" />
+            </Principal>
+            <Dependent Role="Subsistema">
+              <PropertyRef Name="idperiodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spLoginIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Clave" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="PEDIModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoCalificacion" EntityType="Self.TipoCalificacion" Schema="dbo" store:Type="Tables" />
@@ -421,6 +424,7 @@
           <EntitySet Name="ObjeEspecificosDepartamento" EntityType="Self.ObjeEspecificosDepartamento" Schema="gestion" store:Type="Tables" />
           <EntitySet Name="ObjetivosEspecificos" EntityType="Self.ObjetivosEspecificos" Schema="gestion" store:Type="Tables" />
           <EntitySet Name="ObjetivosEstrategicos" EntityType="Self.ObjetivosEstrategicos" Schema="gestion" store:Type="Tables" />
+          <EntitySet Name="periodo" EntityType="Self.periodo" Schema="gestion" store:Type="Tables" />
           <EntitySet Name="Subsistema" EntityType="Self.Subsistema" Schema="gestion" store:Type="Tables" />
           <EntitySet Name="Acciones" EntityType="Self.Acciones" Schema="planificacion" store:Type="Tables" />
           <EntitySet Name="Estrategias" EntityType="Self.Estrategias" Schema="planificacion" store:Type="Tables" />
@@ -470,10 +474,6 @@
             <End Role="TipoCalificacion" EntitySet="TipoCalificacion" />
             <End Role="Metas" EntitySet="Metas" />
           </AssociationSet>
-          <AssociationSet Name="FK_ObjeEspecificosDepartamento_Departamento" Association="Self.FK_ObjeEspecificosDepartamento_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
-          </AssociationSet>
           <AssociationSet Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" Association="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
             <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
             <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
@@ -486,12 +486,8 @@
             <End Role="Subsistema" EntitySet="Subsistema" />
             <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Periodo_Planificacion" Association="Self.FK_Periodo_Planificacion">
-            <End Role="Planificacion" EntitySet="Planificacion" />
+          <AssociationSet Name="FK_Planificacion_Periocidad" Association="Self.FK_Planificacion_Periocidad">
             <End Role="Periocidad" EntitySet="Periocidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Planificacion_Departamento" Association="Self.FK_Planificacion_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Planificacion" EntitySet="Planificacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Planificacion_TipoPlanificacion" Association="Self.FK_Planificacion_TipoPlanificacion">
@@ -509,6 +505,10 @@
           <AssociationSet Name="FK_Programacion_Metas" Association="Self.FK_Programacion_Metas">
             <End Role="Metas" EntitySet="Metas" />
             <End Role="Programacion" EntitySet="Programacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subsistema_periodo" Association="Self.FK_Subsistema_periodo">
+            <End Role="periodo" EntitySet="periodo" />
+            <End Role="Subsistema" EntitySet="Subsistema" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -529,7 +529,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Metas" Relationship="Self.FK_Metas_TipoCalificacion" FromRole="TipoCalificacion" ToRole="Metas" />
@@ -539,10 +539,8 @@
             <PropertyRef Name="DepartamentoID" />
           </Key>
           <Property Name="DepartamentoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="eliminado" Type="Boolean" />
-          <NavigationProperty Name="ObjeEspecificosDepartamento" Relationship="Self.FK_ObjeEspecificosDepartamento_Departamento" FromRole="Departamento" ToRole="ObjeEspecificosDepartamento" />
-          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Planificacion_Departamento" FromRole="Departamento" ToRole="Planificacion" />
         </EntityType>
         <EntityType Name="ObjeEspecificosDepartamento">
           <Key>
@@ -552,7 +550,6 @@
           <Property Name="DepartamentoID" Type="Int32" />
           <Property Name="ObjetivosEspecificosId" Type="Int32" />
           <Property Name="eliminado" Type="Boolean" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK_ObjeEspecificosDepartamento_Departamento" FromRole="ObjeEspecificosDepartamento" ToRole="Departamento" />
           <NavigationProperty Name="ObjetivosEspecificos" Relationship="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" FromRole="ObjeEspecificosDepartamento" ToRole="ObjetivosEspecificos" />
         </EntityType>
         <EntityType Name="ObjetivosEspecificos">
@@ -578,6 +575,17 @@
           <NavigationProperty Name="ObjetivosEspecificos" Relationship="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos" FromRole="ObjetivosEstrategicos" ToRole="ObjetivosEspecificos" />
           <NavigationProperty Name="Subsistema" Relationship="Self.FK_ObjetivosEstrategicos_Subsistema" FromRole="ObjetivosEstrategicos" ToRole="Subsistema" />
         </EntityType>
+        <EntityType Name="periodo">
+          <Key>
+            <PropertyRef Name="periodoId" />
+          </Key>
+          <Property Name="periodoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="inicio" Type="DateTime" Precision="0" />
+          <Property Name="fin" Type="DateTime" Precision="0" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Subsistema" Relationship="Self.FK_Subsistema_periodo" FromRole="periodo" ToRole="Subsistema" />
+        </EntityType>
         <EntityType Name="Subsistema">
           <Key>
             <PropertyRef Name="SubsistemaId" />
@@ -585,7 +593,9 @@
           <Property Name="SubsistemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="eliminado" Type="Boolean" />
+          <Property Name="idperiodo" Type="Int32" />
           <NavigationProperty Name="ObjetivosEstrategicos" Relationship="Self.FK_ObjetivosEstrategicos_Subsistema" FromRole="Subsistema" ToRole="ObjetivosEstrategicos" />
+          <NavigationProperty Name="periodo" Relationship="Self.FK_Subsistema_periodo" FromRole="Subsistema" ToRole="periodo" />
         </EntityType>
         <EntityType Name="Acciones">
           <Key>
@@ -601,7 +611,7 @@
           <Key>
             <PropertyRef Name="EstrategiasId" />
           </Key>
-          <Property Name="EstrategiasId" Type="Int32" Nullable="false" />
+          <Property Name="EstrategiasId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ObjetivosEspecificosId" Type="Int32" />
           <Property Name="PlanificacionId" Type="Int32" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -665,13 +675,13 @@
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="tipoCalificacionId" Type="Int32" />
+          <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="TipoCalificacion" Relationship="Self.FK_Metas_TipoCalificacion" FromRole="Metas" ToRole="TipoCalificacion" />
           <NavigationProperty Name="Acciones" Relationship="Self.FK_Acciones_Metas" FromRole="Metas" ToRole="Acciones" />
           <NavigationProperty Name="Indicadores" Relationship="Self.FK_Metas_Indicadores" FromRole="Metas" ToRole="Indicadores" />
           <NavigationProperty Name="InformacioAdicional" Relationship="Self.FK_InformacioAdicional_Metas" FromRole="Metas" ToRole="InformacioAdicional" />
           <NavigationProperty Name="Presupuesto" Relationship="Self.FK_Presupuesto_Metas" FromRole="Metas" ToRole="Presupuesto" />
           <NavigationProperty Name="Programacion" Relationship="Self.FK_Programacion_Metas" FromRole="Metas" ToRole="Programacion" />
-          <Property Name="eliminado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Periocidad">
           <Key>
@@ -682,7 +692,7 @@
           <Property Name="estado" Type="Boolean" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="intervalo" Relationship="Self.FK_intervalo_Periodo" FromRole="Periocidad" ToRole="intervalo" />
-          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Periodo_Planificacion" FromRole="Periocidad" ToRole="Planificacion" />
+          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Planificacion_Periocidad" FromRole="Periocidad" ToRole="Planificacion" />
         </EntityType>
         <EntityType Name="Planificacion">
           <Key>
@@ -691,13 +701,12 @@
           <Property Name="PlanificacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartamentoID" Type="Int32" />
           <Property Name="TipoPlanificacionId" Type="Int32" />
-          <Property Name="TipoProgramacionId" Type="Int32" />
+          <Property Name="PeriocidadID" Type="Int32" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK_Planificacion_Departamento" FromRole="Planificacion" ToRole="Departamento" />
-          <NavigationProperty Name="Estrategias" Relationship="Self.FK_Estrategias_Planificacion" FromRole="Planificacion" ToRole="Estrategias" />
-          <NavigationProperty Name="Periocidad" Relationship="Self.FK_Periodo_Planificacion" FromRole="Planificacion" ToRole="Periocidad" />
-          <NavigationProperty Name="TipoPlanificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="Planificacion" ToRole="TipoPlanificacion" />
           <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Estrategias" Relationship="Self.FK_Estrategias_Planificacion" FromRole="Planificacion" ToRole="Estrategias" />
+          <NavigationProperty Name="Periocidad" Relationship="Self.FK_Planificacion_Periocidad" FromRole="Planificacion" ToRole="Periocidad" />
+          <NavigationProperty Name="TipoPlanificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="Planificacion" ToRole="TipoPlanificacion" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -720,16 +729,16 @@
           <Property Name="ejecutado" Type="Int32" />
           <Property Name="IntervaloId" Type="Int32" />
           <Property Name="MetaID" Type="Int32" />
+          <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Evidencias" Relationship="Self.FK_Evidencias_Programacion" FromRole="Programacion" ToRole="Evidencias" />
           <NavigationProperty Name="intervalo" Relationship="Self.FK_Programacion_intervalo" FromRole="Programacion" ToRole="intervalo" />
           <NavigationProperty Name="Metas" Relationship="Self.FK_Programacion_Metas" FromRole="Programacion" ToRole="Metas" />
-          <Property Name="eliminado" Type="Boolean" />
         </EntityType>
         <EntityType Name="TipoPlanificacion">
           <Key>
             <PropertyRef Name="TipoPlanificacionId" />
           </Key>
-          <Property Name="TipoPlanificacionId" Type="Int32" Nullable="false" />
+          <Property Name="TipoPlanificacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Planificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="TipoPlanificacion" ToRole="Planificacion" />
@@ -743,30 +752,6 @@
             </Principal>
             <Dependent Role="Metas">
               <PropertyRef Name="tipoCalificacionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ObjeEspecificosDepartamento_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
-          <End Role="ObjeEspecificosDepartamento" Type="Self.ObjeEspecificosDepartamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="DepartamentoID" />
-            </Principal>
-            <Dependent Role="ObjeEspecificosDepartamento">
-              <PropertyRef Name="DepartamentoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Planificacion_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
-          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="DepartamentoID" />
-            </Principal>
-            <Dependent Role="Planificacion">
-              <PropertyRef Name="DepartamentoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -815,6 +800,18 @@
             </Principal>
             <Dependent Role="ObjetivosEstrategicos">
               <PropertyRef Name="SubsistemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subsistema_periodo">
+          <End Role="periodo" Type="Self.periodo" Multiplicity="0..1" />
+          <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="periodo">
+              <PropertyRef Name="periodoId" />
+            </Principal>
+            <Dependent Role="Subsistema">
+              <PropertyRef Name="idperiodo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -938,15 +935,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Periodo_Planificacion">
-          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="1" />
+        <Association Name="FK_Planificacion_Periocidad">
           <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
+          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Planificacion">
-              <PropertyRef Name="PlanificacionId" />
-            </Principal>
-            <Dependent Role="Periocidad">
+            <Principal Role="Periocidad">
               <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Planificacion">
+              <PropertyRef Name="PeriocidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -969,6 +966,7 @@
           <EntitySet Name="ObjeEspecificosDepartamento" EntityType="Self.ObjeEspecificosDepartamento" />
           <EntitySet Name="ObjetivosEspecificos" EntityType="Self.ObjetivosEspecificos" />
           <EntitySet Name="ObjetivosEstrategicos" EntityType="Self.ObjetivosEstrategicos" />
+          <EntitySet Name="periodo" EntityType="Self.periodo" />
           <EntitySet Name="Subsistema" EntityType="Self.Subsistema" />
           <EntitySet Name="Acciones" EntityType="Self.Acciones" />
           <EntitySet Name="Estrategias" EntityType="Self.Estrategias" />
@@ -986,14 +984,6 @@
             <End Role="TipoCalificacion" EntitySet="TipoCalificacion" />
             <End Role="Metas" EntitySet="Metas" />
           </AssociationSet>
-          <AssociationSet Name="FK_ObjeEspecificosDepartamento_Departamento" Association="Self.FK_ObjeEspecificosDepartamento_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Planificacion_Departamento" Association="Self.FK_Planificacion_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Planificacion" EntitySet="Planificacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" Association="Self.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos">
             <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
             <End Role="ObjeEspecificosDepartamento" EntitySet="ObjeEspecificosDepartamento" />
@@ -1009,6 +999,10 @@
           <AssociationSet Name="FK_ObjetivosEstrategicos_Subsistema" Association="Self.FK_ObjetivosEstrategicos_Subsistema">
             <End Role="Subsistema" EntitySet="Subsistema" />
             <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subsistema_periodo" Association="Self.FK_Subsistema_periodo">
+            <End Role="periodo" EntitySet="periodo" />
+            <End Role="Subsistema" EntitySet="Subsistema" />
           </AssociationSet>
           <AssociationSet Name="FK_Acciones_Metas" Association="Self.FK_Acciones_Metas">
             <End Role="Metas" EntitySet="Metas" />
@@ -1050,42 +1044,31 @@
             <End Role="Metas" EntitySet="Metas" />
             <End Role="Programacion" EntitySet="Programacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Periodo_Planificacion" Association="Self.FK_Periodo_Planificacion">
-            <End Role="Planificacion" EntitySet="Planificacion" />
+          <AssociationSet Name="FK_Planificacion_Periocidad" Association="Self.FK_Planificacion_Periocidad">
             <End Role="Periocidad" EntitySet="Periocidad" />
+            <End Role="Planificacion" EntitySet="Planificacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Planificacion_TipoPlanificacion" Association="Self.FK_Planificacion_TipoPlanificacion">
             <End Role="TipoPlanificacion" EntitySet="TipoPlanificacion" />
             <End Role="Planificacion" EntitySet="Planificacion" />
           </AssociationSet>
-          <FunctionImport Name="SelectIndicadores" ReturnType="Collection(PEDIModel.SelectIndicadores_Result3)" />
+          <FunctionImport Name="spLoginIngreso" ReturnType="Collection(PEDIModel.spLoginIngreso_Result)">
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="SelectIndicadores_Result">
-          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
-          <Property Type="Int32" Name="Expr1" Nullable="true" />
-          <Property Type="Boolean" Name="eliminado" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="SelectIndicadores_Result1">
-          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
-          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
-          <Property Type="Int32" Name="Indicador" Nullable="true" />
-          <Property Type="Boolean" Name="eliminado" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="SelectIndicadores_Result2">
-          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
-          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
-          <Property Type="Int32" Name="Indicador" Nullable="true" />
-          <Property Type="Boolean" Name="eliminado" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="SelectIndicadores_Result3">
-          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
-          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="IndicadorId" Nullable="true" />
-          <Property Type="String" Name="Indicador" Nullable="true" MaxLength="250" />
+        <ComplexType Name="spLoginIngreso_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="departamento" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="primerNombre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="segundoNombre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="primerApellido" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="segundoApellido" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="usuario" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="clave" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="id_departamento" Nullable="true" />
+          <Property Type="Int32" Name="idPersona" Nullable="true" />
+          <Property Type="String" Name="TipoRol" Nullable="false" MaxLength="13" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1152,12 +1135,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="periodo">
+            <EntityTypeMapping TypeName="PEDIModel.periodo">
+              <MappingFragment StoreEntitySet="periodo">
+                <ScalarProperty Name="periodoId" ColumnName="periodoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="inicio" ColumnName="inicio" />
+                <ScalarProperty Name="fin" ColumnName="fin" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Subsistema">
             <EntityTypeMapping TypeName="PEDIModel.Subsistema">
               <MappingFragment StoreEntitySet="Subsistema">
                 <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="idperiodo" ColumnName="idperiodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1229,12 +1224,12 @@
           <EntitySetMapping Name="Metas">
             <EntityTypeMapping TypeName="PEDIModel.Metas">
               <MappingFragment StoreEntitySet="Metas">
-                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="tipoCalificacionId" ColumnName="tipoCalificacionId" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1251,12 +1246,12 @@
           <EntitySetMapping Name="Planificacion">
             <EntityTypeMapping TypeName="PEDIModel.Planificacion">
               <MappingFragment StoreEntitySet="Planificacion">
-                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
                 <ScalarProperty Name="PlanificacionId" ColumnName="PlanificacionId" />
                 <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
                 <ScalarProperty Name="TipoPlanificacionId" ColumnName="TipoPlanificacionId" />
-                <ScalarProperty Name="TipoProgramacionId" ColumnName="TipoProgramacionId" />
+                <ScalarProperty Name="PeriocidadID" ColumnName="PeriocidadID" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1274,13 +1269,13 @@
           <EntitySetMapping Name="Programacion">
             <EntityTypeMapping TypeName="PEDIModel.Programacion">
               <MappingFragment StoreEntitySet="Programacion">
-                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="observacion" ColumnName="observacion" />
                 <ScalarProperty Name="planificado" ColumnName="planificado" />
                 <ScalarProperty Name="ejecutado" ColumnName="ejecutado" />
                 <ScalarProperty Name="IntervaloId" ColumnName="IntervaloId" />
                 <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1293,6 +1288,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spLoginIngreso" FunctionName="PEDIModel.Store.spLoginIngreso" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spLoginIngreso_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+                <ScalarProperty Name="segundoNombre" ColumnName="segundoNombre" />
+                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+                <ScalarProperty Name="segundoApellido" ColumnName="segundoApellido" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="TipoRol" ColumnName="TipoRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

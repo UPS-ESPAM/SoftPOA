@@ -3,13 +3,13 @@
         var fact = {};
 
         fact.getObjetivosEstrategicos = function () {
-            return $http.get('ObjetivosEstrategicos/GetObjetivosEstrategicos');
+            return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicos');
         }
 
         fact.addObjetivoEstrategico = function (ObjetivoEstrategico) {
             var request = $http({
                 method: 'POST',
-                url: 'ObjetivosEstrategicos/Create',
+                url: '../ObjetivosEstrategicos/Create',
                 data: ObjetivoEstrategico,
                 dataType: "json"
             });
@@ -20,7 +20,7 @@
             
             var request = $http({
                 method: 'POST',
-                url: 'ObjetivosEstrategicos/Update',
+                url: '../ObjetivosEstrategicos/Update',
                 data: ObjetivoEstrategico,
                 dataType: "json"
             });
@@ -31,7 +31,7 @@
             debugger
             var request = $http({
                 method: 'POST',
-                url: 'ObjetivosEstrategicos/Delete/' + id,
+                url: '../ObjetivosEstrategicos/Delete/' + id,
                 dataType: "json"
             });
             return request;

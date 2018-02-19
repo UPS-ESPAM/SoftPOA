@@ -14,20 +14,8 @@ namespace GestionPOA.Models
     
     public partial class Departamento
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Departamento()
-        {
-            this.ObjeEspecificosDepartamento = new HashSet<ObjeEspecificosDepartamento>();
-            this.Planificacion = new HashSet<Planificacion>();
-        }
-    
         public int DepartamentoID { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> eliminado { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObjeEspecificosDepartamento> ObjeEspecificosDepartamento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Planificacion> Planificacion { get; set; }
     }
 }

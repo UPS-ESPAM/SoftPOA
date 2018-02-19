@@ -3,13 +3,13 @@
         var fact = {};
 
         fact.getEstrategias = function () {
-            return $http.get('Indicadores/Estrategias');
+            return $http.get('../Indicadores/Estrategias');
         }
 
         fact.getIndicadores = function (id) {
             var request = $http({
                 method: 'POST',
-                url: 'Indicadores/Indicadores/' + id,
+                url: '../Indicadores/Indicadores/' + id,
                 dataType: "json"
             });
             return request;
@@ -18,7 +18,7 @@
         fact.addIndicadores = function (indicadores) {
             var request = $http({
                 method: 'POST',
-                url: 'Indicadores/Create',
+                url: '../Indicadores/Create',
                 data: indicadores,
                 dataType: "json"
             });
@@ -28,7 +28,7 @@
         fact.updateIndicadores = function (indicadores) {
             var request = $http({
                 method: 'POST',
-                url: 'Indicadores/Update',
+                url: '../Indicadores/Update',
                 data: indicadores,
                 dataType: "json"
             });
@@ -38,7 +38,7 @@
         fact.deleteIndicadores = function (id) {
             var request = $http({
                 method: 'POST',
-                url: 'Indicadores/Delete/' + id,
+                url: '../Indicadores/Delete/' + id,
                 dataType: "json"
             });
             return request;

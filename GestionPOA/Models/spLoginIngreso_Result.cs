@@ -10,15 +10,19 @@
 namespace GestionPOA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ObjeEspecificosDepartamento
+    public partial class spLoginIngreso_Result
     {
         public int id { get; set; }
-        public Nullable<int> DepartamentoID { get; set; }
-        public Nullable<int> ObjetivosEspecificosId { get; set; }
-        public Nullable<bool> eliminado { get; set; }
-    
-        public virtual ObjetivosEspecificos ObjetivosEspecificos { get; set; }
+        public string departamento { get; set; }
+        public string primerNombre { get; set; }
+        public string segundoNombre { get; set; }
+        public string primerApellido { get; set; }
+        public string segundoApellido { get; set; }
+        public string usuario { get; set; }
+        public string clave { get; set; }
+        public Nullable<int> id_departamento { get; set; }
+        public Nullable<int> idPersona { get; set; }
+        public string TipoRol { get; set; }
     }
 }

@@ -12,21 +12,21 @@ namespace GestionPOA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Subsistema
+    public partial class periodo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subsistema()
+        public periodo()
         {
-            this.ObjetivosEstrategicos = new HashSet<ObjetivosEstrategicos>();
+            this.Subsistema = new HashSet<Subsistema>();
         }
     
-        public int SubsistemaId { get; set; }
+        public int periodoId { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<System.DateTime> inicio { get; set; }
+        public Nullable<System.DateTime> fin { get; set; }
         public Nullable<bool> eliminado { get; set; }
-        public Nullable<int> idperiodo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObjetivosEstrategicos> ObjetivosEstrategicos { get; set; }
-        public virtual periodo periodo { get; set; }
+        public virtual ICollection<Subsistema> Subsistema { get; set; }
     }
 }

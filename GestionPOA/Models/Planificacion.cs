@@ -23,11 +23,10 @@ namespace GestionPOA.Models
         public int PlanificacionId { get; set; }
         public Nullable<int> DepartamentoID { get; set; }
         public Nullable<int> TipoPlanificacionId { get; set; }
-        public Nullable<int> TipoProgramacionId { get; set; }
+        public Nullable<int> PeriocidadID { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<bool> eliminado { get; set; }
     
-        public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Estrategias> Estrategias { get; set; }
         public virtual Periocidad Periocidad { get; set; }

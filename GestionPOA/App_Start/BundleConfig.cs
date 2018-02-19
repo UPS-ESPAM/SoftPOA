@@ -40,17 +40,20 @@ namespace GestionPOA
                        "~/Scripts/angular-animate.min.js",
                        "~/Scripts/angular-touch.min.js",
                        "~/Scripts/ng-table.min.js",
+                       "~/Scripts/cookies.js",
                        "~/App/app.js",
                        "~/App/Services/SubsistemasServices.js",
                        "~/App/Services/ObjetivosEspecificosServices.js",
                        "~/App/Services/ObjetivosEstrategicosServices.js",
                        "~/App/Services/IndicadoresServices.js",
                        "~/App/Services/AccionesServices.js",
+                       "~/App/Services/LoginServices.js",
                        "~/App/Controller/SubsistemasController.js",
                        "~/App/Controller/ObjetivosEspecificosController.js",
                        "~/App/Controller/ObjetivosEstrategicosController.js",
                        "~/App/Controller/IndicadoresController.js",
-                       "~/App/Controller/AccionesController.js"
+                       "~/App/Controller/AccionesController.js",
+                       "~/App/Controller/LoginController.js"
                        ));
             bundles.Add(new StyleBundle("~/Content/plantillaCss").Include(
                      "~/Content/assets/css/bootstrap.min.css",
