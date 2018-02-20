@@ -18,6 +18,7 @@ namespace GestionPOA.Models
         public Periocidad()
         {
             this.intervalo = new HashSet<intervalo>();
+            this.Planificacion = new HashSet<Planificacion>();
         }
     
         public int id { get; set; }
@@ -27,6 +28,7 @@ namespace GestionPOA.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<intervalo> intervalo { get; set; }
-        public virtual Planificacion Planificacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Planificacion> Planificacion { get; set; }
     }
 }

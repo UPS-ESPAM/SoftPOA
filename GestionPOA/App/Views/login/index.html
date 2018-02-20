@@ -1,0 +1,105 @@
+﻿<nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Plan Operativo Anual</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class=" active ">
+                    <a href="#">
+                        <i class="material-icons">fingerprint</i> Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="wrapper wrapper-full-page" ng-controller="LoginController as vm">
+    <div class="full-page login-page" filter-color="black" data-image="/Content/img/login.jpg">
+        <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                        <form name="loginForm" ng-submit="vm.verifylogin()" novalidate">
+                            <div class="card card-login card-hidden">
+                                <div class="card-header text-center" data-background-color="green">
+                                    <h4 class="card-title">Login</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">account_circle</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Usuario</label>
+                                            <input type="text" class="form-control" ng-model="vm.login.usuario" required>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Contraseña</label>
+                                            <input type="password" class="form-control" ng-model="vm.login.password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-success" ng-disabled="loginForm.$invalid">
+                                        Ingresar
+                                        <span class="btn-label btn-label-right">
+                                            <i class="material-icons">keyboard_arrow_right</i>
+                                        </span>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <p class="copyright pull-right">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>
+                    <a href="http://ups.espam.edu.ec/">UPS</a> - Unidad de Producción de Software
+                </p>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+        <!--<div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-view="">  </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+       
+<script type="text/javascript">
+      $().ready(function () {
+          demo.checkFullPageBackgroundImage();
+
+          setTimeout(function () {
+              // after 1000 ms we add the class animated to the login/register card
+              $('.card').removeClass('card-hidden');
+          }, 700)
+      });
+</script>

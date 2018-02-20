@@ -10,15 +10,10 @@
 namespace GestionPOA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ObjeEspecificosDepartamento
+    public partial class spMetasDepartment_Result
     {
         public int id { get; set; }
-        public Nullable<int> DepartamentoID { get; set; }
-        public Nullable<int> ObjetivosEspecificosId { get; set; }
-        public Nullable<bool> eliminado { get; set; }
-    
-        public virtual ObjetivosEspecificos ObjetivosEspecificos { get; set; }
+        public string Descripcion { get; set; }
     }
 }

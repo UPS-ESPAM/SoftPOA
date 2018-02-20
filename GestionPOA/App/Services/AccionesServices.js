@@ -3,21 +3,31 @@
         var fact = {};
 
         fact.getMetas = function () {
-            return $http.get('Acciones/Metas');
+            return $http.get('../Acciones/Metas');
         }
 
         fact.getAcciones = function (id) {
             var request = $http({
                 method: 'POST',
-                url: 'Acciones/Acciones/' + id,
+                url: '../Acciones/Acciones/' + id,
                 dataType: "json"
             });
             return request;
         }
+
+        fact.getDetalleMeta = function (id) {
+            var request = $http({
+                method: 'GET',
+                url: '../Acciones/MetaDetalle/' + id,
+                dataType: "json"
+            });
+            return request;
+        }
+
         fact.addAcciones = function (accion) {
             var request = $http({
                 method: 'POST',
-                url: 'Acciones/Create',
+                url: '../Acciones/Create',
                 data: accion,
                 dataType: "json"
             });
@@ -27,7 +37,7 @@
         fact.updateAcciones = function (accion) {
             var request = $http({
                 method: 'POST',
-                url: 'Acciones/Update',
+                url: '../Acciones/Update',
                 data: accion,
                 dataType: "json"
             });
@@ -37,7 +47,7 @@
         fact.deleteAcciones = function (id) {
             var request = $http({
                 method: 'POST',
-                url: 'Acciones/Delete/' + id,
+                url: '../Acciones/Delete/' + id,
                 dataType: "json"
             });
             return request;
