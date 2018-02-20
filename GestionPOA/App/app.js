@@ -25,6 +25,10 @@ angular
               templateUrl: '../../App/Views/objetivoespecificos/index.html',
               controller: 'ObjetivosEspecificosController'
           })
+          .when('/Planificacion', {
+              templateUrl: '../../App/Views/planificacion/index.html',
+              controller: 'PlanificacionController'
+          })
           .when('/Estrategia/Indicadores', {
               templateUrl: '../../App/Views/indicadores/index.html',
               controller: 'IndicadoresController'
