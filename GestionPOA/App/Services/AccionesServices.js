@@ -3,7 +3,7 @@
         var fact = {};
 
         fact.getMetas = function () {
-            return $http.get('../Acciones/Metas');
+            return $http.get('../Metas/Metas');
         }
 
         fact.getAcciones = function (id) {
@@ -18,7 +18,7 @@
         fact.getDetalleMeta = function (id) {
             var request = $http({
                 method: 'GET',
-                url: '../Acciones/MetaDetalle/' + id,
+                url: '../Metas/MetaDetalle/' + id,
                 dataType: "json"
             });
             return request;

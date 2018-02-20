@@ -48,12 +48,15 @@ namespace GestionPOA
                        "~/App/Services/IndicadoresServices.js",
                        "~/App/Services/AccionesServices.js",
                        "~/App/Services/LoginServices.js",
+                        "~/App/Services/MetasServices.js",
                        "~/App/Controller/SubsistemasController.js",
                        "~/App/Controller/ObjetivosEspecificosController.js",
                        "~/App/Controller/ObjetivosEstrategicosController.js",
                        "~/App/Controller/IndicadoresController.js",
                        "~/App/Controller/AccionesController.js",
-                       "~/App/Controller/LoginController.js"
+                       "~/App/Controller/LoginController.js",
+                       "~/App/Controller/MetasController.js",
+                        "~/App/Directivas/numbersOnly.js"
                        ));
             bundles.Add(new StyleBundle("~/Content/plantillaCss").Include(
                      "~/Content/assets/css/bootstrap.min.css",

@@ -152,6 +152,7 @@
     <Compile Include="Controllers\AccionesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
+    <Compile Include="Controllers\MetasController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
@@ -255,20 +256,25 @@
     <Content Include="App\Controller\HomeController.js" />
     <Content Include="App\Controller\IndicadoresController.js" />
     <Content Include="App\Controller\LoginController.js" />
+    <Content Include="App\Controller\MetasController.js" />
     <Content Include="App\Controller\ObjetivosEspecificosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
+    <Content Include="App\Directivas\numbersOnly.js" />
     <Content Include="App\Services\AccionesServices.js" />
     <Content Include="App\Services\IndicadoresServices.js" />
     <Content Include="App\Services\LoginServices.js" />
+    <Content Include="App\Services\MetasServices.js" />
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
     <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\login\index.html" />
+    <Content Include="App\Views\metas\index.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
     <Content Include="App\Views\objetivosestrategicos\index.html" />
+    <Content Include="App\Views\planificacion\index.html" />
     <Content Include="App\Views\subsistema\index.html" />
     <Content Include="Content\angular-datatables.min.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
@@ -438,7 +444,6 @@
     <Content Include="Views\Admin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\Views\planificacion\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
