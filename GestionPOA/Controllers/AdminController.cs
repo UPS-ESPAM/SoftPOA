@@ -42,7 +42,7 @@ namespace GestionPOA.Controllers
         }
         public ActionResult Logout()
         {
-            Session["Page"] = null;
+            Session.Clear();
             return Json(new { msj = "Sesión Cerrada" }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
