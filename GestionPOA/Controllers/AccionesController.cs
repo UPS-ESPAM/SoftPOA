@@ -17,10 +17,14 @@ namespace GestionPOA.Controllers
         // GET: Acciones
         public ActionResult Metas()
         {
-            var metas  = db.Metas.Where(m => m.eliminado == false)
-                                          .Select(m=> new { id = m.id, Descripcion = m.Descripcion })
-                                          .ToList();
+            var metas = db.spMetasDepartment(Convert.ToInt32(Session["department"])).ToList();
             return Json(new { listMetas = metas }, JsonRequestBehavior.AllowGet);
+        }
+        // GET: Acciones/MetaDetalle
+        public ActionResult MetaDetalle(int id)
+        {
+            var detalle = db.spMetaDetalle(id).ToList();
+            return Json(new { detalleMeta = detalle }, JsonRequestBehavior.AllowGet);
         }
         // GET: Acciones
         public ActionResult Acciones(int id)

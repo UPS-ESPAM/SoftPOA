@@ -17,11 +17,23 @@ namespace GestionPOA.Controllers
         // GET: Estrategias
         public ActionResult Estrategias()
         {
-            var estrategias = db.Estrategias.Where(e => e.eliminado == false)
-                                          .Select(e => new { EstrategiasId = e.EstrategiasId, Descripcion = e.Descripcion })
-                                          .ToList();
-
+            var estrategias = db.spEstrategiasDepartment(Convert.ToInt32(Session["department"])).ToList();
             return Json(new { listEstrategias = estrategias }, JsonRequestBehavior.AllowGet);
+        }
+        // GET: Indicadores/EstrategiaDetalle
+        public ActionResult EstrategiaDetalle(int id)
+        {
+            var detalle = from oe in db.ObjetivosEstrategicos
+                              join oesp in db.ObjetivosEspecificos on oe.ObjetivosEstragicoId equals oesp.ObjetivosEstragicoId
+                              join e in db.Estrategias on oesp.ObjetivosEspecificosId equals e.ObjetivosEspecificosId
+                              where e.EstrategiasId == id
+                              select new
+                              {
+                                  ObjetivoEstrategico = oe.Descripcion,
+                                  ObjetivoEspecifico = oesp.Descripcion
+                              };
+
+            return Json(new { detalleEstrategia = detalle }, JsonRequestBehavior.AllowGet);
         }
         // GET: Indicadores
         public ActionResult Indicadores(int id)

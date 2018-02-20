@@ -60,5 +60,32 @@ namespace GestionPOA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spLoginIngreso_Result>("spLoginIngreso", usuarioParameter, claveParameter);
         }
+    
+        public virtual ObjectResult<spEstrategiasDepartment_Result> spEstrategiasDepartment(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasDepartment_Result>("spEstrategiasDepartment", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spMetasDepartment_Result> spMetasDepartment(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartment_Result>("spMetasDepartment", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spMetaDetalle_Result> spMetaDetalle(Nullable<int> meta)
+        {
+            var metaParameter = meta.HasValue ?
+                new ObjectParameter("meta", meta) :
+                new ObjectParameter("meta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaDetalle_Result>("spMetaDetalle", metaParameter);
+        }
     }
 }

@@ -15,6 +15,15 @@
             return request;
         }
 
+        fact.getEstrategiaDetalle = function (id) {
+            var request = $http({
+                method: 'GET',
+                url: '../Indicadores/EstrategiaDetalle/' + id,
+                dataType: "json"
+            });
+            return request;
+        }
+
         fact.addIndicadores = function (indicadores) {
             var request = $http({
                 method: 'POST',
