@@ -10,76 +10,83 @@
             })
         }
 
-        vm.cargarEstrategia = function (id, estrategia) {
+        vm.cargarEstrategia = function (id, ObjetivoEspecifico) {
             var requestResponse = EstrategiasServices.getEstrategias(id);
+            
             requestResponse.then(function successCallback(response) {
                 vm.appstate = 'showAdd';
-                vm.listadoIndicadores = response.data.listIndicadores
-                vm.modalIndicadores.EstrategiasId = id;
-                vm.estrategia = estrategia;
+                debugger
+                vm.listadoEstrategia = response.data.listaEstrategia
+                vm.modalEstrategia.ObjetivosEspecificosId = id;
+                vm.ObjetivoEspecifico = ObjetivoEspecifico;
             });
         }
 
-        //vm.ventanaIndicador = function () {
-        //    $('.modal ').insertAfter($('body'));
-        //    vm.modalIndicadores.Descripcion = "";
-        //};
+        vm.ventanaEstrategia = function () {
+            $('.modal ').insertAfter($('body'));
+            vm.modalEstrategia.Descripcion = "";
+        };
 
-        //vm.ventanaModalIndicadores = function (indicadores) {
-        //    $('.modal ').insertAfter($('body'));
-        //    vm.modalIndicadores.Descripcion = indicadores.Descripcion;
-        //    vm.modalIndicadores.IndicadorId = indicadores.IndicadorId;
-        //}
+        vm.ventanaModalEstrategia = function (estrategia) {
+            debugger
+            $('.modal ').insertAfter($('body'));
+            vm.modalEstrategia.Descripcion = estrategia.Descripcion;
+            vm.modalEstrategia.EstrategiasId = estrategia.EstrategiasId;
+            vm.modalEstrategia.PlanificacionId = estrategia.PlanificacionId;
 
-        //vm.addIndicador = function () {
-        //    var requestResponse = IndicadoresServices.addIndicadores(vm.modalIndicadores);
-        //    requestResponse.then(function successCallback(response) {
-        //        var requestResponse = IndicadoresServices.getIndicadores(vm.modalIndicadores.EstrategiasId);
-        //        requestResponse.then(function successCallback(response) {
-        //            vm.listadoIndicadores = response.data.listIndicadores
-        //        });
-        //        swal({
-        //            title: 'Correcto!',
-        //            text: response.data.mensaje,
-        //            type: 'success',
-        //            confirmButtonClass: "btn btn-success",
-        //            buttonsStyling: false
-        //        })
-        //        vm.modalIndicadores.Descripcion = "";
-        //        $('.modal').modal('hide');
-        //    });
-        //}
+        }
 
-        //vm.updateIndicador = function () {
-        //    var requestResponse = IndicadoresServices.updateIndicadores(vm.modalIndicadores);
-        //    requestResponse.then(function successCallback(response) {
-        //        var requestResponse = IndicadoresServices.getIndicadores(vm.modalIndicadores.EstrategiasId);
-        //        requestResponse.then(function successCallback(response) {
-        //            vm.listadoIndicadores = response.data.listIndicadores
-        //        });
-        //        swal({
-        //            title: 'Correcto!',
-        //            text: response.data.mensaje,
-        //            type: 'success',
-        //            confirmButtonClass: "btn btn-success",
-        //            buttonsStyling: false
-        //        })
-        //        vm.modalIndicadores.Descripcion = "";
-        //        $('.modal').modal('hide');
-        //    });
-        //}
+        vm.addEstrategia = function () {
+            debugger
+            var requestResponse = EstrategiasServices.addEstrategia(vm.modalEstrategia);
+            requestResponse.then(function successCallback(response) {
+                var requestResponse = EstrategiasServices.getEstrategias(vm.modalEstrategia.ObjetivosEspecificosId);
+                requestResponse.then(function successCallback(response) { 
+                    
+                    vm.listadoEstrategia = response.data.listaEstrategia
+                });
+                swal({
+                    title: 'Correcto!',
+                    text: response.data.mensaje,
+                    type: 'success',
+                    confirmButtonClass: "btn btn-success",
+                    buttonsStyling: false
+                })
+                vm.modalEstrategia.Descripcion = "";
+                $('.modal').modal('hide');
+            });
+        }
 
-        //vm.deleteIndicador = function (id, index) {
-        //    vm.listadoIndicadores.splice(index, 1);
-        //    var requestResponse = IndicadoresServices.deleteIndicadores(id);
-        //    requestResponse.then(function successCallback(response) {
-        //        swal({
-        //            title: 'Correcto!',
-        //            text: response.data.mensaje,
-        //            type: 'success',
-        //            confirmButtonClass: "btn btn-success",
-        //            buttonsStyling: false
-        //        })
-        //    });
-        //}
+        vm.updateEstrategia = function () {
+            var requestResponse = EstrategiasServices.updateEstrategia(vm.modalEstrategia);
+            requestResponse.then(function successCallback(response) {
+                var requestResponse = EstrategiasServices.getEstrategias(vm.modalEstrategia.ObjetivosEspecificosId);
+                requestResponse.then(function successCallback(response) {
+                    vm.listadoEstrategia = response.data.listaEstrategia
+                });
+                swal({
+                    title: 'Correcto!',
+                    text: response.data.mensaje,
+                    type: 'success',
+                    confirmButtonClass: "btn btn-success",
+                    buttonsStyling: false
+                })
+                vm.modalEstrategia.Descripcion = "";
+                $('.modal').modal('hide');
+            });
+        }
+
+        vm.deleteEstrategia = function (id, index) {
+            vm.listadoEstrategia.splice(index, 1);
+            var requestResponse = EstrategiasServices.deleteEstrategia(id);
+            requestResponse.then(function successCallback(response) {
+                swal({
+                    title: 'Correcto!',
+                    text: response.data.mensaje,
+                    type: 'success',
+                    confirmButtonClass: "btn btn-success",
+                    buttonsStyling: false
+                })
+            });
+        }
     });

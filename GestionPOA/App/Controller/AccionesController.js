@@ -3,6 +3,7 @@
 
         var vm = this;
         cargarMetas();
+        vm.detallesMeta = {};
 
         function cargarMetas() {
             AccionesServices.getMetas().then(function (response) {
@@ -17,6 +18,17 @@
                 vm.listadoAcciones = response.data.listAcciones
                 vm.modalAcciones.MetaID = id;
                 vm.meta = meta;
+            });
+        }
+
+        vm.detalleMeta = function (id) {
+            var requestResponse = AccionesServices.getDetalleMeta(id);
+            requestResponse.then(function successCallback(response) {
+                $('.modal ').insertAfter($('body'));
+                vm.detallesMeta.ObjetivoEstrategico = response.data.detalleMeta['0'].Objetivo_Estrategico;
+                vm.detallesMeta.ObjetivoEspecifico = response.data.detalleMeta['0'].Objetivo_Especifico;
+                vm.detallesMeta.Estrategia = response.data.detalleMeta['0'].Estrategia;
+                vm.detallesMeta.Indicador = response.data.detalleMeta['0'].Indicador;
             });
         }
 

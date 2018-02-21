@@ -4,6 +4,8 @@
         var vm = this;
         cargarEstategias();
         vm.modalIndicadores = {};
+        vm.detallesEstrategia = {}
+
         function cargarEstategias() {
             IndicadoresServices.getEstrategias().then(function (response) {
                 vm.listadoEstrategias = response.data.listEstrategias;
@@ -19,6 +21,17 @@
                 vm.estrategia = estrategia;
             });
         }
+
+        vm.detalleEstrategias = function (id) {
+            var requestResponse = IndicadoresServices.getEstrategiaDetalle(id);
+            requestResponse.then(function successCallback(response) {
+                $('.modal ').insertAfter($('body'));
+                vm.detallesEstrategia.ObjetivoEstrategico = response.data.detalleEstrategia['0'].ObjetivoEstrategico;
+                vm.detallesEstrategia.ObjetivoEspecifico = response.data.detalleEstrategia['0'].ObjetivoEspecifico;
+            });
+        }
+
+
 
         vm.ventanaIndicador = function () {
             $('.modal ').insertAfter($('body'));

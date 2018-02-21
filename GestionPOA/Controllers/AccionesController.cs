@@ -15,14 +15,6 @@ namespace GestionPOA.Controllers
         private PEDIEntities db = new PEDIEntities();
 
         // GET: Acciones
-        public ActionResult Metas()
-        {
-            var metas  = db.Metas.Where(m => m.eliminado == false)
-                                          .Select(m=> new { id = m.id, Descripcion = m.Descripcion })
-                                          .ToList();
-            return Json(new { listMetas = metas }, JsonRequestBehavior.AllowGet);
-        }
-        // GET: Acciones
         public ActionResult Acciones(int id)
         {
             var acciones = db.Acciones.Where(a => a.eliminado == false)

@@ -14,115 +14,66 @@ namespace GestionPOA.Controllers
     {
         private PEDIEntities db = new PEDIEntities();
 
-        // GET: Estrategias
-        public ActionResult Index()
+        // GET: Estrategias/GetEstrategiasbyObjetivo/3
+        public JsonResult GetEstrategiasbyObjetivo(int id)
         {
-            var estrategias = db.Estrategias.Include(e => e.ObjetivosEspecificos).Include(e => e.Planificacion);
-            return View(estrategias.ToList());
+            int _DepartamentoId = int.Parse(Session["department"].ToString());
+            var estrategias = db.spEstrategiasbyDepartamentoandObjetivoEspecifico(_DepartamentoId, id).ToList();
+            return Json(new { listaEstrategia = estrategias }, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Estrategias/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Estrategias estrategias = db.Estrategias.Find(id);
-            if (estrategias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(estrategias);
-        }
-
+       
         // GET: Estrategias/Create
-        public ActionResult Create()
+        public JsonResult Create(Estrategias estrategias)
         {
-            ViewBag.ObjetivosEspecificosId = new SelectList(db.ObjetivosEspecificos, "ObjetivosEspecificosId", "Descripcion");
-            ViewBag.PlanificacionId = new SelectList(db.Planificacion, "PlanificacionId", "PlanificacionId");
-            return View();
+            int _DepartamentoId = int.Parse(Session["department"].ToString());
+            db.spEstrategiasInsert(estrategias.ObjetivosEspecificosId,estrategias.Descripcion, _DepartamentoId);
+            return Json(new { mensaje = "Registrado correctamente" });
         }
 
-        // POST: Estrategias/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EstrategiasId,ObjetivosEspecificosId,PlanificacionId,Descripcion,eliminado")] Estrategias estrategias)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Estrategias.Add(estrategias);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.ObjetivosEspecificosId = new SelectList(db.ObjetivosEspecificos, "ObjetivosEspecificosId", "Descripcion", estrategias.ObjetivosEspecificosId);
-            ViewBag.PlanificacionId = new SelectList(db.Planificacion, "PlanificacionId", "PlanificacionId", estrategias.PlanificacionId);
-            return View(estrategias);
-        }
-
-        // GET: Estrategias/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Estrategias/Update/5
+        public JsonResult Update(Estrategias estrategias)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Estrategias estrategias = db.Estrategias.Find(id);
-            if (estrategias == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ObjetivosEspecificosId = new SelectList(db.ObjetivosEspecificos, "ObjetivosEspecificosId", "Descripcion", estrategias.ObjetivosEspecificosId);
-            ViewBag.PlanificacionId = new SelectList(db.Planificacion, "PlanificacionId", "PlanificacionId", estrategias.PlanificacionId);
-            return View(estrategias);
-        }
-
-        // POST: Estrategias/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EstrategiasId,ObjetivosEspecificosId,PlanificacionId,Descripcion,eliminado")] Estrategias estrategias)
-        {
-            if (ModelState.IsValid)
+          
+            if (estrategias != null)
             {
                 db.Entry(estrategias).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { mensaje = "Registrado actualizado correctamente" });
             }
-            ViewBag.ObjetivosEspecificosId = new SelectList(db.ObjetivosEspecificos, "ObjetivosEspecificosId", "Descripcion", estrategias.ObjetivosEspecificosId);
-            ViewBag.PlanificacionId = new SelectList(db.Planificacion, "PlanificacionId", "PlanificacionId", estrategias.PlanificacionId);
-            return View(estrategias);
+            else
+            {
+                return Json(new { mensaje = "Error, no actualizado" });
+
+            }
+
+
         }
 
+
+
         // GET: Estrategias/Delete/5
-        public ActionResult Delete(int? id)
+        public JsonResult Delete(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new { mensaje = "Error, no se pudo eliminar correctamente." });
             }
             Estrategias estrategias = db.Estrategias.Find(id);
             if (estrategias == null)
             {
-                return HttpNotFound();
+                return Json(new { mensaje = "Error, no se pudo eliminar correctamente." });
             }
-            return View(estrategias);
+            else
+            {
+                estrategias.eliminado = true;
+                db.SaveChanges();
+            }
+            return Json(new { mensaje = "Registrado eliminado correctamente" });
         }
 
-        // POST: Estrategias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Estrategias estrategias = db.Estrategias.Find(id);
-            db.Estrategias.Remove(estrategias);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+      
 
         protected override void Dispose(bool disposing)
         {

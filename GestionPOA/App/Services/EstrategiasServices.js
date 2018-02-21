@@ -7,41 +7,42 @@
         }
 
         fact.getEstrategias = function (id) {
+                
             var request = $http({
                 method: 'POST',
-                url: '../Indicadores/Indicadores/' + id,
+                url: '../Estrategias/GetEstrategiasbyObjetivo/' + id,
                 dataType: "json"
             });
             return request;
         }
 
-        //fact.addIndicadores = function (indicadores) {
-        //    var request = $http({
-        //        method: 'POST',
-        //        url: '../Indicadores/Create',
-        //        data: indicadores,
-        //        dataType: "json"
-        //    });
-        //    return request;
-        //}
+        fact.addEstrategia = function (estrategia) {            
+            var request = $http({
+                method: 'POST',
+                url: '../Estrategias/Create',
+                data: estrategia,
+                dataType: "json"
+            });
+            return request;
+        }
 
-        //fact.updateIndicadores = function (indicadores) {
-        //    var request = $http({
-        //        method: 'POST',
-        //        url: '../Indicadores/Update',
-        //        data: indicadores,
-        //        dataType: "json"
-        //    });
-        //    return request;
-        //}
+        fact.updateEstrategia = function (estrategia) {
+            var request = $http({
+                method: 'POST',
+                url: '../Estrategias/Update',
+                data: estrategia,
+                dataType: "json"
+            });
+            return request;
+        }
 
-        //fact.deleteIndicadores = function (id) {
-        //    var request = $http({
-        //        method: 'POST',
-        //        url: '../Indicadores/Delete/' + id,
-        //        dataType: "json"
-        //    });
-        //    return request;
-        //}
+        fact.deleteEstrategia = function (id) {
+            var request = $http({
+                method: 'POST',
+                url: '../Estrategias/Delete/' + id,
+                dataType: "json"
+            });
+            return request;
+        }
         return fact;
     }]);

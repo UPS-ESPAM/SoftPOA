@@ -61,6 +61,33 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spLoginIngreso_Result>("spLoginIngreso", usuarioParameter, claveParameter);
         }
     
+        public virtual ObjectResult<spEstrategiasDepartment_Result> spEstrategiasDepartment(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasDepartment_Result>("spEstrategiasDepartment", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spMetasDepartment_Result> spMetasDepartment(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartment_Result>("spMetasDepartment", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spMetaDetalle_Result> spMetaDetalle(Nullable<int> meta)
+        {
+            var metaParameter = meta.HasValue ?
+                new ObjectParameter("meta", meta) :
+                new ObjectParameter("meta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaDetalle_Result>("spMetaDetalle", metaParameter);
+        }
+    
         public virtual ObjectResult<spObjetivosEspecificosbyDepartamento_Result> spObjetivosEspecificosbyDepartamento(Nullable<int> department)
         {
             var departmentParameter = department.HasValue ?
@@ -68,6 +95,36 @@ namespace GestionPOA.Models
                 new ObjectParameter("department", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivosEspecificosbyDepartamento_Result>("spObjetivosEspecificosbyDepartamento", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spEstrategiasbyDepartamentoandObjetivoEspecifico_Result> spEstrategiasbyDepartamentoandObjetivoEspecifico(Nullable<int> departamentoId, Nullable<int> objetivoEspecificoId)
+        {
+            var departamentoIdParameter = departamentoId.HasValue ?
+                new ObjectParameter("DepartamentoId", departamentoId) :
+                new ObjectParameter("DepartamentoId", typeof(int));
+    
+            var objetivoEspecificoIdParameter = objetivoEspecificoId.HasValue ?
+                new ObjectParameter("ObjetivoEspecificoId", objetivoEspecificoId) :
+                new ObjectParameter("ObjetivoEspecificoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasbyDepartamentoandObjetivoEspecifico_Result>("spEstrategiasbyDepartamentoandObjetivoEspecifico", departamentoIdParameter, objetivoEspecificoIdParameter);
+        }
+    
+        public virtual int spEstrategiasInsert(Nullable<int> objetivosEspecificosId, string descripcion, Nullable<int> departamentId)
+        {
+            var objetivosEspecificosIdParameter = objetivosEspecificosId.HasValue ?
+                new ObjectParameter("ObjetivosEspecificosId", objetivosEspecificosId) :
+                new ObjectParameter("ObjetivosEspecificosId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var departamentIdParameter = departamentId.HasValue ?
+                new ObjectParameter("departamentId", departamentId) :
+                new ObjectParameter("departamentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
         }
     }
 }

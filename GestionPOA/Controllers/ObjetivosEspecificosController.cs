@@ -39,7 +39,7 @@ namespace GestionPOA.Controllers
         // GET: ObjetivosEspecificos/getObjetivosEspecificosByDepartamento
         public ActionResult getObjetivosEspecificosByDepartamento()
         {
-            int _DepartamentoId = int.Parse(Session["departamentoId"].ToString());
+            int _DepartamentoId = int.Parse(Session["department"].ToString());
             var listado = db.spObjetivosEspecificosbyDepartamento(_DepartamentoId).ToList();
          
             return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);

@@ -413,6 +413,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spEstrategiasbyDepartamentoandObjetivoEspecifico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="DepartamentoId" Type="int" Mode="In" />
+          <Parameter Name="ObjetivoEspecificoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEstrategiasDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="department" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEstrategiasInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="ObjetivosEspecificosId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="departamentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spMetaDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="meta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spMetasDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="department" Type="int" Mode="In" />
+        </Function>
         <Function Name="spObjetivosEspecificosbyDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="department" Type="int" Mode="In" />
         </Function>
@@ -1059,8 +1077,26 @@
             <Parameter Name="Usuario" Mode="In" Type="String" />
             <Parameter Name="Clave" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spEstrategiasDepartment" ReturnType="Collection(PEDIModel.spEstrategiasDepartment_Result)">
+          <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spMetasDepartment" ReturnType="Collection(PEDIModel.spMetasDepartment_Result)">
+          <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spMetaDetalle" ReturnType="Collection(PEDIModel.spMetaDetalle_Result)">
+          <Parameter Name="meta" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spObjetivosEspecificosbyDepartamento" ReturnType="Collection(PEDIModel.spObjetivosEspecificosbyDepartamento_Result)">
-            <Parameter Name="department" Mode="In" Type="Int32" />
+          <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEstrategiasbyDepartamentoandObjetivoEspecifico" ReturnType="Collection(PEDIModel.spEstrategiasbyDepartamentoandObjetivoEspecifico_Result)">
+            <Parameter Name="DepartamentoId" Mode="In" Type="Int32" />
+            <Parameter Name="ObjetivoEspecificoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEstrategiasInsert">
+            <Parameter Name="ObjetivosEspecificosId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="departamentId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
@@ -1076,9 +1112,28 @@
           <Property Type="Int32" Name="idPersona" Nullable="true" />
           <Property Type="String" Name="TipoRol" Nullable="false" MaxLength="13" />
         </ComplexType>
+        <ComplexType Name="spEstrategiasDepartment_Result">
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spMetasDepartment_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spMetaDetalle_Result">
+          <Property Type="String" Name="Objetivo_Estrategico" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Objetivo_Especifico" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Indicador" Nullable="true" MaxLength="250" />
+        </ComplexType>
         <ComplexType Name="spObjetivosEspecificosbyDepartamento_Result">
           <Property Type="Int32" Name="ObjetivosEspecificosId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spEstrategiasbyDepartamentoandObjetivoEspecifico_Result">
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="Int32" Name="PlanificacionId" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1315,6 +1370,32 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEstrategiasDepartment" FunctionName="PEDIModel.Store.spEstrategiasDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spEstrategiasDepartment_Result">
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spMetasDepartment" FunctionName="PEDIModel.Store.spMetasDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetasDepartment_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spMetaDetalle" FunctionName="PEDIModel.Store.spMetaDetalle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetaDetalle_Result">
+                <ScalarProperty Name="Objetivo_Estrategico" ColumnName="Objetivo_Estrategico" />
+                <ScalarProperty Name="Objetivo_Especifico" ColumnName="Objetivo_Especifico" />
+                <ScalarProperty Name="Estrategia" ColumnName="Estrategia" />
+                <ScalarProperty Name="Indicador" ColumnName="Indicador" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spObjetivosEspecificosbyDepartamento" FunctionName="PEDIModel.Store.spObjetivosEspecificosbyDepartamento">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spObjetivosEspecificosbyDepartamento_Result">
@@ -1323,6 +1404,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEstrategiasbyDepartamentoandObjetivoEspecifico" FunctionName="PEDIModel.Store.spEstrategiasbyDepartamentoandObjetivoEspecifico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spEstrategiasbyDepartamentoandObjetivoEspecifico_Result">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="PlanificacionId" ColumnName="PlanificacionId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEstrategiasInsert" FunctionName="PEDIModel.Store.spEstrategiasInsert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
