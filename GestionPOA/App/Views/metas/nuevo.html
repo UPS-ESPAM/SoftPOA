@@ -1,9 +1,9 @@
-﻿<div class="row" ng-controller="PlanificacionController as vm">
+﻿<div class="row" ng-controller="MetasController as vm">
     <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header card-header-text" data-background-color="orange">
-                    <h4 class="card-title">Objetivos Específicos Asignados</h4>
+                    <h4 class="card-title">Indicadores</h4>
                 </div>
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
@@ -11,8 +11,8 @@
                         <th>Descripción</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="objetivoEspecifico in vm.listadoObjetivoEspecifico" ng-click="vm.cargarEstrategia(objetivoEspecifico.EstrategiasId,estrategias.Descripcion)">
-                                <td style="cursor:pointer;">{{estrategias.Descripcion}}</td>
+                            <tr ng-repeat="objetivoEspecifico in vm.listadoObjetivoEspecifico" ng-click="vm.cargarEstrategia(objetivoEspecifico.ObjetivosEspecificosId,objetivoEspecifico.Descripcion)">
+                                <td style="cursor:pointer;">{{objetivoEspecifico.Descripcion}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -24,8 +24,8 @@
                 <div class="card-header card-header-tabs" data-background-color="green">
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
-                            <a ng-show="vm.appstate =='showAdd'" class="ui olive label" data-toggle="modal" data-target="#myModal" ng-click="vm.ventanaIndicador()"><i class="add icon"></i>Estrategia</a>
-                            <span class="nav-tabs-title"><b>OBJETIVO ESPECÍFICO:</b> {{vm.ObjetivoEspecifico }}</span>
+                            <a ng-show="vm.appstate =='showAdd'" class="ui olive label" data-toggle="modal" data-target="#myModal" ng-click="vm.ventanaEstrategia()"><i class="add icon"></i>Estrategia</a>
+                            <span class="nav-tabs-title"><b>INDICADOR:</b> {{vm.ObjetivoEspecifico }}</span>
                             <ul class="nav nav-tabs" data-tabs="tabs"></ul>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="card-content">
                     <table class="table">
                         <thead class="text-warning">
-                        <th>Indicadores</th>
+                        <th>METAS</th>
                         <th>Acciones</th>
                         </thead>
                         <tbody>
@@ -61,26 +61,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title text-success">:: Agregar Indicador ::</h4>
+                    <h4 class="modal-title text-success">:: Agregar Estrategia ::</h4>
                 </div>
-                <form name="addIndicadoresForm" class="ui form" ng-submit="vm.addIndicador()" novalidate>
+                <form name="addEstrategiaForm" class="ui form" ng-submit="vm.addEstrategia()" novalidate>
                     <div class="modal-body">
                         <div class="form-group label-floating">
-                            <label class="control-label"><span class="text-success"><b>ESTRATEGIA: </b> </span> {{vm.estrategia | uppercase}} </label>
+                            <label class="control-label"><span class="text-success"><b>Objetivo Específico: </b> </span> {{vm.ObjetivoEspecifico | uppercase}} </label>
                         </div>
                         <br />
                         <div class="form-group label-floating">
-                            <label class="control-label" style="font-size:12px;">DESCRIPCIÓN DEL INDICADOR</label>
+                            <label class="control-label" style="font-size:12px;">DESCRIPCIÓN DE LA ESTRATEGIA</label>
                             <div class="form-group">
-                                <textarea type="text" class="form-control" ng-model="vm.modalIndicadores.Descripcion" required></textarea>
+                                <textarea type="text" class="form-control" ng-model="vm.modalEstrategia.Descripcion" required></textarea>
                             </div>
                         </div>
 
-                        <input type="hidden" ng-model="vm.modalIndicadores.EstrategiasId" ng-value="vm.modalIndicadores.EstrategiasId">
-                        <input type="hidden" ng-model="vm.modalIndicadores.eliminado" ng-value="vm.modalIndicadores.eliminado = 0">
+                        <input type="hidden" ng-model="vm.modalEstrategia.ObjetivosEspecificosId" ng-value="vm.modalEstrategia.ObjetivosEspecificosId">
+                        <input type="hidden" ng-model="vm.modalEstrategia.PlanificacionId" ng-value="vm.modalEstrategia.PlanificacionId">
+                        <input type="hidden" ng-model="vm.modalEstrategia.eliminado" ng-value="vm.modalEstrategia.eliminado = 0">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="addIndicadoresForm.$invalid">Registrar <i class="add icon"></i></button>
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="addEstrategiaForm.$invalid">Registrar <i class="add icon"></i></button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
                     </div>
                 </form>
@@ -95,26 +96,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title text-success">:: Actualizar Indicador ::</h4>
+                    <h4 class="modal-title text-success">:: Actualizar Estrategia ::</h4>
                 </div>
-                <form name="updateIndicadoresForm" class="ui form" ng-submit="vm.updateIndicador()" novalidate>
+                <form name="updateEstrategiaForm" class="ui form" ng-submit="vm.updateEstrategia()" novalidate>
                     <div class="modal-body">
                         <div class="form-group label-floating">
-                            <label class="control-label"><span class="text-success"><b>ESTRATEGIA: </b> </span> {{vm.estrategia | uppercase}}</label>
+                            <label class="control-label"><span class="text-success"><b>Objetivo Específico: </b> </span> {{vm.ObjetivoEspecifico | uppercase}}</label>
                         </div>
                         <br />
                         <div class="form-group label-floating">
-                            <label class="control-label" style="font-size:12px;">DESCRIPCIÓN DEL INDICADOR</label>
+                            <label class="control-label" style="font-size:12px;">DESCRIPCIÓN DE LA ESTRATEGIA</label>
                             <div class="form-group">
-                                <textarea type="text" class="form-control" ng-model="vm.modalIndicadores.Descripcion" required></textarea>
+                                <textarea type="text" class="form-control" ng-model="vm.modalEstrategia.Descripcion" required></textarea>
                             </div>
                         </div>
-                        <input type="hidden" ng-model="vm.modalIndicadores.IndicadorId" ng-value="vm.modalIndicadores.IndicadorId">
-                        <input type="hidden" ng-model="vm.modalIndicadores.EstrategiasId" ng-value="vm.modalIndicadores.EstrategiasId">
-                        <input type="hidden" ng-model="vm.modalIndicadores.eliminado" ng-value="vm.modalIndicadores.eliminado = 0">
+                        <input type="hidden" ng-model="vm.modalEstrategia.ObjetivosEspecificosId" ng-value="vm.modalEstrategia.ObjetivosEspecificosId">
+                        <input type="hidden" ng-model="vm.modalEstrategia.EstrategiasId" ng-value="vm.modalEstrategia.EstrategiasId">
+                        <input type="hidden" ng-model="vm.modalEstrategia.PlanificacionId" ng-value="vm.modalEstrategia.PlanificacionId">
+                        <input type="hidden" ng-model="vm.modalEstrategia.eliminado" ng-value="vm.modalEstrategia.eliminado = 0">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="updateIndicadoresForm.$invalid">Actualizar <i class="add icon"></i></button>
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="updateEstrategiaForm.$invalid">Actualizar <i class="add icon"></i></button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
                     </div>
                 </form>
