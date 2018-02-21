@@ -413,6 +413,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spObjetivosEspecificosbyDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="department" Type="int" Mode="In" />
+        </Function>
         <Function Name="spLoginIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Usuario" Type="varchar" Mode="In" />
           <Parameter Name="Clave" Type="varchar" Mode="In" />
@@ -1056,6 +1059,9 @@
             <Parameter Name="Usuario" Mode="In" Type="String" />
             <Parameter Name="Clave" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spObjetivosEspecificosbyDepartamento" ReturnType="Collection(PEDIModel.spObjetivosEspecificosbyDepartamento_Result)">
+            <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1069,6 +1075,10 @@
           <Property Type="Int32" Name="id_departamento" Nullable="true" />
           <Property Type="Int32" Name="idPersona" Nullable="true" />
           <Property Type="String" Name="TipoRol" Nullable="false" MaxLength="13" />
+        </ComplexType>
+        <ComplexType Name="spObjetivosEspecificosbyDepartamento_Result">
+          <Property Type="Int32" Name="ObjetivosEspecificosId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1302,6 +1312,14 @@
                 <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
                 <ScalarProperty Name="idPersona" ColumnName="idPersona" />
                 <ScalarProperty Name="TipoRol" ColumnName="TipoRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObjetivosEspecificosbyDepartamento" FunctionName="PEDIModel.Store.spObjetivosEspecificosbyDepartamento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spObjetivosEspecificosbyDepartamento_Result">
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

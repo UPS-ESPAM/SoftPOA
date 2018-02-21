@@ -15,7 +15,7 @@ namespace GestionPOA.Controllers
     {
         private PEDIEntities db = new PEDIEntities();
 
-        // GET: ObjetivosEspecificos
+        // GET: ObjetivosEspecificos/getObjetivosEspecificos
         public ActionResult getObjetivosEspecificos()
         {
             var  listaOEI = db.ObjetivosEstrategicos.Where(oe => oe.eliminado == false)
@@ -36,6 +36,14 @@ namespace GestionPOA.Controllers
             return Json(new { listOEspecifico = listOE, listObjetivoEstrategico = listaOEI }, JsonRequestBehavior.AllowGet);
         }
 
+        // GET: ObjetivosEspecificos/getObjetivosEspecificosByDepartamento
+        public ActionResult getObjetivosEspecificosByDepartamento()
+        {
+            int _DepartamentoId = int.Parse(Session["departamentoId"].ToString());
+            var listado = db.spObjetivosEspecificosbyDepartamento(_DepartamentoId).ToList();
+         
+            return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);
+        }
         // POST: ObjetivosEspecificos/Create
         [HttpPost]
         public ActionResult Create(ObjetivosEspecificos objetivosEspecificos)

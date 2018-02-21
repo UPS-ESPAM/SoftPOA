@@ -1,4 +1,4 @@
-﻿<div class="row" ng-controller="PlanificacionController as vm">
+﻿<div class="row" ng-controller="EstrategiasController as vm">
     <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card">
@@ -11,8 +11,8 @@
                         <th>Descripción</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="objetivoEspecifico in vm.listadoObjetivoEspecifico" ng-click="vm.cargarEstrategia(objetivoEspecifico.EstrategiasId,estrategias.Descripcion)">
-                                <td style="cursor:pointer;">{{estrategias.Descripcion}}</td>
+                            <tr ng-repeat="objetivoEspecifico in vm.listadoObjetivoEspecifico" ng-click="vm.cargarEstrategia(objetivoEspecifico.ObjetivosEspecificosId,objetivoEspecifico.Descripcion)">
+                                <td style="cursor:pointer;">{{objetivoEspecifico.Descripcion}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -33,7 +33,7 @@
                 <div class="card-content">
                     <table class="table">
                         <thead class="text-warning">
-                        <th>Indicadores</th>
+                        <th>ESTRATEGIA</th>
                         <th>Acciones</th>
                         </thead>
                         <tbody>

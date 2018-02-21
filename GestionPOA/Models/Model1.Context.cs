@@ -60,5 +60,14 @@ namespace GestionPOA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spLoginIngreso_Result>("spLoginIngreso", usuarioParameter, claveParameter);
         }
+    
+        public virtual ObjectResult<spObjetivosEspecificosbyDepartamento_Result> spObjetivosEspecificosbyDepartamento(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivosEspecificosbyDepartamento_Result>("spObjetivosEspecificosbyDepartamento", departmentParameter);
+        }
     }
 }
