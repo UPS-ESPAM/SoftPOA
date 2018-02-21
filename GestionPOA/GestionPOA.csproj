@@ -290,6 +290,7 @@
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\login\index.html" />
     <Content Include="App\Views\metas\index.html" />
+    <Content Include="App\Views\metas\nuevo.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
     <Content Include="App\Views\objetivosestrategicos\index.html" />
     <Content Include="App\Views\estrategias\index.html" />

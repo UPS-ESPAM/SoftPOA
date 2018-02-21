@@ -20,11 +20,8 @@ namespace GestionPOA.Models
         public PEDIEntities()
             : base("name=PEDIEntities")
         {
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = false;
-
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -128,6 +125,15 @@ namespace GestionPOA.Models
                 new ObjectParameter("departamentId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
         }
     }
 }
