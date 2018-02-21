@@ -45,10 +45,7 @@ namespace GestionPOA.Controllers
             else
             {
                 return Json(new { mensaje = "Error, no actualizado" });
-
             }
-
-
         }
 
 

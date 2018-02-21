@@ -20,8 +20,11 @@ namespace GestionPOA.Models
         public PEDIEntities()
             : base("name=PEDIEntities")
         {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
