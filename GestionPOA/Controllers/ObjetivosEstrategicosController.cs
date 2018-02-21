@@ -82,7 +82,6 @@ namespace GestionPOA.Controllers
 
         }
 
-
         // POST: ObjetivosEstrategicos/Delete/5
         [HttpPost]
         public JsonResult Delete(int id)

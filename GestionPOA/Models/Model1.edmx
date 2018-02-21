@@ -416,6 +416,9 @@
         <Function Name="spEstrategiasDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="department" Type="int" Mode="In" />
         </Function>
+        <Function Name="spMetaAndProgramaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="department" Type="int" Mode="In" />
+        </Function>
         <Function Name="spMetaDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="meta" Type="int" Mode="In" />
         </Function>
@@ -1072,7 +1075,10 @@
           <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spMetaDetalle" ReturnType="Collection(PEDIModel.spMetaDetalle_Result)">
-            <Parameter Name="meta" Mode="In" Type="Int32" />
+          <Parameter Name="meta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spMetaAndProgramaciones" ReturnType="Collection(PEDIModel.spMetaAndProgramaciones_Result)">
+            <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
@@ -1101,6 +1107,18 @@
           <Property Type="String" Name="Objetivo_Especifico" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Estrategia" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Indicador" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spMetaAndProgramaciones_Result">
+          <Property Type="Int32" Name="MetaID" Nullable="false" />
+          <Property Type="String" Name="Metas" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ID_I" Nullable="true" />
+          <Property Type="Int32" Name="ID_II" Nullable="true" />
+          <Property Type="Int32" Name="ID_III" Nullable="true" />
+          <Property Type="Int32" Name="ID_IV" Nullable="true" />
+          <Property Type="Int32" Name="I" Nullable="true" />
+          <Property Type="Int32" Name="II" Nullable="true" />
+          <Property Type="Int32" Name="III" Nullable="true" />
+          <Property Type="Int32" Name="IV" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1360,6 +1378,22 @@
                 <ScalarProperty Name="Objetivo_Especifico" ColumnName="Objetivo_Especifico" />
                 <ScalarProperty Name="Estrategia" ColumnName="Estrategia" />
                 <ScalarProperty Name="Indicador" ColumnName="Indicador" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spMetaAndProgramaciones" FunctionName="PEDIModel.Store.spMetaAndProgramaciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetaAndProgramaciones_Result">
+                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+                <ScalarProperty Name="Metas" ColumnName="Metas" />
+                <ScalarProperty Name="ID_I" ColumnName="ID_I" />
+                <ScalarProperty Name="ID_II" ColumnName="ID_II" />
+                <ScalarProperty Name="ID_III" ColumnName="ID_III" />
+                <ScalarProperty Name="ID_IV" ColumnName="ID_IV" />
+                <ScalarProperty Name="I" ColumnName="I" />
+                <ScalarProperty Name="II" ColumnName="II" />
+                <ScalarProperty Name="III" ColumnName="III" />
+                <ScalarProperty Name="IV" ColumnName="IV" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

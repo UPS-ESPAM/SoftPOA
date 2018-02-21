@@ -1,37 +1,55 @@
-﻿<div class="row">
+﻿<div class="row" ng-controller="MetasController as vm">
     <div class="row">
         <div class="col-lg-16 col-md-12">
             <div class="card">
                 <div class="card-header card-header-text" data-background-color="orange">
-                    <h4 class="card-title">Planificaión  Metas</h4>
+                    <h4 class="card-title">Planificación de Metas</h4>
                 </div>
                 <div class="card-content table-responsive">
-                    <table class="table table-hover">
-                        <thead class="text-warning">
-                        <th>Meta</th>
-                        <th>Planificación %</th>
-                        <th>Acción</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>A diciembre de 2017, con periodicidad bianual, se realiza el diagnóstico de suficiencia en inglés de los docentes</td>
-                                <td>
-                                    <input type="text" name="code" ng-model="data.code" numbers-only max="" />
-                                    <input type="text" name="code" ng-model="data.code" numbers-only max="" />
-                                    <input type="text" name="code" ng-model="data.code" numbers-only max="" />
-                                    <input type="text" name="code" ng-model="data.code" numbers-only max="" />
-                                </td>
-                                <td class="td-actions text-center">
-                                    <button type="button" rel="tooltip" title="Editar" data-toggle="modal" data-target="#myModalUpdate" ng-click="vm.ventanaModalIndicadores(indicadores)" class="btn btn-success btn-round">
-                                        <i class="material-icons">edit</i>
-                                    </button>
-                                    <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-round" ng-click="vm.deleteIndicador(indicadores.IndicadorId, $index)">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form name="categoryForm">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                                <tr class="text-center">
+                                    <th rowspan="2" width="60%">Metas</th>
+                                    <th colspan="4">Programación Trimestral en % de la meta</th>
+                                    <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                    <td>{{Programacion.Metas}}</td>
+                                    <td class="text-center">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.II" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.III" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.IV" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="td-actions text-center">
+                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
+                                            <i class="material-icons">cached</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>
