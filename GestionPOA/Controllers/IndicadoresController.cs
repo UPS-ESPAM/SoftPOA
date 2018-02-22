@@ -46,13 +46,10 @@ namespace GestionPOA.Controllers
         }
 
         // GET: Indicadores
-        public ActionResult GetIndicadores()
+        public ActionResult GetIndicadoresbyDepartament()
         {
-           
-            var indicadores = db.Indicadores.Where(i => i.eliminado == false)
-                                            .Where(i => i.EstrategiasId == id)
-                                            .Select(i => new { IndicadorId = i.IndicadorId, Descripcion = i.Descripcion })
-                                            .ToList();
+
+            var indicadores = db.spIndicadoresDepartment(Convert.ToInt32(Session["department"])).ToList();  
             return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
         }
 

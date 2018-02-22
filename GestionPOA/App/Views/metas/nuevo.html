@@ -11,8 +11,8 @@
                         <th>Descripción</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="objetivoEspecifico in vm.listadoObjetivoEspecifico" ng-click="vm.cargarEstrategia(objetivoEspecifico.ObjetivosEspecificosId,objetivoEspecifico.Descripcion)">
-                                <td style="cursor:pointer;">{{objetivoEspecifico.Descripcion}}</td>
+                            <tr ng-repeat="Indicador in vm.listadoIndicadores" ng-click="vm.cargarMetas(Indicador.IndicadorId,Indicador.Descripcion)">
+                                <td style="cursor:pointer;">{{Indicador.Descripcion}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -24,8 +24,8 @@
                 <div class="card-header card-header-tabs" data-background-color="green">
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
-                            <a ng-show="vm.appstate =='showAdd'" class="ui olive label" data-toggle="modal" data-target="#myModal" ng-click="vm.ventanaEstrategia()"><i class="add icon"></i>Estrategia</a>
-                            <span class="nav-tabs-title"><b>INDICADOR:</b> {{vm.ObjetivoEspecifico }}</span>
+                            <a ng-show="vm.appstate =='showAdd'" class="ui olive label" data-toggle="modal" data-target="#myModal" ng-click="vm.ventanaIndicador()"><i class="add icon"></i>Estrategia</a>
+                            <span class="nav-tabs-title"><b>INDICADOR:</b> {{vm.Indicador }}</span>
                             <ul class="nav nav-tabs" data-tabs="tabs"></ul>
                         </div>
                     </div>

@@ -1,9 +1,18 @@
 ﻿angular.module('appGestion')
-    .controller('MetasController', function (IntervalosServices, MetasServices, ProgramacionesServices) {
+    .controller('MetasController', function (IntervalosServices, IndicadoresServices, MetasServices, ProgramacionesServices) {
         var vm = this;
        
         cargarIntervalos();
         cargarMetasProgramacion();
+        cargarIndicadores();
+
+
+        function cargarIndicadores() {
+            debugger
+            IndicadoresServices.getIndicadoresByDepartamento().then(function (response) {
+                vm.listadoIndicadores = response.data.listIndicadores;
+            })
+        }
 
         function cargarIntervalos() {
             IntervalosServices.getIntervalos().then(function (response) {

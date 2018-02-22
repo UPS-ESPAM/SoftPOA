@@ -31,6 +31,9 @@ namespace GestionPOA.Controllers
             var detalle = db.spMetaDetalle(id).ToList();
             return Json(new { detalleMeta = detalle }, JsonRequestBehavior.AllowGet);
         }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

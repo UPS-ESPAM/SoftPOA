@@ -53,5 +53,16 @@
             return request;
         }
 
+        fact.getIndicadoresByDepartamento = function () {
+            debugger
+            var request = $http({
+                method: 'POST',
+                url: '../Indicadores/GetIndicadoresbyDepartament',
+                dataType: "json"
+            });
+            return request;
+        }
+
+
         return fact;
     }]);
