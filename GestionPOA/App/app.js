@@ -25,9 +25,9 @@ angular
               templateUrl: '../../App/Views/objetivoespecificos/index.html',
               controller: 'ObjetivosEspecificosController'
           })
-          .when('/Planificacion', {
-              templateUrl: '../../App/Views/planificacion/index.html',
-              controller: 'PlanificacionController'
+          .when('/Planificacion/Estrategia', {
+              templateUrl: '../../App/Views/estrategias/index.html',
+              controller: 'EstrategiasController'
           })
           .when('/Estrategia/Indicadores', {
               templateUrl: '../../App/Views/indicadores/index.html',
@@ -37,6 +37,15 @@ angular
               templateUrl: '../../App/Views/acciones/index.html',
               controller: 'AccionesController'
           })
+          .when('/Metas/Planificacion', {
+              templateUrl: '../../App/Views/metas/index.html',
+              controller: 'MetasController'
+          })
+          .when('/Metas/Nuevo', {
+              templateUrl: '../../App/Views/metas/nuevo.html',
+              controller: 'MetasController'
+          })
+
         .otherwise({
           redirectTo: '/'
         });
