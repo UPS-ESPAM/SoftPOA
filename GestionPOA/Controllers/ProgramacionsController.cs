@@ -23,7 +23,7 @@ namespace GestionPOA.Controllers
             foreach (clsProgramacion element in programacion)
             {
                 _programacion = (from p in db.Programacion
-                                 where p.id == element.id
+                                 where p.IntervaloId == element.id
                                  where p.MetaID==element.MetasID
                                  select p).First();
 
