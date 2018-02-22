@@ -45,8 +45,8 @@ namespace GestionPOA.Models
         public virtual DbSet<Periocidad> Periocidad { get; set; }
         public virtual DbSet<Planificacion> Planificacion { get; set; }
         public virtual DbSet<Presupuesto> Presupuesto { get; set; }
-        public virtual DbSet<Programacion> Programacion { get; set; }
         public virtual DbSet<TipoPlanificacion> TipoPlanificacion { get; set; }
+        public virtual DbSet<Programacion> Programacion { get; set; }
     
         public virtual ObjectResult<spLoginIngreso_Result> spLoginIngreso(string usuario, string clave)
         {
@@ -127,13 +127,13 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
         }
     
-        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
+        public virtual ObjectResult<spMetaAndProgramaciones_Result1> spMetaAndProgramaciones(Nullable<int> department)
         {
             var departmentParameter = department.HasValue ?
                 new ObjectParameter("department", department) :
                 new ObjectParameter("department", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result1>("spMetaAndProgramaciones", departmentParameter);
         }
     }
 }

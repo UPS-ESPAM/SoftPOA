@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                <tr ng-if="vm.deparmentID!=2" class="animate-if" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
                                     <td>{{Programacion.Metas}}</td>
                                     <td class="text-center">
                                         <div class="ui input">
@@ -40,6 +40,50 @@
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.IV" numbers-only max="" />
                                         </div>
+                                    </td>
+                                    <td class="td-actions text-center">
+                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
+                                            <i class="material-icons">cached</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr ng-if="vm.deparmentID==2" class="animate-if" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                    <td><label>Cualitativo: <input type="checkbox" ng-model="checked" ng-init="checked=true" /></label></td>
+                                    <td>{{Programacion.Metas}}</td>
+                                    <td class="text-center">
+                                        <select ng-model="select1" ng-init="selected=1">
+                                            <option value="1">Cuantitativo</option>
+                                            <option value="2" ng-selected="selected">Satisfactorio</option>
+                                            <option value="3">Medio Satisfactorio</option>
+                                            <option value="4">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="select1!=Cuantitativo">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <select ng-model="select2">
+                                            <option value="1">Satisfactorio</option>
+                                            <option value="1">Medio Satisfactorio</option>
+                                            <option value="1">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center">
+                                    <td class="text-center">
+                                        <select ng-model="select3">
+                                            <option value="1">Satisfactorio</option>
+                                            <option value="1">Medio Satisfactorio</option>
+                                            <option value="1">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center">
+                                        <select ng-model="select4">
+                                            <option value="1">Satisfactorio</option>
+                                            <option value="1">Medio Satisfactorio</option>
+                                            <option value="1">Deficiente</option>
+                                        </select>
                                     </td>
                                     <td class="td-actions text-center">
                                         <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">

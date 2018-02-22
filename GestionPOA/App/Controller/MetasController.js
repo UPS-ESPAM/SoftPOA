@@ -1,9 +1,10 @@
 ﻿angular.module('appGestion')
-    .controller('MetasController', function (IntervalosServices, MetasServices, ProgramacionesServices) {
+    .controller('MetasController', function ($cookies,IntervalosServices, MetasServices, ProgramacionesServices) {
         var vm = this;
        
         cargarIntervalos();
         cargarMetasProgramacion();
+        vm.deparmentID = $cookies.deparmentID;
 
         function cargarIntervalos() {
             IntervalosServices.getIntervalos().then(function (response) {
@@ -26,7 +27,6 @@
                 { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
             );
             var total = 0;
-            debugger
             for (var i = 0; i < vm.arrayprogramacion.length; i++) {
                 var total = total + parseInt(vm.arrayprogramacion[i].valor) ;
             }
