@@ -1,7 +1,7 @@
 ﻿angular.module('appGestion')
     .controller('MetasController', function ($cookies,IntervalosServices, MetasServices, ProgramacionesServices) {
         var vm = this;
-       
+        vm.detallesMeta = {};
         cargarIntervalos();
         cargarMetasProgramacion();
         vm.deparmentID = $cookies.deparmentID;
@@ -18,6 +18,18 @@
             })
         }
 
+        vm.detalleMeta = function (id) {
+            debugger
+            var requestResponse = MetasServices.getDetalleMeta(id);
+            requestResponse.then(function successCallback(response) {
+                $('.modal ').insertAfter($('body'));
+                vm.detallesMeta.ObjetivoEstrategico = response.data.detalleMeta['0'].Objetivo_Estrategico;
+                vm.detallesMeta.ObjetivoEspecifico = response.data.detalleMeta['0'].Objetivo_Especifico;
+                vm.detallesMeta.Estrategia = response.data.detalleMeta['0'].Estrategia;
+                vm.detallesMeta.Indicador = response.data.detalleMeta['0'].Indicador;
+            });
+        }
+
         vm.updateMetasProgramacion = function (Programacion) {
             vm.arrayprogramacion = [];
             vm.arrayprogramacion.push(
@@ -26,8 +38,8 @@
                 { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
                 { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
             );
-            debugger
-            if (vm.deparmentID == 2) {
+        
+            if (vm.deparmentID == 8) {
                 var requestResponse = ProgramacionesServices.updateProgramaciones(vm.arrayprogramacion);
                 Message(requestResponse);
             } else {
