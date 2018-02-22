@@ -1050,7 +1050,7 @@
             <End Role="Metas" EntitySet="Metas" />
             <End Role="Programacion" EntitySet="Programacion" />
           </AssociationSet>
-          <FunctionImport Name="spMetaAndProgramaciones" ReturnType="Collection(PEDIModel.spMetaAndProgramaciones_Result1)">
+          <FunctionImport Name="spMetaAndProgramaciones" ReturnType="Collection(PEDIModel.spMetaAndProgramaciones_Result2)">
             <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -1156,6 +1156,20 @@
         <ComplexType Name="spMetaAndProgramaciones_Result1">
           <Property Type="Int32" Name="MetaID" Nullable="false" />
           <Property Type="String" Name="Metas" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ID_I" Nullable="true" />
+          <Property Type="Int32" Name="ID_II" Nullable="true" />
+          <Property Type="Int32" Name="ID_III" Nullable="true" />
+          <Property Type="Int32" Name="ID_IV" Nullable="true" />
+          <Property Type="String" Name="I" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="II" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spMetaAndProgramaciones_Result2">
+          <Property Type="Int32" Name="MetaID" Nullable="false" />
+          <Property Type="String" Name="Metas" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="PresupuestoID" Nullable="false" />
+          <Property Type="Decimal" Name="Presupuesto" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Int32" Name="ID_I" Nullable="true" />
           <Property Type="Int32" Name="ID_II" Nullable="true" />
           <Property Type="Int32" Name="ID_III" Nullable="true" />
@@ -1446,9 +1460,11 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spMetaAndProgramaciones" FunctionName="PEDIModel.Store.spMetaAndProgramaciones">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.spMetaAndProgramaciones_Result1">
+              <ComplexTypeMapping TypeName="PEDIModel.spMetaAndProgramaciones_Result2">
                 <ScalarProperty Name="MetaID" ColumnName="MetaID" />
                 <ScalarProperty Name="Metas" ColumnName="Metas" />
+                <ScalarProperty Name="PresupuestoID" ColumnName="PresupuestoID" />
+                <ScalarProperty Name="Presupuesto" ColumnName="Presupuesto" />
                 <ScalarProperty Name="ID_I" ColumnName="ID_I" />
                 <ScalarProperty Name="ID_II" ColumnName="ID_II" />
                 <ScalarProperty Name="ID_III" ColumnName="ID_III" />

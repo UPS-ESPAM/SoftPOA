@@ -15,9 +15,9 @@ namespace GestionPOA.Controllers
     {
         private PEDIEntities db = new PEDIEntities();
         
-        // POST: Programacions/Update
+        // POST: Programacions/UpdatePEDI
         [HttpPost]
-        public ActionResult Update(List<clsProgramacion> programacion)
+        public ActionResult UpdatePEDI(List<clsProgramacion> programacion)
         {
             Programacion _programacion = new Programacion();
             foreach (clsProgramacion element in programacion)
@@ -32,7 +32,31 @@ namespace GestionPOA.Controllers
             }
             return Json(new { mensaje = "Planificación actualizada correctamente" });
         }
+        // POST: Programacions/UpdatePOA
+        [HttpPost]
+        public ActionResult UpdatePOA(List<clsProgramacion> programacion, int id, decimal valor)
+        {
+            Programacion _programacion = new Programacion();
+            foreach (clsProgramacion element in programacion)
+            {
+                _programacion = (from p in db.Programacion
+                                 where p.IntervaloId == element.id
+                                 where p.MetaID == element.MetasID
+                                 select p).First();
 
+                _programacion.planificado = element.valor;
+                db.SaveChanges();
+            }
+
+            Presupuesto _presupuesto = new Presupuesto();
+            _presupuesto = (from p in db.Presupuesto
+                             where p.MetaID == id
+                             select p).First();
+            _presupuesto.Planificado = valor;
+            db.SaveChanges();
+
+            return Json(new { mensaje = "Planificación actualizada correctamente" });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

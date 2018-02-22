@@ -157,6 +157,7 @@
     <Compile Include="Controllers\MetasController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
+    <Compile Include="Controllers\PresupuestosController.cs" />
     <Compile Include="Controllers\ProgramacionsController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,6 +241,9 @@
     <Compile Include="Models\spMetaAndProgramaciones_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spMetaAndProgramaciones_Result2.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spMetaDetalle_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -278,6 +282,8 @@
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\PlanificacionController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
+    <Content Include="App\Directivas\decimalOnly.js" />
+    <Content Include="App\Directivas\formatCurrency.js" />
     <Content Include="App\Directivas\numbersOnly.js" />
     <Content Include="App\Services\AccionesServices.js" />
     <Content Include="App\Services\EstrategiasServices.js" />
@@ -467,7 +473,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Estrategias\" />
+    <Folder Include="Views\Presupuestos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

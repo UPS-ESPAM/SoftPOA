@@ -127,13 +127,13 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
         }
     
-        public virtual ObjectResult<spMetaAndProgramaciones_Result1> spMetaAndProgramaciones(Nullable<int> department)
+        public virtual ObjectResult<spMetaAndProgramaciones_Result2> spMetaAndProgramaciones(Nullable<int> department)
         {
             var departmentParameter = department.HasValue ?
                 new ObjectParameter("department", department) :
                 new ObjectParameter("department", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result1>("spMetaAndProgramaciones", departmentParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result2>("spMetaAndProgramaciones", departmentParameter);
         }
     }
 }

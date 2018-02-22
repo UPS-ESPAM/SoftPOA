@@ -13,7 +13,9 @@
         }
         
         function cargarMetasProgramacion() {
+           
             MetasServices.getMetasProgramacion().then(function (response) {
+                debugger
                 vm.listadoMetasProgramaciones = response.data.listMetasProgramacion;
             })
         }
@@ -31,6 +33,7 @@
         }
 
         vm.updateMetasProgramacion = function (Programacion) {
+            debugger
             vm.arrayprogramacion = [];
             vm.arrayprogramacion.push(
                 { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID},
@@ -40,7 +43,7 @@
             );
         
             if (vm.deparmentID == 8) {
-                var requestResponse = ProgramacionesServices.updateProgramaciones(vm.arrayprogramacion);
+                var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
                 Message(requestResponse);
             } else {
                 var total = 0;
@@ -48,7 +51,7 @@
                     var total = total + parseInt(vm.arrayprogramacion[i].valor);
                 }
                 if (total == 100) {
-                    var requestResponse = ProgramacionesServices.updateProgramaciones(vm.arrayprogramacion);
+                    var requestResponse = ProgramacionesServices.updateProgramacionesPOA(vm.arrayprogramacion, Programacion.MetaID, Programacion.Presupuesto );
                     Message(requestResponse);
                 } else {
                     $.notify({
