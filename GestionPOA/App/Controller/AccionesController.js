@@ -1,12 +1,12 @@
 ﻿angular.module('appGestion')
-    .controller('AccionesController', function (AccionesServices) {
+    .controller('AccionesController', function (AccionesServices, MetasServices) {
 
         var vm = this;
         cargarMetas();
         vm.detallesMeta = {};
 
         function cargarMetas() {
-            AccionesServices.getMetas().then(function (response) {
+            MetasServices.getMetas().then(function (response) {
                 vm.listadoMetas = response.data.listMetas;
             })
         }
@@ -22,7 +22,7 @@
         }
 
         vm.detalleMeta = function (id) {
-            var requestResponse = AccionesServices.getDetalleMeta(id);
+            var requestResponse = MetasServices.getDetalleMeta(id);
             requestResponse.then(function successCallback(response) {
                 $('.modal ').insertAfter($('body'));
                 vm.detallesMeta.ObjetivoEstrategico = response.data.detalleMeta['0'].Objetivo_Estrategico;

@@ -425,6 +425,9 @@
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="departamentId" Type="int" Mode="In" />
         </Function>
+        <Function Name="spMetaAndProgramaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="department" Type="int" Mode="In" />
+        </Function>
         <Function Name="spIndicadoresDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="department" Type="int" Mode="In" />
         </Function>
@@ -1101,6 +1104,9 @@
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="departamentId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spMetaAndProgramaciones" ReturnType="Collection(PEDIModel.spMetaAndProgramaciones_Result)">
+            <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spIndicadoresDepartment" ReturnType="Collection(PEDIModel.spIndicadoresDepartment_Result)">
             <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1140,6 +1146,18 @@
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
           <Property Type="Int32" Name="PlanificacionId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spMetaAndProgramaciones_Result">
+          <Property Type="Int32" Name="MetaID" Nullable="false" />
+          <Property Type="String" Name="Metas" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ID_I" Nullable="true" />
+          <Property Type="Int32" Name="ID_II" Nullable="true" />
+          <Property Type="Int32" Name="ID_III" Nullable="true" />
+          <Property Type="Int32" Name="ID_IV" Nullable="true" />
+          <Property Type="Int32" Name="I" Nullable="true" />
+          <Property Type="Int32" Name="II" Nullable="true" />
+          <Property Type="Int32" Name="III" Nullable="true" />
+          <Property Type="Int32" Name="IV" Nullable="true" />
         </ComplexType>
         <ComplexType Name="spIndicadoresDepartment_Result">
           <Property Type="Int32" Name="IndicadorId" Nullable="false" />
@@ -1425,6 +1443,22 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spEstrategiasInsert" FunctionName="PEDIModel.Store.spEstrategiasInsert" />
+          <FunctionImportMapping FunctionImportName="spMetaAndProgramaciones" FunctionName="PEDIModel.Store.spMetaAndProgramaciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetaAndProgramaciones_Result">
+                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+                <ScalarProperty Name="Metas" ColumnName="Metas" />
+                <ScalarProperty Name="ID_I" ColumnName="ID_I" />
+                <ScalarProperty Name="ID_II" ColumnName="ID_II" />
+                <ScalarProperty Name="ID_III" ColumnName="ID_III" />
+                <ScalarProperty Name="ID_IV" ColumnName="ID_IV" />
+                <ScalarProperty Name="I" ColumnName="I" />
+                <ScalarProperty Name="II" ColumnName="II" />
+                <ScalarProperty Name="III" ColumnName="III" />
+                <ScalarProperty Name="IV" ColumnName="IV" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spIndicadoresDepartment" FunctionName="PEDIModel.Store.spIndicadoresDepartment">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spIndicadoresDepartment_Result">

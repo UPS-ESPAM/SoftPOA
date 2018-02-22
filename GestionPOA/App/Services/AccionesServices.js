@@ -1,11 +1,7 @@
 ﻿angular.module('appGestion')
     .factory('AccionesServices', ['$http', function ($http) {
         var fact = {};
-
-        fact.getMetas = function () {
-            return $http.get('../Metas/Metas');
-        }
-
+        
         fact.getAcciones = function (id) {
             var request = $http({
                 method: 'POST',
@@ -14,16 +10,7 @@
             });
             return request;
         }
-
-        fact.getDetalleMeta = function (id) {
-            var request = $http({
-                method: 'GET',
-                url: '../Metas/MetaDetalle/' + id,
-                dataType: "json"
-            });
-            return request;
-        }
-
+        
         fact.addAcciones = function (accion) {
             var request = $http({
                 method: 'POST',
