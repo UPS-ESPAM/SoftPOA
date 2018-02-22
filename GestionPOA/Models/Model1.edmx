@@ -425,6 +425,9 @@
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="departamentId" Type="int" Mode="In" />
         </Function>
+        <Function Name="spIndicadoresDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="department" Type="int" Mode="In" />
+        </Function>
         <Function Name="spMetaDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="meta" Type="int" Mode="In" />
         </Function>
@@ -1098,6 +1101,9 @@
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="departamentId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spIndicadoresDepartment" ReturnType="Collection(PEDIModel.spIndicadoresDepartment_Result)">
+            <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1134,6 +1140,11 @@
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
           <Property Type="Int32" Name="PlanificacionId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spIndicadoresDepartment_Result">
+          <Property Type="Int32" Name="IndicadorId" Nullable="false" />
+          <Property Type="Int32" Name="EstrategiasId" Nullable="true" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1414,6 +1425,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spEstrategiasInsert" FunctionName="PEDIModel.Store.spEstrategiasInsert" />
+          <FunctionImportMapping FunctionImportName="spIndicadoresDepartment" FunctionName="PEDIModel.Store.spIndicadoresDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spIndicadoresDepartment_Result">
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

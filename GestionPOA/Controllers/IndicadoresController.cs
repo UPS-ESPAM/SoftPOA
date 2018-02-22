@@ -44,6 +44,19 @@ namespace GestionPOA.Controllers
                                             .ToList();
             return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
         }
+
+        // GET: Indicadores
+        public ActionResult GetIndicadores()
+        {
+           
+            var indicadores = db.Indicadores.Where(i => i.eliminado == false)
+                                            .Where(i => i.EstrategiasId == id)
+                                            .Select(i => new { IndicadorId = i.IndicadorId, Descripcion = i.Descripcion })
+                                            .ToList();
+            return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
+        }
+
+
         // POST: Indicadores/Create
         [HttpPost]
         public ActionResult Create(Indicadores indicadores)
