@@ -2,7 +2,7 @@
     .controller('LoginController', function (LoginServices, $cookies) {
         var vm = this;
         vm.login = {};
-        $cookies.username = $("#myDivUser").data('value');
+        $cookies.deparmentID = $("#myDivDepartmentID").data('value');
         vm.verifylogin = function () {
             var requestResponse = LoginServices.verifysLogin(vm.login.usuario, vm.login.password);
             requestResponse.then(function successCallback(response) {
@@ -25,7 +25,7 @@
         vm.logout = function () {
             var requestResponse = LoginServices.logout();
             requestResponse.then(function successCallback(response) {
-                $cookies.remove('username');
+                $cookies.remove('deparmentID');
                 window.location.href = '/';
             });
         }

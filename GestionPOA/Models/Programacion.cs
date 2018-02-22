@@ -22,8 +22,8 @@ namespace GestionPOA.Models
     
         public int id { get; set; }
         public string observacion { get; set; }
-        public Nullable<int> planificado { get; set; }
-        public Nullable<int> ejecutado { get; set; }
+        public string planificado { get; set; }
+        public string ejecutado { get; set; }
         public Nullable<int> IntervaloId { get; set; }
         public Nullable<int> MetaID { get; set; }
         public Nullable<bool> eliminado { get; set; }

@@ -9,18 +9,23 @@
                     <form name="categoryForm">
                         <table class="table table-hover">
                             <thead class="text-warning">
-                                <tr class="text-center">
+                                <tr class="text-center" style="font-size:13px;">
+                                    <th rowspan="2">Cualitativo</th>
                                     <th rowspan="2" width="60%">Metas</th>
+                                    <th rowspan="2"> </th>
                                     <th colspan="4">Programación Trimestral en % de la meta</th>
+                                    <th rowspan="2">Presupuesto</th>
                                     <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 </tr>
-                                <tr>
+                                <tr style="font-size:13px;">
                                     <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="Programacion in vm.listadoMetasProgramaciones">
-                                    <td>{{Programacion.Metas}}</td>
+                                <tr style="font-size:12px;" ng-if="vm.deparmentID!=8" class="animate-if" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                    <td class="text-center"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="true"/></td>
+                                    <td style="font-size:13px;" >{{Programacion.Metas}}</td>
+                                    <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Programacion.MetaID)" class="text-success">ver más</span></td>
                                     <td class="text-center">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
@@ -41,6 +46,77 @@
                                             <input size="2" type="text" ng-model="Programacion.IV" numbers-only max="" />
                                         </div>
                                     </td>
+                                    <td class="text-center" style="font-size:12px;">
+                                        <div class="ui input">
+                                            <input size="10" type="text" ng-model="Programacion.Presupuesto" decimal-only format="currency"/>
+                                        </div>
+                                    </td>
+                                    <td class="td-actions text-center" >
+                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
+                                            <i class="material-icons">cached</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr style="font-size:12px;" ng-if="vm.deparmentID==8" class="animate-if" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                   <!--<td ng-if="Programacion.I == '110' || Programacion.I == '220' || Programacion.I == '330'">
+                                          <input type="checkbox" ng-model="checked" ng-init="checked=false" />
+                                    </td>-->
+                                    <!--<td ng-if="Programacion.I != '110' || Programacion.I != '220' || Programacion.I != '330'">
+                                        <input type="checkbox" ng-model="checked1" ng-init="checked=true" />
+                                    </td>-->
+                                    <td>
+                                        <input type="checkbox" ng-model="checked" ng-init="checked=true"  />
+                                    </td>
+                                  
+                                    <td style="font-size:13px;">{{Programacion.Metas}}</td>
+                                    <td class="text-center animate-if" ng-if="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==false">
+                                        <select ng-model="Programacion.I" >
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.II" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==false">
+                                        <select ng-model="Programacion.II">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.III" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==false">
+                                        <select ng-model="Programacion.III">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.IV" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-if="checked==false">
+                                        <select ng-model="Programacion.IV">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
                                     <td class="td-actions text-center">
                                         <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
                                             <i class="material-icons">cached</i>
@@ -54,4 +130,53 @@
             </div>
         </div>
     </div>
+    <!-- MODAL DETALLE META -->
+    <div id="myModalDetalleMeta" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Detalle de la Meta ::</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ui relaxed divided list">
+                        <div class="item">
+                            <i class="large angle right icon"></i>
+                            <div class="content">
+                                <a class="header">OBJETIVO ESTRATEGICO</a>
+                                <div class="description">{{ vm.detallesMeta.ObjetivoEstrategico }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="large angle right icon"></i>
+                            <div class="content">
+                                <a class="header">OBJETIVO ESPECIFICO</a>
+                                <div class="description">{{ vm.detallesMeta.ObjetivoEspecifico}}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="large angle right icon"></i>
+                            <div class="content">
+                                <a class="header">ESTRATEGIA</a>
+                                <div class="description">{{ vm.detallesMeta.Estrategia }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="large angle right icon"></i>
+                            <div class="content">
+                                <a class="header">INDICADOR</a>
+                                <div class="description">{{ vm.detallesMeta.Indicador}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL DETALLE META -->
 </div>
