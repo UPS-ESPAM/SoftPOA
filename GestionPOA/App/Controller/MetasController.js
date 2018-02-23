@@ -35,7 +35,9 @@
                 vm.detallesMeta.Indicador = response.data.detalleMeta['0'].Indicador;
             });
         }
-
+        vm.addObservacion = function (id) {
+             $('.modal ').insertAfter($('body'));
+        }
         vm.updateMetasProgramacion = function (Programacion) {
             vm.arrayprogramacion = [];
             vm.arrayprogramacion.push(
