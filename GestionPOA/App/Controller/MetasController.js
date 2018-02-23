@@ -45,9 +45,12 @@
                 vm.observacion.Observacion = response.data.listObservacion['0'].Observacion;
             });
         }
+        vm.EvidenciaUpload = function (id) {
+            debugger
+            $('.modal ').insertAfter($('body'));
+        }
         vm.updateObservacion = function () {
             var requestResponse = MetasServices.updateObservacionMeta(vm.observacion.id, vm.observacion.Observacion);
-            debugger
             Message(requestResponse);
         }
         vm.updateMetasProgramacion = function (Programacion) {
