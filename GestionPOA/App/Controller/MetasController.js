@@ -4,6 +4,7 @@
         vm.detallesMeta = {};
         cargarIntervalos();
         cargarMetasProgramacion();
+        cargarMetaEjecución();
         vm.deparmentID = $cookies.deparmentID;
 
         function cargarIntervalos() {
@@ -13,9 +14,14 @@
         }
         
         function cargarMetasProgramacion() {
-           
             MetasServices.getMetasProgramacion().then(function (response) {
                 vm.listadoMetasProgramaciones = response.data.listMetasProgramacion;
+            })
+        }
+
+        function cargarMetaEjecución() {
+                MetasServices.getMetasEjecucion().then(function (response) {
+                vm.listadoMetasEjecucion = response.data.listMetasEjecucionn;
             })
         }
 
@@ -66,6 +72,24 @@
                 }
             }
 
+        }
+
+        vm.updateMetasEjecucion = function (Ejecucion) {
+            debugger
+            vm.arrayejecucion = [];
+            vm.arrayejecucion.push(
+                { id: Ejecucion.ID_I, valor: Ejecucion.I, MetasID: Ejecucion.MetaID },
+                { id: Ejecucion.ID_II, valor: Ejecucion.II, MetasID: Ejecucion.MetaID },
+                { id: Ejecucion.ID_III, valor: Ejecucion.III, MetasID: Ejecucion.MetaID },
+                { id: Ejecucion.ID_IV, valor: Ejecucion.IV, MetasID: Ejecucion.MetaID },
+            );
+            if (vm.deparmentID == 8) {
+                var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
+                Message(requestResponse);
+            } else {
+                var requestResponse = ProgramacionesServices.updateEjecucionPOA(vm.arrayejecucion, Ejecucion.MetaID, Ejecucion.P_Ejecutado);
+                    Message(requestResponse);
+            }
         }
 
         function Message(requestResponse) {

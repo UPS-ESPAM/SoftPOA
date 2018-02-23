@@ -19,5 +19,9 @@
             return $http.get('../Metas/Programacion');
         }
 
+        fact.getMetasEjecucion = function () {
+            return $http.get('../Metas/Ejecucion');
+        }
+
         return fact;
     }]);

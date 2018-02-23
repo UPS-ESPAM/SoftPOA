@@ -20,7 +20,6 @@ namespace GestionPOA.Models
         public PEDIEntities()
             : base("name=PEDIEntities")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -135,6 +134,15 @@ namespace GestionPOA.Models
                 new ObjectParameter("department", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result2>("spMetaAndProgramaciones", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
         }
     }
 }

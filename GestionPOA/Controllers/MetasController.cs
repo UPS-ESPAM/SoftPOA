@@ -25,6 +25,12 @@ namespace GestionPOA.Controllers
             var metasProgramacion = db.spMetaAndProgramaciones(Convert.ToInt32(Session["department"])); 
             return Json(new { listMetasProgramacion = metasProgramacion }, JsonRequestBehavior.AllowGet);
         }
+        // GET: Metas/Ejecucion
+        public ActionResult Ejecucion()
+        {
+            var metasEjecucion = db.spMetaAndEjecucion(Convert.ToInt32(Session["department"]));
+            return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Metas/MetaDetalle
         public ActionResult MetaDetalle(int id)
         {
