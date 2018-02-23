@@ -8,7 +8,7 @@ namespace GestionPOA.MyClass
     public class clsProgramacion
     {
         public int id { get; set; }
-        public int valor { get; set; }
+        public string valor { get; set; }
         public int MetasID { get; set; }
    
     }

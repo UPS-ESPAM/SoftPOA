@@ -45,8 +45,8 @@ namespace GestionPOA.Models
         public virtual DbSet<Periocidad> Periocidad { get; set; }
         public virtual DbSet<Planificacion> Planificacion { get; set; }
         public virtual DbSet<Presupuesto> Presupuesto { get; set; }
-        public virtual DbSet<Programacion> Programacion { get; set; }
         public virtual DbSet<TipoPlanificacion> TipoPlanificacion { get; set; }
+        public virtual DbSet<Programacion> Programacion { get; set; }
     
         public virtual ObjectResult<spLoginIngreso_Result> spLoginIngreso(string usuario, string clave)
         {
@@ -127,13 +127,13 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
         }
     
-        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
+        public virtual ObjectResult<spMetaAndProgramaciones_Result1> spMetaAndProgramaciones(Nullable<int> department)
         {
             var departmentParameter = department.HasValue ?
                 new ObjectParameter("department", department) :
                 new ObjectParameter("department", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result1>("spMetaAndProgramaciones", departmentParameter);
         }
     
         public virtual ObjectResult<spIndicadoresDepartment_Result> spIndicadoresDepartment(Nullable<int> department)
@@ -143,6 +143,36 @@ namespace GestionPOA.Models
                 new ObjectParameter("department", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spIndicadoresDepartment_Result>("spIndicadoresDepartment", departmentParameter);
+        }
+    
+        public virtual int spMetasInsert(Nullable<int> indicadorId, string descripcion, Nullable<int> tipoCalificacionId)
+        {
+            var indicadorIdParameter = indicadorId.HasValue ?
+                new ObjectParameter("IndicadorId", indicadorId) :
+                new ObjectParameter("IndicadorId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var tipoCalificacionIdParameter = tipoCalificacionId.HasValue ?
+                new ObjectParameter("tipoCalificacionId", tipoCalificacionId) :
+                new ObjectParameter("tipoCalificacionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spMetasInsert", indicadorIdParameter, descripcionParameter, tipoCalificacionIdParameter);
+        }
+    
+        public virtual int spEvidenciasInsert(Nullable<int> programacionId, string evidencia)
+        {
+            var programacionIdParameter = programacionId.HasValue ?
+                new ObjectParameter("programacionId", programacionId) :
+                new ObjectParameter("programacionId", typeof(int));
+    
+            var evidenciaParameter = evidencia != null ?
+                new ObjectParameter("evidencia", evidencia) :
+                new ObjectParameter("evidencia", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEvidenciasInsert", programacionIdParameter, evidenciaParameter);
         }
     }
 }

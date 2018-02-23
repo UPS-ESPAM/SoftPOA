@@ -19,6 +19,33 @@ namespace GestionPOA.Controllers
             var metas = db.spMetasDepartment(Convert.ToInt32(Session["department"])).ToList();
             return Json(new { listMetas = metas }, JsonRequestBehavior.AllowGet);
         }
+
+        // GET: Metas/MetasbyIndicador/5
+        public ActionResult MetasbyIndicador(int id)
+        {
+            var metas = from m in db.Metas
+                        join tc in db.TipoCalificacion on m.tipoCalificacionId equals tc.id
+                         where m.eliminado == false && m.IndicadorId == id
+                         select new
+                         {
+                             id = m.id,
+                             IndicadorId = m.IndicadorId,
+                             Observacion = m.Observacion,
+                             Descripcion = m.Descripcion,
+                             tipoCalificacionId = m.tipoCalificacionId,
+                             eliminado = m.eliminado,
+                             tipoCalificacion = tc.Descripcion
+                         };
+            var tipoCalificacion = from tc in db.TipoCalificacion
+                                   where tc.eliminado == false
+                                   select new
+                                   {
+                                       id = tc.id,
+                                       Descripcion = tc.Descripcion
+                                   };
+            return Json(new { listMetas = metas, listTipoCalificacion = tipoCalificacion }, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Metas/Programacion
         public ActionResult Programacion()
         {
@@ -32,7 +59,32 @@ namespace GestionPOA.Controllers
             return Json(new { detalleMeta = detalle }, JsonRequestBehavior.AllowGet);
         }
 
+        // POST: Metas/Create
+        [HttpPost]
+        public ActionResult Create(Metas metas)
+        {
+            db.spMetasInsert(metas.IndicadorId,metas.Descripcion,metas.tipoCalificacionId);
+            return Json(new { mensaje = "Registrado correctamente" });
+        }
 
+        // POST: Metas/Update
+        [HttpPost]
+        public ActionResult Update(Metas metas)
+        {
+            db.Entry(metas).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(new { mensaje = "Registrado actualizado correctamente" });
+        }
+
+        // POST: Metas/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Metas metas = db.Metas.Where(s => s.id == id).SingleOrDefault();
+            metas.eliminado = true;
+            db.SaveChanges();
+            return Json(new { mensaje = "Registrado eliminado correctamente" });
+        }
 
         protected override void Dispose(bool disposing)
         {

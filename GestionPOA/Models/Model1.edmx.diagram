@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6b8bf9d3e2564a769735a5f59c49ed34" Name="Diagram1">
+      <Diagram DiagramId="6b8bf9d3e2564a769735a5f59c49ed34" Name="Diagram1" ZoomLevel="79">
         <EntityTypeShape EntityType="PEDIModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.TipoCalificacion" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Departamento" Width="1.5" PointX="11.75" PointY="2.25" IsExpanded="true" />
@@ -23,7 +23,6 @@
         <EntityTypeShape EntityType="PEDIModel.Periocidad" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Planificacion" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Presupuesto" Width="1.5" PointX="12" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="PEDIModel.Programacion" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.TipoPlanificacion" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="PEDIModel.FK_Metas_TipoCalificacion" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" ManuallyRouted="false" />
@@ -34,15 +33,16 @@
         <AssociationConnector Association="PEDIModel.FK_Acciones_Metas" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Estrategias_Planificacion" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Indicadores_Estrategias" ManuallyRouted="false" />
-        <AssociationConnector Association="PEDIModel.FK_Evidencias_Programacion" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Metas_Indicadores" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_InformacioAdicional_Metas" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_intervalo_Periodo" ManuallyRouted="false" />
-        <AssociationConnector Association="PEDIModel.FK_Programacion_intervalo" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Presupuesto_Metas" ManuallyRouted="false" />
-        <AssociationConnector Association="PEDIModel.FK_Programacion_Metas" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Planificacion_Periocidad" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Planificacion_TipoPlanificacion" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PEDIModel.Programacion" Width="1.5" PointX="14" PointY="3" />
+        <AssociationConnector Association="PEDIModel.FK_Evidencias_Programacion" />
+        <AssociationConnector Association="PEDIModel.FK_Programacion_intervalo" />
+        <AssociationConnector Association="PEDIModel.FK_Programacion_Metas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

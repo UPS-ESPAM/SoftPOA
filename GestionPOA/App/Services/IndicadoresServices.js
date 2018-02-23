@@ -53,8 +53,7 @@
             return request;
         }
 
-        fact.getIndicadoresByDepartamento = function () {
-            debugger
+        fact.getIndicadoresByDepartamento = function () {            
             var request = $http({
                 method: 'POST',
                 url: '../Indicadores/GetIndicadoresbyDepartament',
