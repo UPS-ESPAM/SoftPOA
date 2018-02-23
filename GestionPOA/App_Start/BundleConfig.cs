@@ -62,7 +62,8 @@ namespace GestionPOA
                        "~/App/Directivas/numbersOnly.js",
                        "~/App/Controller/EstrategiasController.js",
                        "~/App/Directivas/decimalOnly.js",
-                       "~/App/Directivas/formatCurrency.js"
+                       "~/App/Directivas/formatCurrency.js",
+                       "~/App/Directivas/loader.js"
                        ));
             bundles.Add(new StyleBundle("~/Content/plantillaCss").Include(
                      "~/Content/assets/css/bootstrap.min.css",
