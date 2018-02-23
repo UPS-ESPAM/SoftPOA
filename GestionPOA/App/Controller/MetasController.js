@@ -15,13 +15,11 @@
         function cargarMetasProgramacion() {
            
             MetasServices.getMetasProgramacion().then(function (response) {
-                debugger
                 vm.listadoMetasProgramaciones = response.data.listMetasProgramacion;
             })
         }
 
         vm.detalleMeta = function (id) {
-            debugger
             var requestResponse = MetasServices.getDetalleMeta(id);
             requestResponse.then(function successCallback(response) {
                 $('.modal ').insertAfter($('body'));
@@ -33,7 +31,6 @@
         }
 
         vm.updateMetasProgramacion = function (Programacion) {
-            debugger
             vm.arrayprogramacion = [];
             vm.arrayprogramacion.push(
                 { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID},
