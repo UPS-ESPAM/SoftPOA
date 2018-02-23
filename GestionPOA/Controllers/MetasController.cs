@@ -37,6 +37,26 @@ namespace GestionPOA.Controllers
             var detalle = db.spMetaDetalle(id).ToList();
             return Json(new { detalleMeta = detalle }, JsonRequestBehavior.AllowGet);
         }
+        // GET: Metas/Observacion
+        public ActionResult Observacion(int id)
+        {
+            var observacion = db.Metas.Where(m => m.id == id)
+                                    .Select(m => new { id = m.id, Descripcion = m.Descripcion, Observacion= m.Observacion })
+                                    .ToList();
+            return Json(new { listObservacion = observacion }, JsonRequestBehavior.AllowGet);
+        }
+        // POST: Metas/ObservacionUpdate
+        [HttpPost]
+        public ActionResult ObservacionUpdate(int id, string observacion)
+        {
+            Metas _metas = new Metas();
+            _metas = (from m in db.Metas
+                            where m.id == id
+                            select m).First();
+            _metas.Observacion = observacion;
+            db.SaveChanges();
+            return Json(new { mensaje = "Planificación actualizada correctamente" });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

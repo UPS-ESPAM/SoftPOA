@@ -2,6 +2,7 @@
     .controller('MetasController', function ($cookies,IntervalosServices, MetasServices, ProgramacionesServices) {
         var vm = this;
         vm.detallesMeta = {};
+        vm.observacion = {};
         cargarIntervalos();
         cargarMetasProgramacion();
         cargarMetaEjecución();
@@ -35,8 +36,19 @@
                 vm.detallesMeta.Indicador = response.data.detalleMeta['0'].Indicador;
             });
         }
-        vm.addObservacion = function (id) {
-             $('.modal ').insertAfter($('body'));
+        vm.ObservacionDetalle = function (id) {
+            var requestResponse = MetasServices.getMetasObservacion(id);
+            requestResponse.then(function successCallback(response) {
+                $('.modal ').insertAfter($('body'));
+                vm.observacion.id = response.data.listObservacion['0'].id;
+                vm.observacion.Descripcion = response.data.listObservacion['0'].Descripcion;
+                vm.observacion.Observacion = response.data.listObservacion['0'].Observacion;
+            });
+        }
+        vm.updateObservacion = function () {
+            var requestResponse = MetasServices.updateObservacionMeta(vm.observacion.id, vm.observacion.Observacion);
+            debugger
+            Message(requestResponse);
         }
         vm.updateMetasProgramacion = function (Programacion) {
             vm.arrayprogramacion = [];
@@ -77,7 +89,6 @@
         }
 
         vm.updateMetasEjecucion = function (Ejecucion) {
-            debugger
             vm.arrayejecucion = [];
             vm.arrayejecucion.push(
                 { id: Ejecucion.ID_I, valor: Ejecucion.I, MetasID: Ejecucion.MetaID },
