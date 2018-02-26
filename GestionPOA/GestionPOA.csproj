@@ -305,6 +305,7 @@
     <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\login\index.html" />
+    <Content Include="App\Views\metas\asignacion.html" />
     <Content Include="App\Views\metas\ejecucion.html" />
     <Content Include="App\Views\metas\index.html" />
     <Content Include="App\Views\metas\nuevo.html" />
