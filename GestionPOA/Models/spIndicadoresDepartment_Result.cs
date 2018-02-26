@@ -11,17 +11,10 @@ namespace GestionPOA.Models
 {
     using System;
     
-    public partial class spMetaAndProgramaciones_Result1
+    public partial class spIndicadoresDepartment_Result
     {
-        public int MetaID { get; set; }
-        public string Metas { get; set; }
-        public Nullable<int> ID_I { get; set; }
-        public Nullable<int> ID_II { get; set; }
-        public Nullable<int> ID_III { get; set; }
-        public Nullable<int> ID_IV { get; set; }
-        public string I { get; set; }
-        public string II { get; set; }
-        public string III { get; set; }
-        public string IV { get; set; }
+        public int IndicadorId { get; set; }
+        public Nullable<int> EstrategiasId { get; set; }
+        public string Descripcion { get; set; }
     }
 }
