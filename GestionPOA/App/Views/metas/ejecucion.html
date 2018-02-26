@@ -16,9 +16,10 @@
                                     <th rowspan="2"> </th>
                                     <th colspan="4">Ejecución Trimestral en % de la meta</th>
                                     <th rowspan="2">Presupuesto</th>
+                                    <th rowspan="2">Observación</th>
                                     <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 </tr>
-                                <tr style="font-size:13px;">
+                                <tr class="text-center" style="font-size:13px;">
                                     <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
                                 </tr>
                             </thead>
@@ -31,27 +32,34 @@
                                     <td class="text-center">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.I" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_I)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.II" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia"  data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_II)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.III" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_III)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="ui input">
-                                            <input size="2" type="text" ng-model="Ejecucion.IV" numbers-only max="" />
+                                            <input size="2" type="text" ng-model="Ejecucion.IV" numbers-only max=""/>
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_IV)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center" style="font-size:12px;">
                                         <div class="ui input">
                                             <input size="10" type="text" ng-model="Ejecucion.P_Ejecutado" decimal-only format="currency" />
                                         </div>
+                                    </td>
+                                    <td class="text-center" style="font-size:12px;">
+                                        <span data-toggle="modal" rel="tooltip" title="Agregar Observación" data-target="#myModalAddObservacion" style="cursor:pointer;" ng-click="vm.ObservacionDetalle(Ejecucion.MetaID)" class="text-success">Añadir</span>
                                     </td>
                                     <td class="td-actions text-center">
                                         <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasEjecucion(Ejecucion)" class="btn btn-success btn-round">
@@ -75,6 +83,7 @@
                                     <td class="text-center animate-if" ng-if="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.I" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_I)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==false">
@@ -83,10 +92,12 @@
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
+                                        <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_I)">unarchive</i>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.II" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_II)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==false">
@@ -95,10 +106,12 @@
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
+                                        <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_II)">unarchive</i>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.III" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_III)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==false">
@@ -107,10 +120,12 @@
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
+                                        <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_III)">unarchive</i>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Ejecucion.IV" numbers-only max="" />
+                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_IV)">unarchive</i>
                                         </div>
                                     </td>
                                     <td class="text-center animate-if" ng-if="checked==false">
@@ -119,6 +134,10 @@
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
+                                        <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_IV)">unarchive</i>
+                                    </td>
+                                    <td class="text-center" style="font-size:12px;">
+                                        <span data-toggle="modal" rel="tooltip" title="Agregar Observación" data-target="#myModalAddObservacion" style="cursor:pointer;" ng-click="vm.ObservacionDetalle(Ejecucion.MetaID)" class="text-success">Añadir</span>
                                     </td>
                                     <td class="td-actions text-center">
                                         <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasEjecucion(Ejecucion)" class="btn btn-success btn-round">
@@ -126,7 +145,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr><td class="text-success" data-loader colspan="4"></td></tr>
+                                <tr><td class="text-success" data-loader colspan="9"></td></tr>
                             </tbody>
                         </table>
                     </form>
@@ -183,4 +202,61 @@
         </div>
     </div>
     <!-- END MODAL DETALLE META -->
+    <!-- MODAL ADD OBSERVACIÓN -->
+    <div id="myModalAddObservacion" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Actualizar Observación ::</h4>
+                </div>
+                <form name="updateObservacionForm" class="ui form" ng-submit="vm.updateObservacion()" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group label-floating">
+                            <label class="control-label"><span class="text-success"><b>META: </b> </span> {{vm.observacion.Descripcion | uppercase}}</label>
+                        </div>
+                        <br />
+                        <div class="form-group label-floating">
+                            <label class="control-label" style="font-size:12px;">OBSERVACIÓN DE LA META</label>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" ng-model="vm.observacion.Observacion" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="updateObservacionForm.$invalid">Actualizar <i class="refresh icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL ADD OBSERVACIÓN -->
+    <!-- MODAL UPLOAD EVIDENCIA -->
+    <div id="myModalupload" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Subir Evidencia ::</h4>
+                </div>
+                <form name="upload" ng-submit="vm.uploadFile()"  class="ui form" novalidate >
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label"><span class="text-success"><b>META: </b> </span> {{ vm.uploadfile.meta | uppercase}}</label>
+                        </div>
+                        <label class="control-label" style="font-size:12px;">SUBIR EVIDENCIA</label>
+                        <input type="file" id="file"  ng-model="vm.uploadfile.files" luploader-model="file" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="upload.$invalid">Actualizar <i class="refresh icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL UPLOAD EVIDENCIA -->
 </div>

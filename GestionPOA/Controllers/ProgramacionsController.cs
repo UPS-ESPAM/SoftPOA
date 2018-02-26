@@ -47,7 +47,7 @@ namespace GestionPOA.Controllers
                 _programacion.ejecutado = element.valor;
                 db.SaveChanges();
             }
-            return Json(new { mensaje = "Planificación actualizada correctamente" });
+            return Json(new { mensaje = "Ejecución actualizada correctamente" });
         }
         // POST: Programacions/UpdatePOA
         [HttpPost]
@@ -97,7 +97,7 @@ namespace GestionPOA.Controllers
             _presupuesto.Ejecutado = valor;
             db.SaveChanges();
 
-            return Json(new { mensaje = "Planificación actualizada correctamente" });
+            return Json(new { mensaje = "Ejecución actualizada correctamente" });
         }
         protected override void Dispose(bool disposing)
         {

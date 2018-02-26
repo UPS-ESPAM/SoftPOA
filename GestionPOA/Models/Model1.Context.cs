@@ -127,13 +127,30 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
         }
     
-        public virtual ObjectResult<spMetaAndProgramaciones_Result2> spMetaAndProgramaciones(Nullable<int> department)
+        public virtual ObjectResult<spIndicadoresDepartment_Result> spIndicadoresDepartment(Nullable<int> department)
         {
             var departmentParameter = department.HasValue ?
                 new ObjectParameter("department", department) :
                 new ObjectParameter("department", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result2>("spMetaAndProgramaciones", departmentParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spIndicadoresDepartment_Result>("spIndicadoresDepartment", departmentParameter);
+        }
+    
+        public virtual int spMetasInsert(Nullable<int> indicadorId, string descripcion, Nullable<int> tipoCalificacionId)
+        {
+            var indicadorIdParameter = indicadorId.HasValue ?
+                new ObjectParameter("IndicadorId", indicadorId) :
+                new ObjectParameter("IndicadorId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var tipoCalificacionIdParameter = tipoCalificacionId.HasValue ?
+                new ObjectParameter("tipoCalificacionId", tipoCalificacionId) :
+                new ObjectParameter("tipoCalificacionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spMetasInsert", indicadorIdParameter, descripcionParameter, tipoCalificacionIdParameter);
         }
     
         public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department)
@@ -143,6 +160,37 @@ namespace GestionPOA.Models
                 new ObjectParameter("department", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spIndicadorDetalle_Result> spIndicadorDetalle(Nullable<int> indicadorId)
+        {
+            var indicadorIdParameter = indicadorId.HasValue ?
+                new ObjectParameter("indicadorId", indicadorId) :
+                new ObjectParameter("indicadorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spIndicadorDetalle_Result>("spIndicadorDetalle", indicadorIdParameter);
+        }
+    
+        public virtual ObjectResult<string> spEvidenciasInsert(Nullable<int> programacionId, string evidencia)
+        {
+            var programacionIdParameter = programacionId.HasValue ?
+                new ObjectParameter("programacionId", programacionId) :
+                new ObjectParameter("programacionId", typeof(int));
+    
+            var evidenciaParameter = evidencia != null ?
+                new ObjectParameter("evidencia", evidencia) :
+                new ObjectParameter("evidencia", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spEvidenciasInsert", programacionIdParameter, evidenciaParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
         }
     }
 }

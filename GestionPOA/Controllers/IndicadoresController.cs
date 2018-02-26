@@ -44,6 +44,22 @@ namespace GestionPOA.Controllers
                                             .ToList();
             return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
         }
+
+        // GET: Indicadores
+        public ActionResult GetIndicadoresbyDepartament()
+        {
+
+            var indicadores = db.spIndicadoresDepartment(Convert.ToInt32(Session["department"])).ToList();  
+            return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Indicadores/IndicadorDetalle
+        public ActionResult IndicadorDetalle(int id)
+        {
+            var detalle = db.spIndicadorDetalle(id).ToList();
+            return Json(new { detalleIndicador = detalle }, JsonRequestBehavior.AllowGet);
+        }
+
         // POST: Indicadores/Create
         [HttpPost]
         public ActionResult Create(Indicadores indicadores)
