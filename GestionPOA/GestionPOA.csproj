@@ -152,6 +152,7 @@
     <Compile Include="Controllers\AccionesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EstrategiasController.cs" />
+    <Compile Include="Controllers\EvidenciasController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\IntervalosController.cs" />
     <Compile Include="Controllers\MetasController.cs" />
@@ -247,9 +248,6 @@
     <Compile Include="Models\spMetaAndProgramaciones_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\spMetaAndProgramaciones_Result1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\spMetaDetalle_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -292,8 +290,10 @@
     <Content Include="App\Directivas\formatCurrency.js" />
     <Content Include="App\Directivas\loader.js" />
     <Content Include="App\Directivas\numbersOnly.js" />
+    <Content Include="App\Directivas\uploaderFile.js" />
     <Content Include="App\Services\AccionesServices.js" />
     <Content Include="App\Services\EstrategiasServices.js" />
+    <Content Include="App\Services\EvidenciasServices.js" />
     <Content Include="App\Services\IndicadoresServices.js" />
     <Content Include="App\Services\IntervalosServices.js" />
     <Content Include="App\Services\LoginServices.js" />
@@ -482,7 +482,8 @@
     <Content Include="Views\Admin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Evidencias\" />
+    <Folder Include="Views\Evidencias\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
