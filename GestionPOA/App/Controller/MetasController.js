@@ -1,8 +1,10 @@
 ﻿angular.module('appGestion')
-    .controller('MetasController', function ($cookies,IntervalosServices, MetasServices, ProgramacionesServices) {
+    .controller('MetasController', function ($cookies, IntervalosServices, MetasServices, ProgramacionesServices, EvidenciasServices) {
         var vm = this;
         vm.detallesMeta = {};
         vm.observacion = {};
+        vm.uploadfile = {};
+        vm.file = {};
         cargarIntervalos();
         cargarMetasProgramacion();
         cargarMetaEjecución();
@@ -13,19 +15,16 @@
                 vm.listadoIntervalos = response.data.listIntervalos;
             })
         }
-        
         function cargarMetasProgramacion() {
             MetasServices.getMetasProgramacion().then(function (response) {
                 vm.listadoMetasProgramaciones = response.data.listMetasProgramacion;
             })
         }
-
         function cargarMetaEjecución() {
                 MetasServices.getMetasEjecucion().then(function (response) {
                 vm.listadoMetasEjecucion = response.data.listMetasEjecucionn;
             })
         }
-
         vm.detalleMeta = function (id) {
             var requestResponse = MetasServices.getDetalleMeta(id);
             requestResponse.then(function successCallback(response) {
@@ -45,9 +44,11 @@
                 vm.observacion.Observacion = response.data.listObservacion['0'].Observacion;
             });
         }
-        vm.EvidenciaUpload = function (id) {
-            debugger
+        vm.EvidenciaUpload = function (id, meta, intervaloid) {
             $('.modal ').insertAfter($('body'));
+            vm.uploadfile.idmeta = id
+            vm.uploadfile.intervaloid = intervaloid
+            vm.uploadfile.meta = meta
         }
         vm.updateObservacion = function () {
             var requestResponse = MetasServices.updateObservacionMeta(vm.observacion.id, vm.observacion.Observacion);
@@ -90,7 +91,6 @@
             }
 
         }
-
         vm.updateMetasEjecucion = function (Ejecucion) {
             vm.arrayejecucion = [];
             vm.arrayejecucion.push(
@@ -107,7 +107,42 @@
                     Message(requestResponse);
             }
         }
-
+        vm.uploadFile = function () {
+            var fileInput = $('#file');
+            var fileData = fileInput.prop("files")[0];
+            EvidenciasServices.uploadFile(fileData, vm.uploadfile.idmeta, vm.uploadfile.intervaloid).then(function (res) {
+                if (res.data.msj == "planificacion") {
+                    swal({
+                        title: 'Error!',
+                        text: 'No se puede cargar evidencia porque la programación es 0',
+                        type: 'error',
+                        confirmButtonClass: "btn btn-danger",
+                        buttonsStyling: false
+                    })
+                    this.upload.reset();
+                }else if (res.data.msj == "no") {
+                    swal({
+                        title: 'Error!',
+                        text: 'Máximo de evidencias registradas 2',
+                        type: 'error',
+                        confirmButtonClass: "btn btn-danger",
+                        buttonsStyling: false
+                    })
+                    this.upload.reset();
+                } else {
+                    swal({
+                        title: 'Correcto!',
+                        text: res.data.msj,
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success",
+                        buttonsStyling: false
+                    })
+                    $('.modal').modal('hide');
+                    this.upload.reset();
+                }
+             
+            })
+        }
         function Message(requestResponse) {
             requestResponse.then(function successCallback(response) {
                 swal({
@@ -127,5 +162,4 @@
                 })
             });
         }
-
     });

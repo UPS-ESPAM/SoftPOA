@@ -425,6 +425,10 @@
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="departamentId" Type="int" Mode="In" />
         </Function>
+        <Function Name="spEvidenciasInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="programacionId" Type="int" Mode="In" />
+          <Parameter Name="evidencia" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="spMetaAndEjecucion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="department" Type="int" Mode="In" />
         </Function>
@@ -1057,7 +1061,11 @@
           <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spMetaAndEjecucion" ReturnType="Collection(PEDIModel.spMetaAndEjecucion_Result)">
-            <Parameter Name="department" Mode="In" Type="Int32" />
+          <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEvidenciasInsert" ReturnType="Collection(String)">
+            <Parameter Name="programacionId" Mode="In" Type="Int32" />
+            <Parameter Name="evidencia" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
@@ -1514,6 +1522,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEvidenciasInsert" FunctionName="PEDIModel.Store.spEvidenciasInsert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

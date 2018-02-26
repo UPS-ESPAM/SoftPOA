@@ -50,6 +50,7 @@ namespace GestionPOA
                        "~/App/Services/EstrategiasServices.js",
                        "~/App/Services/LoginServices.js",
                        "~/App/Services/MetasServices.js",
+                        "~/App/Services/EvidenciasServices.js",
                        "~/App/Services/IntervalosServices.js",
                        "~/App/Services/ProgramacionesServices.js",
                        "~/App/Controller/SubsistemasController.js",
@@ -63,7 +64,8 @@ namespace GestionPOA
                        "~/App/Controller/EstrategiasController.js",
                        "~/App/Directivas/decimalOnly.js",
                        "~/App/Directivas/formatCurrency.js",
-                       "~/App/Directivas/loader.js"
+                       "~/App/Directivas/loader.js",
+                        "~/App/Directivas/uploadFile.js"
                        ));
             bundles.Add(new StyleBundle("~/Content/plantillaCss").Include(
                      "~/Content/assets/css/bootstrap.min.css",
