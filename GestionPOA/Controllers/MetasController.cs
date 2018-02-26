@@ -52,6 +52,12 @@ namespace GestionPOA.Controllers
             var metasProgramacion = db.spMetaAndProgramaciones(Convert.ToInt32(Session["department"])); 
             return Json(new { listMetasProgramacion = metasProgramacion }, JsonRequestBehavior.AllowGet);
         }
+        // GET: Metas/Ejecucion
+        public ActionResult Ejecucion()
+        {
+            var metasEjecucion = db.spMetaAndEjecucion(Convert.ToInt32(Session["department"]));
+            return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Metas/MetaDetalle
         public ActionResult MetaDetalle(int id)
         {
@@ -69,9 +75,11 @@ namespace GestionPOA.Controllers
 
         // POST: Metas/Update
         [HttpPost]
-        public ActionResult Update(Metas metas)
+        public ActionResult Update(int id, string descripcion, int idtipo)
         {
-            db.Entry(metas).State = EntityState.Modified;
+            Metas metas = db.Metas.Where(s => s.id == id).SingleOrDefault();
+            metas.Descripcion = descripcion;
+            metas.tipoCalificacionId = idtipo;
             db.SaveChanges();
             return Json(new { mensaje = "Registrado actualizado correctamente" });
         }
@@ -86,6 +94,26 @@ namespace GestionPOA.Controllers
             return Json(new { mensaje = "Registrado eliminado correctamente" });
         }
 
+        // GET: Metas/Observacion
+        public ActionResult Observacion(int id)
+        {
+            var observacion = db.Metas.Where(m => m.id == id)
+                                    .Select(m => new { id = m.id, Descripcion = m.Descripcion, Observacion= m.Observacion })
+                                    .ToList();
+            return Json(new { listObservacion = observacion }, JsonRequestBehavior.AllowGet);
+        }
+        // POST: Metas/ObservacionUpdate
+        [HttpPost]
+        public ActionResult ObservacionUpdate(int id, string observacion)
+        {
+            Metas _metas = new Metas();
+            _metas = (from m in db.Metas
+                            where m.id == id
+                            select m).First();
+            _metas.Observacion = observacion;
+            db.SaveChanges();
+            return Json(new { mensaje = "Planificación actualizada correctamente" });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

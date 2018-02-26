@@ -174,5 +174,23 @@ namespace GestionPOA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEvidenciasInsert", programacionIdParameter, evidenciaParameter);
         }
+    
+        public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spIndicadorDetalle_Result> spIndicadorDetalle(Nullable<int> indicadorId)
+        {
+            var indicadorIdParameter = indicadorId.HasValue ?
+                new ObjectParameter("indicadorId", indicadorId) :
+                new ObjectParameter("indicadorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spIndicadorDetalle_Result>("spIndicadorDetalle", indicadorIdParameter);
+        }
     }
 }

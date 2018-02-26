@@ -41,6 +41,10 @@ angular
               templateUrl: '../../App/Views/metas/index.html',
               controller: 'MetasController'
           })
+          .when('/Metas/Ejecucion', {
+              templateUrl: '../../App/Views/metas/ejecucion.html',
+              controller: 'MetasController'
+          })
           .when('/Metas/Nuevo', {
               templateUrl: '../../App/Views/metas/nuevo.html',
               controller: 'MetasController'

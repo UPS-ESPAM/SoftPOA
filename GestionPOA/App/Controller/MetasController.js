@@ -1,7 +1,9 @@
 ﻿angular.module('appGestion')
     .controller('MetasController', function ($cookies,IntervalosServices, IndicadoresServices, MetasServices, ProgramacionesServices) {
         var vm = this;
-       
+        vm.detallesMeta = {};
+        vm.observacion = {};
+        vm.modalIndicador = {};
         cargarIntervalos();
         cargarMetasProgramacion();
         cargarIndicadores();
@@ -34,10 +36,10 @@
             vm.modalMetas.Descripcion = "";
         };
 
-        vm.ventanaModalMeta = function (metas) {
+        vm.ventanaModalMeta = function (metas) {            
             $('.modal ').insertAfter($('body'));
             vm.modalMetas.Descripcion = metas.Descripcion;
-
+            vm.modalMetas.tipoCalificacionId = metas.tipoCalificacionId;
             vm.modalMetas.id = metas.id;
         }
 
@@ -62,11 +64,11 @@
         }
 
         vm.updateMeta = function () {
-            var requestResponse = MetasServices.updateIndicadores(vm.modalIndicadores);
+            var requestResponse = MetasServices.updateMetas(vm.modalMetas.id, vm.modalMetas.Descripcion, vm.modalMetas.tipoCalificacionId );
             requestResponse.then(function successCallback(response) {
-                var requestResponse = IndicadoresServices.getIndicadores(vm.modalIndicadores.EstrategiasId);
+                var requestResponse = MetasServices.getMetasbyIndicador(vm.modalMetas.IndicadorId);
                 requestResponse.then(function successCallback(response) {
-                    vm.listadoIndicadores = response.data.listIndicadores
+                    vm.listadoMetas = response.data.listMetas
                 });
                 swal({
                     title: 'Correcto!',
@@ -81,8 +83,8 @@
         }
 
         vm.deleteMeta = function (id, index) {
-            vm.listadoIndicadores.splice(index, 1);
-            var requestResponse = MetasServices.deleteIndicadores(id);
+            vm.listadoMetas.splice(index, 1);
+            var requestResponse = MetasServices.deleteMetas(id);
             requestResponse.then(function successCallback(response) {
                 swal({
                     title: 'Correcto!',
@@ -94,6 +96,7 @@
             });
         }
 
+        cargarMetaEjecución();
         vm.deparmentID = $cookies.deparmentID;
 
         function cargarIntervalos() {
@@ -108,6 +111,39 @@
             })
         }
 
+        function cargarMetaEjecución() {
+                MetasServices.getMetasEjecucion().then(function (response) {
+                vm.listadoMetasEjecucion = response.data.listMetasEjecucionn;
+            })
+        }
+
+        vm.detalleIndicador = function (id) {
+            
+            var requestResponse = IndicadoresServices.getIndicadorDetalle(id);
+            requestResponse.then(function successCallback(response) {
+                $('.modal ').insertAfter($('body'));
+                vm.modalIndicador.ObjetivoEstrategico = response.data.detalleIndicador['0'].Objetivo_Estrategico;
+                vm.modalIndicador.ObjetivoEspecifico = response.data.detalleIndicador['0'].Objetivo_Especifico;
+                vm.modalIndicador.Estrategia = response.data.detalleIndicador['0'].Estrategia;
+            });
+        }
+        vm.ObservacionDetalle = function (id) {
+            var requestResponse = MetasServices.getMetasObservacion(id);
+            requestResponse.then(function successCallback(response) {
+                $('.modal ').insertAfter($('body'));
+                vm.observacion.id = response.data.listObservacion['0'].id;
+                vm.observacion.Descripcion = response.data.listObservacion['0'].Descripcion;
+                vm.observacion.Observacion = response.data.listObservacion['0'].Observacion;
+            });
+        }
+        vm.EvidenciaUpload = function (id) {
+            debugger
+            $('.modal ').insertAfter($('body'));
+        }
+        vm.updateObservacion = function () {
+            var requestResponse = MetasServices.updateObservacionMeta(vm.observacion.id, vm.observacion.Observacion);
+            Message(requestResponse);
+        }
         vm.updateMetasProgramacion = function (Programacion) {
             vm.arrayprogramacion = [];
             vm.arrayprogramacion.push(
@@ -116,26 +152,50 @@
                 { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
                 { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
             );
-            var total = 0;
-            for (var i = 0; i < vm.arrayprogramacion.length; i++) {
-                var total = total + parseInt(vm.arrayprogramacion[i].valor) ;
-            }
-            if (total == 100) {
-                var requestResponse = ProgramacionesServices.updateProgramaciones(vm.arrayprogramacion);
+        
+            if (vm.deparmentID == 8) {
+                var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
                 Message(requestResponse);
             } else {
-                $.notify({
-                    icon: "notifications",
-                    message: "<b>Error: </b> La suma de la planificación es menor o mayor a 100%"
-                }, {
-                     type: 'danger',
-                     timer: 10,
-                        placement: {
-                            from: 'top',
-                            align: 'right'
+                var total = 0;
+                for (var i = 0; i < vm.arrayprogramacion.length; i++) {
+                    var total = total + parseInt(vm.arrayprogramacion[i].valor);
+                }
+                if (total == 100) {
+                    var requestResponse = ProgramacionesServices.updateProgramacionesPOA(vm.arrayprogramacion, Programacion.MetaID, Programacion.Presupuesto );
+                    Message(requestResponse);
+                } else {
+                    $.notify({
+                        icon: "notifications",
+                        message: "<b>Error: </b> La suma de la planificación es menor o mayor a 100%"
+                    }, {
+                            type: 'danger',
+                            timer: 10,
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            }
                         }
-                    }
-                );
+                    );
+                }
+            }
+
+        }
+
+        vm.updateMetasEjecucion = function (Ejecucion) {
+            vm.arrayejecucion = [];
+            vm.arrayejecucion.push(
+                { id: Ejecucion.ID_I, valor: Ejecucion.I, MetasID: Ejecucion.MetaID },
+                { id: Ejecucion.ID_II, valor: Ejecucion.II, MetasID: Ejecucion.MetaID },
+                { id: Ejecucion.ID_III, valor: Ejecucion.III, MetasID: Ejecucion.MetaID },
+                { id: Ejecucion.ID_IV, valor: Ejecucion.IV, MetasID: Ejecucion.MetaID },
+            );
+            if (vm.deparmentID == 8) {
+                var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
+                Message(requestResponse);
+            } else {
+                var requestResponse = ProgramacionesServices.updateEjecucionPOA(vm.arrayejecucion, Ejecucion.MetaID, Ejecucion.P_Ejecutado);
+                    Message(requestResponse);
             }
         }
 

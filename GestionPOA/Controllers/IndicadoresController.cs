@@ -53,6 +53,12 @@ namespace GestionPOA.Controllers
             return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
         }
 
+        // GET: Indicadores/IndicadorDetalle
+        public ActionResult IndicadorDetalle(int id)
+        {
+            var detalle = db.spIndicadorDetalle(id).ToList();
+            return Json(new { detalleIndicador = detalle }, JsonRequestBehavior.AllowGet);
+        }
 
         // POST: Indicadores/Create
         [HttpPost]

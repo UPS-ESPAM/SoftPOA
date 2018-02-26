@@ -157,6 +157,7 @@
     <Compile Include="Controllers\MetasController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
+    <Compile Include="Controllers\PresupuestosController.cs" />
     <Compile Include="Controllers\ProgramacionsController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -231,10 +232,16 @@
     <Compile Include="Models\spEstrategiasDepartment_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spIndicadorDetalle_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spIndicadoresDepartment_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spLoginIngreso_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spMetaAndEjecucion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spMetaAndProgramaciones_Result.cs">
@@ -281,6 +288,9 @@
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\PlanificacionController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
+    <Content Include="App\Directivas\decimalOnly.js" />
+    <Content Include="App\Directivas\formatCurrency.js" />
+    <Content Include="App\Directivas\loader.js" />
     <Content Include="App\Directivas\numbersOnly.js" />
     <Content Include="App\Services\AccionesServices.js" />
     <Content Include="App\Services\EstrategiasServices.js" />
@@ -295,6 +305,7 @@
     <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\login\index.html" />
+    <Content Include="App\Views\metas\ejecucion.html" />
     <Content Include="App\Views\metas\index.html" />
     <Content Include="App\Views\metas\nuevo.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
@@ -307,6 +318,7 @@
     <Content Include="Content\assets\css\material-dashboard.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\apple-icon.png" />
     <Content Include="Content\img\bg-pricing.jpg" />
     <Content Include="Content\img\card-1.jpg" />
@@ -470,7 +482,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Estrategias\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

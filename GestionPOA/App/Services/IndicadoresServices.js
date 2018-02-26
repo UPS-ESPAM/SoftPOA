@@ -62,6 +62,14 @@
             return request;
         }
 
+        fact.getIndicadorDetalle = function (id) {
+            var request = $http({
+                method: 'GET',
+                url: '../Indicadores/IndicadorDetalle/' + id,
+                dataType: "json"
+            });
+            return request;
+        }
 
         return fact;
     }]);
