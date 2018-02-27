@@ -14,6 +14,7 @@
                                     <th rowspan="2">Cualitativo</th>
                                     <th rowspan="2" width="60%">Metas</th>
                                     <th rowspan="2"> </th>
+                                    <th rowspan="2">Tiempo Meta</th>
                                     <th colspan="4">Programación Trimestral en % de la meta</th>
                                     <th rowspan="2">Presupuesto</th>
                                     <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -28,6 +29,11 @@
                                     <td class="text-center"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="true"/></td>
                                     <td style="font-size:13px;" >{{Programacion.Metas}}</td>
                                     <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Programacion.MetaID)" class="text-success">ver más</span></td>
+                                    <td class="text-center">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.I" ng-disabled="true" />
+                                        </div>
+                                    </td>
                                     <td class="text-center">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.I" numbers-only max=""/>
