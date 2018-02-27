@@ -49,6 +49,10 @@ angular
               templateUrl: '../../App/Views/metas/nuevo.html',
               controller: 'MetasController'
           })
+          .when('/Metas/Asignacion', {
+              templateUrl: '../../App/Views/metas/asignacion.html',
+              controller: 'MetasController'
+          })
 
         .otherwise({
           redirectTo: '/'

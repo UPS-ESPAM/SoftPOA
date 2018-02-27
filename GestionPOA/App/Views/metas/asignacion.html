@@ -1,0 +1,148 @@
+﻿<div ng-controller="MetasController as vm">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">note_add</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">:: Asignar Metas a los departamentos ::</h4>
+                <form name="addAsignacionMetaForm" ng-submit="vm.addAsignacionMeta();" novalidate>                    
+                    <div class="form-group label-floating col-lg-6 col-md-12">
+                        <label class="control-label">SUBSISTEMA</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating col-lg-6 col-md-12">
+                        <label class="control-label">OBJETIVO ESTRATÉGICO INSTITULACIONAL</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating col-lg-6 col-md-12">
+                        <label class="control-label">OBJETIVO ESPECÍFICO INSTITUCIONAL</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating col-lg-6 col-md-12">
+                        <label class="control-label">ESTRATEGIAS</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating col-lg-6 col-md-12">
+                        <label class="control-label">INDICADORES</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating col-lg-6 col-md-12">
+                        <label class="control-label">METAS</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating col-lg-12 col-md-12">
+                        <label class="control-label">DEPARTAMENTO</label>
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <input type="hidden" ng-model="vm.ObjetivoEstrategico.eliminado" ng-value="vm.ObjetivoEstrategico.eliminado = 0">
+                    <input type="submit" value="Registrar" class="btn btn-fill btn-success" ng-disabled="addAsignacionMetaForm.$invalid" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">list</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title"><a class="ui teal tag label">METAS ASIGNADAS A LOS DEPARTAMENTOS</a></h4>
+                <div class="toolbar row">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="ui label">
+                                    <i class="pin icon"></i> Total de registros: {{vm.totalregistros}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom:20px;">
+                            <div class="form-group">
+                                <div class="ui icon input pull-right">
+                                    <input type="text" placeholder="Buscar..." class="form-control pull-right" ng-model="searchText">
+                                    <i class="circular search link icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table ng-table="vm.tableParams" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <tr ng-repeat="ObjetivosEstrategicos in vm.listObjetivosEstrategico | orderBy: 'id' | filter:searchText as results">
+                        <td title="'Ìtems'" class="text-center">
+                            {{$index +1}}
+                        </td>
+                        <td title="'Departamento'" class="text-center">
+                            {{ObjetivosEstrategicos.Descripcion}}
+                        </td>
+                        <td title="'Meta'" class="text-center">
+                            {{ObjetivosEstrategicos.DescripcionSubsistemas}}
+                        </td>
+                        <td title="'Acciones'" class="td-actions text-center">
+                            <button type="button" rel="tooltip" title="Editar" data-toggle="modal" data-target="#myModal" ng-click="vm.ModalObjetivosEstrategicos(ObjetivosEstrategicos)" class="btn btn-success btn-round">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-round" ng-click="vm.deleteObjetivoEstrategico(ObjetivosEstrategicos.ObjetivosEstragicoId, $index)">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="animate-repeat" ng-if="results.length === 0">
+                        <td colspan="3" class="text-danger">No se encontraron registros...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Actualizar Objetivo Estrategicos Institucionales ::</h4>
+                </div>
+                <form name="updateObjetivoEstrategicoForm" class="ui form" ng-submit="vm.updateObjetivoEstrategico()" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group label-floating">
+                            <label class="control-label">OBJETICO ESTRATÉGICO INSTITUCIONAL</label>
+                            <select class="form-group" ng-model="vm.modalObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                                <option value="0">-- Seleccione --</option>
+                            </select>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">OBJETIVO ESPECíFICO</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="vm.modalObjetivoEstrategico.Descripcion" required>
+                            </div>
+                        </div>
+                        <input type="hidden" ng-model="vm.modalObjetivoEstrategico.ObjetivosEstragicoId" ng-value="vm.modalObjetivoEstrategico.ObjetivosEstrategicoId">
+                        <input type="hidden" ng-model="vm.modalObjetivoEstrategico.eliminado" ng-value="vm.modalObjetivoEstrategico.eliminado = 0">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="updateObjetivoEstrategicoForm.$invalid">Actualizar <i class="refresh icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
