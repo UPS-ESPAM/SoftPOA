@@ -1278,6 +1278,7 @@
           <Property Type="String" Name="II" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Mes" Nullable="true" />
         </ComplexType>
         <ComplexType Name="spPlanificacionConsultar_Result">
           <Property Type="String" Name="Periodo" Nullable="true" MaxLength="250" />
@@ -1681,6 +1682,7 @@
                 <ScalarProperty Name="II" ColumnName="II" />
                 <ScalarProperty Name="III" ColumnName="III" />
                 <ScalarProperty Name="IV" ColumnName="IV" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

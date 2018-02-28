@@ -5,7 +5,7 @@
             require: 'ngModel',
             link: function (scope, element, attrs, ctrl) {
                 var validateNumber = function (inputValue) {
-                    var maxLength = 2;
+                    var maxLength = 3;
                     if (attrs.max) {
                         maxLength = attrs.max;
                     }
