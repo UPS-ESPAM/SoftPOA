@@ -52,6 +52,13 @@ namespace GestionPOA.Controllers
             return Json(new { mensaje = "Registrado eliminado correctamente" });
         }
 
+        // GET: Subsistemas/GetSubsistemaPeriodoActual
+        public JsonResult GetSubsistemaPeriodoActual()
+        {
+            var listSibsistemas = db.spSubsistemaConsult();
+
+            return Json(new { listSistemas = listSibsistemas }, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

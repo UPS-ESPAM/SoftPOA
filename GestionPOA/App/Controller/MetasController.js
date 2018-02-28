@@ -1,5 +1,6 @@
 ﻿angular.module('appGestion')
-    .controller('MetasController', function ($cookies, IntervalosServices, MetasServices, ProgramacionesServices, EvidenciasServices, IndicadoresServices) {
+    .controller('MetasController', function ($cookies, IntervalosServices, MetasServices,
+        ProgramacionesServices, EvidenciasServices, IndicadoresServices) {
         var vm = this;
         vm.detallesMeta = {};
         vm.observacion = {};
@@ -10,13 +11,15 @@
         cargarMetasProgramacion();
         cargarIndicadores();
         vm.arrOptionSelects = [];
-
+        vm.arrOptionObjEstrategicos = [];
+        vm.listSistemas = {};
+        listPlanificacion = [];
         function cargarIndicadores() {            
             IndicadoresServices.getIndicadoresByDepartamento().then(function (response) {
                 vm.listadoIndicadores = response.data.listIndicadores;                
                 
             })
-        }
+        }       
         vm.cargarMetas = function (id, indicador) {
             var requestResponse = MetasServices.getMetasbyIndicador(id);
             requestResponse.then(function successCallback(response) {                
@@ -106,7 +109,7 @@
                 MetasServices.getMetasEjecucion().then(function (response) {
                 vm.listadoMetasEjecucion = response.data.listMetasEjecucionn;
             })
-        }
+        }   
         vm.detalleIndicador = function (id) {
             var requestResponse = IndicadoresServices.getIndicadorDetalle(id);
             requestResponse.then(function successCallback(response) {
@@ -253,4 +256,5 @@
                 })
             });
         }
+
     });

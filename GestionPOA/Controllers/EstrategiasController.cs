@@ -22,7 +22,12 @@ namespace GestionPOA.Controllers
             return Json(new { listaEstrategia = estrategias }, JsonRequestBehavior.AllowGet);
         }
 
-       
+        // GET: Estrategias/GetEstrategiasbyObjetivoPeriodoActual/3
+        public JsonResult GetEstrategiasbyObjetivoPeriodoActual(int id)
+        {
+            var estrategias = db.spEstrategiasPeriodoActualConsult(id).ToList();
+            return Json(new { listaEstrategia = estrategias }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Estrategias/Create
         public JsonResult Create(Estrategias estrategias)
         {

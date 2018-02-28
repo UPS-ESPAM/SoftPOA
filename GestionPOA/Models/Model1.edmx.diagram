@@ -43,6 +43,8 @@
         <AssociationConnector Association="PEDIModel.FK_Evidencias_Programacion" />
         <AssociationConnector Association="PEDIModel.FK_Programacion_intervalo" />
         <AssociationConnector Association="PEDIModel.FK_Programacion_Metas" />
+        <EntityTypeShape EntityType="PEDIModel.MetasDepartamento" Width="1.5" PointX="12" PointY="16.625" />
+        <AssociationConnector Association="PEDIModel.FK_MetasDepartamento_Metas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

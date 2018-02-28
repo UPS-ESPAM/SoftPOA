@@ -47,6 +47,7 @@ namespace GestionPOA.Models
         public virtual DbSet<Presupuesto> Presupuesto { get; set; }
         public virtual DbSet<TipoPlanificacion> TipoPlanificacion { get; set; }
         public virtual DbSet<Programacion> Programacion { get; set; }
+        public virtual DbSet<MetasDepartamento> MetasDepartamento { get; set; }
     
         public virtual ObjectResult<spLoginIngreso_Result> spLoginIngreso(string usuario, string clave)
         {
@@ -191,6 +192,62 @@ namespace GestionPOA.Models
                 new ObjectParameter("department", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spPlanificacionConsultar_Result> spPlanificacionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spPlanificacionConsultar_Result>("spPlanificacionConsultar");
+        }
+    
+        public virtual ObjectResult<spSubsistemaConsult_Result> spSubsistemaConsult()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSubsistemaConsult_Result>("spSubsistemaConsult");
+        }
+    
+        public virtual ObjectResult<spObjetivosEstrategicosConsult_Result> spObjetivosEstrategicosConsult(Nullable<int> subsistema)
+        {
+            var subsistemaParameter = subsistema.HasValue ?
+                new ObjectParameter("Subsistema", subsistema) :
+                new ObjectParameter("Subsistema", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivosEstrategicosConsult_Result>("spObjetivosEstrategicosConsult", subsistemaParameter);
+        }
+    
+        public virtual ObjectResult<spObjetivosEspecificosConsult_Result> spObjetivosEspecificosConsult(Nullable<int> objetivoEstrategico)
+        {
+            var objetivoEstrategicoParameter = objetivoEstrategico.HasValue ?
+                new ObjectParameter("ObjetivoEstrategico", objetivoEstrategico) :
+                new ObjectParameter("ObjetivoEstrategico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivosEspecificosConsult_Result>("spObjetivosEspecificosConsult", objetivoEstrategicoParameter);
+        }
+    
+        public virtual ObjectResult<spObjetivosEspecificosPeriodoActualConsult_Result> spObjetivosEspecificosPeriodoActualConsult(Nullable<int> objetivoEspecifico)
+        {
+            var objetivoEspecificoParameter = objetivoEspecifico.HasValue ?
+                new ObjectParameter("ObjetivoEspecifico", objetivoEspecifico) :
+                new ObjectParameter("ObjetivoEspecifico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivosEspecificosPeriodoActualConsult_Result>("spObjetivosEspecificosPeriodoActualConsult", objetivoEspecificoParameter);
+        }
+    
+        public virtual ObjectResult<spEstrategiasPeriodoActualConsult_Result> spEstrategiasPeriodoActualConsult(Nullable<int> objetivoEspecifico)
+        {
+            var objetivoEspecificoParameter = objetivoEspecifico.HasValue ?
+                new ObjectParameter("ObjetivoEspecifico", objetivoEspecifico) :
+                new ObjectParameter("ObjetivoEspecifico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasPeriodoActualConsult_Result>("spEstrategiasPeriodoActualConsult", objetivoEspecificoParameter);
+        }
+    
+        public virtual ObjectResult<spDepartamentoConsult_Result> spDepartamentoConsult()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoConsult_Result>("spDepartamentoConsult");
+        }
+    
+        public virtual ObjectResult<spMetasDepartamentosAsignadosConsult_Result> spMetasDepartamentosAsignadosConsult()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartamentosAsignadosConsult_Result>("spMetasDepartamentosAsignadosConsult");
         }
     }
 }

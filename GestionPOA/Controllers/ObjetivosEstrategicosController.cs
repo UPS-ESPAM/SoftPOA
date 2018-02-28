@@ -41,6 +41,15 @@ namespace GestionPOA.Controllers
             return Json(new { listOE = lists , listaSistemas = listaSistemas }, JsonRequestBehavior.AllowGet);
         }
 
+
+        // GET: ObjetivosEstrategicos/GetObjetivosEstrategicosPeriodoActual
+        public JsonResult GetObjetivosEstrategicosPeriodoActual(int id)
+        {
+            var listObjetivosEstrategicos = db.spObjetivosEstrategicosConsult(id);
+
+            return Json(new { listObjetivosEstrategicos = listObjetivosEstrategicos }, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: ObjetivosEstrategicos/Details/5
         public ActionResult Details(int? id)
         {

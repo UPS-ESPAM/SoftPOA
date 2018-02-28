@@ -25,6 +25,7 @@ namespace GestionPOA.Models
         public Nullable<System.DateTime> inicio { get; set; }
         public Nullable<System.DateTime> fin { get; set; }
         public Nullable<bool> eliminado { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subsistema> Subsistema { get; set; }

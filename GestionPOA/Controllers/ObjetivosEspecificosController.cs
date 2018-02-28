@@ -44,6 +44,16 @@ namespace GestionPOA.Controllers
          
             return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);
         }
+
+        // GET: ObjetivosEspecificos/getObjetivosEspecificosbyObjEstrategicoPeriodoActual
+        public ActionResult getObjetivosEspecificosbyObjEstrategicoPeriodoActual(int id)
+        {
+            
+            var listado = db.spObjetivosEspecificosConsult(id).ToList();
+
+            return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);
+        }
+
         // POST: ObjetivosEspecificos/Create
         [HttpPost]
         public ActionResult Create(ObjetivosEspecificos objetivosEspecificos)
