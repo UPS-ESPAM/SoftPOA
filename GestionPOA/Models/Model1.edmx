@@ -67,6 +67,7 @@
           <Property Name="inicio" Type="date" />
           <Property Name="fin" Type="date" />
           <Property Name="eliminado" Type="bit" />
+          <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="Subsistema">
           <Key>
@@ -627,6 +628,7 @@
           <Property Name="fin" Type="DateTime" Precision="0" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Subsistema" Relationship="Self.FK_Subsistema_periodo" FromRole="periodo" ToRole="Subsistema" />
+          <Property Name="estado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Subsistema">
           <Key>
@@ -1215,6 +1217,7 @@
           <Property Type="String" Name="II" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Mes" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1284,6 +1287,7 @@
           <EntitySetMapping Name="periodo">
             <EntityTypeMapping TypeName="PEDIModel.periodo">
               <MappingFragment StoreEntitySet="periodo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="periodoId" ColumnName="periodoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="inicio" ColumnName="inicio" />
@@ -1549,6 +1553,7 @@
                 <ScalarProperty Name="II" ColumnName="II" />
                 <ScalarProperty Name="III" ColumnName="III" />
                 <ScalarProperty Name="IV" ColumnName="IV" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
