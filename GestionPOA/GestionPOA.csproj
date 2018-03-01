@@ -319,6 +319,7 @@
     <Content Include="App\Controller\ObjetivosEspecificosController.js" />
     <Content Include="App\Controller\ObjetivosEspecificosDepartamentosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
+    <Content Include="App\Controller\PeriodicidadController.js" />
     <Content Include="App\Controller\PlanificacionController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
     <Content Include="App\Directivas\decimalOnly.js" />
@@ -338,6 +339,7 @@
     <Content Include="App\Services\ObjetivosEspecificosDepartamentosServices.js" />
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
+    <Content Include="App\Services\PeriodicidadServices.js" />
     <Content Include="App\Services\ProgramacionesServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
     <Content Include="App\Views\acciones\index.html" />
@@ -351,6 +353,7 @@
     <Content Include="App\Views\objetivoespecificos\index.html" />
     <Content Include="App\Views\objetivosestrategicos\index.html" />
     <Content Include="App\Views\estrategias\index.html" />
+    <Content Include="App\Views\periodicidad\index.html" />
     <Content Include="App\Views\subsistema\index.html" />
     <Content Include="Content\angular-datatables.min.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
@@ -522,7 +525,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\ObjeEspecificosDepartamentoes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
