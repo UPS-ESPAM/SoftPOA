@@ -1,4 +1,4 @@
-﻿<div ng-controller="MetasDepartamentosController as vm">
+﻿<div ng-controller="ObjetivosEspecificosDepartamentosController as vm">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-icon" data-background-color="green">
@@ -6,7 +6,7 @@
             </div>
             <div class="card-content">
                 <h4 class="card-title">:: Asignar Objetivos Especificos a los Departamentos ::</h4>
-                <form name="addAsignacionMetaForm" ng-submit="vm.addAsignacionMeta();" novalidate>
+                <form name="addAsignacionOEspecificoForm" ng-submit="vm.addAsignacionObjetivoEspecifico();" novalidate>
                     <div class="form-group label-floating col-lg-6 col-md-12">
                         <label class="control-label">SUBSISTEMA</label>
                         <select class="form-control" ng-model="vm.asignacion.SubsistemaId" ng-change="vm.cargarObjetivosEstrategicos(vm.asignacion.SubsistemaId)" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects" required>
@@ -32,7 +32,7 @@
                         </select>
                     </div>
                     <div class="form-group label-floating col-lg-12 col-md-12">
-                        <input type="submit" value="Registrar" class="btn btn-fill btn-success" ng-disabled="addAsignacionMetaForm.$invalid" />
+                        <input type="submit" value="Registrar" class="btn btn-fill btn-success" ng-disabled="addAsignacionOEspecificoForm.$invalid" />
                     </div>
             </form>
         </div>
@@ -65,25 +65,26 @@
                     </div>
                 </div>
                 <table ng-table="vm.tableParams" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                    <tr ng-repeat="MetaAsignada in vm.listMetasAsignadas | orderBy: 'id' | filter:searchText as results">
+                    <tr ng-repeat="ObjEspecificosAsignado in vm.listObjetivosEspecificosAsignados | orderBy: 'id' | filter:searchText as results">
                         <td title="'Ìtems'" class="text-center">
                             {{$index +1}}
                         </td>
                         <td title="'Departamento'" class="text-center">
-                            {{MetaAsignada.nombre_subunidad}}
+                            {{ObjEspecificosAsignado.nombre_subunidad}}
                         </td>
                         <td title="'Objetivo Especifico'" class="text-center">
-                            {{MetaAsignada.Descripcion}}
+                            {{ObjEspecificosAsignado.Descripcion}}
                         </td>
                         <td title="'Acciones'" class="td-actions text-center">
-                            <button type="button" rel="tooltip" title="Editar" data-toggle="modal" data-target="#myModal" ng-click="vm.modalMetaAsignada(MetaAsignada)" class="btn btn-success btn-round">
+                            <button type="button" rel="tooltip" title="Editar" data-toggle="modal" data-target="#myModal" ng-click="vm.modalAsignacionDepartamento(ObjEspecificosAsignado)" class="btn btn-success btn-round">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-round" ng-click="vm.deleteAsignacionMeta(MetaAsignada.id, $index)">
+                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-round" ng-click="vm.deleteAsignacionDepartamento(ObjEspecificosAsignado.id, $index)">
                                 <i class="material-icons">close</i>
                             </button>
                         </td>
                     </tr>
+                    <tr><td class="text-success" data-loader colspan="3"></td></tr>
                     <tr class="animate-repeat" ng-if="results.length === 0">
                         <td colspan="3" class="text-danger">No se encontraron registros...</td>
                     </tr>
@@ -92,7 +93,7 @@
         </div>
     </div>
     <!-- MODAL -->
-    <!--<div id="myModal" class="modal fade">
+    <div id="myModal" class="modal fade">
         <div class="modal-dialog">
              Modal content
             <div class="modal-content">
@@ -118,27 +119,9 @@
                                 <option value="">-- Seleccione --</option>
                             </select>
                         </div>
-                        <div class="form-group label-floating col-lg-6 col-md-12">
+                        <div class="form-group label-floating col-lg-12 col-md-12" >
                             <label class="control-label">OBJETIVO ESPECÍFICO INSTITUCIONAL</label>
                             <select class="form-group" ng-model="vm.asignacionModal.ObjetivosEspecificosId" ng-change="vm.cargarEstrategias(vm.asignacionModal.ObjetivosEspecificosId)" ng-options="arrOptionSelect.ObjetivosEspecificosId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionObjEspecificos" required>
-                                <option value="">-- Seleccione --</option>
-                            </select>
-                        </div>
-                        <div class="form-group label-floating col-lg-6 col-md-12">
-                            <label class="control-label">ESTRATEGIAS</label>
-                            <select class="form-group" ng-model="vm.asignacionModal.EstrategiasId" ng-change="vm.cargarIndicadores(vm.asignacionModal.EstrategiasId)" ng-options="arrOptionSelect.EstrategiasId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionEstrategias" required>
-                                <option value="">-- Seleccione --</option>
-                            </select>
-                        </div>
-                        <div class="form-group label-floating col-lg-6 col-md-12">
-                            <label class="control-label">INDICADORES</label>
-                            <select class="form-group" ng-model="vm.asignacionModal.IndicadorId" ng-change="vm.cargarMetasByIndicador(vm.asignacionModal.IndicadorId)" ng-options="arrOptionSelect.IndicadorId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionIndicadores" required>
-                                <option value="">-- Seleccione --</option>
-                            </select>
-                        </div>
-                        <div class="form-group label-floating col-lg-6 col-md-12">
-                            <label class="control-label">METAS</label>
-                            <select class="form-group" ng-model="vm.asignacionModal.MetaId" ng-options="arrOptionSelect.id as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionMetas" required>
                                 <option value="">-- Seleccione --</option>
                             </select>
                         </div>
@@ -151,8 +134,5 @@
                 </form>
             </div>
         </div>
-    </div>-->
-
-
-
+    </div>
 </div>

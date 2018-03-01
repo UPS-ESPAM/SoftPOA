@@ -480,6 +480,7 @@
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="tipoCalificacionId" Type="int" Mode="In" />
         </Function>
+        <Function Name="spObjetivoEspecificoDepartamentosAsignadosSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spObjetivosEspecificosbyDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="department" Type="int" Mode="In" />
         </Function>
@@ -1152,6 +1153,7 @@
             <End Role="MetasDepartamento" EntitySet="MetasDepartamento" />
           </AssociationSet>
           <FunctionImport Name="spMetasDepartamentosAsignadosConsult" ReturnType="Collection(PEDIModel.spMetasDepartamentosAsignadosConsult_Result)" />
+          <FunctionImport Name="spObjetivoEspecificoDepartamentosAsignadosSelect" ReturnType="Collection(PEDIModel.spObjetivoEspecificoDepartamentosAsignadosSelect_Result)" />
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1353,6 +1355,14 @@
           <Property Type="Int32" Name="indicadorID" Nullable="false" />
           <Property Type="Int32" Name="id_subunidad" Nullable="false" />
           <Property Type="Int32" Name="metasID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spObjetivoEspecificoDepartamentosAsignadosSelect_Result">
+          <Property Type="Int32" Name="SubsistemaId" Nullable="false" />
+          <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
+          <Property Type="Int32" Name="ObjetivosEspecificosId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="id" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1761,6 +1771,18 @@
                 <ScalarProperty Name="indicadorID" ColumnName="indicadorID" />
                 <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
                 <ScalarProperty Name="metasID" ColumnName="metasID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObjetivoEspecificoDepartamentosAsignadosSelect" FunctionName="PEDIModel.Store.spObjetivoEspecificoDepartamentosAsignadosSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spObjetivoEspecificoDepartamentosAsignadosSelect_Result">
+                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

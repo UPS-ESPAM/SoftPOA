@@ -61,7 +61,6 @@
             })
         }
         vm.cargarObjetivosEstrategicos = function (id) { 
-            debugger
             if (id != null) {
                 ObjetivosEstrategicosServices.getObjetivosEstrategicosBySubSistema(id).then(function (d) {
                     vm.arrOptionObjEstrategicos = [];

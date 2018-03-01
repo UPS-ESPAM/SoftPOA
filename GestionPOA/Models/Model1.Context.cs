@@ -249,5 +249,10 @@ namespace GestionPOA.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartamentosAsignadosConsult_Result>("spMetasDepartamentosAsignadosConsult");
         }
+    
+        public virtual ObjectResult<spObjetivoEspecificoDepartamentosAsignadosSelect_Result> spObjetivoEspecificoDepartamentosAsignadosSelect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivoEspecificoDepartamentosAsignadosSelect_Result>("spObjetivoEspecificoDepartamentosAsignadosSelect");
+        }
     }
 }
