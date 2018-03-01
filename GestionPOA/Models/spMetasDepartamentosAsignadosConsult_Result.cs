@@ -17,5 +17,11 @@ namespace GestionPOA.Models
         public int id { get; set; }
         public string nombre_subunidad { get; set; }
         public int SubsistemaId { get; set; }
+        public int ObjetivosEstragicoId { get; set; }
+        public int ObjetivosEspecificosId { get; set; }
+        public int EstrategiasId { get; set; }
+        public int indicadorID { get; set; }
+        public int id_subunidad { get; set; }
+        public int metasID { get; set; }
     }
 }

@@ -11,7 +11,7 @@
         cargarDepartamentos();  
         cargarTabla();
         function cargarTabla() {
-            MetasDepartamentosServices.getMetasDepartamentos().then(function (d) {                
+            MetasDepartamentosServices.getMetasDepartamentos().then(function (d) {   
                 listMetasAsignadas = d.data.listametasDepartamento;
                 vm.totalregistros = listMetasAsignadas.length;               
                 //llenar tabla
@@ -29,13 +29,20 @@
             })
         }        
         vm.modalMetaAsignada = function (metaAsignada) {
-            
             $('.modal ').insertAfter($('body'));
             vm.Departamento = metaAsignada.nombre_subunidad;
             vm.asignacionModal.id = metaAsignada.id;
             vm.asignacionModal.SubsistemaId = metaAsignada.SubsistemaId;
             vm.cargarObjetivosEstrategicos(metaAsignada.SubsistemaId);
-
+            vm.cargarObjetivosEspecificos(metaAsignada.ObjetivosEstragicoId);
+            vm.asignacionModal.ObjetivosEspecificosId = metaAsignada.ObjetivosEspecificosId;
+            vm.cargarEstrategias(metaAsignada.ObjetivosEspecificosId);
+            vm.asignacionModal.ObjetivosEstragicoId = metaAsignada.ObjetivosEstragicoId;
+            vm.cargarIndicadores(metaAsignada.EstrategiasId);
+            vm.asignacionModal.EstrategiasId = metaAsignada.EstrategiasId;
+            vm.cargarMetasByIndicador(metaAsignada.indicadorID);
+            vm.asignacionModal.IndicadorId = metaAsignada.indicadorID;
+            vm.asignacionModal.MetaId = metaAsignada.metasID;
         };      
         function cargarSubSistemas() {
             SubsistemasServices.getSubsistemasPeriodo().then(function (d) {
@@ -53,7 +60,8 @@
                 });
             })
         }
-        vm.cargarObjetivosEstrategicos = function (id) {             
+        vm.cargarObjetivosEstrategicos = function (id) { 
+            debugger
             if (id != null) {
                 ObjetivosEstrategicosServices.getObjetivosEstrategicosBySubSistema(id).then(function (d) {
                     vm.arrOptionObjEstrategicos = [];

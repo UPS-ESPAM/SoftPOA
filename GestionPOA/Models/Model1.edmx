@@ -1347,6 +1347,12 @@
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="SubsistemaId" Nullable="false" />
+          <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
+          <Property Type="Int32" Name="ObjetivosEspecificosId" Nullable="false" />
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="Int32" Name="indicadorID" Nullable="false" />
+          <Property Type="Int32" Name="id_subunidad" Nullable="false" />
+          <Property Type="Int32" Name="metasID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1749,6 +1755,12 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
                 <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="indicadorID" ColumnName="indicadorID" />
+                <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
+                <ScalarProperty Name="metasID" ColumnName="metasID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
