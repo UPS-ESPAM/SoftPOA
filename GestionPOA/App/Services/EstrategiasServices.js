@@ -6,6 +6,10 @@
             return $http.get('../ObjetivosEspecificos/getObjetivosEspecificosByDepartamento');
         }
 
+        fact.getOEstrategiasPeriodoActual = function (id) {
+            return $http.get('../Estrategias/GetEstrategiasbyObjetivoPeriodoActual/'+id);
+        }
+
         fact.getEstrategias = function (id) {
                 
             var request = $http({

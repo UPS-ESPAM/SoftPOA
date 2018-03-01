@@ -6,6 +6,10 @@
             return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicos');
         }
 
+        fact.getObjetivosEstrategicosBySubSistema = function (id) {
+            return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicosPeriodoActual/'+id);
+        }
+ 
         fact.addObjetivoEstrategico = function (ObjetivoEstrategico) {
             var request = $http({
                 method: 'POST',

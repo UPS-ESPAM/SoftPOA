@@ -5,7 +5,9 @@
         fact.getSubsistemas = function () {
             return $http.get('../Subsistemas/GetSubsistema');
         }
-
+        fact.getSubsistemasPeriodo = function () {
+            return $http.get('../Subsistemas/GetSubsistemaPeriodoActual');
+        }
         fact.addSubsistemas = function (subsistema) {
             var request = $http({
                 method: 'POST',

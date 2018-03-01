@@ -151,11 +151,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccionesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DepartamentoesController.cs" />
     <Compile Include="Controllers\EstrategiasController.cs" />
     <Compile Include="Controllers\EvidenciasController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\IntervalosController.cs" />
     <Compile Include="Controllers\MetasController.cs" />
+    <Compile Include="Controllers\MetasDepartamentoesController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
     <Compile Include="Controllers\PresupuestosController.cs" />
@@ -186,6 +188,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetasDepartamento.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -227,10 +232,16 @@
     <Compile Include="Models\Programacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spDepartamentoConsult_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spEstrategiasbyDepartamentoandObjetivoEspecifico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spEstrategiasDepartment_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spEstrategiasPeriodoActualConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spIndicadorDetalle_Result.cs">
@@ -251,10 +262,28 @@
     <Compile Include="Models\spMetaDetalle_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spMetasDepartamentosAsignadosConsult_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spMetasDepartment_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spObjetivosEspecificosbyDepartamento_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spObjetivosEspecificosConsult_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spObjetivosEspecificosPeriodoActualConsult_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spObjetivosEstrategicosConsult_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPlanificacionConsultar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSubsistemaConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subsistema.cs">
@@ -282,6 +311,7 @@
     <Content Include="App\Controller\IndicadoresController.js" />
     <Content Include="App\Controller\LoginController.js" />
     <Content Include="App\Controller\MetasController.js" />
+    <Content Include="App\Controller\MetasDepartamentosController.js" />
     <Content Include="App\Controller\ObjetivosEspecificosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\PlanificacionController.js" />
@@ -292,11 +322,13 @@
     <Content Include="App\Directivas\numbersOnly.js" />
     <Content Include="App\Directivas\uploaderFile.js" />
     <Content Include="App\Services\AccionesServices.js" />
+    <Content Include="App\Services\DepartamentosServices.js" />
     <Content Include="App\Services\EstrategiasServices.js" />
     <Content Include="App\Services\EvidenciasServices.js" />
     <Content Include="App\Services\IndicadoresServices.js" />
     <Content Include="App\Services\IntervalosServices.js" />
     <Content Include="App\Services\LoginServices.js" />
+    <Content Include="App\Services\MetasDepartamentosServices.js" />
     <Content Include="App\Services\MetasServices.js" />
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
@@ -305,6 +337,7 @@
     <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\login\index.html" />
+    <Content Include="App\Views\metas\asignacion.html" />
     <Content Include="App\Views\metas\ejecucion.html" />
     <Content Include="App\Views\metas\index.html" />
     <Content Include="App\Views\metas\nuevo.html" />
@@ -482,7 +515,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
+    <Folder Include="Views\Departamentoes\" />
     <Folder Include="Views\Evidencias\" />
+    <Folder Include="Views\MetasDepartamentoes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

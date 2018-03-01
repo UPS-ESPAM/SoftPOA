@@ -114,6 +114,14 @@ namespace GestionPOA.Controllers
             db.SaveChanges();
             return Json(new { mensaje = "Planificación actualizada correctamente" });
         }
+
+        // GET: Metas/MetasPlanificacion
+        public ActionResult MetasPlanificacion()
+        {
+           var detalle = db.spPlanificacionConsultar().ToList();
+            return Json(new { detallePlanificacion = detalle }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
