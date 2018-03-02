@@ -155,6 +155,7 @@
     <Compile Include="Controllers\EstrategiasController.cs" />
     <Compile Include="Controllers\EvidenciasController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
+    <Compile Include="Controllers\InformacionAdicionalsController.cs" />
     <Compile Include="Controllers\IntervalosController.cs" />
     <Compile Include="Controllers\MetasController.cs" />
     <Compile Include="Controllers\MetasDepartamentoesController.cs" />
@@ -529,6 +530,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
+    <Folder Include="Views\InformacionAdicionals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

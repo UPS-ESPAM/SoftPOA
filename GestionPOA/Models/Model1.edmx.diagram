@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="PEDIModel.Estrategias" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Evidencias" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Indicadores" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PEDIModel.InformacioAdicional" Width="1.5" PointX="12" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Metas" Width="1.5" PointX="9.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Planificacion" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Presupuesto" Width="1.5" PointX="12" PointY="13" IsExpanded="true" />
@@ -32,7 +31,6 @@
         <AssociationConnector Association="PEDIModel.FK_Estrategias_Planificacion" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Indicadores_Estrategias" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Metas_Indicadores" ManuallyRouted="false" />
-        <AssociationConnector Association="PEDIModel.FK_InformacioAdicional_Metas" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Presupuesto_Metas" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Planificacion_TipoPlanificacion" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PEDIModel.Programacion" Width="1.5" PointX="14" PointY="3" />
@@ -45,6 +43,8 @@
         <AssociationConnector Association="PEDIModel.FK_intervalo_Periodo" />
         <AssociationConnector Association="PEDIModel.FK_Programacion_intervalo" />
         <AssociationConnector Association="PEDIModel.FK_Planificacion_Periocidad" />
+        <EntityTypeShape EntityType="PEDIModel.InformacioAdicional" Width="1.5" PointX="12" PointY="19.625" />
+        <AssociationConnector Association="PEDIModel.FK_InformacioAdicional_Metas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
