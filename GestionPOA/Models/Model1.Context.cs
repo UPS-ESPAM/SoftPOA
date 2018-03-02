@@ -40,14 +40,14 @@ namespace GestionPOA.Models
         public virtual DbSet<Evidencias> Evidencias { get; set; }
         public virtual DbSet<Indicadores> Indicadores { get; set; }
         public virtual DbSet<InformacioAdicional> InformacioAdicional { get; set; }
-        public virtual DbSet<intervalo> intervalo { get; set; }
         public virtual DbSet<Metas> Metas { get; set; }
-        public virtual DbSet<Periocidad> Periocidad { get; set; }
         public virtual DbSet<Planificacion> Planificacion { get; set; }
         public virtual DbSet<Presupuesto> Presupuesto { get; set; }
         public virtual DbSet<TipoPlanificacion> TipoPlanificacion { get; set; }
         public virtual DbSet<Programacion> Programacion { get; set; }
         public virtual DbSet<MetasDepartamento> MetasDepartamento { get; set; }
+        public virtual DbSet<intervalo> intervalo { get; set; }
+        public virtual DbSet<Periocidad> Periocidad { get; set; }
     
         public virtual ObjectResult<spLoginIngreso_Result> spLoginIngreso(string usuario, string clave)
         {

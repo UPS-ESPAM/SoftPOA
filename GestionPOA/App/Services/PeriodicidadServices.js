@@ -2,19 +2,19 @@
     .factory('PeriodicidadServices', ['$http', function ($http) {
         var fact = {};
 
-        //fact.getSubsistemas = function () {
-        //    return $http.get('../Subsistemas/GetSubsistema');
-        //}
+        fact.getPeriocidad = function () {
+            return $http.get('../Periocidades/GetPeriocidades');
+        }
        
-        //fact.addSubsistemas = function (subsistema) {
-        //    var request = $http({
-        //        method: 'POST',
-        //        url: '../Subsistemas/Create',
-        //        data: subsistema,
-        //        dataType: "json"
-        //    });
-        //    return request;
-        //}
+        fact.addPeriocidad = function (periodo) {
+            var request = $http({
+                method: 'POST',
+                url: '../Periocidades/Create',
+                data: { 'periodo': periodo},
+                dataType: "json"
+            });
+            return request;
+        }
 
         //fact.updateSubsistemas = function (subsistema) {
         //    var request = $http({

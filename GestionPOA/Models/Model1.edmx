@@ -131,7 +131,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PeriodoId" Type="int" />
           <Property Name="Orden" Type="int" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
@@ -162,7 +162,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Periodo" Type="nvarchar" MaxLength="50" />
           <Property Name="estado" Type="bit" />
           <Property Name="eliminado" Type="bit" />
@@ -738,18 +738,6 @@
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Metas" Relationship="Self.FK_InformacioAdicional_Metas" FromRole="InformacioAdicional" ToRole="Metas" />
         </EntityType>
-        <EntityType Name="intervalo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PeriodoId" Type="Int32" />
-          <Property Name="Orden" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="eliminado" Type="Boolean" />
-          <NavigationProperty Name="Periocidad" Relationship="Self.FK_intervalo_Periodo" FromRole="intervalo" ToRole="Periocidad" />
-          <NavigationProperty Name="Programacion" Relationship="PEDIModel.FK_Programacion_intervalo" FromRole="intervalo" ToRole="Programacion" />
-        </EntityType>
         <EntityType Name="Metas">
           <Key>
             <PropertyRef Name="id" />
@@ -768,17 +756,6 @@
           <NavigationProperty Name="Programacion" Relationship="PEDIModel.FK_Programacion_Metas" FromRole="Metas" ToRole="Programacion" />
           <NavigationProperty Name="MetasDepartamento" Relationship="PEDIModel.FK_MetasDepartamento_Metas" FromRole="Metas" ToRole="MetasDepartamento" />
         </EntityType>
-        <EntityType Name="Periocidad">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Periodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="estado" Type="Boolean" />
-          <Property Name="eliminado" Type="Boolean" />
-          <NavigationProperty Name="intervalo" Relationship="Self.FK_intervalo_Periodo" FromRole="Periocidad" ToRole="intervalo" />
-          <NavigationProperty Name="Planificacion" Relationship="Self.FK_Planificacion_Periocidad" FromRole="Periocidad" ToRole="Planificacion" />
-        </EntityType>
         <EntityType Name="Planificacion">
           <Key>
             <PropertyRef Name="PlanificacionId" />
@@ -790,8 +767,8 @@
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Estrategias" Relationship="Self.FK_Estrategias_Planificacion" FromRole="Planificacion" ToRole="Estrategias" />
-          <NavigationProperty Name="Periocidad" Relationship="Self.FK_Planificacion_Periocidad" FromRole="Planificacion" ToRole="Periocidad" />
           <NavigationProperty Name="TipoPlanificacion" Relationship="Self.FK_Planificacion_TipoPlanificacion" FromRole="Planificacion" ToRole="TipoPlanificacion" />
+          <NavigationProperty Name="Periocidad" Relationship="PEDIModel.FK_Planificacion_Periocidad" FromRole="Planificacion" ToRole="Periocidad" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -945,18 +922,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_intervalo_Periodo">
-          <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
-          <End Role="intervalo" Type="Self.intervalo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Periocidad">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="intervalo">
-              <PropertyRef Name="PeriodoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Presupuesto_Metas">
           <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
           <End Role="Presupuesto" Type="Self.Presupuesto" Multiplicity="*" />
@@ -966,18 +931,6 @@
             </Principal>
             <Dependent Role="Presupuesto">
               <PropertyRef Name="MetaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Planificacion_Periocidad">
-          <End Role="Periocidad" Type="Self.Periocidad" Multiplicity="0..1" />
-          <End Role="Planificacion" Type="Self.Planificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Periocidad">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Planificacion">
-              <PropertyRef Name="PeriocidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1007,9 +960,7 @@
           <EntitySet Name="Evidencias" EntityType="Self.Evidencias" />
           <EntitySet Name="Indicadores" EntityType="Self.Indicadores" />
           <EntitySet Name="InformacioAdicional" EntityType="Self.InformacioAdicional" />
-          <EntitySet Name="intervalo" EntityType="Self.intervalo" />
           <EntitySet Name="Metas" EntityType="Self.Metas" />
-          <EntitySet Name="Periocidad" EntityType="Self.Periocidad" />
           <EntitySet Name="Planificacion" EntityType="Self.Planificacion" />
           <EntitySet Name="Presupuesto" EntityType="Self.Presupuesto" />
           <EntitySet Name="TipoPlanificacion" EntityType="Self.TipoPlanificacion" />
@@ -1057,17 +1008,9 @@
             <End Role="Metas" EntitySet="Metas" />
             <End Role="InformacioAdicional" EntitySet="InformacioAdicional" />
           </AssociationSet>
-          <AssociationSet Name="FK_intervalo_Periodo" Association="Self.FK_intervalo_Periodo">
-            <End Role="Periocidad" EntitySet="Periocidad" />
-            <End Role="intervalo" EntitySet="intervalo" />
-          </AssociationSet>
           <AssociationSet Name="FK_Presupuesto_Metas" Association="Self.FK_Presupuesto_Metas">
             <End Role="Metas" EntitySet="Metas" />
             <End Role="Presupuesto" EntitySet="Presupuesto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Planificacion_Periocidad" Association="Self.FK_Planificacion_Periocidad">
-            <End Role="Periocidad" EntitySet="Periocidad" />
-            <End Role="Planificacion" EntitySet="Planificacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Planificacion_TipoPlanificacion" Association="Self.FK_Planificacion_TipoPlanificacion">
             <End Role="TipoPlanificacion" EntitySet="TipoPlanificacion" />
@@ -1102,10 +1045,6 @@
           <AssociationSet Name="FK_Evidencias_Programacion" Association="PEDIModel.FK_Evidencias_Programacion">
             <End Role="Programacion" EntitySet="Programacion" />
             <End Role="Evidencias" EntitySet="Evidencias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Programacion_intervalo" Association="PEDIModel.FK_Programacion_intervalo">
-            <End Role="intervalo" EntitySet="intervalo" />
-            <End Role="Programacion" EntitySet="Programacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Programacion_Metas" Association="PEDIModel.FK_Programacion_Metas">
             <End Role="Metas" EntitySet="Metas" />
@@ -1154,6 +1093,20 @@
           </AssociationSet>
           <FunctionImport Name="spMetasDepartamentosAsignadosConsult" ReturnType="Collection(PEDIModel.spMetasDepartamentosAsignadosConsult_Result)" />
           <FunctionImport Name="spObjetivoEspecificoDepartamentosAsignadosSelect" ReturnType="Collection(PEDIModel.spObjetivoEspecificoDepartamentosAsignadosSelect_Result)" />
+          <EntitySet Name="intervalo" EntityType="PEDIModel.intervalo" />
+          <EntitySet Name="Periocidad" EntityType="PEDIModel.Periocidad" />
+          <AssociationSet Name="FK_intervalo_Periodo" Association="PEDIModel.FK_intervalo_Periodo">
+            <End Role="Periocidad" EntitySet="Periocidad" />
+            <End Role="intervalo" EntitySet="intervalo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programacion_intervalo" Association="PEDIModel.FK_Programacion_intervalo">
+            <End Role="intervalo" EntitySet="intervalo" />
+            <End Role="Programacion" EntitySet="Programacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planificacion_Periocidad" Association="PEDIModel.FK_Planificacion_Periocidad">
+            <End Role="Periocidad" EntitySet="Periocidad" />
+            <End Role="Planificacion" EntitySet="Planificacion" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1203,8 +1156,8 @@
           <Property Name="MetaID" Type="Int32" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Evidencias" Relationship="PEDIModel.FK_Evidencias_Programacion" FromRole="Programacion" ToRole="Evidencias" />
-          <NavigationProperty Name="intervalo" Relationship="PEDIModel.FK_Programacion_intervalo" FromRole="Programacion" ToRole="intervalo" />
           <NavigationProperty Name="Metas" Relationship="PEDIModel.FK_Programacion_Metas" FromRole="Programacion" ToRole="Metas" />
+          <NavigationProperty Name="intervalo" Relationship="PEDIModel.FK_Programacion_intervalo" FromRole="Programacion" ToRole="intervalo" />
         </EntityType>
         <Association Name="FK_Evidencias_Programacion">
           <End Type="PEDIModel.Programacion" Role="Programacion" Multiplicity="0..1" />
@@ -1215,18 +1168,6 @@
             </Principal>
             <Dependent Role="Evidencias">
               <PropertyRef Name="ProgramacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Programacion_intervalo">
-          <End Type="PEDIModel.intervalo" Role="intervalo" Multiplicity="0..1" />
-          <End Type="PEDIModel.Programacion" Role="Programacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="intervalo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Programacion">
-              <PropertyRef Name="IntervaloId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1364,6 +1305,65 @@
           <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="id" Nullable="false" />
         </ComplexType>
+        <EntityType Name="intervalo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodoId" Type="Int32" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="Periocidad" Relationship="PEDIModel.FK_intervalo_Periodo" FromRole="intervalo" ToRole="Periocidad" />
+          <NavigationProperty Name="Programacion" Relationship="PEDIModel.FK_Programacion_intervalo" FromRole="intervalo" ToRole="Programacion" />
+        </EntityType>
+        <EntityType Name="Periocidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Periodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="intervalo" Relationship="PEDIModel.FK_intervalo_Periodo" FromRole="Periocidad" ToRole="intervalo" />
+          <NavigationProperty Name="Planificacion" Relationship="PEDIModel.FK_Planificacion_Periocidad" FromRole="Periocidad" ToRole="Planificacion" />
+        </EntityType>
+        <Association Name="FK_intervalo_Periodo">
+          <End Type="PEDIModel.Periocidad" Role="Periocidad" Multiplicity="0..1" />
+          <End Type="PEDIModel.intervalo" Role="intervalo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periocidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="intervalo">
+              <PropertyRef Name="PeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programacion_intervalo">
+          <End Type="PEDIModel.intervalo" Role="intervalo" Multiplicity="0..1" />
+          <End Type="PEDIModel.Programacion" Role="Programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="intervalo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programacion">
+              <PropertyRef Name="IntervaloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planificacion_Periocidad">
+          <End Type="PEDIModel.Periocidad" Role="Periocidad" Multiplicity="0..1" />
+          <End Type="PEDIModel.Planificacion" Role="Planificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periocidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Planificacion">
+              <PropertyRef Name="PeriocidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1505,17 +1505,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="intervalo">
-            <EntityTypeMapping TypeName="PEDIModel.intervalo">
-              <MappingFragment StoreEntitySet="intervalo">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Metas">
             <EntityTypeMapping TypeName="PEDIModel.Metas">
               <MappingFragment StoreEntitySet="Metas">
@@ -1524,16 +1513,6 @@
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="tipoCalificacionId" ColumnName="tipoCalificacionId" />
-                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Periocidad">
-            <EntityTypeMapping TypeName="PEDIModel.Periocidad">
-              <MappingFragment StoreEntitySet="Periocidad">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="eliminado" ColumnName="eliminado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1786,6 +1765,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="intervalo">
+            <EntityTypeMapping TypeName="PEDIModel.intervalo">
+              <MappingFragment StoreEntitySet="intervalo">
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periocidad">
+            <EntityTypeMapping TypeName="PEDIModel.Periocidad">
+              <MappingFragment StoreEntitySet="Periocidad">
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

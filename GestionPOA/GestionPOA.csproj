@@ -161,6 +161,7 @@
     <Compile Include="Controllers\ObjeEspecificosDepartamentoesController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
+    <Compile Include="Controllers\PeriocidadesController.cs" />
     <Compile Include="Controllers\PresupuestosController.cs" />
     <Compile Include="Controllers\ProgramacionsController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
@@ -525,6 +526,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
+    <Folder Include="Views\Periocidades\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

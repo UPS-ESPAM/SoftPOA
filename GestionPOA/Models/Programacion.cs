@@ -30,7 +30,7 @@ namespace GestionPOA.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evidencias> Evidencias { get; set; }
-        public virtual intervalo intervalo { get; set; }
         public virtual Metas Metas { get; set; }
+        public virtual intervalo intervalo { get; set; }
     }
 }
