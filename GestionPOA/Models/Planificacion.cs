@@ -29,7 +29,7 @@ namespace GestionPOA.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Estrategias> Estrategias { get; set; }
-        public virtual Periocidad Periocidad { get; set; }
         public virtual TipoPlanificacion TipoPlanificacion { get; set; }
+        public virtual Periocidad Periocidad { get; set; }
     }
 }

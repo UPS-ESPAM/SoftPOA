@@ -155,11 +155,14 @@
     <Compile Include="Controllers\EstrategiasController.cs" />
     <Compile Include="Controllers\EvidenciasController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
+    <Compile Include="Controllers\InformacionAdicionalsController.cs" />
     <Compile Include="Controllers\IntervalosController.cs" />
     <Compile Include="Controllers\MetasController.cs" />
     <Compile Include="Controllers\MetasDepartamentoesController.cs" />
+    <Compile Include="Controllers\ObjeEspecificosDepartamentoesController.cs" />
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
+    <Compile Include="Controllers\PeriocidadesController.cs" />
     <Compile Include="Controllers\PresupuestosController.cs" />
     <Compile Include="Controllers\ProgramacionsController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
@@ -268,6 +271,9 @@
     <Compile Include="Models\spMetasDepartment_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spObjetivoEspecificoDepartamentosAsignadosSelect_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spObjetivosEspecificosbyDepartamento_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -309,11 +315,14 @@
     <Content Include="App\Controller\EstrategiasController.js" />
     <Content Include="App\Controller\HomeController.js" />
     <Content Include="App\Controller\IndicadoresController.js" />
+    <Content Include="App\Controller\InformacionAdicionalController.js" />
     <Content Include="App\Controller\LoginController.js" />
     <Content Include="App\Controller\MetasController.js" />
     <Content Include="App\Controller\MetasDepartamentosController.js" />
     <Content Include="App\Controller\ObjetivosEspecificosController.js" />
+    <Content Include="App\Controller\ObjetivosEspecificosDepartamentosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
+    <Content Include="App\Controller\PeriodicidadController.js" />
     <Content Include="App\Controller\PlanificacionController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
     <Content Include="App\Directivas\decimalOnly.js" />
@@ -326,24 +335,30 @@
     <Content Include="App\Services\EstrategiasServices.js" />
     <Content Include="App\Services\EvidenciasServices.js" />
     <Content Include="App\Services\IndicadoresServices.js" />
+    <Content Include="App\Services\InformacionAdicionalServices.js" />
     <Content Include="App\Services\IntervalosServices.js" />
     <Content Include="App\Services\LoginServices.js" />
     <Content Include="App\Services\MetasDepartamentosServices.js" />
     <Content Include="App\Services\MetasServices.js" />
+    <Content Include="App\Services\ObjetivosEspecificosDepartamentosServices.js" />
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
+    <Content Include="App\Services\PeriodicidadServices.js" />
     <Content Include="App\Services\ProgramacionesServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
     <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
+    <Content Include="App\Views\informacion\index.html" />
     <Content Include="App\Views\login\index.html" />
     <Content Include="App\Views\metas\asignacion.html" />
     <Content Include="App\Views\metas\ejecucion.html" />
     <Content Include="App\Views\metas\index.html" />
     <Content Include="App\Views\metas\nuevo.html" />
+    <Content Include="App\Views\objetivoespecificos\asignacion.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
     <Content Include="App\Views\objetivosestrategicos\index.html" />
     <Content Include="App\Views\estrategias\index.html" />
+    <Content Include="App\Views\periodicidad\index.html" />
     <Content Include="App\Views\subsistema\index.html" />
     <Content Include="Content\angular-datatables.min.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
@@ -515,9 +530,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\Departamentoes\" />
-    <Folder Include="Views\Evidencias\" />
-    <Folder Include="Views\MetasDepartamentoes\" />
+    <Folder Include="Views\InformacionAdicionals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

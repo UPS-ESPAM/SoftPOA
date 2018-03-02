@@ -18,10 +18,10 @@ namespace GestionPOA.Models
         public Metas()
         {
             this.Acciones = new HashSet<Acciones>();
-            this.InformacioAdicional = new HashSet<InformacioAdicional>();
             this.Presupuesto = new HashSet<Presupuesto>();
             this.Programacion = new HashSet<Programacion>();
             this.MetasDepartamento = new HashSet<MetasDepartamento>();
+            this.InformacioAdicional = new HashSet<InformacioAdicional>();
         }
     
         public int id { get; set; }
@@ -36,12 +36,12 @@ namespace GestionPOA.Models
         public virtual ICollection<Acciones> Acciones { get; set; }
         public virtual Indicadores Indicadores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InformacioAdicional> InformacioAdicional { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Presupuesto> Presupuesto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Programacion> Programacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MetasDepartamento> MetasDepartamento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InformacioAdicional> InformacioAdicional { get; set; }
     }
 }

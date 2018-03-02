@@ -32,7 +32,46 @@ namespace GestionPOA.Controllers
 
             return Json(new { listIntervalos = intervalos }, JsonRequestBehavior.AllowGet);
         }
-        
+        // GET: Intervalos
+        public ActionResult GetIntervalos(int id)
+        {
+
+            var intervalos = db.intervalo.Where(i => i.eliminado == false)
+                                        .Where(i => i.PeriodoId == id)
+                                        .OrderByDescending(i => i.Orden)
+                                        .Select(p => new { id = p.id, Descripcion = p.Descripcion, PeriodoId= p.PeriodoId, Orden=p.Orden })
+                                        .ToList();
+            return Json(new { lisIntervalosxPeriocidad = intervalos }, JsonRequestBehavior.AllowGet);
+        }
+        // POST: Intervalos/Create
+        [HttpPost]
+        public JsonResult Create(intervalo intervalos)
+        {
+            db.intervalo.Add(intervalos);
+            db.SaveChanges();
+            return Json(new { mensaje = "Intervalo registrado correctamente" });
+        }
+        // POST: Intervalos/Update
+        [HttpPost]
+        public ActionResult Update(int id, int orden, string _intervalo)
+        {
+            intervalo invertalos = db.intervalo.Where(i => i.id == id).SingleOrDefault();
+            invertalos.Orden = orden;
+            invertalos.Descripcion = _intervalo;
+            db.SaveChanges();
+            return Json(new { mensaje = "Registrado actualizado correctamente" });
+        }
+
+        // POST: Intervalos/Delete
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            intervalo invertalos = db.intervalo.Where(i => i.id == id).SingleOrDefault();
+            invertalos.eliminado = true;
+            db.SaveChanges();
+            return Json(new { mensaje = "Registrado eliminado correctamente" }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

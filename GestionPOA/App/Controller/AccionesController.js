@@ -12,6 +12,7 @@
         }
 
         vm.cargarAcciones = function (id, meta) {
+            debugger
             var requestResponse = AccionesServices.getAcciones(id);
             requestResponse.then(function successCallback(response) {
                 vm.appstate = 'showAdd';

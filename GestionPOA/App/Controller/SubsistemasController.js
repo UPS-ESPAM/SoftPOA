@@ -6,11 +6,8 @@
         listSubsistema = [];
         vm.totalregistros = 0;
         vm.modalsubsistema = {}
-
         function cargar() {
-
             SubsistemasServices.getSubsistemas().then(function (d) {
-                debugger
                 listSubsistema = d.data.list;
                 vm.totalregistros = listSubsistema.length;
                 vm.tableParams = new NgTableParams({

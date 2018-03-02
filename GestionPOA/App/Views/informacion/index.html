@@ -1,0 +1,185 @@
+﻿<div class="row" ng-controller="InformacionAdicionalController as ctlInfo">
+    <div class="row" ng-controller="AccionesController as vm">
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-text" data-background-color="orange">
+                    <h4 class="card-title">Metas</h4>
+                </div>
+                <div class="card-content table-responsive" >
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                        <th>Descripción</th>
+                        <th> </th>
+                        </thead>
+                        <tbody  >
+                            <tr ng-repeat="meta in vm.listadoMetas">
+                                <td style="cursor:pointer;" ng-click="ctlInfo.SearchFormulasCalculos(meta.id, meta.Descripcion)">{{meta.Descripcion}}</td>
+                                <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(meta.id)" class="text-success">ver más</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-tabs" data-background-color="green">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <a ng-show="ctlInfo.appstate =='showAdd'" class="ui olive label" data-toggle="modal" data-target="#myModal" ng-click="ctlInfo.ventanaFormulaCalculo()"><i class="add icon"></i>Fórmula de Cáculo</a>
+                            <span class="nav-tabs-title"><b>Meta:</b> {{ctlInfo.meta }}</span>
+                            <ul class="nav nav-tabs" data-tabs="tabs"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <table class="table">
+                        <thead class="text-warning">
+                        <th style="font-size:14px;">Fórmula Cálculo</th>
+                        <th style="font-size:14px;">Línea Base</th>
+                        <th>Acciones </th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="formulacalculo in ctlInfo.listFormulasCalculos">
+                                <td>{{formulacalculo.FormulaCalculo}}</td>
+                                <td>{{formulacalculo.LineaBase}}</td>
+                                <td title="'Acciones'" class="td-actions text-center">
+                                    <button type="button" rel="tooltip" title="Editar" data-toggle="modal" data-target="#myModalUpdate" ng-click="ctlInfo.updateVentanaModal(formulacalculo)" class="btn btn-success btn-round">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                    <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-round" ng-click="ctlInfo.deleteFormulaCalculo(formulacalculo.id, $index)">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DETALLE META -->
+        <div id="myModalDetalleMeta" class="modal fade">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-success">:: Detalle de la Meta ::</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ui relaxed divided list">
+                            <div class="item">
+                                <i class="large angle right icon"></i>
+                                <div class="content">
+                                    <a class="header">OBJETIVO ESTRATEGICO</a>
+                                    <div class="description">{{ vm.detallesMeta.ObjetivoEstrategico }}</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <i class="large angle right icon"></i>
+                                <div class="content">
+                                    <a class="header">OBJETIVO ESPECIFICO</a>
+                                    <div class="description">{{ vm.detallesMeta.ObjetivoEspecifico}}</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <i class="large angle right icon"></i>
+                                <div class="content">
+                                    <a class="header">ESTRATEGIA</a>
+                                    <div class="description">{{ vm.detallesMeta.Estrategia }}</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <i class="large angle right icon"></i>
+                                <div class="content">
+                                    <a class="header">INDICADOR</a>
+                                    <div class="description">{{ vm.detallesMeta.Indicador}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- END MODAL DETALLE META -->
+    </div>
+    <!-- MODAL INSERT -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Fórmula de Cálculo / Línea Base ::</h4>
+                </div>
+                <form name="addFormulaCalculoForm" class="ui form" ng-submit="ctlInfo.addFormulaCalculo()" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group label-floating">
+                            <label class="control-label"><span class="text-success"><b>META: </b> </span> {{ctlInfo.meta | uppercase}} </label>
+                        </div>
+                        <br />
+                        <div class="form-group label-floating">
+                            <label class="control-label" style="font-size:12px;">Fórmula de Cáculo</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="ctlInfo.modalFormulaCalculo.FormulaCalculo" required>
+                            </div>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" style="font-size:12px;">Línea Base</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="ctlInfo.modalFormulaCalculo.LineaBase" required>
+                            </div>
+                        </div>
+                        <input type="hidden" ng-model="ctlInfo.modalFormulaCalculo.metasId" ng-value="ctlInfo.modalFormulaCalculo.metasId">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="addFormulaCalculoForm.$invalid">Registrar <i class="add icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL INSERT -->
+    <!-- MODAL UPDATE -->
+    <div id="myModalUpdate" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Actualizar Indicador ::</h4>
+                </div>
+                <form name="updateFormulaCalculoForm" class="ui form" ng-submit="ctlInfo.updateFormulaCalculo()" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group label-floating">
+                            <label class="control-label"><span class="text-success"><b>META: </b> </span> {{ctlInfo.meta | uppercase}}</label>
+                        </div>
+                        <br />
+                        <div class="form-group label-floating">
+                            <label class="control-label" style="font-size:12px;">Fórmula de Cálculo</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="ctlInfo.modalUpdateFormulaCalculo.FormulaCalculo" required>
+                            </div>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" style="font-size:12px;">Línea Base</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="ctlInfo.modalUpdateFormulaCalculo.LineaBase " required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-fill btn-success" ng-disabled="updateFormulaCalculoForm.$invalid">Actualizar <i class="add icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL UPDATE -->
+</div>

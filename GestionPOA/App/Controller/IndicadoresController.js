@@ -12,16 +12,15 @@
             })
         }
 
-        vm.cargarIndicadores = function (id, estrategia) {
+        vm.cargarIndicadores = function (id, periocidad) {
             var requestResponse = IndicadoresServices.getIndicadores(id);
             requestResponse.then(function successCallback(response) {
                 vm.appstate = 'showAdd';
                 vm.listadoIndicadores = response.data.listIndicadores
                 vm.modalIndicadores.EstrategiasId = id;
-                vm.estrategia = estrategia;
+                vm.periocidad = periocidad;
             });
         }
-
         vm.detalleEstrategias = function (id) {
             var requestResponse = IndicadoresServices.getEstrategiaDetalle(id);
             requestResponse.then(function successCallback(response) {
@@ -30,9 +29,6 @@
                 vm.detallesEstrategia.ObjetivoEspecifico = response.data.detalleEstrategia['0'].ObjetivoEspecifico;
             });
         }
-
-
-
         vm.ventanaIndicador = function () {
             $('.modal ').insertAfter($('body'));
             vm.modalIndicadores.Descripcion = "";
