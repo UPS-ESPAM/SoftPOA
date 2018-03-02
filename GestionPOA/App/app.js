@@ -57,6 +57,10 @@ angular
               templateUrl: '../../App/Views/metas/asignacion.html',
               controller: 'MetasController'
           })
+          .when('/Metas/Informacion/Adicional', {
+              templateUrl: '../../App/Views/informacion/index.html',
+              controller: 'InformacionAdicionalController'
+          })
           .when('/Periodicidad', {
               templateUrl: '../../App/Views/periodicidad/index.html',
               controller: 'PeriodicidadController'

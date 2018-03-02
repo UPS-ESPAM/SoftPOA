@@ -71,15 +71,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasDepartment_Result>("spEstrategiasDepartment", departmentParameter);
         }
     
-        public virtual ObjectResult<spMetasDepartment_Result> spMetasDepartment(Nullable<int> department)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartment_Result>("spMetasDepartment", departmentParameter);
-        }
-    
         public virtual ObjectResult<spMetaDetalle_Result> spMetaDetalle(Nullable<int> meta)
         {
             var metaParameter = meta.HasValue ?
@@ -253,6 +244,15 @@ namespace GestionPOA.Models
         public virtual ObjectResult<spObjetivoEspecificoDepartamentosAsignadosSelect_Result> spObjetivoEspecificoDepartamentosAsignadosSelect()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivoEspecificoDepartamentosAsignadosSelect_Result>("spObjetivoEspecificoDepartamentosAsignadosSelect");
+        }
+    
+        public virtual ObjectResult<spMetasDepartment_Result> spMetasDepartment(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartment_Result>("spMetasDepartment", departmentParameter);
         }
     }
 }

@@ -1023,9 +1023,6 @@
           <FunctionImport Name="spEstrategiasDepartment" ReturnType="Collection(PEDIModel.spEstrategiasDepartment_Result)">
           <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spMetasDepartment" ReturnType="Collection(PEDIModel.spMetasDepartment_Result)">
-          <Parameter Name="department" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="spMetaDetalle" ReturnType="Collection(PEDIModel.spMetaDetalle_Result)">
           <Parameter Name="meta" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1107,6 +1104,9 @@
             <End Role="Periocidad" EntitySet="Periocidad" />
             <End Role="Planificacion" EntitySet="Planificacion" />
           </AssociationSet>
+          <FunctionImport Name="spMetasDepartment" ReturnType="Collection(PEDIModel.spMetasDepartment_Result)">
+            <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1123,10 +1123,6 @@
         </ComplexType>
         <ComplexType Name="spEstrategiasDepartment_Result">
           <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="spMetasDepartment_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="spMetaDetalle_Result">
@@ -1364,6 +1360,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spMetasDepartment_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1574,14 +1574,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spMetasDepartment" FunctionName="PEDIModel.Store.spMetasDepartment">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.spMetasDepartment_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spMetaDetalle" FunctionName="PEDIModel.Store.spMetaDetalle">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spMetaDetalle_Result">
@@ -1786,6 +1778,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spMetasDepartment" FunctionName="PEDIModel.Store.spMetasDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetasDepartment_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

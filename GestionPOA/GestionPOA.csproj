@@ -314,6 +314,7 @@
     <Content Include="App\Controller\EstrategiasController.js" />
     <Content Include="App\Controller\HomeController.js" />
     <Content Include="App\Controller\IndicadoresController.js" />
+    <Content Include="App\Controller\InformacionAdicionalController.js" />
     <Content Include="App\Controller\LoginController.js" />
     <Content Include="App\Controller\MetasController.js" />
     <Content Include="App\Controller\MetasDepartamentosController.js" />
@@ -333,6 +334,7 @@
     <Content Include="App\Services\EstrategiasServices.js" />
     <Content Include="App\Services\EvidenciasServices.js" />
     <Content Include="App\Services\IndicadoresServices.js" />
+    <Content Include="App\Services\InformacionAdicionalServices.js" />
     <Content Include="App\Services\IntervalosServices.js" />
     <Content Include="App\Services\LoginServices.js" />
     <Content Include="App\Services\MetasDepartamentosServices.js" />
@@ -345,6 +347,7 @@
     <Content Include="App\Services\SubsistemasServices.js" />
     <Content Include="App\Views\acciones\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
+    <Content Include="App\Views\informacion\index.html" />
     <Content Include="App\Views\login\index.html" />
     <Content Include="App\Views\metas\asignacion.html" />
     <Content Include="App\Views\metas\ejecucion.html" />
@@ -526,7 +529,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\Periocidades\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
