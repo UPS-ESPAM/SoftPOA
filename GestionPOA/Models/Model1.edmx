@@ -125,6 +125,7 @@
           <Property Name="metasId" Type="int" />
           <Property Name="FormulaCalculo" Type="nvarchar" MaxLength="350" />
           <Property Name="LineaBase" Type="nvarchar" MaxLength="350" />
+          <Property Name="MetodoEvaluacion" Type="nvarchar" MaxLength="350" />
           <Property Name="eliminado" Type="bit" />
         </EntityType>
         <EntityType Name="intervalo">
@@ -1349,6 +1350,7 @@
           <Property Name="metasId" Type="Int32" />
           <Property Name="FormulaCalculo" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="LineaBase" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="MetodoEvaluacion" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="Metas" Relationship="PEDIModel.FK_InformacioAdicional_Metas" FromRole="InformacioAdicional" ToRole="Metas" />
         </EntityType>
@@ -1779,6 +1781,7 @@
             <EntityTypeMapping TypeName="PEDIModel.InformacioAdicional">
               <MappingFragment StoreEntitySet="InformacioAdicional">
                 <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="MetodoEvaluacion" ColumnName="MetodoEvaluacion" />
                 <ScalarProperty Name="LineaBase" ColumnName="LineaBase" />
                 <ScalarProperty Name="FormulaCalculo" ColumnName="FormulaCalculo" />
                 <ScalarProperty Name="metasId" ColumnName="metasId" />

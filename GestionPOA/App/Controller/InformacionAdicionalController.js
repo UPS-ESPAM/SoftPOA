@@ -64,6 +64,7 @@
             ctlInfo.modalUpdateFormulaCalculo.LineaBase = formulacalculo.LineaBase;
             ctlInfo.modalUpdateFormulaCalculo.metasId = formulacalculo.metasId;
             ctlInfo.modalUpdateFormulaCalculo.id = formulacalculo.id;
+            ctlInfo.modalUpdateFormulaCalculo.MetodoEvaluacion =  formulacalculo.MetodoEvaluacion;
         }
         ctlInfo.updateFormulaCalculo = function () {
             var requestResponse = InformacionAdicionalServices.updateFormulaCalculo(ctlInfo.modalUpdateFormulaCalculo);

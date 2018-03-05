@@ -18,6 +18,7 @@ namespace GestionPOA.Models
         public Nullable<int> metasId { get; set; }
         public string FormulaCalculo { get; set; }
         public string LineaBase { get; set; }
+        public string MetodoEvaluacion { get; set; }
         public Nullable<bool> eliminado { get; set; }
     
         public virtual Metas Metas { get; set; }
