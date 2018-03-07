@@ -31,6 +31,7 @@ namespace GestionPOA
                        "~/Scripts/assets/js/fullcalendar.min.js",
                        "~/Scripts/assets/js/jquery.tagsinput.js",
                        "~/Scripts/assets/js/material-dashboard.js",
+                       "~/Scripts/plugins/alertify.min.js",
                        "~/Scripts/assets/js/demo.js"
                        ));
 
@@ -79,6 +80,7 @@ namespace GestionPOA
             bundles.Add(new StyleBundle("~/Content/plantillaCss").Include(
                      "~/Content/assets/css/bootstrap.min.css",
                       "~/Content/plugins/semantic.min.css",
+                      "~/Content/plugins/alertify.min.css",
                      "~/Content/assets/css/demo.css",
                      "~/Content/assets/css/material-dashboard.css"
                      ));

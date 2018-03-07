@@ -397,8 +397,10 @@
     <Content Include="Content\img\sidebar-2.jpg" />
     <Content Include="Content\img\sidebar-3.jpg" />
     <Content Include="Content\img\sidebar-4.jpg" />
+    <Content Include="Content\plugins\alertify.min.css" />
     <Content Include="Content\plugins\icon.min.css" />
     <Content Include="Content\plugins\modal.min.css" />
+    <Content Include="Content\plugins\popup.min.css" />
     <Content Include="Content\plugins\semantic.min.css" />
     <Content Include="Content\plugins\transition.min.css" />
     <Content Include="Content\themes\default\assets\fonts\icons.svg" />
@@ -510,6 +512,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ng-table.min.js" />
+    <Content Include="Scripts\plugins\alertify.min.js" />
+    <Content Include="Scripts\plugins\popup.min.js" />
     <Content Include="Scripts\plugins\semantic.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

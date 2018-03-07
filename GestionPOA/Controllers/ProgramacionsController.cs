@@ -14,7 +14,18 @@ namespace GestionPOA.Controllers
     public class ProgramacionsController : Controller
     {
         private PEDIEntities db = new PEDIEntities();
-        
+
+        // POST: Programacions/planificacion
+        public JsonResult planificacion(int idmeta, int id)
+        {
+            var planificacions = db.Programacion.Where(p => p.eliminado == false)
+                                                 .Where(p => p.MetaID == idmeta)
+                                                 .Where(p => p.IntervaloId == id)
+                                                 .Select(p => new { planificacion = p.planificado})
+                                                 .FirstOrDefault();
+
+            return Json(new { planifiacion = planificacions }, JsonRequestBehavior.AllowGet);
+        }
         // POST: Programacions/UpdatePEDI
         [HttpPost]
         public ActionResult UpdatePEDI(List<clsProgramacion> programacion)
@@ -76,28 +87,33 @@ namespace GestionPOA.Controllers
         }
         // POST: Programacions/EjecucionUpdatePOA
         [HttpPost]
-        public ActionResult EjecucionUpdatePOA(List<clsProgramacion> programacion, int id, decimal valor)
+        public ActionResult EjecucionUpdatePOA( int id,int MetasID, string valor, string observacion)
         {
             Programacion _programacion = new Programacion();
-            foreach (clsProgramacion element in programacion)
-            {
+           
                 _programacion = (from p in db.Programacion
-                                 where p.IntervaloId == element.id
-                                 where p.MetaID == element.MetasID
+                                 where p.IntervaloId == id
+                                 where p.MetaID == MetasID
                                  select p).First();
 
-                _programacion.ejecutado = element.valor;
-                db.SaveChanges();
-            }
+                _programacion.ejecutado = valor;
+                _programacion.observacion = observacion;
+            db.SaveChanges();
+            return Json(new { mensaje = "Ejecución actualizada correctamente" });
+        }
+        // POST: Programacions/UpdatePresupuesto
+        [HttpPost]
+        public ActionResult UpdatePresupuesto(int MetasID, decimal presupuesto)
+        {
 
             Presupuesto _presupuesto = new Presupuesto();
             _presupuesto = (from p in db.Presupuesto
-                            where p.MetaID == id
-                            select p).First();
-            _presupuesto.Ejecutado = valor;
+                            where p.MetaID == MetasID
+                            select p).FirstOrDefault();
+            _presupuesto.Ejecutado = presupuesto;
             db.SaveChanges();
 
-            return Json(new { mensaje = "Ejecución actualizada correctamente" });
+            return Json(new { mensaje = "Presupuesto actualizado correctamente" });
         }
         protected override void Dispose(bool disposing)
         {

@@ -1,8 +1,12 @@
 ﻿angular.module('appGestion')
     .controller('MetasController', function ($cookies, IntervalosServices, MetasServices,
-        ProgramacionesServices, EvidenciasServices, IndicadoresServices) {
+        ProgramacionesServices, EvidenciasServices, IndicadoresServices, $scope) {
         var vm = this;
+        vm.off9 = [];
+        valorP = 0;
+        mensaje = "";
         vm.detallesMeta = {};
+        vm.mes = 00;
         vm.observacion = {};
         vm.modalIndicador = {};
         vm.uploadfile = {};
@@ -14,6 +18,8 @@
         vm.arrOptionObjEstrategicos = [];
         vm.listSistemas = {};
         listPlanificacion = [];
+        vm.CurrentDate = new Date();
+        vm.onChnage = vm.onChnage;
         function cargarIndicadores() {            
             IndicadoresServices.getIndicadoresByDepartamento().then(function (response) {
                 vm.listadoIndicadores = response.data.listIndicadores;                
@@ -44,7 +50,6 @@
             vm.modalMetas.id = metas.id;
         }
         vm.addMetas = function () {
-            debugger
             var requestResponse = MetasServices.addMetas(vm.modalMetas);
             requestResponse.then(function successCallback(response) {
                 var requestResponse = MetasServices.getMetasbyIndicador(vm.modalMetas.IndicadorId);
@@ -185,21 +190,43 @@
             }
 
         }
-        vm.updateMetasEjecucion = function (Ejecucion) {
-            vm.arrayejecucion = [];
-            vm.arrayejecucion.push(
-                { id: Ejecucion.ID_I, valor: Ejecucion.I, MetasID: Ejecucion.MetaID },
-                { id: Ejecucion.ID_II, valor: Ejecucion.II, MetasID: Ejecucion.MetaID },
-                { id: Ejecucion.ID_III, valor: Ejecucion.III, MetasID: Ejecucion.MetaID },
-                { id: Ejecucion.ID_IV, valor: Ejecucion.IV, MetasID: Ejecucion.MetaID },
-            );
+        vm.updateMetasEjecucion = function (id, MetaID,valor ) {
+            if (valor > valorP) {
+                mensaje = "exceso";
+            } else {
+                mensaje = "no cumplimiento";
+            }
             if (vm.deparmentID == 8) {
                 var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
                 Message(requestResponse);
             } else {
-                var requestResponse = ProgramacionesServices.updateEjecucionPOA(vm.arrayejecucion, Ejecucion.MetaID, Ejecucion.P_Ejecutado);
+                if (valorP != valor) {
+                    swal({
+                        title: "<span style='font-size:14px;'>Escriba una observación por el "+mensaje+" de la planificación :<span>",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        html:
+                        '<input id="swal-input1" class="swal2-input">',
+                        preConfirm: function () {
+                            return new Promise(function (resolve) {
+                                resolve([
+                                    $('#swal-input1').val()
+                                ])
+                            })
+                        },
+                        onOpen: function () {
+                            $('#swal-input1').focus()
+                        }
+                    }).then(function (result) {
+                        var requestResponse = ProgramacionesServices.updateEjecucionPOA(id, MetaID, valor, result[0]);
+                        Message(requestResponse);
+                    }).catch(swal.noop)
+                } else {
+                    var requestResponse = ProgramacionesServices.updateEjecucionPOA(id, MetaID, valor, null);
                     Message(requestResponse);
+                }
             }
+            
         }
         vm.uploadFile = function () {
             var fileInput = $('#file');
@@ -255,6 +282,18 @@
                     buttonsStyling: false
                 })
             });
+        }
+        vm.searhPlanificacion = function (idmeta, id) {
+            vm.off9 = [];
+            ProgramacionesServices.getTrismetrePlanificiacion(idmeta, id).then(function (response) {
+                vm.off9[id + "" + idmeta] = response.data.planifiacion.planificacion;
+               valorP = response.data.planifiacion.planificacion;
+            })
+
+        }
+        vm.updatePresupuestoEjecutado = function (metaID, P_Ejecutado, ) {
+            var requestResponse = ProgramacionesServices.updatePresupuesto(metaID, P_Ejecutado, );
+            Message(requestResponse);
         }
 
     });
