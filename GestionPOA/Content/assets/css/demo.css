@@ -36,6 +36,14 @@
     font-size: 10px;
     padding-top: 7px;
 }
+.obPlaMeta {
+    font-size: 10px;
+    position: absolute;
+    margin-top: 27px;
+    padding-left: 10px;
+    color: red;
+    cursor: pointer;
+}
 .colPla {
     background-color: #ECEDED !important;
     color: #97999A;
