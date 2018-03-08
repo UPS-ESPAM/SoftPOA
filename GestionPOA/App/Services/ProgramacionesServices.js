@@ -2,6 +2,15 @@
     .factory('ProgramacionesServices', ['$http', function ($http) {
         var fact = {};
         
+        fact.getObservacion = function (metaid, id) {
+            var request = $http({
+                method: 'POST',
+                url: '../Programacions/getObservacion',
+                data: { 'metaid': metaid, 'id': id },
+                dataType: "json"
+            });
+            return request;
+        }
         fact.updateProgramacionesPEDI = function (programacion) {
             var request = $http({
                 method: 'POST',

@@ -3,8 +3,11 @@
         ProgramacionesServices, EvidenciasServices, IndicadoresServices, $scope) {
         var vm = this;
         vm.off9 = [];
+        vm.Observacion = [];
         valorP = 0;
         mensaje = "";
+        vm.prt1 = "";
+        vm.prt2 = "";
         vm.detallesMeta = {};
         vm.mes = 00;
         vm.observacion = {};
@@ -219,11 +222,46 @@
                         }
                     }).then(function (result) {
                         var requestResponse = ProgramacionesServices.updateEjecucionPOA(id, MetaID, valor, result[0]);
-                        Message(requestResponse);
+                        requestResponse.then(function successCallback(response) {
+                            swal({
+                                title: 'Correcto!',
+                                text: response.data.mensaje,
+                                type: 'success',
+                                confirmButtonClass: "btn btn-success",
+                                buttonsStyling: false
+                            })
+                            vm.getObservacionEjecucion(MetaID, id);
+                        }, function errorCallback(response) {
+                            swal({
+                                title: 'Error!',
+                                text: 'Error',
+                                type: 'error',
+                                confirmButtonClass: "btn btn-danger",
+                                buttonsStyling: false
+                            })
+                        });
+                       
                     }).catch(swal.noop)
                 } else {
                     var requestResponse = ProgramacionesServices.updateEjecucionPOA(id, MetaID, valor, null);
-                    Message(requestResponse);
+                    requestResponse.then(function successCallback(response) {
+                        swal({
+                            title: 'Correcto!',
+                            text: response.data.mensaje,
+                            type: 'success',
+                            confirmButtonClass: "btn btn-success",
+                            buttonsStyling: false
+                        })
+                        vm.getObservacionEjecucion(MetaID, id);
+                    }, function errorCallback(response) {
+                        swal({
+                            title: 'Error!',
+                            text: 'Error',
+                            type: 'error',
+                            confirmButtonClass: "btn btn-danger",
+                            buttonsStyling: false
+                        })
+                    });
                 }
             }
             
@@ -287,13 +325,23 @@
             vm.off9 = [];
             ProgramacionesServices.getTrismetrePlanificiacion(idmeta, id).then(function (response) {
                 vm.off9[id + "" + idmeta] = response.data.planifiacion.planificacion;
-               valorP = response.data.planifiacion.planificacion;
+                valorP = response.data.planifiacion.planificacion;
+                vm.getObservacionEjecucion(idmeta, id);
             })
-
+           
         }
         vm.updatePresupuestoEjecutado = function (metaID, P_Ejecutado, ) {
             var requestResponse = ProgramacionesServices.updatePresupuesto(metaID, P_Ejecutado, );
             Message(requestResponse);
         }
-
+        vm.getObservacionEjecucion = function (metadid, id) {
+            debugger
+            $('.modal ').insertAfter($('body'));
+            var requestResponse = ProgramacionesServices.getObservacion(metadid, id);
+                requestResponse.then(function successCallback(response) {
+                    vm.Observacion[id + "" + metadid] = response.data.observacion['0'].observacion;
+                    vm.prt1 = metadid;
+                    vm.prt2 = id;
+                 });    
+        }
     });

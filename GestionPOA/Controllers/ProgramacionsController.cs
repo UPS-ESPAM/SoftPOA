@@ -15,6 +15,18 @@ namespace GestionPOA.Controllers
     {
         private PEDIEntities db = new PEDIEntities();
 
+
+        // GET: Programacions/getObservacion
+        public JsonResult getObservacion(int metaid, int id)
+        {
+            var observacion = db.Programacion.Where(p => p.eliminado == false)
+                                                .Where(p => p.MetaID == metaid)
+                                                .Where(p => p.IntervaloId == id)
+                                    .Select(p => new { observacion = p.observacion })
+                                    .ToList();
+
+            return Json(new { observacion}, JsonRequestBehavior.AllowGet);
+        }
         // POST: Programacions/planificacion
         public JsonResult planificacion(int idmeta, int id)
         {
