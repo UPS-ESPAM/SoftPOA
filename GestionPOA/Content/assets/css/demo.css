@@ -28,7 +28,35 @@
     height: 70px;
     display: block;
 }
+.inpEje {
+    font-size: 7pt;
 
+}
+.planiValor {
+    font-size: 10px;
+    padding-top: 7px;
+}
+.obPlaMeta {
+    font-size: 10px;
+    position: absolute;
+    margin-top: 27px;
+    padding-left: 10px;
+    color: red;
+    cursor: pointer;
+}
+.colPla {
+    background-color: #ECEDED !important;
+    color: #97999A;
+}
+.colEje {
+    background-color: #ECEDED !important;
+    color: #97999A;
+}
+.fond {
+    background-color: #E2E3E3 !important;
+    color: black;
+    font-weight: bolder !important;
+}
 .tim-row{
     margin-bottom: 20px;
 }
@@ -64,7 +92,7 @@
     -moz-transition: all .34s;
 }
 .uploadIcon {
-    font-size: 17px !important;
+    font-size: 15px !important;
     margin-top: 7px;
     color: cadetblue;
     cursor: pointer;

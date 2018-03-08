@@ -10,61 +10,73 @@
                     <form name="categoryForm">
                         <table class="table table-hover">
                             <thead class="text-warning">
-                                <tr class="text-center" style="font-size:13px;">
-                                    <th rowspan="2">Cualitativo</th>
-                                    <th rowspan="2" width="60%">Metas</th>
-                                    <th rowspan="2"> </th>
-                                    <th colspan="4">Ejecución Trimestral en % de la meta</th>
-                                    <th rowspan="2">Presupuesto</th>
-                                    <th rowspan="2">Observación</th>
-                                    <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <tr class="text-center" style="font-size:9px;">
+                                    <th rowspan="2" class="fond">Cualitativo</th>
+                                    <th rowspan="2" width="60%" class="fond">Metas</th>
+                                    <th rowspan="2" class="fond"> </th>
+                                    <th colspan="4" class="text-center fond">Ejecución Trimestral Meta en %</th>
+                                    <th rowspan="2" class="text-center fond">%  Cumplimiento de la gestión</th>
+                                    <th rowspan="2" class="fond text-center">Presupuesto</th>
+                                    <th rowspan="2" class="fond text-center">Observación Meta</th>
                                 </tr>
-                                <tr class="text-center" style="font-size:13px;">
-                                    <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
+                                <tr class="text-center" style="font-size:10px;">
+                                    <th class="text-center colEje" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr style="font-size:12px;" ng-if="vm.deparmentID!=8" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
+                                <tr style="font-size:20px;" ng-if="vm.deparmentID!=8" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
                                     <td class="text-center"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="true" /></td>
-                                    <td style="font-size:13px;">{{Ejecucion.Metas}}</td>
-                                    <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Ejecucion.MetaID)" class="text-success">ver más</span></td>
-                                    <td class="text-center">
+                                    <td style="font-size:12px;">{{Ejecucion.Metas}}</td>
+                                    <td style="font-size:10px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Ejecucion.MetaID)" class="text-success">ver más</span></td>
+                                    <td class="text-center colPla">
                                         <div class="ui input">
-                                            <input size="2" type="text" ng-model="Ejecucion.I" numbers-only max="" />
-                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_I)">unarchive</i>
+                                            <div ng-show="vm.Observacion[Ejecucion.ID_I+''+Ejecucion.MetaID] != null" class="obPlaMeta" rel="tooltip" title="Detalle Observación" data-toggle="modal" data-target="#observaEjecucion" ng-click="vm.getObservacionEjecucion(Ejecucion.MetaID,Ejecucion.ID_I )">Ver</div>
+                                            <input ng-disabled="{{vm.CurrentDate | date:'MM'}} > '3' && {{vm.CurrentDate | date:'dd'}} > '15'" size="2" type="text" ng-model="Ejecucion.I" numbers-only max="" class="inpEje " ng-click="vm.searhPlanificacion(Ejecucion.MetaID,Ejecucion.ID_I)" />
+                                            <i ng-show="vm.off9[Ejecucion.ID_I+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" style="color:coral !important;" rel="tooltip" title="Guardar" ng-click="vm.updateMetasEjecucion(Ejecucion.ID_I, Ejecucion.MetaID,Ejecucion.I)">save</i>
+                                            <i ng-show="vm.off9[Ejecucion.ID_I+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_I)">unarchive</i>
+                                            <span class="planiValor">{{vm.off9[Ejecucion.ID_I+""+Ejecucion.MetaID]}}</span>
                                         </div>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center colPla">
                                         <div class="ui input">
-                                            <input size="2" type="text" ng-model="Ejecucion.II" numbers-only max="" />
-                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia"  data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_II)">unarchive</i>
+                                            <div ng-show="vm.Observacion[Ejecucion.ID_II+''+Ejecucion.MetaID] != null" class="obPlaMeta" rel="tooltip" title="Detalle Observación" data-toggle="modal" data-target="#observaEjecucion" ng-click="vm.getObservacionEjecucion(Ejecucion.MetaID,Ejecucion.ID_II)">Ver</div>
+                                            <input ng-disabled="{{vm.CurrentDate | date:'MM'}} <= '3' || {{vm.CurrentDate | date:'MM'}} >= '7'  && {{vm.CurrentDate | date:'dd'}} > '15'" size="2" type="text" ng-model="Ejecucion.II" numbers-only max="" class="inpEje" ng-click="vm.searhPlanificacion(Ejecucion.MetaID,Ejecucion.ID_II)" />
+                                            <i ng-show="vm.off9[Ejecucion.ID_II+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" style="color:coral !important;" rel="tooltip" title="Guardar" ng-click="vm.updateMetasEjecucion(Ejecucion.ID_II, Ejecucion.MetaID)">save</i>
+                                            <i ng-show="vm.off9[Ejecucion.ID_II+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_II)">unarchive</i>
+                                            <span class="planiValor">{{vm.off9[Ejecucion.ID_II+""+Ejecucion.MetaID]}}</span>
                                         </div>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center colPla">
                                         <div class="ui input">
-                                            <input size="2" type="text" ng-model="Ejecucion.III" numbers-only max="" />
-                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_III)">unarchive</i>
+                                            <div ng-show="vm.Observacion[Ejecucion.ID_III+''+Ejecucion.MetaID] != null" class="obPlaMeta" rel="tooltip" title="Detalle Observación" data-toggle="modal" data-target="#observaEjecucion" ng-click="vm.getObservacionEjecucion(Ejecucion.MetaID,Ejecucion.ID_III)">Ver</div>
+                                            <input ng-disabled="{{vm.CurrentDate | date:'MM'}} <= '6' || {{vm.CurrentDate | date:'MM' }} >= '10'  && {{vm.CurrentDate | date:'dd'}} > '15'" size="2" type="text" ng-model="Ejecucion.III" numbers-only max="" class="inpEje" ng-click="vm.searhPlanificacion(Ejecucion.MetaID,Ejecucion.ID_III)" />
+                                            <i ng-show="vm.off9[Ejecucion.ID_III+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" style="color:coral !important;" rel="tooltip" title="Guardar" ng-click="vm.updateMetasEjecucion(Ejecucion.ID_III, Ejecucion.MetaID)">save</i>
+                                            <i ng-show="vm.off9[Ejecucion.ID_III+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_III)">unarchive</i>
+                                            <span class="planiValor">{{vm.off9[Ejecucion.ID_III+""+Ejecucion.MetaID]}}</span>
                                         </div>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center colPla">
                                         <div class="ui input">
-                                            <input size="2" type="text" ng-model="Ejecucion.IV" numbers-only max=""/>
-                                            <i class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_IV)">unarchive</i>
+                                            <div ng-show="vm.Observacion[Ejecucion.ID_IV+''+Ejecucion.MetaID] != null" class="obPlaMeta" rel="tooltip" title="Detalle Observación" data-toggle="modal" data-target="#observaEjecucion" ng-click="vm.getObservacionEjecucion(Ejecucion.MetaID,Ejecucion.ID_IV)">Ver</div>
+                                            <input ng-disabled="{{vm.CurrentDate | date:'MM'}} <= '9' || {{vm.CurrentDate | date:'MM'}} > '12'  && {{vm.CurrentDate | date:'dd'}} > '15'" size="2" type="text" ng-model="Ejecucion.IV" numbers-only max="" class="inpEje" ng-click="vm.searhPlanificacion(Ejecucion.MetaID,Ejecucion.ID_IV)" />
+                                            <i ng-show="vm.off9[Ejecucion.ID_IV+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" style="color:coral !important;" rel="tooltip" title="Guardar" ng-click="vm.updateMetasEjecucion(Ejecucion.ID_IIV, Ejecucion.MetaID)">save</i>
+                                            <i ng-show="vm.off9[Ejecucion.ID_IV+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal" data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_IV)">unarchive</i>
+                                            <span class="planiValor">{{vm.off9[Ejecucion.ID_IV+""+Ejecucion.MetaID]}}</span>
                                         </div>
                                     </td>
                                     <td class="text-center" style="font-size:12px;">
                                         <div class="ui input">
-                                            <input size="10" type="text" ng-model="Ejecucion.P_Ejecutado" decimal-only format="currency" />
+                                            <input type="text" size="3" ng-model="vm.porcentaje[Ejecucion.MetaID]" ng-init="vm.porcentaje[Ejecucion.MetaID]=Ejecucion.Cumplimiento" ng-disabled="true">
+                                        </div>
+                                    </td>
+                                    <td class="text-center" style="font-size:12px;">
+                                        <div class="ui input">
+                                            <input size="10" type="text" ng-model="Ejecucion.P_Ejecutado" ng-blur="vm.updatePresupuestoEjecutado(Ejecucion.MetaID,Ejecucion.P_Ejecutado)" decimal-only format="currency" />
                                         </div>
                                     </td>
                                     <td class="text-center" style="font-size:12px;">
                                         <span data-toggle="modal" rel="tooltip" title="Agregar Observación" data-target="#myModalAddObservacion" style="cursor:pointer;" ng-click="vm.ObservacionDetalle(Ejecucion.MetaID)" class="text-success">Añadir</span>
-                                    </td>
-                                    <td class="td-actions text-center">
-                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasEjecucion(Ejecucion)" class="btn btn-success btn-round">
-                                            <i class="material-icons">cached</i>
-                                        </button>
                                     </td>
                                 </tr>
                                 <tr style="font-size:12px;" ng-if="vm.deparmentID==8" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
@@ -145,7 +157,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr><td class="text-success" data-loader colspan="9"></td></tr>
+                                <tr><td class="text-success" data-loader colspan="10"></td></tr>
                             </tbody>
                         </table>
                     </form>
@@ -242,13 +254,13 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title text-success">:: Subir Evidencia ::</h4>
                 </div>
-                <form name="upload" ng-submit="vm.uploadFile()"  class="ui form" novalidate >
+                <form name="upload" ng-submit="vm.uploadFile()" class="ui form" novalidate>
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label"><span class="text-success"><b>META: </b> </span> {{ vm.uploadfile.meta | uppercase}}</label>
                         </div>
                         <label class="control-label" style="font-size:12px;">SUBIR EVIDENCIA</label>
-                        <input type="file" id="file"  ng-model="vm.uploadfile.files" luploader-model="file" />
+                        <input type="file" id="file" ng-model="vm.uploadfile.files" luploader-model="file" />
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-fill btn-success" ng-disabled="upload.$invalid">Actualizar <i class="refresh icon"></i></button>
@@ -259,4 +271,30 @@
         </div>
     </div>
     <!-- END MODAL UPLOAD EVIDENCIA -->
+    <!-- MODAL SHOW OBSERVACIÓN PLANIFICACION -->
+    <div id="observaEjecucion" class="modal fade">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">:: Observación de la Ejecución Trismestral ::</h4>
+                </div>
+                <form name="updateObservacionForm" class="ui form" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group label-floating">
+                            <label class="control-label" style="font-size:12px;">OBSERVACIÓN EJECUCIÓN TRISMESTRAL</label>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" ng-model="vm.Observacion[vm.prt2+''+vm.prt1]" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close <i class="remove icon"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL SHOW OBSERVACIÓN PLANIFICACION -->
 </div>

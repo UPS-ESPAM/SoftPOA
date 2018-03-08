@@ -145,15 +145,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spMetasInsert", indicadorIdParameter, descripcionParameter, tipoCalificacionIdParameter);
         }
     
-        public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
-        }
-    
         public virtual ObjectResult<spIndicadorDetalle_Result> spIndicadorDetalle(Nullable<int> indicadorId)
         {
             var indicadorIdParameter = indicadorId.HasValue ?
@@ -174,15 +165,6 @@ namespace GestionPOA.Models
                 new ObjectParameter("evidencia", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spEvidenciasInsert", programacionIdParameter, evidenciaParameter);
-        }
-    
-        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
         }
     
         public virtual ObjectResult<spPlanificacionConsultar_Result> spPlanificacionConsultar()
@@ -253,6 +235,33 @@ namespace GestionPOA.Models
                 new ObjectParameter("department", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartment_Result>("spMetasDepartment", departmentParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
+        }
+    
+        public virtual ObjectResult<string> spPorcentajeCumplimiento(Nullable<int> idmeta)
+        {
+            var idmetaParameter = idmeta.HasValue ?
+                new ObjectParameter("idmeta", idmeta) :
+                new ObjectParameter("idmeta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spPorcentajeCumplimiento", idmetaParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
         }
     }
 }

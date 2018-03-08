@@ -25,5 +25,6 @@ namespace GestionPOA.Models
         public string II { get; set; }
         public string III { get; set; }
         public string IV { get; set; }
+        public string Cumplimiento { get; set; }
     }
 }

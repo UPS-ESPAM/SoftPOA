@@ -18,7 +18,7 @@ namespace GestionPOA.Controllers
         public ActionResult getInformacionAdicional(int id)
         {
             var informacioAdicional = db.InformacioAdicional.Where(i => i.metasId == id).Where(i => i.eliminado==false)
-                                      .Select(i => new { id = i.id, FormulaCalculo = i.FormulaCalculo, LineaBase = i.LineaBase , metasId = i.metasId })
+                                      .Select(i => new { id = i.id, FormulaCalculo = i.FormulaCalculo, LineaBase = i.LineaBase , metasId = i.metasId, MetodoEvaluacion = i.MetodoEvaluacion })
                                       .ToList();
 
             return Json(new { listFormulaCalculo = informacioAdicional }, JsonRequestBehavior.AllowGet);

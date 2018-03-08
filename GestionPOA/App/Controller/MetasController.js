@@ -1,8 +1,16 @@
 ﻿angular.module('appGestion')
     .controller('MetasController', function ($cookies, IntervalosServices, MetasServices,
-        ProgramacionesServices, EvidenciasServices, IndicadoresServices) {
+        ProgramacionesServices, EvidenciasServices, IndicadoresServices, $scope) {
         var vm = this;
+        vm.off9 = [];
+        vm.Observacion = [];
+        vm.porcentaje = [];
+        valorP = 0;
+        mensaje = "";
+        vm.prt1 = "";
+        vm.prt2 = "";
         vm.detallesMeta = {};
+        vm.mes = 00;
         vm.observacion = {};
         vm.modalIndicador = {};
         vm.uploadfile = {};
@@ -14,6 +22,8 @@
         vm.arrOptionObjEstrategicos = [];
         vm.listSistemas = {};
         listPlanificacion = [];
+        vm.CurrentDate = new Date();
+        vm.onChnage = vm.onChnage;
         function cargarIndicadores() {            
             IndicadoresServices.getIndicadoresByDepartamento().then(function (response) {
                 vm.listadoIndicadores = response.data.listIndicadores;                
@@ -44,7 +54,6 @@
             vm.modalMetas.id = metas.id;
         }
         vm.addMetas = function () {
-            debugger
             var requestResponse = MetasServices.addMetas(vm.modalMetas);
             requestResponse.then(function successCallback(response) {
                 var requestResponse = MetasServices.getMetasbyIndicador(vm.modalMetas.IndicadorId);
@@ -185,21 +194,80 @@
             }
 
         }
-        vm.updateMetasEjecucion = function (Ejecucion) {
-            vm.arrayejecucion = [];
-            vm.arrayejecucion.push(
-                { id: Ejecucion.ID_I, valor: Ejecucion.I, MetasID: Ejecucion.MetaID },
-                { id: Ejecucion.ID_II, valor: Ejecucion.II, MetasID: Ejecucion.MetaID },
-                { id: Ejecucion.ID_III, valor: Ejecucion.III, MetasID: Ejecucion.MetaID },
-                { id: Ejecucion.ID_IV, valor: Ejecucion.IV, MetasID: Ejecucion.MetaID },
-            );
+        vm.updateMetasEjecucion = function (id, MetaID,valor ) {
+            if (valor > valorP) {
+                mensaje = "exceso";
+            } else {
+                mensaje = "no cumplimiento";
+            }
             if (vm.deparmentID == 8) {
                 var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
                 Message(requestResponse);
             } else {
-                var requestResponse = ProgramacionesServices.updateEjecucionPOA(vm.arrayejecucion, Ejecucion.MetaID, Ejecucion.P_Ejecutado);
-                    Message(requestResponse);
+                if (valorP != valor) {
+                    swal({
+                        title: "<span style='font-size:14px;'>Escriba una observación por el "+mensaje+" de la planificación :<span>",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        html:
+                        '<input id="swal-input1" class="swal2-input">',
+                        preConfirm: function () {
+                            return new Promise(function (resolve) {
+                                resolve([
+                                    $('#swal-input1').val()
+                                ])
+                            })
+                        },
+                        onOpen: function () {
+                            $('#swal-input1').focus()
+                        }
+                    }).then(function (result) {
+                        var requestResponse = ProgramacionesServices.updateEjecucionPOA(id, MetaID, valor, result[0]);
+                        requestResponse.then(function successCallback(response) {
+                            swal({
+                                title: 'Correcto!',
+                                text: response.data.mensaje,
+                                type: 'success',
+                                confirmButtonClass: "btn btn-success",
+                                buttonsStyling: false
+                            })
+                            vm.getObservacionEjecucion(MetaID, id);
+                            vm.cumplimiento(MetaID);
+                        }, function errorCallback(response) {
+                            swal({
+                                title: 'Error!',
+                                text: 'Error',
+                                type: 'error',
+                                confirmButtonClass: "btn btn-danger",
+                                buttonsStyling: false
+                            })
+                        });
+                       
+                    }).catch(swal.noop)
+                } else {
+                    var requestResponse = ProgramacionesServices.updateEjecucionPOA(id, MetaID, valor, null);
+                    requestResponse.then(function successCallback(response) {
+                        swal({
+                            title: 'Correcto!',
+                            text: response.data.mensaje,
+                            type: 'success',
+                            confirmButtonClass: "btn btn-success",
+                            buttonsStyling: false
+                        })
+                        vm.getObservacionEjecucion(MetaID, id);
+                        vm.cumplimiento(MetaID);
+                    }, function errorCallback(response) {
+                        swal({
+                            title: 'Error!',
+                            text: 'Error',
+                            type: 'error',
+                            confirmButtonClass: "btn btn-danger",
+                            buttonsStyling: false
+                        })
+                    });
+                }
             }
+            
         }
         vm.uploadFile = function () {
             var fileInput = $('#file');
@@ -256,5 +324,34 @@
                 })
             });
         }
-
+        vm.searhPlanificacion = function (idmeta, id) {
+            vm.off9 = [];
+            ProgramacionesServices.getTrismetrePlanificiacion(idmeta, id).then(function (response) {
+                vm.off9[id + "" + idmeta] = response.data.planifiacion.planificacion;
+                valorP = response.data.planifiacion.planificacion;
+                vm.getObservacionEjecucion(idmeta, id);
+            })
+           
+        }
+        vm.updatePresupuestoEjecutado = function (metaID, P_Ejecutado, ) {
+            var requestResponse = ProgramacionesServices.updatePresupuesto(metaID, P_Ejecutado, );
+            Message(requestResponse);
+        }
+        vm.getObservacionEjecucion = function (metadid, id) {
+            $('.modal ').insertAfter($('body'));
+            var requestResponse = ProgramacionesServices.getObservacion(metadid, id);
+                requestResponse.then(function successCallback(response) {
+                    vm.Observacion[id + "" + metadid] = response.data.observacion['0'].observacion;
+                    vm.prt1 = metadid;
+                    vm.prt2 = id;
+                 });    
+        }
+        vm.cumplimiento = function (idmeta) {
+            var requestResponse = ProgramacionesServices.getCumplimiento(idmeta);
+            requestResponse.then(function successCallback(response) {
+                debugger
+                vm.porcentaje[idmeta] = response.data.cumplimiento;
+            }); 
+          
+          }
     });
