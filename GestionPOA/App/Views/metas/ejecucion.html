@@ -15,6 +15,7 @@
                                     <th rowspan="2" width="60%" class="fond">Metas</th>
                                     <th rowspan="2" class="fond"> </th>
                                     <th colspan="4" class="text-center fond">Ejecución Trimestral Meta en %</th>
+                                    <th rowspan="2" class="text-center fond">%  Cumplimiento de la gestión</th>
                                     <th rowspan="2" class="fond text-center">Presupuesto</th>
                                     <th rowspan="2" class="fond text-center">Observación Meta</th>
                                 </tr>
@@ -63,6 +64,9 @@
                                             <i ng-show="vm.off9[Ejecucion.ID_IV+''+Ejecucion.MetaID] != null" class="uploadIcon material-icons" rel="tooltip" title="Cargar Evidencia" data-toggle="modal"  data-target="#myModalupload" ng-click="vm.EvidenciaUpload(Ejecucion.MetaID,Ejecucion.Metas,Ejecucion.ID_IV)">unarchive</i>
                                             <span class="planiValor">{{vm.off9[Ejecucion.ID_IV+""+Ejecucion.MetaID]}}</span>
                                         </div>
+                                    </td>
+                                    <td class="text-center" style="font-size:12px;">
+                                       0
                                     </td>
                                     <td class="text-center" style="font-size:12px;">
                                         <div class="ui input">
