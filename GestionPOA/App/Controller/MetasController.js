@@ -4,6 +4,7 @@
         var vm = this;
         vm.off9 = [];
         vm.Observacion = [];
+        vm.porcentaje = [];
         valorP = 0;
         mensaje = "";
         vm.prt1 = "";
@@ -231,6 +232,7 @@
                                 buttonsStyling: false
                             })
                             vm.getObservacionEjecucion(MetaID, id);
+                            vm.cumplimiento(MetaID);
                         }, function errorCallback(response) {
                             swal({
                                 title: 'Error!',
@@ -253,6 +255,7 @@
                             buttonsStyling: false
                         })
                         vm.getObservacionEjecucion(MetaID, id);
+                        vm.cumplimiento(MetaID);
                     }, function errorCallback(response) {
                         swal({
                             title: 'Error!',
@@ -335,7 +338,6 @@
             Message(requestResponse);
         }
         vm.getObservacionEjecucion = function (metadid, id) {
-            debugger
             $('.modal ').insertAfter($('body'));
             var requestResponse = ProgramacionesServices.getObservacion(metadid, id);
                 requestResponse.then(function successCallback(response) {
@@ -344,4 +346,12 @@
                     vm.prt2 = id;
                  });    
         }
+        vm.cumplimiento = function (idmeta) {
+            var requestResponse = ProgramacionesServices.getCumplimiento(idmeta);
+            requestResponse.then(function successCallback(response) {
+                debugger
+                vm.porcentaje[idmeta] = response.data.cumplimiento;
+            }); 
+          
+          }
     });

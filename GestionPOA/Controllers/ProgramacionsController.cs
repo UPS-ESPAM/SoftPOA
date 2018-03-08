@@ -16,6 +16,13 @@ namespace GestionPOA.Controllers
         private PEDIEntities db = new PEDIEntities();
 
 
+
+        //GET: Programacions/getCumplimiento
+        public JsonResult getCumplimiento(int idmeta) {
+             var cumplimientos = db.spPorcentajeCumplimiento(idmeta).FirstOrDefault();
+             return Json(new { cumplimiento = cumplimientos }, JsonRequestBehavior.AllowGet);
+        }
+        
         // GET: Programacions/getObservacion
         public JsonResult getObservacion(int metaid, int id)
         {

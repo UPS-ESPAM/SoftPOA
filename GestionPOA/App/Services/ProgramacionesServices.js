@@ -1,7 +1,17 @@
 ﻿angular.module('appGestion')
     .factory('ProgramacionesServices', ['$http', function ($http) {
         var fact = {};
-        
+
+        fact.getCumplimiento = function (idmeta) {
+            var request = $http({
+                method: 'POST',
+                url: '../Programacions/getCumplimiento',
+                data: { 'idmeta': idmeta },
+                dataType: "json"
+            });
+            return request;
+        }
+
         fact.getObservacion = function (metaid, id) {
             var request = $http({
                 method: 'POST',
