@@ -494,6 +494,7 @@
         <Function Name="spPorcentajeCumplimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="idmeta" Type="int" Mode="In" />
         </Function>
+        <Function Name="spPorcentajeOEstrategico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spSubsistemaConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spLoginIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Usuario" Type="varchar" Mode="In" />
@@ -1089,8 +1090,9 @@
           <Parameter Name="idmeta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spMetaAndEjecucion" ReturnType="Collection(PEDIModel.spMetaAndEjecucion_Result)">
-            <Parameter Name="department" Mode="In" Type="Int32" />
+          <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spPorcentajeOEstrategico" ReturnType="Collection(PEDIModel.spPorcentajeOEstrategico_Result)" />
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1372,6 +1374,13 @@
           <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Cumplimiento" Nullable="true" MaxLength="31" />
+        </ComplexType>
+        <ComplexType Name="spPorcentajeOEstrategico_Result">
+          <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="sum_pla" Nullable="false" />
+          <Property Type="Int32" Name="sum_eje" Nullable="false" />
+          <Property Type="Decimal" Name="porcentaje" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1795,6 +1804,17 @@
                 <ScalarProperty Name="III" ColumnName="III" />
                 <ScalarProperty Name="IV" ColumnName="IV" />
                 <ScalarProperty Name="Cumplimiento" ColumnName="Cumplimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spPorcentajeOEstrategico" FunctionName="PEDIModel.Store.spPorcentajeOEstrategico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spPorcentajeOEstrategico_Result">
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="sum_pla" ColumnName="sum_pla" />
+                <ScalarProperty Name="sum_eje" ColumnName="sum_eje" />
+                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

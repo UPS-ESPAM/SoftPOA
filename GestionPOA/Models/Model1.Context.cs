@@ -263,5 +263,10 @@ namespace GestionPOA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
         }
+    
+        public virtual ObjectResult<spPorcentajeOEstrategico_Result> spPorcentajeOEstrategico()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spPorcentajeOEstrategico_Result>("spPorcentajeOEstrategico");
+        }
     }
 }

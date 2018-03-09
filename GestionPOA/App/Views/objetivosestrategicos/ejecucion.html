@@ -1,0 +1,51 @@
+﻿<div ng-controller="CumplimientoOEstrategicoController as vm">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">list</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title"><a class="ui teal tag label">CUMPLIMIENTO OBJETIVOS ESTRATÉGICOS INSTITUCIONALES</a></h4>
+                <div class="toolbar row">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="ui label">
+                                    <i class="pin icon"></i> Total de registros: {{vm.totalregistros}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding-bottom:20px;">
+                            <div class="form-group">
+                                <div class="ui icon input pull-right">
+                                    <input type="text" placeholder="Buscar..." class="form-control pull-right" ng-model="searchText">
+                                    <i class="circular search link icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table ng-table="vm.tableParams" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <tr ng-repeat="cumplimientoObjetivosEstrategico in vm.CumplimientoObjetivosEstrategico | orderBy: 'id' | filter:searchText as results">
+                        
+                        <td title="'Objetivo Estratégico Institucional'" class="text-left">
+                            {{cumplimientoObjetivosEstrategico.Descripcion}}
+                        </td>
+                        <td title="'Planificación'" class="text-center">
+                            {{cumplimientoObjetivosEstrategico.sum_pla}}
+                        </td>
+                        <td title="'Ejecución %'" class="text-center" >
+                            {{cumplimientoObjetivosEstrategico.sum_eje}}
+                        </td>
+                        <td title="'Cumplimiento %'" class="text-center text-success" style="font-weight:bold">
+                            {{cumplimientoObjetivosEstrategico.porcentaje}}
+                        </td>
+                    </tr>
+                    <tr class="animate-repeat" ng-if="results.length === 0">
+                        <td colspan="4" class="text-danger">No se encontraron registros...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

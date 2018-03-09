@@ -349,7 +349,6 @@
         vm.cumplimiento = function (idmeta) {
             var requestResponse = ProgramacionesServices.getCumplimiento(idmeta);
             requestResponse.then(function successCallback(response) {
-                debugger
                 vm.porcentaje[idmeta] = response.data.cumplimiento;
             }); 
           
