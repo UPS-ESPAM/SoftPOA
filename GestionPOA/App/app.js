@@ -69,6 +69,10 @@ angular
               templateUrl: '../../App/Views/periodicidad/index.html',
               controller: 'PeriodicidadController'
           })
+          .when('/Planificacion/Alertas', {
+              templateUrl: '../../App/Views/alertas/index.html',
+              controller: 'AlertasController'
+          })
         .otherwise({
           redirectTo: '/'
         });

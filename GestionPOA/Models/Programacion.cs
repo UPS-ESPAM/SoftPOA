@@ -26,11 +26,12 @@ namespace GestionPOA.Models
         public string ejecutado { get; set; }
         public Nullable<int> IntervaloId { get; set; }
         public Nullable<int> MetaID { get; set; }
+        public Nullable<bool> ReadObservation { get; set; }
         public Nullable<bool> eliminado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evidencias> Evidencias { get; set; }
-        public virtual Metas Metas { get; set; }
         public virtual intervalo intervalo { get; set; }
+        public virtual Metas Metas { get; set; }
     }
 }

@@ -295,6 +295,9 @@
     <Compile Include="Models\spPorcentajeOEstrategico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spShowPlanificacionEjecucion_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spSubsistemaConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -318,6 +321,7 @@
     <Content Include=".gitignore" />
     <Content Include="App\app.js" />
     <Content Include="App\Controller\AccionesController.js" />
+    <Content Include="App\Controller\AlertasController.js" />
     <Content Include="App\Controller\CumplimientoOEstrategicoController.js" />
     <Content Include="App\Controller\EstrategiasController.js" />
     <Content Include="App\Controller\HomeController.js" />
@@ -338,6 +342,7 @@
     <Content Include="App\Directivas\numbersOnly.js" />
     <Content Include="App\Directivas\uploaderFile.js" />
     <Content Include="App\Services\AccionesServices.js" />
+    <Content Include="App\Services\AlertasServices.js" />
     <Content Include="App\Services\DepartamentosServices.js" />
     <Content Include="App\Services\EstrategiasServices.js" />
     <Content Include="App\Services\EvidenciasServices.js" />
@@ -354,6 +359,7 @@
     <Content Include="App\Services\ProgramacionesServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
     <Content Include="App\Views\acciones\index.html" />
+    <Content Include="App\Views\alertas\index.html" />
     <Content Include="App\Views\indicadores\index.html" />
     <Content Include="App\Views\informacion\index.html" />
     <Content Include="App\Views\login\index.html" />
