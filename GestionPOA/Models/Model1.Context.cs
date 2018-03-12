@@ -213,16 +213,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasPeriodoActualConsult_Result>("spEstrategiasPeriodoActualConsult", objetivoEspecificoParameter);
         }
     
-        public virtual ObjectResult<spDepartamentoConsult_Result> spDepartamentoConsult()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoConsult_Result>("spDepartamentoConsult");
-        }
-    
-        public virtual ObjectResult<spMetasDepartamentosAsignadosConsult_Result> spMetasDepartamentosAsignadosConsult()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartamentosAsignadosConsult_Result>("spMetasDepartamentosAsignadosConsult");
-        }
-    
         public virtual ObjectResult<spObjetivoEspecificoDepartamentosAsignadosSelect_Result> spObjetivoEspecificoDepartamentosAsignadosSelect()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivoEspecificoDepartamentosAsignadosSelect_Result>("spObjetivoEspecificoDepartamentosAsignadosSelect");
@@ -267,6 +257,25 @@ namespace GestionPOA.Models
         public virtual ObjectResult<spPorcentajeOEstrategico_Result> spPorcentajeOEstrategico()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spPorcentajeOEstrategico_Result>("spPorcentajeOEstrategico");
+        }
+    
+        public virtual ObjectResult<spMetasDepartamentosAsignadosConsult_Result> spMetasDepartamentosAsignadosConsult()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartamentosAsignadosConsult_Result>("spMetasDepartamentosAsignadosConsult");
+        }
+    
+        public virtual ObjectResult<spDepartamentoConsult_Result> spDepartamentoConsult()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoConsult_Result>("spDepartamentoConsult");
+        }
+    
+        public virtual ObjectResult<spDepartamentoCorreoConsult_Result> spDepartamentoCorreoConsult(Nullable<int> idSubUnidad)
+        {
+            var idSubUnidadParameter = idSubUnidad.HasValue ?
+                new ObjectParameter("idSubUnidad", idSubUnidad) :
+                new ObjectParameter("idSubUnidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoCorreoConsult_Result>("spDepartamentoCorreoConsult", idSubUnidadParameter);
         }
     }
 }
