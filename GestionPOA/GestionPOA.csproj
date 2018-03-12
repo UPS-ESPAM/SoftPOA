@@ -238,6 +238,9 @@
     <Compile Include="Models\spDepartamentoConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spDepartamentoCorreoConsult_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spEstrategiasbyDepartamentoandObjetivoEspecifico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -289,6 +292,9 @@
     <Compile Include="Models\spPlanificacionConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spPorcentajeOEstrategico_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spSubsistemaConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -312,6 +318,7 @@
     <Content Include=".gitignore" />
     <Content Include="App\app.js" />
     <Content Include="App\Controller\AccionesController.js" />
+    <Content Include="App\Controller\CumplimientoOEstrategicoController.js" />
     <Content Include="App\Controller\EstrategiasController.js" />
     <Content Include="App\Controller\HomeController.js" />
     <Content Include="App\Controller\IndicadoresController.js" />
@@ -356,6 +363,7 @@
     <Content Include="App\Views\metas\nuevo.html" />
     <Content Include="App\Views\objetivoespecificos\asignacion.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
+    <Content Include="App\Views\objetivosestrategicos\ejecucion.html" />
     <Content Include="App\Views\objetivosestrategicos\index.html" />
     <Content Include="App\Views\estrategias\index.html" />
     <Content Include="App\Views\periodicidad\index.html" />
@@ -534,7 +542,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\InformacionAdicionals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

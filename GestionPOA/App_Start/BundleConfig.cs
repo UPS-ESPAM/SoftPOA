@@ -70,6 +70,7 @@ namespace GestionPOA
                        "~/App/Controller/ObjetivosEspecificosDepartamentosController.js",
                        "~/App/Controller/PeriodicidadController.js",
                        "~/App/Controller/InformacionAdicionalController.js",
+                       "~/App/Controller/CumplimientoOEstrategicoController.js",
                        "~/App/Directivas/numbersOnly.js",
                        "~/App/Controller/EstrategiasController.js",
                        "~/App/Directivas/decimalOnly.js",

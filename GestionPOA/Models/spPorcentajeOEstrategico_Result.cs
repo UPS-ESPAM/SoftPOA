@@ -11,16 +11,12 @@ namespace GestionPOA.Models
 {
     using System;
     
-    public partial class spDepartamentoConsult_Result
+    public partial class spPorcentajeOEstrategico_Result
     {
-        public string nombre_subunidad { get; set; }
-        public string Nombres { get; set; }
-        public string SegundoNombre { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
-        public int id_subunidad { get; set; }
-        public int Id_Persona { get; set; }
-        public string Email { get; set; }
-        public string EmailInstitucional { get; set; }
+        public int ObjetivosEstragicoId { get; set; }
+        public string Descripcion { get; set; }
+        public int sum_pla { get; set; }
+        public int sum_eje { get; set; }
+        public decimal porcentaje { get; set; }
     }
 }

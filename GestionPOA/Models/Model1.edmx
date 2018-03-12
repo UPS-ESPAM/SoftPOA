@@ -438,6 +438,9 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="spDepartamentoConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
+        <Function Name="spDepartamentoCorreoConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
+          <Parameter Name="idSubUnidad" Type="int" Mode="In" />
+        </Function>
         <Function Name="spEstrategiasbyDepartamentoandObjetivoEspecifico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="DepartamentoId" Type="int" Mode="In" />
           <Parameter Name="ObjetivoEspecificoId" Type="int" Mode="In" />
@@ -494,6 +497,7 @@
         <Function Name="spPorcentajeCumplimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="idmeta" Type="int" Mode="In" />
         </Function>
+        <Function Name="spPorcentajeOEstrategico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spSubsistemaConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spLoginIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Usuario" Type="varchar" Mode="In" />
@@ -1052,13 +1056,11 @@
           <FunctionImport Name="spEstrategiasPeriodoActualConsult" ReturnType="Collection(PEDIModel.spEstrategiasPeriodoActualConsult_Result)">
           <Parameter Name="ObjetivoEspecifico" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spDepartamentoConsult" ReturnType="Collection(PEDIModel.spDepartamentoConsult_Result)" />
           <EntitySet Name="MetasDepartamento" EntityType="PEDIModel.MetasDepartamento" />
           <AssociationSet Name="FK_MetasDepartamento_Metas" Association="PEDIModel.FK_MetasDepartamento_Metas">
             <End Role="Metas" EntitySet="Metas" />
             <End Role="MetasDepartamento" EntitySet="MetasDepartamento" />
           </AssociationSet>
-          <FunctionImport Name="spMetasDepartamentosAsignadosConsult" ReturnType="Collection(PEDIModel.spMetasDepartamentosAsignadosConsult_Result)" />
           <FunctionImport Name="spObjetivoEspecificoDepartamentosAsignadosSelect" ReturnType="Collection(PEDIModel.spObjetivoEspecificoDepartamentosAsignadosSelect_Result)" />
           <EntitySet Name="intervalo" EntityType="PEDIModel.intervalo" />
           <EntitySet Name="Periocidad" EntityType="PEDIModel.Periocidad" />
@@ -1089,7 +1091,13 @@
           <Parameter Name="idmeta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spMetaAndEjecucion" ReturnType="Collection(PEDIModel.spMetaAndEjecucion_Result)">
-            <Parameter Name="department" Mode="In" Type="Int32" />
+          <Parameter Name="department" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spPorcentajeOEstrategico" ReturnType="Collection(PEDIModel.spPorcentajeOEstrategico_Result)" />
+          <FunctionImport Name="spMetasDepartamentosAsignadosConsult" ReturnType="Collection(PEDIModel.spMetasDepartamentosAsignadosConsult_Result)" />
+          <FunctionImport Name="spDepartamentoConsult" ReturnType="Collection(PEDIModel.spDepartamentoConsult_Result)" />
+          <FunctionImport Name="spDepartamentoCorreoConsult" ReturnType="Collection(PEDIModel.spDepartamentoCorreoConsult_Result)">
+            <Parameter Name="idSubUnidad" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
@@ -1204,15 +1212,6 @@
           <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
         </ComplexType>
-        <ComplexType Name="spDepartamentoConsult_Result">
-          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="id_subunidad" Nullable="false" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
-        </ComplexType>
         <EntityType Name="MetasDepartamento">
           <Key>
             <PropertyRef Name="id" />
@@ -1236,18 +1235,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="spMetasDepartamentosAsignadosConsult_Result">
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="SubsistemaId" Nullable="false" />
-          <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
-          <Property Type="Int32" Name="ObjetivosEspecificosId" Nullable="false" />
-          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
-          <Property Type="Int32" Name="indicadorID" Nullable="false" />
-          <Property Type="Int32" Name="id_subunidad" Nullable="false" />
-          <Property Type="Int32" Name="metasID" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="spObjetivoEspecificoDepartamentosAsignadosSelect_Result">
           <Property Type="Int32" Name="SubsistemaId" Nullable="false" />
           <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
@@ -1372,6 +1359,42 @@
           <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Cumplimiento" Nullable="true" MaxLength="31" />
+        </ComplexType>
+        <ComplexType Name="spPorcentajeOEstrategico_Result">
+          <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="sum_pla" Nullable="false" />
+          <Property Type="Int32" Name="sum_eje" Nullable="false" />
+          <Property Type="Decimal" Name="porcentaje" Nullable="false" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="spMetasDepartamentosAsignadosConsult_Result">
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="SubsistemaId" Nullable="false" />
+          <Property Type="Int32" Name="ObjetivosEstragicoId" Nullable="false" />
+          <Property Type="Int32" Name="ObjetivosEspecificosId" Nullable="false" />
+          <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
+          <Property Type="Int32" Name="indicadorID" Nullable="false" />
+          <Property Type="Int32" Name="id_subunidad" Nullable="false" />
+          <Property Type="Int32" Name="metasID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spDepartamentoConsult_Result">
+          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id_subunidad" Nullable="false" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EmailInstitucional" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spDepartamentoCorreoConsult_Result">
+          <Property Type="Int32" Name="id_subunidad" Nullable="false" />
+          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EmailInstitucional" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1666,19 +1689,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spDepartamentoConsult" FunctionName="PEDIModel.Store.spDepartamentoConsult">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.spDepartamentoConsult_Result">
-                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
-                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="MetasDepartamento">
             <EntityTypeMapping TypeName="PEDIModel.MetasDepartamento">
               <MappingFragment StoreEntitySet="MetasDepartamento">
@@ -1690,22 +1700,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spMetasDepartamentosAsignadosConsult" FunctionName="PEDIModel.Store.spMetasDepartamentosAsignadosConsult">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.spMetasDepartamentosAsignadosConsult_Result">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
-                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
-                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
-                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
-                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
-                <ScalarProperty Name="indicadorID" ColumnName="indicadorID" />
-                <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
-                <ScalarProperty Name="metasID" ColumnName="metasID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spObjetivoEspecificoDepartamentosAsignadosSelect" FunctionName="PEDIModel.Store.spObjetivoEspecificoDepartamentosAsignadosSelect">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spObjetivoEspecificoDepartamentosAsignadosSelect_Result">
@@ -1795,6 +1789,58 @@
                 <ScalarProperty Name="III" ColumnName="III" />
                 <ScalarProperty Name="IV" ColumnName="IV" />
                 <ScalarProperty Name="Cumplimiento" ColumnName="Cumplimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spPorcentajeOEstrategico" FunctionName="PEDIModel.Store.spPorcentajeOEstrategico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spPorcentajeOEstrategico_Result">
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="sum_pla" ColumnName="sum_pla" />
+                <ScalarProperty Name="sum_eje" ColumnName="sum_eje" />
+                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spMetasDepartamentosAsignadosConsult" FunctionName="PEDIModel.Store.spMetasDepartamentosAsignadosConsult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetasDepartamentosAsignadosConsult_Result">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
+                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
+                <ScalarProperty Name="ObjetivosEstragicoId" ColumnName="ObjetivosEstragicoId" />
+                <ScalarProperty Name="ObjetivosEspecificosId" ColumnName="ObjetivosEspecificosId" />
+                <ScalarProperty Name="EstrategiasId" ColumnName="EstrategiasId" />
+                <ScalarProperty Name="indicadorID" ColumnName="indicadorID" />
+                <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
+                <ScalarProperty Name="metasID" ColumnName="metasID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spDepartamentoConsult" FunctionName="PEDIModel.Store.spDepartamentoConsult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spDepartamentoConsult_Result">
+                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spDepartamentoCorreoConsult" FunctionName="PEDIModel.Store.spDepartamentoCorreoConsult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spDepartamentoCorreoConsult_Result">
+                <ScalarProperty Name="id_subunidad" ColumnName="id_subunidad" />
+                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

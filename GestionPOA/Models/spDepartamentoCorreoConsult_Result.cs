@@ -11,15 +11,10 @@ namespace GestionPOA.Models
 {
     using System;
     
-    public partial class spDepartamentoConsult_Result
+    public partial class spDepartamentoCorreoConsult_Result
     {
-        public string nombre_subunidad { get; set; }
-        public string Nombres { get; set; }
-        public string SegundoNombre { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
         public int id_subunidad { get; set; }
-        public int Id_Persona { get; set; }
+        public string nombre_subunidad { get; set; }
         public string Email { get; set; }
         public string EmailInstitucional { get; set; }
     }

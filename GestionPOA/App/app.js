@@ -19,7 +19,11 @@ angular
           })
           .when('/Objetivo/Estrategico', {
               templateUrl: '../../App/Views/objetivosestrategicos/index.html',
-              controller: 'SubsistemasController'
+              controller: 'ObjetivosEstrategicosController'
+          })
+          .when('/Objetivo/Estrategico/Ejecucion', {
+              templateUrl: '../../App/Views/objetivosestrategicos/ejecucion.html',
+              controller: 'CumplimientoOEstrategicoController'
           })
           .when('/Objetivo/Especifico', {
               templateUrl: '../../App/Views/objetivoespecificos/index.html',

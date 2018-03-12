@@ -5,7 +5,9 @@
         fact.getObjetivosEstrategicos = function () {
             return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicos');
         }
-
+        fact.getCumplimintnoOEstrategicos = function () {
+            return $http.get('../ObjetivosEstrategicos/GetCumplimientoObjetivosEstrategicos');
+        }
         fact.getObjetivosEstrategicosBySubSistema = function (id) {
             return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicosPeriodoActual/'+id);
         }
