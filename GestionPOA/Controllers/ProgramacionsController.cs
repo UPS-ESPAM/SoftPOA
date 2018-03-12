@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GestionPOA.Models;
 using GestionPOA.MyClass;
+using System.Net.Mail;
 
 namespace GestionPOA.Controllers
 {
@@ -118,6 +119,32 @@ namespace GestionPOA.Controllers
                 _programacion.ejecutado = valor;
                 _programacion.observacion = observacion;
             db.SaveChanges();
+            if (observacion==null) {
+                observacion = "Cumplí con lo planificado";
+            }
+            var depCorreo = db.spDepartamentoCorreoConsult(Convert.ToInt32(Session["department"])).FirstOrDefault();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("upsdeveloper2018@gmail.com", "Dirección de Planificación", System.Text.Encoding.UTF8);
+            mail.To.Add("upsdeveloper2018@gmail.com");
+            mail.Subject = "Planificación Meta";
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
+            mail.Body = "La ejecución de la meta actualizada por parte de la " + depCorreo.nombre_subunidad + " fue : " + valor + "%, con una observación de :" + observacion +"";
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = false;
+
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,//587
+                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential("upsdeveloper2018@gmail.com", "***ups***2018"),
+                EnableSsl = true,
+                Timeout = 10000
+            };
+
+            smtp.Send(mail);
+
             return Json(new { mensaje = "Ejecución actualizada correctamente" });
         }
         // POST: Programacions/UpdatePresupuesto
