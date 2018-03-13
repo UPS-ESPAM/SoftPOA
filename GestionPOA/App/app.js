@@ -5,7 +5,8 @@ angular
       'ngAnimate',
       'ngTouch',
       'ngTable',
-      'ngCookies'
+      'ngCookies',
+      'pusher-angular'
   ])
 
   .config(function ($routeProvider) {

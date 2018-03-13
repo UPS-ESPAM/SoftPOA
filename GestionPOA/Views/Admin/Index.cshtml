@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>:: Gestión Plan Operativo Anual ::</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- pusher-js -->
+    <script src="//js.pusher.com/2.2/pusher.min.js"></script>
     @Styles.Render("~/Content/plantillaCss")
     @Styles.Render("~/Content/plugins")
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+   
+
 </head>
 <body ng-app="appGestion">
     <div class="wrapper" ng-controller="LoginController as vm">
@@ -213,9 +217,9 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
+                            <li class="dropdown" ng-controller="HomeController as vm">
                                 <a href="#!/Planificacion/Alertas" class="btn btn-just-icon btn-dribbble dropdown-toggle" data-toggle="dropdown" style="margin-right:25px; margin-top:7px;">
-                                    <i class="material-icons text-orange">notifications_active</i> <div class="floating ui red label">22</div>
+                                    <i class="material-icons text-orange">notifications_active</i> <div class="floating ui red label">{{ vm.alertsCounts}}</div>
 
                                     <p class="hidden-lg hidden-md" style="text-align:left">
                                         Usuario

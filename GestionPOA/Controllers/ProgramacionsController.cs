@@ -102,7 +102,7 @@ namespace GestionPOA.Controllers
                              select p).First();
             _presupuesto.Planificado = valor;
             db.SaveChanges();
-
+            
             return Json(new { mensaje = "Planificación actualizada correctamente" });
         }
         // POST: Programacions/EjecucionUpdatePOA
@@ -144,8 +144,7 @@ namespace GestionPOA.Controllers
             };
 
             smtp.Send(mail);
-
-            return Json(new { mensaje = "Ejecución actualizada correctamente" });
+            return RedirectToAction("Push","Alertas");
         }
         // POST: Programacions/UpdatePresupuesto
         [HttpPost]
