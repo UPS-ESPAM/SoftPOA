@@ -1,0 +1,56 @@
+﻿<div ng-controller="AlertasController as vm">
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-text" data-background-color="orange">
+                    <h4 class="card-title">Alertas</h4>
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                        <th></th>
+                        <th>Departamento</th>
+                        <th class="text-center">Trimestre</th>
+                        <th class="text-center">Planificado</th>
+                        <th class="text-center">Ejecutado</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="alerta in vm.listAlertasss" ng-click="vm.ShowObservacion(alerta.observacion, alerta.id); vm.myStyle[alerta.id]={'background-color':'teal'}">
+                                <td style="background-color:red" ng-style="vm.myStyle[alerta.id]">&nbsp;</td>
+                                <td>{{alerta.nombre_subunidad}}</td>
+                                <td class="text-center">{{alerta.trimestre}}</td>
+                                <td class="text-center">{{alerta.planificado}}%</td>
+                                <td class="text-center">{{alerta.ejecutado}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-tabs" data-background-color="green">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <a ng-show="vm.appstate =='showAdd'" class="ui olive label" data-toggle="modal" data-target="#myModal" ng-click="vm.ventanaIndicador()"><i class="add icon"></i>Indicador</a>
+                            <span class="nav-tabs-title"><b>Observación</b></span>
+                            <ul class="nav nav-tabs" data-tabs="tabs"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <table class="table">
+                        <thead class="text-warning">
+                        <th>Mensaje</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{vm.justifacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
