@@ -55,6 +55,7 @@ namespace GestionPOA.Controllers
                 Session["user"] = username.usuario;
                 Session["departamento"] = username.departamento;
                 Session["department"] = username.id_departamento;
+                Session["rol"] = username.TipoRol;
                 Session["Page"] = "verify";
                 return Json(new { username }, JsonRequestBehavior.AllowGet);
             }

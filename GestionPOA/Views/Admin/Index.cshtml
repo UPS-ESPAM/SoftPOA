@@ -59,9 +59,9 @@
                         </div>
                     </div>
                 </div>
-                <div id="myDivDepartmentID" class="hidden" data-value="@Request.RequestContext.HttpContext.Session["department"]"></div>
+               
                 <ul class="nav">
-                    <li>
+                    <li ng-show="vm.rol=='Administrador'">{
                         <a data-toggle="collapse" href="#subsistema">
                             <i class="material-icons">dialpad</i>
                             <p>
@@ -77,7 +77,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li ng-show="vm.rol=='Administrador'">
                         <a data-toggle="collapse" href="#objetivoestrategico">
                             <i class="material-icons">gps_fixed</i>
                             <p>
@@ -96,7 +96,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li ng-show="vm.rol=='Administrador'">
                         <a data-toggle="collapse" href="#objetivoespecifico">
                             <i class="material-icons">golf_course</i>
                             <p>
@@ -166,19 +166,19 @@
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Ejecucion"> <i class="material-icons" style="color: #4caf50;">play_circle_filled</i>Ejecución</a>
                                 </li>
-                                <li style="padding-left:12px;">
+                                <li ng-show="vm.rol=='Administrador'" style="padding-left:12px;" >
                                     <a href="#!/Metas/Asignacion"> <i class="material-icons" style="color: #4caf50;">library_add</i>Asignacion</a>
                                 </li>
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Acciones"> <i class="material-icons" style="color: #4caf50;">text_format</i>Acciones</a>
                                 </li>
-                                <li style="padding-left:12px;">
+                                <li style="padding-left:12px;"  ng-show="vm.rol=='Administrador'">
                                     <a href="#!/Metas/Informacion/Adicional"> <i class="material-icons" style="color: #4caf50;">info</i>Fórmula Cálculo</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li  ng-show="vm.rol=='Administrador'">
                         <a data-toggle="collapse" href="#configuracion">
                             <i class="material-icons">build</i>
                             <p>
@@ -198,6 +198,7 @@
             </div>
         </div>
         <div class="main-panel">
+            <div id="myDivDepartmentID" ng-hide="true" class="hidden" data-value="@Request.RequestContext.HttpContext.Session["department"]" data-strol="@Request.RequestContext.HttpContext.Session["rol"]"></div>
             <nav class="navbar navbar-default navbar-absolute">
                 <div class="container-fluid">
                     <div class="navbar-minimize">
@@ -217,9 +218,9 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown" ng-controller="HomeController as vm">
+                            <li   class="dropdown" ng-controller="HomeController as vn" ng-show="vm.rol=='Administrador'">
                                 <a href="#!/Planificacion/Alertas" class="btn btn-just-icon btn-dribbble dropdown-toggle" data-toggle="dropdown" style="margin-right:25px; margin-top:7px;">
-                                    <i class="material-icons text-orange">notifications_active</i> <div class="floating ui red label">{{ vm.alertsCounts}}</div>
+                                    <i class="material-icons text-orange">notifications_active</i> <div class="floating ui red label">{{ vn.alertsCounts}}</div>
 
                                     <p class="hidden-lg hidden-md" style="text-align:left">
                                         Usuario

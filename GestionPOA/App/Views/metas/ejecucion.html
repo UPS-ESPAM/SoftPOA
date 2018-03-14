@@ -25,7 +25,7 @@
                             </thead>
 
                             <tbody>
-                                <tr style="font-size:20px;" ng-if="vm.deparmentID!=8" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
+                                <tr style="font-size:20px;" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
                                     <td class="text-center"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="true" /></td>
                                     <td style="font-size:12px;">{{Ejecucion.Metas}}</td>
                                     <td style="font-size:10px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Ejecucion.MetaID)" class="text-success">ver más</span></td>
@@ -79,13 +79,8 @@
                                         <span data-toggle="modal" rel="tooltip" title="Agregar Observación" data-target="#myModalAddObservacion" style="cursor:pointer;" ng-click="vm.ObservacionDetalle(Ejecucion.MetaID)" class="text-success">Añadir</span>
                                     </td>
                                 </tr>
-                                <tr style="font-size:12px;" ng-if="vm.deparmentID==8" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
-                                    <!--<td ng-if="Programacion.I == '110' || Programacion.I == '220' || Programacion.I == '330'">
-                                           <input type="checkbox" ng-model="checked" ng-init="checked=false" />
-                                     </td>-->
-                                    <!--<td ng-if="Programacion.I != '110' || Programacion.I != '220' || Programacion.I != '330'">
-                                        <input type="checkbox" ng-model="checked1" ng-init="checked=true" />
-                                    </td>-->
+                                <!--<tr style="font-size:12px;" ng-if="vm.deparmentID==8" class="animate-if" ng-repeat="Ejecucion in vm.listadoMetasEjecucion">
+                                  
                                     <td>
                                         <input type="checkbox" ng-model="checked" ng-init="checked=true" />
                                     </td>
@@ -156,7 +151,10 @@
                                             <i class="material-icons">cached</i>
                                         </button>
                                     </td>
-                                </tr>
+                                </tr>-->
+
+
+
                                 <tr><td class="text-success" data-loader colspan="10"></td></tr>
                             </tbody>
                         </table>
