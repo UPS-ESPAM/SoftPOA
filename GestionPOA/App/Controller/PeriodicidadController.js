@@ -7,7 +7,7 @@
         cargarPeriocidad();
         function cargarPeriocidad() {
             PeriodicidadServices.getPeriocidad().then(function (response) {
-                vm.listPeriocidiades = response.data.listperiocidiades;
+                 vm.listPeriocidiades = response.data.listperiocidiades;
             })
         }
         vm.cargarIntervalos = function (id, periocidad) {

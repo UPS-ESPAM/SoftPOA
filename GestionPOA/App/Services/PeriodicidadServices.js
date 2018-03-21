@@ -5,7 +5,10 @@
         fact.getPeriocidad = function () {
             return $http.get('../Periocidades/GetPeriocidades');
         }
-       
+
+        fact.getTipoPlanificacion = function () {
+            return $http.get('../Periocidades/GetTipoPlanificacion');
+        }
         fact.addPeriocidad = function (periodo) {
             var request = $http({
                 method: 'POST',
@@ -15,25 +18,14 @@
             });
             return request;
         }
-
-        //fact.updateSubsistemas = function (subsistema) {
-        //    var request = $http({
-        //        method: 'POST',
-        //        url: '../Subsistemas/Update',
-        //        data: subsistema,
-        //        dataType: "json"
-        //    });
-        //    return request;
-        //}
-
-        //fact.deleteSubsistemas = function (id) {
-        //    var request = $http({
-        //        method: 'POST',
-        //        url: '../Subsistemas/Delete/' + id,
-        //        dataType: "json"
-        //    });
-        //    return request;
-        //}
-
+        fact.addPlanificacion = function (idtipoplanificacion, idperiocidad) {
+            var request = $http({
+                method: 'POST',
+                url: '../Planificacions/Create',
+                data: { 'idtipoplanificacion': idtipoplanificacion, 'idperiocidad': idperiocidad },
+                dataType: "json"
+            });
+            return request;
+        }
         return fact;
     }]);

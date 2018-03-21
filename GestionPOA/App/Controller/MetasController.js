@@ -166,10 +166,10 @@
                 { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
             );
         
-            if (vm.deparmentID == 8) {
-                var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
-                Message(requestResponse);
-            } else {
+            //if (vm.deparmentID == 8) {
+            //    var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
+            //    Message(requestResponse);
+            //} else {
                 var total = 0;
                 for (var i = 0; i < vm.arrayprogramacion.length; i++) {
                     var total = total + parseInt(vm.arrayprogramacion[i].valor);
@@ -191,7 +191,7 @@
                         }
                     );
                 }
-            }
+           // }
 
         }
         vm.updateMetasEjecucion = function (id, MetaID,valor ) {
@@ -200,10 +200,10 @@
             } else {
                 mensaje = "no cumplimiento";
             }
-            if (vm.deparmentID == 8) {
-                var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
-                Message(requestResponse);
-            } else {
+            //if (vm.deparmentID == 8) {
+            //    var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
+            //    Message(requestResponse);
+            //} else {
                 if (valorP != valor) {
                     swal({
                         title: "<span style='font-size:14px;'>Escriba una observación por el "+mensaje+" de la planificación :<span>",
@@ -266,7 +266,7 @@
                         })
                     });
                 }
-            }
+           // }
             
         }
         vm.uploadFile = function () {

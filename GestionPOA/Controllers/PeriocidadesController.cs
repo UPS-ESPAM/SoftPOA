@@ -23,6 +23,15 @@ namespace GestionPOA.Controllers
                                                 .ToList();
             return Json(new { listperiocidiades = periocidiades }, JsonRequestBehavior.AllowGet);
         }
+        // GET: Periocidades/GetTipoPlanificacion
+        public ActionResult GetTipoPlanificacion()
+        {
+            var tipoPlanificacion = db.TipoPlanificacion.Where(tp => tp.eliminado == false)
+                                                .Where(tp => tp.Descripcion == "POA")
+                                                .Select(tp => new { id = tp.TipoPlanificacionId, Descripcion = tp.Descripcion })
+                                                .ToList();
+            return Json(new { listTipoPlanificacion = tipoPlanificacion }, JsonRequestBehavior.AllowGet);
+        }
         // POST: Periocidades/Create
         [HttpPost]
         public ActionResult Create(string periodo)

@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
     <Compile Include="Controllers\PeriocidadesController.cs" />
+    <Compile Include="Controllers\PlanificacionsController.cs" />
     <Compile Include="Controllers\PresupuestosController.cs" />
     <Compile Include="Controllers\ProgramacionsController.cs" />
     <Compile Include="Controllers\SubsistemasController.cs" />
@@ -245,6 +246,9 @@
     <Compile Include="Models\spDepartamentoCorreoConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spEstrategiasbyDepartamentoandObjetivoEspecificoPEDI_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spEstrategiasbyDepartamentoandObjetivoEspecifico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -275,10 +279,16 @@
     <Compile Include="Models\spMetasDepartamentosAsignadosConsult_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spMetasDepartmentPEDI_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spMetasDepartment_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spObjetivoEspecificoDepartamentosAsignadosSelect_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spObjetivosEspecificosbyDepartamentoPEDI_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spObjetivosEspecificosbyDepartamento_Result.cs">
@@ -553,7 +563,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\Alertas\" />
+    <Folder Include="Views\Planificacions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

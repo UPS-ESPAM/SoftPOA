@@ -1,10 +1,10 @@
 ﻿angular.module('appGestion')
     .controller('HomeController', function (AlertasServices, $pusher) {
-        var vm = this;
+        var vn = this;
         countAlertas();
         function countAlertas() {
             AlertasServices.getCountAlert().then(function (response) {
-                vm.alertsCounts = response.data.alertsCounts;
+                vn.alertsCounts = response.data.alertsCounts;
             })
         }
 
@@ -15,7 +15,7 @@
         var pusher = $pusher(client);
         var my_channel = pusher.subscribe('my-channel');
         my_channel.bind('my-event', function (data) {
-            vm.alertsCounts = data.message;
+            vn.alertsCounts = data.message;
         });
 
 
