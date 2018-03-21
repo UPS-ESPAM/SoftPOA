@@ -11,6 +11,15 @@
             });
             return request;
         }
+        fact.POAorPEDI = function (singIN) {
+            var request = $http({
+                method: 'POST',
+                url: '../Admin/POAorPEDI/',
+                dataType: "json",
+                data: { 'singIN': singIN }
+            });
+            return request;
+        }
         
         fact.logout = function () {
             var request = $http({

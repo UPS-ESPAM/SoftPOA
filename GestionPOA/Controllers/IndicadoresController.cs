@@ -17,7 +17,7 @@ namespace GestionPOA.Controllers
         // GET: Estrategias
         public ActionResult Estrategias()
         {
-            var estrategias = db.spEstrategiasDepartment(Convert.ToInt32(Session["department"])).ToList();
+            var estrategias = db.spEstrategiasDepartment(Convert.ToInt32(Session["department"]), Convert.ToString(Session["POAorPEDI"])).ToList();
             return Json(new { listEstrategias = estrategias }, JsonRequestBehavior.AllowGet);
         }
         // GET: Indicadores/EstrategiaDetalle
@@ -49,7 +49,7 @@ namespace GestionPOA.Controllers
         public ActionResult GetIndicadoresbyDepartament()
         {
 
-            var indicadores = db.spIndicadoresDepartment(Convert.ToInt32(Session["department"])).ToList();  
+            var indicadores = db.spIndicadoresDepartment(Convert.ToInt32(Session["department"]),Convert.ToString(Session["POAorPEDI"])).ToList();  
             return Json(new { listIndicadores = indicadores }, JsonRequestBehavior.AllowGet);
         }
 

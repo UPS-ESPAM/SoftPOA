@@ -18,8 +18,15 @@ namespace GestionPOA.Controllers
         public JsonResult GetEstrategiasbyObjetivo(int id)
         {
             int _DepartamentoId = int.Parse(Session["department"].ToString());
-            var estrategias = db.spEstrategiasbyDepartamentoandObjetivoEspecifico(_DepartamentoId, id).ToList();
-            return Json(new { listaEstrategia = estrategias }, JsonRequestBehavior.AllowGet);
+            if (Convert.ToString(Session["POAorPEDI"])=="POA") {
+                var estrategias = db.spEstrategiasbyDepartamentoandObjetivoEspecifico(_DepartamentoId, id, Convert.ToString(Session["POAorPEDI"])).ToList();
+                return Json(new { listaEstrategia = estrategias }, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                var estrategias = db.spEstrategiasbyDepartamentoandObjetivoEspecificoPEDI(_DepartamentoId, id, Convert.ToString(Session["POAorPEDI"])).ToList();
+                return Json(new { listaEstrategia = estrategias }, JsonRequestBehavior.AllowGet);
+            }
+       
         }
 
         // GET: Estrategias/GetEstrategiasbyObjetivoPeriodoActual/3
@@ -31,9 +38,17 @@ namespace GestionPOA.Controllers
         // GET: Estrategias/Create
         public JsonResult Create(Estrategias estrategias)
         {
-            int _DepartamentoId = int.Parse(Session["department"].ToString());
-            db.spEstrategiasInsert(estrategias.ObjetivosEspecificosId,estrategias.Descripcion, _DepartamentoId);
-            return Json(new { mensaje = "Registrado correctamente" });
+            if (Convert.ToString(Session["POAorPEDI"]) == "POA")
+            {
+                int _DepartamentoId = int.Parse(Session["department"].ToString());
+                db.spEstrategiasInsert(estrategias.ObjetivosEspecificosId, estrategias.Descripcion, _DepartamentoId);
+                return Json(new { mensaje = "Registrado correctamente" });
+            }
+            else
+            {
+                db.spEstrategiasInsertPEDI(estrategias.ObjetivosEspecificosId, estrategias.Descripcion);
+                return Json(new { mensaje = "Registrado correctamente" });
+            }
         }
 
 

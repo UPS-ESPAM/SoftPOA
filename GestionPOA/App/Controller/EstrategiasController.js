@@ -12,10 +12,8 @@
 
         vm.cargarEstrategia = function (id, ObjetivoEspecifico) {
             var requestResponse = EstrategiasServices.getEstrategias(id);
-            
             requestResponse.then(function successCallback(response) {
                 vm.appstate = 'showAdd';
-                debugger
                 vm.listadoEstrategia = response.data.listaEstrategia
                 vm.modalEstrategia.ObjetivosEspecificosId = id;
                 vm.ObjetivoEspecifico = ObjetivoEspecifico;
@@ -28,7 +26,6 @@
         };
 
         vm.ventanaModalEstrategia = function (estrategia) {
-            debugger
             $('.modal ').insertAfter($('body'));
             vm.modalEstrategia.Descripcion = estrategia.Descripcion;
             vm.modalEstrategia.EstrategiasId = estrategia.EstrategiasId;
@@ -37,7 +34,6 @@
         }
 
         vm.addEstrategia = function () {
-            debugger
             var requestResponse = EstrategiasServices.addEstrategia(vm.modalEstrategia);
             requestResponse.then(function successCallback(response) {
                 var requestResponse = EstrategiasServices.getEstrategias(vm.modalEstrategia.ObjetivosEspecificosId);

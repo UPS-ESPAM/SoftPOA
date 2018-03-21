@@ -40,6 +40,19 @@ namespace GestionPOA.Controllers
             }
             
         }
+        public ActionResult POAorPEDI(string singIN)
+        {
+            if ((singIN == "POA") || (singIN == "PEDI"))
+            {
+                Session["POAorPEDI"] = singIN;
+                Session["Page"] = "verify";
+                return Json(new { msj = "ok" }, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                return Json(new { msj = "No se pudo ingresar al sistema" }, JsonRequestBehavior.AllowGet);
+            }
+           
+        }
         public ActionResult Logout()
         {
             Session.Clear();
@@ -56,8 +69,19 @@ namespace GestionPOA.Controllers
                 Session["departamento"] = username.departamento;
                 Session["department"] = username.id_departamento;
                 Session["rol"] = username.TipoRol;
-                Session["Page"] = "verify";
-                return Json(new { username }, JsonRequestBehavior.AllowGet);
+                if (username.TipoRol != "Administrador")
+                {
+                    var rol = db.POAorPEDI("POA", username.id_departamento).FirstOrDefault();
+                    if (rol=="Existe") {
+                        Session["Page"] = "verify";
+                        Session["POAorPEDI"] = "POA";
+                    }
+                    return Json(new { username, rol, tipo = "Usuario" }, JsonRequestBehavior.AllowGet);
+                }
+                else {
+                    var rol = db.POAorPEDI("POA", username.id_departamento).FirstOrDefault();
+                    return Json(new { username, rol, tipo="Administrador" }, JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {

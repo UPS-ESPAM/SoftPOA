@@ -39,10 +39,16 @@ namespace GestionPOA.Controllers
         // GET: ObjetivosEspecificos/getObjetivosEspecificosByDepartamento
         public ActionResult getObjetivosEspecificosByDepartamento()
         {
-            int _DepartamentoId = int.Parse(Session["department"].ToString());
-            var listado = db.spObjetivosEspecificosbyDepartamento(_DepartamentoId).ToList();
-         
-            return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);
+            if (Convert.ToString(Session["POAorPEDI"])=="POA") {
+                int _DepartamentoId = int.Parse(Session["department"].ToString());
+                var listado = db.spObjetivosEspecificosbyDepartamento(_DepartamentoId).ToList();
+                return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                var listado = db.spObjetivosEspecificosbyDepartamentoPEDI().ToList();
+                return Json(new { listObjetivoEspecificos = listado }, JsonRequestBehavior.AllowGet);
+            }
+           
         }
 
         // GET: ObjetivosEspecificos/getObjetivosEspecificosbyObjEstrategicoPeriodoActual

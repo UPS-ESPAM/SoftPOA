@@ -16,8 +16,16 @@ namespace GestionPOA.Controllers
         // GET: Metas
         public ActionResult Metas()
         {
-            var metas = db.spMetasDepartment(Convert.ToInt32(Session["department"])).ToList();
-            return Json(new { listMetas = metas }, JsonRequestBehavior.AllowGet);
+            if (Convert.ToString(Session["POAorPEDI"]) == "POA")
+            {
+                var metas = db.spMetasDepartment(Convert.ToInt32(Session["department"]), Convert.ToString(Session["POAorPEDI"])).ToList();
+                return Json(new { listMetas = metas }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var metas = db.spMetasDepartmentPEDI(Convert.ToInt32(Session["department"]), Convert.ToString(Session["POAorPEDI"])).ToList();
+                return Json(new { listMetas = metas }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: Metas/MetasbyIndicador/5

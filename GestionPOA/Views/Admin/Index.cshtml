@@ -166,19 +166,19 @@
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Ejecucion"> <i class="material-icons" style="color: #4caf50;">play_circle_filled</i>Ejecución</a>
                                 </li>
-                                <li ng-show="vm.rol=='Administrador'" style="padding-left:12px;" >
+                                <li  ng-show="@Request.RequestContext.HttpContext.Session["POAorPEDI"]=='PEDI'" style="padding-left:12px;" >
                                     <a href="#!/Metas/Asignacion"> <i class="material-icons" style="color: #4caf50;">library_add</i>Asignacion</a>
                                 </li>
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Acciones"> <i class="material-icons" style="color: #4caf50;">text_format</i>Acciones</a>
                                 </li>
-                                <li style="padding-left:12px;"  ng-show="vm.rol=='Administrador'">
+                                <li style="padding-left:12px;"   ng-show="@Request.RequestContext.HttpContext.Session["POAorPEDI"]=='PEDI'"">
                                     <a href="#!/Metas/Informacion/Adicional"> <i class="material-icons" style="color: #4caf50;">info</i>Fórmula Cálculo</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li  ng-show="vm.rol=='Administrador'">
+                    <li ng-show="@Request.RequestContext.HttpContext.Session["POAorPEDI"]=='PEDI'">
                         <a data-toggle="collapse" href="#configuracion">
                             <i class="material-icons">build</i>
                             <p>
@@ -266,11 +266,12 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        <a href="http://www.espam.edu.ec/">UPS</a> Unidad de Producción de Software
+                        <a id="p" href="http://www.espam.edu.ec/" data-toggle="modal" data-target="#myModalss">UPS</a> Unidad de Producción de Software
                     </p>
                 </div>
             </footer>
         </div>
+ 
     </div>
 
     @Scripts.Render("~/bundles/plantillaJS")
