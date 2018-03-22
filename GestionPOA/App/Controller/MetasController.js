@@ -2,6 +2,7 @@
     .controller('MetasController', function ($cookies, IntervalosServices, MetasServices,
         ProgramacionesServices, EvidenciasServices, IndicadoresServices, $scope) {
         var vm = this;
+        vm.status = $cookies.status;
         vm.off9 = [];
         vm.Observacion = [];
         vm.porcentaje = [];
@@ -103,7 +104,7 @@
             });
         }
         cargarMetaEjecución();
-        vm.deparmentID = $cookies.deparmentID;
+        vm.status = $cookies.status;
         function cargarIntervalos() {
             IntervalosServices.getIntervalos().then(function (response) {
                 vm.listadoIntervalos = response.data.listIntervalos;
@@ -158,18 +159,26 @@
             Message(requestResponse);
         }
         vm.updateMetasProgramacion = function (Programacion) {
-            vm.arrayprogramacion = [];
-            vm.arrayprogramacion.push(
-                { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID},
-                { id: Programacion.ID_II, valor: Programacion.II, MetasID: Programacion.MetaID },
-                { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
-                { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
-            );
         
-            //if (vm.deparmentID == 8) {
-            //    var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
-            //    Message(requestResponse);
-            //} else {
+            if (vm.status == "PEDI") {
+                vm.arrayprogramacion = [];
+                vm.arrayprogramacion.push(
+                    { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_II, valor: Programacion.II, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_V, valor: Programacion.V, MetasID: Programacion.MetaID },
+                );
+                var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
+                Message(requestResponse);
+            } else {
+                vm.arrayprogramacion = [];
+                vm.arrayprogramacion.push(
+                    { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_II, valor: Programacion.II, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
+                );
                 var total = 0;
                 for (var i = 0; i < vm.arrayprogramacion.length; i++) {
                     var total = total + parseInt(vm.arrayprogramacion[i].valor);
@@ -191,7 +200,7 @@
                         }
                     );
                 }
-           // }
+            }
 
         }
         vm.updateMetasEjecucion = function (id, MetaID,valor ) {

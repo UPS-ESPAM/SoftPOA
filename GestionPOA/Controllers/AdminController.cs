@@ -44,6 +44,7 @@ namespace GestionPOA.Controllers
         {
             if ((singIN == "POA") || (singIN == "PEDI"))
             {
+                var status = db.POAorPEDI(singIN, Convert.ToInt32(Session["department"])).FirstOrDefault();
                 Session["POAorPEDI"] = singIN;
                 Session["Page"] = "verify";
                 return Json(new { msj = "ok" }, JsonRequestBehavior.AllowGet);

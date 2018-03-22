@@ -187,15 +187,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivoEspecificoDepartamentosAsignadosSelect_Result>("spObjetivoEspecificoDepartamentosAsignadosSelect");
         }
     
-        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
-        }
-    
         public virtual ObjectResult<string> spPorcentajeCumplimiento(Nullable<int> idmeta)
         {
             var idmetaParameter = idmeta.HasValue ?
@@ -363,6 +354,32 @@ namespace GestionPOA.Models
                 new ObjectParameter("POAorPEDI", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartmentPEDI_Result>("spMetasDepartmentPEDI", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramacionesPEDI_Result1> spMetaAndProgramacionesPEDI(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramacionesPEDI_Result1>("spMetaAndProgramacionesPEDI", departmentParameter, pOAorPEDIParameter);
         }
     }
 }

@@ -8,7 +8,9 @@
         vm.arrOptionTP = [];
         $cookies.deparmentID = $("#myDivDepartmentID").data('value');
         $cookies.rol = $("#myDivDepartmentID").data('strol');
+        $cookies.status = $("#status").data('status');
         vm.rol = $cookies.rol;
+        vm.status = $cookies.status;
         vm.verifylogin = function () {
             var requestResponse = LoginServices.verifysLogin(vm.login.usuario, vm.login.password);
             requestResponse.then(function successCallback(response) {

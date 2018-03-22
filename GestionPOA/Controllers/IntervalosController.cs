@@ -18,11 +18,16 @@ namespace GestionPOA.Controllers
         public ActionResult Intervalos()
         {
             var iddeparment = Convert.ToInt32(Session["department"]);
+            var POAorPEDI = Convert.ToString(Session["POAorPEDI"]);
             var intervalos = from pl in db.Planificacion
-                              join p in db.Periocidad on pl.PeriocidadID equals p.id
-                              join i in db.intervalo on p.id equals i.PeriodoId
-                              where p.eliminado == false
-                              where pl.DepartamentoID == iddeparment
+                             join tp in db.TipoPlanificacion on pl.TipoPlanificacionId equals tp.TipoPlanificacionId
+                             join p in db.Periocidad on pl.PeriocidadID equals p.id
+                             join i in db.intervalo on p.id equals i.PeriodoId
+                             where p.eliminado == false
+                             where i.eliminado == false
+                             where pl.DepartamentoID == iddeparment
+                             where tp.Descripcion == POAorPEDI
+                             orderby i.Descripcion ascending
                              select new
                                   {
                                       id = i.id,

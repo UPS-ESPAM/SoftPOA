@@ -25,6 +25,7 @@ namespace GestionPOA.Models
         public Nullable<int> Orden { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> eliminado { get; set; }
+        public string CampoPivot { get; set; }
     
         public virtual Periocidad Periocidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
