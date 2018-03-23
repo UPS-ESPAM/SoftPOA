@@ -108,6 +108,11 @@
         function cargarIntervalos() {
             IntervalosServices.getIntervalos().then(function (response) {
                 vm.listadoIntervalos = response.data.listIntervalos;
+                vm.year=[];
+                vm.listadoIntervalos.forEach(function (element, index) {
+                    vm.year[index] = element.descripcion;
+                });
+
             })
         }
         function cargarMetasProgramacion() {
@@ -159,7 +164,6 @@
             Message(requestResponse);
         }
         vm.updateMetasProgramacion = function (Programacion) {
-        
             if (vm.status == "PEDI") {
                 vm.arrayprogramacion = [];
                 vm.arrayprogramacion.push(
@@ -209,11 +213,8 @@
             } else {
                 mensaje = "no cumplimiento";
             }
-            //if (vm.deparmentID == 8) {
-            //    var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
-            //    Message(requestResponse);
-            //} else {
-                if (valorP != valor) {
+  
+            if (valorP != valor) {
                     swal({
                         title: "<span style='font-size:14px;'>Escriba una observación por el "+mensaje+" de la planificación :<span>",
                         showCancelButton: true,
@@ -274,9 +275,7 @@
                             buttonsStyling: false
                         })
                     });
-                }
-           // }
-            
+             }
         }
         vm.uploadFile = function () {
             var fileInput = $('#file');
@@ -336,9 +335,24 @@
         vm.searhPlanificacion = function (idmeta, id) {
             vm.off9 = [];
             ProgramacionesServices.getTrismetrePlanificiacion(idmeta, id).then(function (response) {
+                debugger
                 vm.off9[id + "" + idmeta] = response.data.planifiacion.planificacion;
                 valorP = response.data.planifiacion.planificacion;
                 vm.getObservacionEjecucion(idmeta, id);
+                switch (vm.off9[id + "" + idmeta]) {
+                    case '110':
+                        vm.off9[id + "" + idmeta] = "Satisfactorio";
+                        break;
+                    case '220':
+                        vm.off9[id + "" + idmeta] = "Medio Satisfactorio";
+                        break;
+                    case '330':
+                        vm.off9[id + "" + idmeta] = "Deficiente";
+                        break;
+                    default:
+                       
+                        break;
+                }
             })
            
         }
@@ -349,7 +363,7 @@
         vm.getObservacionEjecucion = function (metadid, id) {
             $('.modal ').insertAfter($('body'));
             var requestResponse = ProgramacionesServices.getObservacion(metadid, id);
-                requestResponse.then(function successCallback(response) {
+            requestResponse.then(function successCallback(response) {
                     vm.Observacion[id + "" + metadid] = response.data.observacion['0'].observacion;
                     vm.prt1 = metadid;
                     vm.prt2 = id;

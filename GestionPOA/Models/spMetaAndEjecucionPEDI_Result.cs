@@ -11,12 +11,10 @@ namespace GestionPOA.Models
 {
     using System;
     
-    public partial class spMetaAndProgramacionesPEDI_Result1
+    public partial class spMetaAndEjecucionPEDI_Result
     {
         public int MetaID { get; set; }
         public string Metas { get; set; }
-        public int PresupuestoID { get; set; }
-        public Nullable<decimal> Presupuesto { get; set; }
         public Nullable<int> ID_I { get; set; }
         public Nullable<int> ID_II { get; set; }
         public Nullable<int> ID_III { get; set; }
@@ -27,5 +25,6 @@ namespace GestionPOA.Models
         public string III { get; set; }
         public string IV { get; set; }
         public string V { get; set; }
+        public Nullable<int> Planificacion { get; set; }
     }
 }

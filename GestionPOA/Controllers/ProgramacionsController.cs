@@ -65,19 +65,17 @@ namespace GestionPOA.Controllers
         }
         // POST: Programacions/EjecucionUpdatePEDI
         [HttpPost]
-        public ActionResult EjecucionUpdatePEDI(List<clsProgramacion> programacion)
+        public ActionResult EjecucionUpdatePEDI(int id, int MetasID, string valor, string observacion)
         {
             Programacion _programacion = new Programacion();
-            foreach (clsProgramacion element in programacion)
-            {
-                _programacion = (from p in db.Programacion
-                                 where p.IntervaloId == element.id
-                                 where p.MetaID == element.MetasID
-                                 select p).First();
+            _programacion = (from p in db.Programacion
+                             where p.IntervaloId == id
+                             where p.MetaID == MetasID
+                             select p).First();
 
-                _programacion.ejecutado = element.valor;
-                db.SaveChanges();
-            }
+            _programacion.ejecutado = valor;
+            _programacion.observacion = observacion;
+            db.SaveChanges();
             return Json(new { mensaje = "Ejecución actualizada correctamente" });
         }
         // POST: Programacions/UpdatePOA

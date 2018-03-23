@@ -67,14 +67,21 @@ namespace GestionPOA.Controllers
                 var metasProgramacion = db.spMetaAndProgramacionesPEDI(Convert.ToInt32(Session["department"]), Convert.ToString(Session["POAorPEDI"]));
                 return Json(new { listMetasProgramacion = metasProgramacion }, JsonRequestBehavior.AllowGet);
             }
-
-        
         }
         // GET: Metas/Ejecucion
         public ActionResult Ejecucion()
         {
-            var metasEjecucion = db.spMetaAndEjecucion(Convert.ToInt32(Session["department"]));
-            return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
+
+            if (Convert.ToString(Session["POAorPEDI"]) == "POA")
+            {
+                var metasEjecucion = db.spMetaAndEjecucion(Convert.ToInt32(Session["department"]),Convert.ToString(Session["POAorPEDI"]));
+                return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var metasEjecucion = db.spMetaAndEjecucionPEDI(Convert.ToInt32(Session["department"]), Convert.ToString(Session["POAorPEDI"]));
+                return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
+            }
         }
         // GET: Metas/MetaDetalle
         public ActionResult MetaDetalle(int id)

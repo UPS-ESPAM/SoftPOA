@@ -27,6 +27,5 @@ namespace GestionPOA.Models
         public string III { get; set; }
         public string IV { get; set; }
         public string V { get; set; }
-        public Nullable<int> Mes { get; set; }
     }
 }

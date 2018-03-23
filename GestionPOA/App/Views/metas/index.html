@@ -9,29 +9,29 @@
                     <form name="categoryForm">
                         <table class="table table-hover">
                             <thead class="text-warning" ng-show="vm.status=='POA'">
-                                <tr class="text-center" style="font-size:13px;">
-                                    <th rowspan="2">Cualitativo</th>
-                                    <th rowspan="2" width="60%">Metas</th>
-                                    <th rowspan="2"> </th>
-                                    <th rowspan="2">Tiempo Meta</th>
-                                    <th colspan="4">Programación Trimestral en % de la meta</th>
-                                    <th rowspan="2">Presupuesto</th>
-                                    <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <tr class="text-center" style="font-size:9px;">
+                                    <th rowspan="2" class="fond">Cualitativo</th>
+                                    <th rowspan="2" width="60%" class="fond">Metas</th>
+                                    <th rowspan="2" class="fond"> </th>
+                                    <th rowspan="2" class="fond">Tiempo Meta</th>
+                                    <th colspan="4" class="text-center fond">Programación Trimestral en % de la meta</th>
+                                    <th rowspan="2" class="fond">Presupuesto</th>
+                                    <th rowspan="2" class="fond">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 </tr>
-                                <tr style="font-size:13px;">
-                                    <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
+                                <tr class="text-center" style="font-size:10px;">
+                                    <th class="text-center colEje" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
                                 </tr>
                             </thead>
                             <thead class="text-warning" ng-show=" vm.status=='PEDI'">
-                                <tr class="text-center" style="font-size:13px;">
-                                    <th rowspan="2">Cualitativo</th>
-                                    <th rowspan="2" width="60%">Metas</th>
-                                    <th rowspan="2"> </th>
-                                    <th colspan="5" class="text-center">Periocidad</th>
-                                    <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <tr class="text-center" style="font-size:9px;">
+                                    <th rowspan="2" class="fond">Cualitativo</th>
+                                    <th rowspan="2" width="60%" class="fond">Metas</th>
+                                    <th rowspan="2" class="fond"> </th>
+                                    <th colspan="5" class="text-center fond">PLANIFICACIÓN - PERIOCIDAD</th>
+                                    <th rowspan="2" class="fond">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 </tr>
-                                <tr style="font-size:13px;">
-                                    <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
+                                <tr class="text-center" style="font-size:10px;">
+                                    <th class="text-center colEje" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
                                 </tr>
                             </thead>
                                 <tr style="font-size:12px;" class="animate-if" ng-if="vm.status=='POA'" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
