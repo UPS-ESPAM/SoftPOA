@@ -187,15 +187,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivoEspecificoDepartamentosAsignadosSelect_Result>("spObjetivoEspecificoDepartamentosAsignadosSelect");
         }
     
-        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter);
-        }
-    
         public virtual ObjectResult<string> spPorcentajeCumplimiento(Nullable<int> idmeta)
         {
             var idmetaParameter = idmeta.HasValue ?
@@ -203,15 +194,6 @@ namespace GestionPOA.Models
                 new ObjectParameter("idmeta", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spPorcentajeCumplimiento", idmetaParameter);
-        }
-    
-        public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter);
         }
     
         public virtual ObjectResult<spPorcentajeOEstrategico_Result> spPorcentajeOEstrategico()
@@ -236,16 +218,6 @@ namespace GestionPOA.Models
                 new ObjectParameter("idSubUnidad", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoCorreoConsult_Result>("spDepartamentoCorreoConsult", idSubUnidadParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
-        }
-    
-        public virtual ObjectResult<spShowPlanificacionEjecucion_Result> spShowPlanificacionEjecucion()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucion_Result>("spShowPlanificacionEjecucion");
         }
     
         public virtual ObjectResult<string> POAorPEDI(string data, Nullable<int> deparmentID)
@@ -363,6 +335,78 @@ namespace GestionPOA.Models
                 new ObjectParameter("POAorPEDI", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetasDepartmentPEDI_Result>("spMetasDepartmentPEDI", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramaciones_Result> spMetaAndProgramaciones(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramaciones_Result>("spMetaAndProgramaciones", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndEjecucion_Result> spMetaAndEjecucion(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucion_Result>("spMetaAndEjecucion", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndProgramacionesPEDI_Result> spMetaAndProgramacionesPEDI(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramacionesPEDI_Result>("spMetaAndProgramacionesPEDI", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spMetaAndEjecucionPEDI_Result> spMetaAndEjecucionPEDI(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucionPEDI_Result>("spMetaAndEjecucionPEDI", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spShowPlanificacionEjecucion_Result> spShowPlanificacionEjecucion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucion_Result>("spShowPlanificacionEjecucion");
+        }
+    
+        public virtual ObjectResult<spShowPlanificacionEjecucionPEDI_Result> spShowPlanificacionEjecucionPEDI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucionPEDI_Result>("spShowPlanificacionEjecucionPEDI");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucionPEDI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucionPEDI");
         }
     }
 }

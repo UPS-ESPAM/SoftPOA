@@ -2,6 +2,7 @@
     .controller('MetasController', function ($cookies, IntervalosServices, MetasServices,
         ProgramacionesServices, EvidenciasServices, IndicadoresServices, $scope) {
         var vm = this;
+        vm.status = $cookies.status;
         vm.off9 = [];
         vm.Observacion = [];
         vm.porcentaje = [];
@@ -103,10 +104,15 @@
             });
         }
         cargarMetaEjecución();
-        vm.deparmentID = $cookies.deparmentID;
+        vm.status = $cookies.status;
         function cargarIntervalos() {
             IntervalosServices.getIntervalos().then(function (response) {
                 vm.listadoIntervalos = response.data.listIntervalos;
+                vm.year=[];
+                vm.listadoIntervalos.forEach(function (element, index) {
+                    vm.year[index] = element.descripcion;
+                });
+
             })
         }
         function cargarMetasProgramacion() {
@@ -158,18 +164,25 @@
             Message(requestResponse);
         }
         vm.updateMetasProgramacion = function (Programacion) {
-            vm.arrayprogramacion = [];
-            vm.arrayprogramacion.push(
-                { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID},
-                { id: Programacion.ID_II, valor: Programacion.II, MetasID: Programacion.MetaID },
-                { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
-                { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
-            );
-        
-            //if (vm.deparmentID == 8) {
-            //    var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
-            //    Message(requestResponse);
-            //} else {
+            if (vm.status == "PEDI") {
+                vm.arrayprogramacion = [];
+                vm.arrayprogramacion.push(
+                    { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_II, valor: Programacion.II, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_V, valor: Programacion.V, MetasID: Programacion.MetaID },
+                );
+                var requestResponse = ProgramacionesServices.updateProgramacionesPEDI(vm.arrayprogramacion);
+                Message(requestResponse);
+            } else {
+                vm.arrayprogramacion = [];
+                vm.arrayprogramacion.push(
+                    { id: Programacion.ID_I, valor: Programacion.I, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_II, valor: Programacion.II, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_III, valor: Programacion.III, MetasID: Programacion.MetaID },
+                    { id: Programacion.ID_IV, valor: Programacion.IV, MetasID: Programacion.MetaID },
+                );
                 var total = 0;
                 for (var i = 0; i < vm.arrayprogramacion.length; i++) {
                     var total = total + parseInt(vm.arrayprogramacion[i].valor);
@@ -191,7 +204,7 @@
                         }
                     );
                 }
-           // }
+            }
 
         }
         vm.updateMetasEjecucion = function (id, MetaID,valor ) {
@@ -200,11 +213,8 @@
             } else {
                 mensaje = "no cumplimiento";
             }
-            //if (vm.deparmentID == 8) {
-            //    var requestResponse = ProgramacionesServices.updateEjecucionPEDI(vm.arrayejecucion);
-            //    Message(requestResponse);
-            //} else {
-                if (valorP != valor) {
+  
+            if (valorP != valor) {
                     swal({
                         title: "<span style='font-size:14px;'>Escriba una observación por el "+mensaje+" de la planificación :<span>",
                         showCancelButton: true,
@@ -265,9 +275,7 @@
                             buttonsStyling: false
                         })
                     });
-                }
-           // }
-            
+             }
         }
         vm.uploadFile = function () {
             var fileInput = $('#file');
@@ -330,6 +338,20 @@
                 vm.off9[id + "" + idmeta] = response.data.planifiacion.planificacion;
                 valorP = response.data.planifiacion.planificacion;
                 vm.getObservacionEjecucion(idmeta, id);
+                switch (vm.off9[id + "" + idmeta]) {
+                    case '110':
+                        vm.off9[id + "" + idmeta] = "Satisfactorio";
+                        break;
+                    case '220':
+                        vm.off9[id + "" + idmeta] = "Medio Satisfactorio";
+                        break;
+                    case '330':
+                        vm.off9[id + "" + idmeta] = "Deficiente";
+                        break;
+                    default:
+                       
+                        break;
+                }
             })
            
         }
@@ -340,7 +362,7 @@
         vm.getObservacionEjecucion = function (metadid, id) {
             $('.modal ').insertAfter($('body'));
             var requestResponse = ProgramacionesServices.getObservacion(metadid, id);
-                requestResponse.then(function successCallback(response) {
+            requestResponse.then(function successCallback(response) {
                     vm.Observacion[id + "" + metadid] = response.data.observacion['0'].observacion;
                     vm.prt1 = metadid;
                     vm.prt2 = id;

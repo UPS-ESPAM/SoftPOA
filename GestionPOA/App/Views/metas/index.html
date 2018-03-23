@@ -5,38 +5,47 @@
                 <div class="card-header card-header-text" data-background-color="orange">
                     <h4 class="card-title">Planificación de Metas</h4>
                 </div>
-               
                 <div class="card-content table-responsive">
                     <form name="categoryForm">
                         <table class="table table-hover">
-                            <thead class="text-warning">
-                                <tr class="text-center" style="font-size:13px;">
-                                    <th rowspan="2">Cualitativo</th>
-                                    <th rowspan="2" width="60%">Metas</th>
-                                    <th rowspan="2"> </th>
-                                    <th rowspan="2">Tiempo Meta</th>
-                                    <th colspan="4">Programación Trimestral en % de la meta</th>
-                                    <th rowspan="2">Presupuesto</th>
-                                    <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <thead class="text-warning" ng-show="vm.status=='POA'">
+                                <tr class="text-center" style="font-size:9px;">
+                                    <th rowspan="2" class="fond">Cualitativo</th>
+                                    <th rowspan="2" width="60%" class="fond">Metas</th>
+                                    <th rowspan="2" class="fond"> </th>
+                                    <th rowspan="2" class="fond">Tiempo Meta</th>
+                                    <th colspan="4" class="text-center fond">Programación Trimestral en % de la meta</th>
+                                    <th rowspan="2" class="fond">Presupuesto</th>
+                                    <th rowspan="2" class="fond">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 </tr>
-                                <tr style="font-size:13px;">
-                                    <th class="text-center" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
+                                <tr class="text-center" style="font-size:10px;">
+                                    <th class="text-center colEje" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
                                 </tr>
                             </thead>
-                          
-                            <tbody>
-                                <tr style="font-size:12px;"  class="animate-if" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
-                                    <td class="text-center"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="true"/></td>
-                                    <td style="font-size:13px;" >{{Programacion.Metas}}</td>
+                            <thead class="text-warning" ng-show=" vm.status=='PEDI'">
+                                <tr class="text-center" style="font-size:9px;">
+                                    <th rowspan="2" class="fond">Cualitativo</th>
+                                    <th rowspan="2" width="60%" class="fond">Metas</th>
+                                    <th rowspan="2" class="fond"> </th>
+                                    <th colspan="5" class="text-center fond">PLANIFICACIÓN - PERIOCIDAD</th>
+                                    <th rowspan="2" class="fond">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                </tr>
+                                <tr class="text-center" style="font-size:10px;">
+                                    <th class="text-center colEje" ng-repeat="intervalo in vm.listadoIntervalos">{{intervalo.descripcion}}</th>
+                                </tr>
+                            </thead>
+                                <tr style="font-size:12px;" class="animate-if" ng-if="vm.status=='POA'" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                    <td class="text-center"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="true" /></td>
+                                    <td style="font-size:13px;">{{Programacion.Metas}}</td>
                                     <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Programacion.MetaID)" class="text-success">ver más</span></td>
                                     <td class="text-center">
                                         <div class="ui center input">
-                                            <input size="2" type="text" ng-model="Programacion.Mes" ng-disabled="true"/>
+                                            <input size="2" type="text" ng-model="Programacion.Mes" ng-disabled="true" />
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <div class="ui center input" >
-                                            <input size="2" type="text" ng-model="Programacion.I" numbers-only max=""/>
+                                        <div class="ui center input">
+                                            <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
                                         </div>
                                     </td>
                                     <td class="text-center">
@@ -56,66 +65,77 @@
                                     </td>
                                     <td class="text-center" style="font-size:12px;">
                                         <div class="ui center input">
-                                            <input size="10" type="text" ng-model="Programacion.Presupuesto" decimal-only format="currency"/>
+                                            <input size="10" type="text" ng-model="Programacion.Presupuesto" decimal-only format="currency" />
                                         </div>
                                     </td>
-                                    <td class="td-actions text-center" >
+                                    <td class="td-actions text-center">
                                         <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
                                             <i class="material-icons">cached</i>
                                         </button>
                                     </td>
                                 </tr>
-                               
-                                <!--<tr style="font-size:12px;" ng-if="vm.deparmentID==8" class="animate-if" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
-                          
+                            <tbody style="font-size:12px;  border:1px" ng-show="vm.status=='PEDI'" ng-repeat="Programacion in vm.listadoMetasProgramaciones">
+                                <tr ng-if="Programacion.I == 110 || Programacion.I == 220 || Programacion.I == 330" class="animate-if">
                                     <td>
-                                        <input type="checkbox" ng-model="checked" ng-init="checked=true"  />
+                                        <input type="checkbox" ng-model="checked" ng-checked="checked" ng-init="checked=false" />
                                     </td>
-                                  
                                     <td style="font-size:13px;">{{Programacion.Metas}}</td>
-                                    <td class="text-center animate-if" ng-if="checked==true">
+                                    <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Programacion.MetaID)" class="text-success">ver más</span></td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
                                         </div>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==false">
-                                        <select ng-model="Programacion.I" >
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.I">
                                             <option value="110">Satisfactorio</option>
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==true">
+                                    <td class="text-center animate-if" ng-show="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.II" numbers-only max="" />
                                         </div>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==false">
+                                    <td class="text-center animate-if" ng-show="checked==false">
                                         <select ng-model="Programacion.II">
                                             <option value="110">Satisfactorio</option>
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==true">
+                                    <td class="text-center animate-if" ng-show="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.III" numbers-only max="" />
                                         </div>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==false">
+                                    <td class="text-center animate-if" ng-show="checked==false">
                                         <select ng-model="Programacion.III">
                                             <option value="110">Satisfactorio</option>
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
                                         </select>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==true">
+                                    <td class="text-center animate-if" ng-show="checked==true">
                                         <div class="ui input">
                                             <input size="2" type="text" ng-model="Programacion.IV" numbers-only max="" />
                                         </div>
                                     </td>
-                                    <td class="text-center animate-if" ng-if="checked==false">
+                                    <td class="text-center animate-if" ng-show="checked==false">
                                         <select ng-model="Programacion.IV">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.V" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.V">
                                             <option value="110">Satisfactorio</option>
                                             <option value="220">Medio Satisfactorio</option>
                                             <option value="330">Deficiente</option>
@@ -126,11 +146,81 @@
                                             <i class="material-icons">cached</i>
                                         </button>
                                     </td>
-                                </tr>-->
-
-
-                                <tr><td class="text-success" data-loader colspan="10"></td></tr>
+                                </tr>
+                                <tr ng-if="Programacion.I != 110 &&  Programacion.I != 220 && Programacion.I != 330" class="animate-if">
+                                    <td>
+                                        <input type="checkbox" ng-model="checked" ng-checked="checked" ng-init="checked=true" />
+                                    </td>
+                                    <td style="font-size:13px;">{{Programacion.Metas}}</td>
+                                    <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Programacion.MetaID)" class="text-success">ver más</span></td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.I" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.I">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.II" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.II">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.III" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.III">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.IV" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.IV">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==true">
+                                        <div class="ui input">
+                                            <input size="2" type="text" ng-model="Programacion.V" numbers-only max="" />
+                                        </div>
+                                    </td>
+                                    <td class="text-center animate-if" ng-show="checked==false">
+                                        <select ng-model="Programacion.V">
+                                            <option value="110">Satisfactorio</option>
+                                            <option value="220">Medio Satisfactorio</option>
+                                            <option value="330">Deficiente</option>
+                                        </select>
+                                    </td>
+                                    <td class="td-actions text-center">
+                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
+                                            <i class="material-icons">cached</i>
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
+                                 <tr><td class="text-success" data-loader colspan="10"></td></tr>
                         </table>
                     </form>
                 </div>

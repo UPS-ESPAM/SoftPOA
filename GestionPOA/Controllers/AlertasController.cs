@@ -16,14 +16,32 @@ namespace GestionPOA.Controllers
         // GET: Alertas/getCountAlert
         public ActionResult getCountAlert()
         {
-            var alertCount = db.spCountPlanificacionEjecucion().FirstOrDefault();
-            return Json(new { alertsCounts = alertCount }, JsonRequestBehavior.AllowGet);
+            if (Convert.ToString(Session["POAorPEDI"]) == "POA")
+            {
+                var alertCount = db.spCountPlanificacionEjecucion().FirstOrDefault();
+                return Json(new { alertsCounts = alertCount }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var alertCount = db.spCountPlanificacionEjecucionPEDI().FirstOrDefault();
+                return Json(new { alertsCounts = alertCount }, JsonRequestBehavior.AllowGet);
+            }
+           
         }
         // GET: Alertas/getAlertas
         public ActionResult getAlertas()
         {
-            var alertas = db.spShowPlanificacionEjecucion().ToList();
-            return Json(new { listAlertas = alertas }, JsonRequestBehavior.AllowGet);
+            if (Convert.ToString(Session["POAorPEDI"]) == "POA")
+            {
+                var alertas = db.spShowPlanificacionEjecucion().ToList();
+                return Json(new { listAlertas = alertas }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var alertas = db.spShowPlanificacionEjecucionPEDI().ToList();
+                return Json(new { listAlertas = alertas }, JsonRequestBehavior.AllowGet);
+            }
+        
         }
         // POST: Alertas/ReadAlert
         public ActionResult ReadAlert(int id)
