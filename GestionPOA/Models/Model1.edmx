@@ -444,6 +444,7 @@
           <Parameter Name="DeparmentID" Type="int" Mode="In" />
         </Function>
         <Function Name="spCountPlanificacionEjecucion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
+        <Function Name="spCountPlanificacionEjecucionPEDI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spDepartamentoConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spDepartamentoCorreoConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="idSubUnidad" Type="int" Mode="In" />
@@ -534,6 +535,7 @@
         </Function>
         <Function Name="spPorcentajeOEstrategico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spShowPlanificacionEjecucion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
+        <Function Name="spShowPlanificacionEjecucionPEDI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spSubsistemaConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spLoginIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Usuario" Type="varchar" Mode="In" />
@@ -1116,8 +1118,6 @@
             <End Role="Metas" EntitySet="Metas" />
             <End Role="Programacion" EntitySet="Programacion" />
           </AssociationSet>
-          <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(Int32)" />
-          <FunctionImport Name="spShowPlanificacionEjecucion" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucion_Result)" />
           <FunctionImport Name="POAorPEDI" ReturnType="Collection(String)">
             <Parameter Name="data" Mode="In" Type="String" />
             <Parameter Name="DeparmentID" Mode="In" Type="Int32" />
@@ -1169,6 +1169,10 @@
             <Parameter Name="department" Mode="In" Type="Int32" />
             <Parameter Name="POAorPEDI" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spShowPlanificacionEjecucion" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucion_Result)" />
+          <FunctionImport Name="spShowPlanificacionEjecucionPEDI" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucionPEDI_Result)" />
+          <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spCountPlanificacionEjecucionPEDI" ReturnType="Collection(Int32)" />
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1420,14 +1424,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="spShowPlanificacionEjecucion_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="trimestre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="planificado" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ejecutado" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="observacion" Nullable="true" MaxLength="250" />
-        </ComplexType>
         <ComplexType Name="spEstrategiasbyDepartamentoandObjetivoEspecifico_Result">
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="EstrategiasId" Nullable="false" />
@@ -1519,6 +1515,22 @@
           <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="V" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Planificacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spShowPlanificacionEjecucion_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="trimestre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="planificado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ejecutado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="observacion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spShowPlanificacionEjecucionPEDI_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="trimestre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="planificado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ejecutado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="observacion" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1898,19 +1910,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
-          <FunctionImportMapping FunctionImportName="spShowPlanificacionEjecucion" FunctionName="PEDIModel.Store.spShowPlanificacionEjecucion">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.spShowPlanificacionEjecucion_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
-                <ScalarProperty Name="trimestre" ColumnName="trimestre" />
-                <ScalarProperty Name="planificado" ColumnName="planificado" />
-                <ScalarProperty Name="ejecutado" ColumnName="ejecutado" />
-                <ScalarProperty Name="observacion" ColumnName="observacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="POAorPEDI" FunctionName="PEDIModel.Store.POAorPEDI" />
           <FunctionImportMapping FunctionImportName="spEstrategiasbyDepartamentoandObjetivoEspecifico" FunctionName="PEDIModel.Store.spEstrategiasbyDepartamentoandObjetivoEspecifico">
             <ResultMapping>
@@ -2049,6 +2048,32 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spShowPlanificacionEjecucion" FunctionName="PEDIModel.Store.spShowPlanificacionEjecucion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spShowPlanificacionEjecucion_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
+                <ScalarProperty Name="trimestre" ColumnName="trimestre" />
+                <ScalarProperty Name="planificado" ColumnName="planificado" />
+                <ScalarProperty Name="ejecutado" ColumnName="ejecutado" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spShowPlanificacionEjecucionPEDI" FunctionName="PEDIModel.Store.spShowPlanificacionEjecucionPEDI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spShowPlanificacionEjecucionPEDI_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_subunidad" ColumnName="nombre_subunidad" />
+                <ScalarProperty Name="trimestre" ColumnName="trimestre" />
+                <ScalarProperty Name="planificado" ColumnName="planificado" />
+                <ScalarProperty Name="ejecutado" ColumnName="ejecutado" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
+          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucionPEDI" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucionPEDI" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

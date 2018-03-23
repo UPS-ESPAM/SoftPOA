@@ -335,7 +335,6 @@
         vm.searhPlanificacion = function (idmeta, id) {
             vm.off9 = [];
             ProgramacionesServices.getTrismetrePlanificiacion(idmeta, id).then(function (response) {
-                debugger
                 vm.off9[id + "" + idmeta] = response.data.planifiacion.planificacion;
                 valorP = response.data.planifiacion.planificacion;
                 vm.getObservacionEjecucion(idmeta, id);

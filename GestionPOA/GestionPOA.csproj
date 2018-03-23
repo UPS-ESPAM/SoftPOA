@@ -315,6 +315,9 @@
     <Compile Include="Models\spPorcentajeOEstrategico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spShowPlanificacionEjecucionPEDI_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spShowPlanificacionEjecucion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

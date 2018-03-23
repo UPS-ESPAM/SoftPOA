@@ -220,16 +220,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoCorreoConsult_Result>("spDepartamentoCorreoConsult", idSubUnidadParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
-        }
-    
-        public virtual ObjectResult<spShowPlanificacionEjecucion_Result> spShowPlanificacionEjecucion()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucion_Result>("spShowPlanificacionEjecucion");
-        }
-    
         public virtual ObjectResult<string> POAorPEDI(string data, Nullable<int> deparmentID)
         {
             var dataParameter = data != null ?
@@ -397,6 +387,26 @@ namespace GestionPOA.Models
                 new ObjectParameter("POAorPEDI", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucionPEDI_Result>("spMetaAndEjecucionPEDI", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<spShowPlanificacionEjecucion_Result> spShowPlanificacionEjecucion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucion_Result>("spShowPlanificacionEjecucion");
+        }
+    
+        public virtual ObjectResult<spShowPlanificacionEjecucionPEDI_Result> spShowPlanificacionEjecucionPEDI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucionPEDI_Result>("spShowPlanificacionEjecucionPEDI");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucionPEDI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucionPEDI");
         }
     }
 }

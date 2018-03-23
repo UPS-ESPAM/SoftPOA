@@ -15,12 +15,12 @@
                         <th class="text-center">Ejecutado</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="alerta in vm.listAlertasss" ng-click="vm.ShowObservacion(alerta.observacion, alerta.id); vm.myStyle[alerta.id]={'background-color':'teal'}">
+                            <tr style="cursor:pointer;"  ng-repeat="alerta in vm.listAlertasss" ng-click="vm.ShowObservacion(alerta.observacion, alerta.id); vm.myStyle[alerta.id]={'background-color':'teal'}">
                                 <td style="background-color:red" ng-style="vm.myStyle[alerta.id]">&nbsp;</td>
                                 <td>{{alerta.nombre_subunidad}}</td>
                                 <td class="text-center">{{alerta.trimestre}}</td>
-                                <td class="text-center">{{alerta.planificado}}%</td>
-                                <td class="text-center">{{alerta.ejecutado}}%</td>
+                                <td class="text-center">{{ vm.plani[$index]}}</td>
+                                <td class="text-center">{{ vm.ejecu[$index]}}</td>
                             </tr>
                         </tbody>
                     </table>
