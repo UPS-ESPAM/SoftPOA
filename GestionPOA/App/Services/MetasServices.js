@@ -81,11 +81,12 @@
             return $http.get('../Metas/Ejecucion');
         }
 
+        fact.getMetasEjecucionPEDI = function () {
+            return $http.get('../Metas/EjecucionPEDI');
+        }
+
         fact.getMetasPlanificacion = function () {
             return $http.get('../Metas/MetasPlanificacion');
         }
-
-
-
         return fact;
     }]);

@@ -5,6 +5,9 @@
         fact.getIntervalos = function () {
             return $http.get('../Intervalos/Intervalos');
         }
+        fact.getIntervalosPEDI = function () {
+            return $http.get('../Intervalos/IntervalosPEDI');
+        }
 
         fact.getIntervalosPeriocidad = function (id) {
             var request = $http({
