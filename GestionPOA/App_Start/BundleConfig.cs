@@ -41,6 +41,7 @@ namespace GestionPOA
                        "~/Scripts/angular-animate.min.js",
                        "~/Scripts/angular-touch.min.js",
                        "~/Scripts/ng-table.min.js",
+                       "~/Scripts/angular-input-masks-standalone.js",
                        "~/Scripts/cookies.js",
                        "~/Scripts/angular-pusher.js",
                        "~/App/app.js",

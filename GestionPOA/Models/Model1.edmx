@@ -534,6 +534,7 @@
           <Parameter Name="idmeta" Type="int" Mode="In" />
         </Function>
         <Function Name="spPorcentajeOEstrategico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
+        <Function Name="spSelectPeriodos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spShowPlanificacionEjecucion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spShowPlanificacionEjecucionPEDI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
         <Function Name="spSubsistemaConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion" />
@@ -1123,7 +1124,6 @@
           </FunctionImport>
           <FunctionImport Name="spShowPlanificacionEjecucion" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucion_Result)" />
           <FunctionImport Name="spShowPlanificacionEjecucionPEDI" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucionPEDI_Result)" />
-          <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(Int32)" />
           <FunctionImport Name="spCountPlanificacionEjecucionPEDI" ReturnType="Collection(Int32)" />
           <FunctionImport Name="spMetaAndEjecucionPEDI" ReturnType="Collection(PEDIModel.spMetaAndEjecucionPEDI_Result)">
             <Parameter Name="department" Mode="In" Type="Int32" />
@@ -1138,6 +1138,8 @@
             <End Role="periodo" EntitySet="periodo" />
             <End Role="Subsistema" EntitySet="Subsistema" />
           </AssociationSet>
+          <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(String)" />
+          <FunctionImport Name="spSelectPeriodos" ReturnType="Collection(PEDIModel.spSelectPeriodos_Result)" />
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1532,6 +1534,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spSelectPeriodos_Result">
+          <Property Type="Int32" Name="periodoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="inicio" Nullable="true" />
+          <Property Type="DateTime" Name="fin" Nullable="true" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2043,7 +2052,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
           <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucionPEDI" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucionPEDI" />
           <FunctionImportMapping FunctionImportName="spMetaAndEjecucionPEDI" FunctionName="PEDIModel.Store.spMetaAndEjecucionPEDI">
             <ResultMapping>
@@ -2074,6 +2082,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
+          <FunctionImportMapping FunctionImportName="spSelectPeriodos" FunctionName="PEDIModel.Store.spSelectPeriodos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spSelectPeriodos_Result">
+                <ScalarProperty Name="periodoId" ColumnName="periodoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="inicio" ColumnName="inicio" />
+                <ScalarProperty Name="fin" ColumnName="fin" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

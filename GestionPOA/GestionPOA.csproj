@@ -316,6 +316,9 @@
     <Compile Include="Models\spPorcentajeOEstrategico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spSelectPeriodos_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spShowPlanificacionEjecucionPEDI_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -469,6 +472,7 @@
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-datatables.js" />
+    <Content Include="Scripts\angular-input-masks-standalone.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-message-format.js" />
@@ -577,7 +581,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

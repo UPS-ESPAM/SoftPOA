@@ -6,7 +6,8 @@ angular
       'ngTouch',
       'ngTable',
       'ngCookies',
-      'pusher-angular'
+      'pusher-angular',
+      'ui.utils.masks'
   ])
 
   .config(function ($routeProvider) {

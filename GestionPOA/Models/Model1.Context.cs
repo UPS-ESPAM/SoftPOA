@@ -386,11 +386,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucionPEDI_Result>("spShowPlanificacionEjecucionPEDI");
         }
     
-        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
-        }
-    
         public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucionPEDI()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucionPEDI");
@@ -407,6 +402,16 @@ namespace GestionPOA.Models
                 new ObjectParameter("POAorPEDI", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucionPEDI_Result>("spMetaAndEjecucionPEDI", departmentParameter, pOAorPEDIParameter);
+        }
+    
+        public virtual ObjectResult<string> spCountPlanificacionEjecucion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spCountPlanificacionEjecucion");
+        }
+    
+        public virtual ObjectResult<spSelectPeriodos_Result> spSelectPeriodos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelectPeriodos_Result>("spSelectPeriodos");
         }
     }
 }
