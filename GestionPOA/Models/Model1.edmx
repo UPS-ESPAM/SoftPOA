@@ -1165,14 +1165,14 @@
             <Parameter Name="department" Mode="In" Type="Int32" />
             <Parameter Name="POAorPEDI" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="spMetaAndEjecucionPEDI" ReturnType="Collection(PEDIModel.spMetaAndEjecucionPEDI_Result)">
-            <Parameter Name="department" Mode="In" Type="Int32" />
-            <Parameter Name="POAorPEDI" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="spShowPlanificacionEjecucion" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucion_Result)" />
           <FunctionImport Name="spShowPlanificacionEjecucionPEDI" ReturnType="Collection(PEDIModel.spShowPlanificacionEjecucionPEDI_Result)" />
           <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(Int32)" />
           <FunctionImport Name="spCountPlanificacionEjecucionPEDI" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spMetaAndEjecucionPEDI" ReturnType="Collection(PEDIModel.spMetaAndEjecucionPEDI_Result)">
+            <Parameter Name="department" Mode="In" Type="Int32" />
+            <Parameter Name="POAorPEDI" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1501,21 +1501,6 @@
           <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="V" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="spMetaAndEjecucionPEDI_Result">
-          <Property Type="Int32" Name="MetaID" Nullable="false" />
-          <Property Type="String" Name="Metas" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="ID_I" Nullable="true" />
-          <Property Type="Int32" Name="ID_II" Nullable="true" />
-          <Property Type="Int32" Name="ID_III" Nullable="true" />
-          <Property Type="Int32" Name="ID_IV" Nullable="true" />
-          <Property Type="Int32" Name="ID_V" Nullable="true" />
-          <Property Type="String" Name="I" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="II" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="V" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Planificacion" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="spShowPlanificacionEjecucion_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="nombre_subunidad" Nullable="true" MaxLength="200" />
@@ -1531,6 +1516,21 @@
           <Property Type="String" Name="planificado" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ejecutado" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="observacion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spMetaAndEjecucionPEDI_Result">
+          <Property Type="Int32" Name="MetaID" Nullable="false" />
+          <Property Type="String" Name="Metas" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ID_I" Nullable="true" />
+          <Property Type="Int32" Name="ID_II" Nullable="true" />
+          <Property Type="Int32" Name="ID_III" Nullable="true" />
+          <Property Type="Int32" Name="ID_IV" Nullable="true" />
+          <Property Type="Int32" Name="ID_V" Nullable="true" />
+          <Property Type="String" Name="I" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="II" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="III" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IV" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="V" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Planificacion" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2029,25 +2029,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spMetaAndEjecucionPEDI" FunctionName="PEDIModel.Store.spMetaAndEjecucionPEDI">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PEDIModel.spMetaAndEjecucionPEDI_Result">
-                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
-                <ScalarProperty Name="Metas" ColumnName="Metas" />
-                <ScalarProperty Name="ID_I" ColumnName="ID_I" />
-                <ScalarProperty Name="ID_II" ColumnName="ID_II" />
-                <ScalarProperty Name="ID_III" ColumnName="ID_III" />
-                <ScalarProperty Name="ID_IV" ColumnName="ID_IV" />
-                <ScalarProperty Name="ID_V" ColumnName="ID_V" />
-                <ScalarProperty Name="I" ColumnName="I" />
-                <ScalarProperty Name="II" ColumnName="II" />
-                <ScalarProperty Name="III" ColumnName="III" />
-                <ScalarProperty Name="IV" ColumnName="IV" />
-                <ScalarProperty Name="V" ColumnName="V" />
-                <ScalarProperty Name="Planificacion" ColumnName="Planificacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spShowPlanificacionEjecucion" FunctionName="PEDIModel.Store.spShowPlanificacionEjecucion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spShowPlanificacionEjecucion_Result">
@@ -2074,6 +2055,25 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
           <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucionPEDI" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucionPEDI" />
+          <FunctionImportMapping FunctionImportName="spMetaAndEjecucionPEDI" FunctionName="PEDIModel.Store.spMetaAndEjecucionPEDI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PEDIModel.spMetaAndEjecucionPEDI_Result">
+                <ScalarProperty Name="MetaID" ColumnName="MetaID" />
+                <ScalarProperty Name="Metas" ColumnName="Metas" />
+                <ScalarProperty Name="ID_I" ColumnName="ID_I" />
+                <ScalarProperty Name="ID_II" ColumnName="ID_II" />
+                <ScalarProperty Name="ID_III" ColumnName="ID_III" />
+                <ScalarProperty Name="ID_IV" ColumnName="ID_IV" />
+                <ScalarProperty Name="ID_V" ColumnName="ID_V" />
+                <ScalarProperty Name="I" ColumnName="I" />
+                <ScalarProperty Name="II" ColumnName="II" />
+                <ScalarProperty Name="III" ColumnName="III" />
+                <ScalarProperty Name="IV" ColumnName="IV" />
+                <ScalarProperty Name="V" ColumnName="V" />
+                <ScalarProperty Name="Planificacion" ColumnName="Planificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

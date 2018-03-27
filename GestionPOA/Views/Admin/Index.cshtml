@@ -160,14 +160,14 @@
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Nuevo"> <i class="material-icons" style="color: #4caf50;">add</i>Nuevo</a>
                                 </li>
+                                <li ng-show="vm.status=='PEDI'" style="padding-left:12px;">
+                                    <a href="#!/Metas/Asignacion"> <i class="material-icons" style="color: #4caf50;">library_add</i>Asignacion</a>
+                                </li>
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Planificacion"> <i class="material-icons" style="color: #4caf50;">card_travel</i>Planificación</a>
                                 </li>
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Ejecucion"> <i class="material-icons" style="color: #4caf50;">play_circle_filled</i>Ejecución</a>
-                                </li>
-                                <li  ng-show="vm.status=='PEDI'" style="padding-left:12px;" >
-                                    <a href="#!/Metas/Asignacion"> <i class="material-icons" style="color: #4caf50;">library_add</i>Asignacion</a>
                                 </li>
                                 <li style="padding-left:12px;">
                                     <a href="#!/Metas/Acciones"> <i class="material-icons" style="color: #4caf50;">text_format</i>Acciones</a>
@@ -190,6 +190,22 @@
                             <ul class="nav">
                                 <li style="padding-left:12px;">
                                     <a href="#!/Periodicidad"> <i class="material-icons" style="color: #4caf50;">add</i>Periodicidad</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li  ng-show="vm.status=='POA'">
+                        <a data-toggle="collapse" href="#pedi">
+                            <i class="material-icons">library_books</i>
+                            <p>
+                                PEDI
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="pedi">
+                            <ul class="nav">
+                                <li style="padding-left:12px;">
+                                    <a href="#!/Metas/PEDI"> <i class="material-icons" style="color: #4caf50;">play_circle_filled</i>Metas Ejecución</a>
                                 </li>
                             </ul>
                         </div>

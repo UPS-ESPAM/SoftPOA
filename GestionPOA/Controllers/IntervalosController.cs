@@ -37,6 +37,27 @@ namespace GestionPOA.Controllers
 
             return Json(new { listIntervalos = intervalos }, JsonRequestBehavior.AllowGet);
         }
+        // GET: IntervalosPEDI
+        public ActionResult IntervalosPEDI()
+        {
+            var POAorPEDI = "PEDI";
+            var intervalos = from pl in db.Planificacion
+                             join tp in db.TipoPlanificacion on pl.TipoPlanificacionId equals tp.TipoPlanificacionId
+                             join p in db.Periocidad on pl.PeriocidadID equals p.id
+                             join i in db.intervalo on p.id equals i.PeriodoId
+                             where p.eliminado == false
+                             where i.eliminado == false
+                             where tp.Descripcion == POAorPEDI
+                             orderby i.Descripcion ascending
+                             select new
+                             {
+                                 id = i.id,
+                                 descripcion = i.Descripcion,
+                                 periocidad = p.Periodo
+                             };
+
+            return Json(new { listIntervalos = intervalos }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Intervalos
         public ActionResult GetIntervalos(int id)
         {

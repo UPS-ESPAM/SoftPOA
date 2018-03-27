@@ -390,6 +390,7 @@
     <Content Include="App\Views\metas\ejecucion.html" />
     <Content Include="App\Views\metas\index.html" />
     <Content Include="App\Views\metas\nuevo.html" />
+    <Content Include="App\Views\metas\pedi.html" />
     <Content Include="App\Views\objetivoespecificos\asignacion.html" />
     <Content Include="App\Views\objetivoespecificos\index.html" />
     <Content Include="App\Views\objetivosestrategicos\ejecucion.html" />

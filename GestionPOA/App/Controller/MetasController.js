@@ -17,6 +17,7 @@
         vm.uploadfile = {};
         vm.file = {};
         cargarIntervalos();
+        cargarIntervalosPEDI(); 
         cargarMetasProgramacion();
         cargarIndicadores();
         vm.arrOptionSelects = [];
@@ -104,7 +105,18 @@
             });
         }
         cargarMetaEjecución();
+        cargarMetaEjecuciónPEDI()
         vm.status = $cookies.status;
+        function cargarIntervalosPEDI() {
+            IntervalosServices.getIntervalosPEDI().then(function (response) {
+                vm.listadoIntervalosPEDI = response.data.listIntervalos;
+                vm.year = [];
+                vm.listadoIntervalosPEDI.forEach(function (element, index) {
+                    vm.year[index] = element.descripcion;
+                });
+
+            })
+        }
         function cargarIntervalos() {
             IntervalosServices.getIntervalos().then(function (response) {
                 vm.listadoIntervalos = response.data.listIntervalos;
@@ -123,6 +135,11 @@
         function cargarMetaEjecución() {
                 MetasServices.getMetasEjecucion().then(function (response) {
                 vm.listadoMetasEjecucion = response.data.listMetasEjecucionn;
+            })
+        }   
+        function cargarMetaEjecuciónPEDI() {
+            MetasServices.getMetasEjecucionPEDI().then(function (response) {
+                vm.listadoMetasEjecucionPEDI = response.data.listMetasEjecucionn;
             })
         }   
         vm.detalleIndicador = function (id) {

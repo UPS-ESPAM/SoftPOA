@@ -83,6 +83,12 @@ namespace GestionPOA.Controllers
                 return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
             }
         }
+        // GET: Metas/EjecucionPEDI
+        public ActionResult EjecucionPEDI()
+        {
+           var metasEjecucion = db.spMetaAndEjecucionPEDI(Convert.ToInt32(Session["department"]), "PEDI");
+            return Json(new { listMetasEjecucionn = metasEjecucion }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Metas/MetaDetalle
         public ActionResult MetaDetalle(int id)
         {

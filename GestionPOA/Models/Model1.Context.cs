@@ -376,19 +376,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndProgramacionesPEDI_Result>("spMetaAndProgramacionesPEDI", departmentParameter, pOAorPEDIParameter);
         }
     
-        public virtual ObjectResult<spMetaAndEjecucionPEDI_Result> spMetaAndEjecucionPEDI(Nullable<int> department, string pOAorPEDI)
-        {
-            var departmentParameter = department.HasValue ?
-                new ObjectParameter("department", department) :
-                new ObjectParameter("department", typeof(int));
-    
-            var pOAorPEDIParameter = pOAorPEDI != null ?
-                new ObjectParameter("POAorPEDI", pOAorPEDI) :
-                new ObjectParameter("POAorPEDI", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucionPEDI_Result>("spMetaAndEjecucionPEDI", departmentParameter, pOAorPEDIParameter);
-        }
-    
         public virtual ObjectResult<spShowPlanificacionEjecucion_Result> spShowPlanificacionEjecucion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spShowPlanificacionEjecucion_Result>("spShowPlanificacionEjecucion");
@@ -407,6 +394,19 @@ namespace GestionPOA.Models
         public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucionPEDI()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucionPEDI");
+        }
+    
+        public virtual ObjectResult<spMetaAndEjecucionPEDI_Result> spMetaAndEjecucionPEDI(Nullable<int> department, string pOAorPEDI)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(int));
+    
+            var pOAorPEDIParameter = pOAorPEDI != null ?
+                new ObjectParameter("POAorPEDI", pOAorPEDI) :
+                new ObjectParameter("POAorPEDI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucionPEDI_Result>("spMetaAndEjecucionPEDI", departmentParameter, pOAorPEDIParameter);
         }
     }
 }
