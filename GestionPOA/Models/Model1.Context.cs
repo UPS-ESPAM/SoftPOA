@@ -34,7 +34,6 @@ namespace GestionPOA.Models
         public virtual DbSet<ObjetivosEspecificos> ObjetivosEspecificos { get; set; }
         public virtual DbSet<ObjetivosEstrategicos> ObjetivosEstrategicos { get; set; }
         public virtual DbSet<periodo> periodo { get; set; }
-        public virtual DbSet<Subsistema> Subsistema { get; set; }
         public virtual DbSet<Acciones> Acciones { get; set; }
         public virtual DbSet<Estrategias> Estrategias { get; set; }
         public virtual DbSet<Evidencias> Evidencias { get; set; }
@@ -48,6 +47,7 @@ namespace GestionPOA.Models
         public virtual DbSet<Periocidad> Periocidad { get; set; }
         public virtual DbSet<InformacioAdicional> InformacioAdicional { get; set; }
         public virtual DbSet<Programacion> Programacion { get; set; }
+        public virtual DbSet<Subsistema> Subsistema { get; set; }
     
         public virtual ObjectResult<spLoginIngreso_Result> spLoginIngreso(string usuario, string clave)
         {

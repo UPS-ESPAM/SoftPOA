@@ -74,6 +74,10 @@ angular
               templateUrl: '../../App/Views/periodicidad/index.html',
               controller: 'PeriodicidadController'
           })
+          .when('/Periodo', {
+              templateUrl: '../../App/Views/periodo/index.html',
+              controller: 'PeriodosController'
+          })
           .when('/Planificacion/Alertas', {
               templateUrl: '../../App/Views/alertas/index.html',
               controller: 'AlertasController'

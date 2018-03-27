@@ -76,7 +76,7 @@
           <Property Name="SubsistemaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="eliminado" Type="bit" />
-          <Property Name="idperiodo" Type="int" />
+          <Property Name="idperiodo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Acciones">
           <Key>
@@ -428,7 +428,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Subsistema_periodo">
-          <End Role="periodo" Type="Self.periodo" Multiplicity="0..1" />
+          <End Role="periodo" Type="Self.periodo" Multiplicity="1" />
           <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="periodo">
@@ -702,7 +702,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="eliminado" Type="Boolean" />
           <NavigationProperty Name="ObjetivosEspecificos" Relationship="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos" FromRole="ObjetivosEstrategicos" ToRole="ObjetivosEspecificos" />
-          <NavigationProperty Name="Subsistema" Relationship="Self.FK_ObjetivosEstrategicos_Subsistema" FromRole="ObjetivosEstrategicos" ToRole="Subsistema" />
+          <NavigationProperty Name="Subsistema" Relationship="PEDIModel.FK_ObjetivosEstrategicos_Subsistema" FromRole="ObjetivosEstrategicos" ToRole="Subsistema" />
         </EntityType>
         <EntityType Name="periodo">
           <Key>
@@ -713,19 +713,8 @@
           <Property Name="inicio" Type="DateTime" Precision="0" />
           <Property Name="fin" Type="DateTime" Precision="0" />
           <Property Name="eliminado" Type="Boolean" />
-          <NavigationProperty Name="Subsistema" Relationship="Self.FK_Subsistema_periodo" FromRole="periodo" ToRole="Subsistema" />
           <Property Name="estado" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Subsistema">
-          <Key>
-            <PropertyRef Name="SubsistemaId" />
-          </Key>
-          <Property Name="SubsistemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="eliminado" Type="Boolean" />
-          <Property Name="idperiodo" Type="Int32" />
-          <NavigationProperty Name="ObjetivosEstrategicos" Relationship="Self.FK_ObjetivosEstrategicos_Subsistema" FromRole="Subsistema" ToRole="ObjetivosEstrategicos" />
-          <NavigationProperty Name="periodo" Relationship="Self.FK_Subsistema_periodo" FromRole="Subsistema" ToRole="periodo" />
+          <NavigationProperty Name="Subsistema" Relationship="PEDIModel.FK_Subsistema_periodo" FromRole="periodo" ToRole="Subsistema" />
         </EntityType>
         <EntityType Name="Acciones">
           <Key>
@@ -873,30 +862,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ObjetivosEstrategicos_Subsistema">
-          <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="0..1" />
-          <End Role="ObjetivosEstrategicos" Type="Self.ObjetivosEstrategicos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subsistema">
-              <PropertyRef Name="SubsistemaId" />
-            </Principal>
-            <Dependent Role="ObjetivosEstrategicos">
-              <PropertyRef Name="SubsistemaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subsistema_periodo">
-          <End Role="periodo" Type="Self.periodo" Multiplicity="0..1" />
-          <End Role="Subsistema" Type="Self.Subsistema" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="periodo">
-              <PropertyRef Name="periodoId" />
-            </Principal>
-            <Dependent Role="Subsistema">
-              <PropertyRef Name="idperiodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acciones_Metas">
           <End Role="Metas" Type="Self.Metas" Multiplicity="0..1" />
           <End Role="Acciones" Type="Self.Acciones" Multiplicity="*" />
@@ -977,7 +942,6 @@
           <EntitySet Name="ObjetivosEspecificos" EntityType="Self.ObjetivosEspecificos" />
           <EntitySet Name="ObjetivosEstrategicos" EntityType="Self.ObjetivosEstrategicos" />
           <EntitySet Name="periodo" EntityType="Self.periodo" />
-          <EntitySet Name="Subsistema" EntityType="Self.Subsistema" />
           <EntitySet Name="Acciones" EntityType="Self.Acciones" />
           <EntitySet Name="Estrategias" EntityType="Self.Estrategias" />
           <EntitySet Name="Evidencias" EntityType="Self.Evidencias" />
@@ -1001,14 +965,6 @@
           <AssociationSet Name="FK_ObjetivosEspecificos_ObjetivosEstrategicos" Association="Self.FK_ObjetivosEspecificos_ObjetivosEstrategicos">
             <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
             <End Role="ObjetivosEspecificos" EntitySet="ObjetivosEspecificos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ObjetivosEstrategicos_Subsistema" Association="Self.FK_ObjetivosEstrategicos_Subsistema">
-            <End Role="Subsistema" EntitySet="Subsistema" />
-            <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subsistema_periodo" Association="Self.FK_Subsistema_periodo">
-            <End Role="periodo" EntitySet="periodo" />
-            <End Role="Subsistema" EntitySet="Subsistema" />
           </AssociationSet>
           <AssociationSet Name="FK_Acciones_Metas" Association="Self.FK_Acciones_Metas">
             <End Role="Metas" EntitySet="Metas" />
@@ -1173,6 +1129,15 @@
             <Parameter Name="department" Mode="In" Type="Int32" />
             <Parameter Name="POAorPEDI" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Subsistema" EntityType="PEDIModel.Subsistema" />
+          <AssociationSet Name="FK_ObjetivosEstrategicos_Subsistema" Association="PEDIModel.FK_ObjetivosEstrategicos_Subsistema">
+            <End Role="Subsistema" EntitySet="Subsistema" />
+            <End Role="ObjetivosEstrategicos" EntitySet="ObjetivosEstrategicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subsistema_periodo" Association="PEDIModel.FK_Subsistema_periodo">
+            <End Role="periodo" EntitySet="periodo" />
+            <End Role="Subsistema" EntitySet="Subsistema" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1532,6 +1497,41 @@
           <Property Type="String" Name="V" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Planificacion" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Subsistema">
+          <Key>
+            <PropertyRef Name="SubsistemaId" />
+          </Key>
+          <Property Name="SubsistemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="eliminado" Type="Boolean" />
+          <Property Name="idperiodo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ObjetivosEstrategicos" Relationship="PEDIModel.FK_ObjetivosEstrategicos_Subsistema" FromRole="Subsistema" ToRole="ObjetivosEstrategicos" />
+          <NavigationProperty Name="periodo" Relationship="PEDIModel.FK_Subsistema_periodo" FromRole="Subsistema" ToRole="periodo" />
+        </EntityType>
+        <Association Name="FK_ObjetivosEstrategicos_Subsistema">
+          <End Type="PEDIModel.Subsistema" Role="Subsistema" Multiplicity="0..1" />
+          <End Type="PEDIModel.ObjetivosEstrategicos" Role="ObjetivosEstrategicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subsistema">
+              <PropertyRef Name="SubsistemaId" />
+            </Principal>
+            <Dependent Role="ObjetivosEstrategicos">
+              <PropertyRef Name="SubsistemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subsistema_periodo">
+          <End Type="PEDIModel.periodo" Role="periodo" Multiplicity="1" />
+          <End Type="PEDIModel.Subsistema" Role="Subsistema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="periodo">
+              <PropertyRef Name="periodoId" />
+            </Principal>
+            <Dependent Role="Subsistema">
+              <PropertyRef Name="idperiodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1606,16 +1606,6 @@
                 <ScalarProperty Name="inicio" ColumnName="inicio" />
                 <ScalarProperty Name="fin" ColumnName="fin" />
                 <ScalarProperty Name="eliminado" ColumnName="eliminado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Subsistema">
-            <EntityTypeMapping TypeName="PEDIModel.Subsistema">
-              <MappingFragment StoreEntitySet="Subsistema">
-                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
-                <ScalarProperty Name="idperiodo" ColumnName="idperiodo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2074,6 +2064,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Subsistema">
+            <EntityTypeMapping TypeName="PEDIModel.Subsistema">
+              <MappingFragment StoreEntitySet="Subsistema">
+                <ScalarProperty Name="idperiodo" ColumnName="idperiodo" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="SubsistemaId" ColumnName="SubsistemaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

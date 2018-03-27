@@ -32,7 +32,36 @@
 
         vm.addSubsistema = function () {
             var requestResponse = SubsistemasServices.addSubsistemas(vm.subsistema);
-            Message(requestResponse);
+            requestResponse.then(function successCallback(response) {
+                if (response.data.mensaje == 'Error') {
+                    swal({
+                        title: 'Error!',
+                        text: 'Debe realizar las respectivas configuraciones!',
+                        type: 'error',
+                        confirmButtonClass: "btn btn-danger",
+                        buttonsStyling: false
+                    })
+                } else {
+                    cargar();
+                    swal({
+                        title: 'Correcto!',
+                        text: response.data.mensaje,
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success",
+                        buttonsStyling: false
+                    })
+                    vm.subsistema = {};
+                    $('.modal').modal('hide');
+                }
+            }, function errorCallback(response) {
+                swal({
+                    title: 'Error!',
+                    text: 'Error',
+                    type: 'error',
+                    confirmButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                })
+            });
         }
 
         vm.updateSubsistema = function () {

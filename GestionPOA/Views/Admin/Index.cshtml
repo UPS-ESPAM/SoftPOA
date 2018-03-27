@@ -187,6 +187,9 @@
                         <div class="collapse" id="configuracion">
                             <ul class="nav">
                                 <li style="padding-left:12px;">
+                                    <a href="#!/Periodo"> <i class="material-icons" style="color: #4caf50;">add</i>Periodo</a>
+                                </li>
+                                <li style="padding-left:12px;">
                                     <a href="#!/Periodicidad"> <i class="material-icons" style="color: #4caf50;">add</i>Periodicidad</a>
                                 </li>
                             </ul>
@@ -291,6 +294,33 @@
 
     @Scripts.Render("~/bundles/plantillaJS")
     @Scripts.Render("~/bundles/angular")
+    <script type="text/javascript">
+            $().ready(function () {
+
+                $('.datepicker').datetimepicker({
+                    format: 'YYYY/MM/DD',
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-chevron-up",
+                        down: "fa fa-chevron-down",
+                        previous: 'fa fa-chevron-left',
+                        next: 'fa fa-chevron-right',
+                        today: 'fa fa-screenshot',
+                        clear: 'fa fa-trash',
+                        close: 'fa fa-remove',
+                        inline: true
+                    }
+                });
+
+                demo.checkFullPageBackgroundImage();
+
+                setTimeout(function () {
+                    // after 1000 ms we add the class animated to the login/register card
+                    $('.card').removeClass('card-hidden');
+                }, 700)
+            });
+    </script>
 
 </body>
 </html>

@@ -79,8 +79,13 @@ namespace GestionPOA.Controllers
                     }
                     return Json(new { username, rol, tipo = "Usuario" }, JsonRequestBehavior.AllowGet);
                 }
-                else {
+                else 
+                {
                     var rol = db.POAorPEDI("POA", username.id_departamento).FirstOrDefault();
+                    if (rol== "No Existe") {
+                        Session["Page"] = "verify";
+                        Session["POAorPEDI"] = "PEDI";
+                    }
                     return Json(new { username, rol, tipo="Administrador" }, JsonRequestBehavior.AllowGet);
                 }
             }

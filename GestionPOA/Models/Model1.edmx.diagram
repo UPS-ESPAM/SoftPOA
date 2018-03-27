@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="PEDIModel.ObjetivosEspecificos" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.ObjetivosEstrategicos" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.periodo" Width="1.5" PointX="1.5" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PEDIModel.Subsistema" Width="1.5" PointX="1.5" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Acciones" Width="1.5" PointX="12" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Estrategias" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PEDIModel.Evidencias" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
@@ -25,8 +24,6 @@
         <AssociationConnector Association="PEDIModel.FK_ObjeEspecificosDepartamento_ObjetivosEspecificos" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Estrategias_ObjetivosEspecificos1" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_ObjetivosEspecificos_ObjetivosEstrategicos" ManuallyRouted="false" />
-        <AssociationConnector Association="PEDIModel.FK_ObjetivosEstrategicos_Subsistema" ManuallyRouted="false" />
-        <AssociationConnector Association="PEDIModel.FK_Subsistema_periodo" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Acciones_Metas" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Estrategias_Planificacion" ManuallyRouted="false" />
         <AssociationConnector Association="PEDIModel.FK_Indicadores_Estrategias" ManuallyRouted="false" />
@@ -45,6 +42,9 @@
         <AssociationConnector Association="PEDIModel.FK_Evidencias_Programacion" />
         <AssociationConnector Association="PEDIModel.FK_Programacion_intervalo" />
         <AssociationConnector Association="PEDIModel.FK_Programacion_Metas" />
+        <EntityTypeShape EntityType="PEDIModel.Subsistema" Width="1.5" PointX="1.625" PointY="15.625" />
+        <AssociationConnector Association="PEDIModel.FK_ObjetivosEstrategicos_Subsistema" />
+        <AssociationConnector Association="PEDIModel.FK_Subsistema_periodo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

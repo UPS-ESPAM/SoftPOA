@@ -28,9 +28,18 @@ namespace GestionPOA.Controllers
         [HttpPost]
         public JsonResult Create(Subsistema subsistema)
         {
-            db.Subsistema.Add(subsistema);
-            db.SaveChanges();
-            return Json(new { mensaje = "Registrado correctamente" });  
+            try
+            {
+                db.Subsistema.Add(subsistema);
+                db.SaveChanges();
+                return Json(new { mensaje = "Registrado correctamente" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { mensaje = "Error" });
+            }
+
+           
         }
 
         // POST: Subsistemas/Update

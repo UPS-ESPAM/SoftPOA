@@ -18,7 +18,10 @@
                     window.location.href = '/Admin/Index';
                 } else if ((response.data.rol == "Existe") && (response.data.tipo == 'Administrador')) {
                     $("#myModalPOAPEDI").modal("show");
-                } else {
+                } else if ((response.data.rol == "No Existe") && (response.data.tipo == 'Administrador')) {
+                    debugger
+                    window.location.href = '/Admin/Index';
+                }else {
                     $("#myModalss").modal("show");
                 }
             }, function errorCallback(error) {
