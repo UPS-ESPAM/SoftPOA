@@ -40,20 +40,18 @@
                         <img src="~/Content/img/faces/card-profile1-square.jpg" />
                     </div>
                     <div class="info">
-                        <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                            PLAN OPERATIVO
+                        <a  ng-show="vm.status=='POA'" data-toggle="collapse" href="#collapseExample" class="collapsed">
+                            POA
+                            <b class="caret"></b>
+                        </a>
+                        <a ng-show="vm.status=='PEDI'" data-toggle="collapse" href="#collapseExample" class="collapsed">
+                            PEDI
                             <b class="caret"></b>
                         </a>
                         <div class="collapse" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a href="#">Mi Perfil</a>
-                                </li>
-                                <li>
-                                    <a href="#">Configuraciones</a>
-                                </li>
-                                <li>
-                                    <a href="#">Salir</a>
+                                    <a href="#" ng-click="vm.logout()">Salir</a>
                                 </li>
                             </ul>
                         </div>
@@ -194,7 +192,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li  ng-show="vm.status=='POA'">
+                    <li  ng-show="vm.status=='POA' && vm.rol !='Administrador'">
                         <a data-toggle="collapse" href="#pedi">
                             <i class="material-icons">library_books</i>
                             <p>
@@ -230,7 +228,8 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> @ViewBag.Title - Gestión del Plan Operativo Anual </a>
+                        <a class="navbar-brand" href="#" ng-show="vm.status=='POA'"> @ViewBag.Title - Gestión del Plan Operativo Anual </a>
+                        <a class="navbar-brand" href="#" ng-show="vm.status =='PEDI'"> @ViewBag.Title - Gestión del Plan Estratégico Institucional </a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
