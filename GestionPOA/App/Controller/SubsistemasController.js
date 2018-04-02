@@ -1,8 +1,8 @@
 ﻿angular.module('appGestion')
-    .controller('SubsistemasController', function (SubsistemasServices, NgTableParams) {
-
+    .controller('SubsistemasController', function (SubsistemasServices, NgTableParams, PeriodosServices) {
         var vm = this;
         cargar();
+        cargarPlanificion();
         listSubsistema = [];
         vm.totalregistros = 0;
         vm.modalsubsistema = {}
@@ -23,13 +23,20 @@
                 });
             })
         }
-
+        function cargarPlanificion() {
+            PeriodosServices.SelectPeriodos().then(function (d) {
+                //para llenar select              
+                vm.arrOptionPlanifiacion = [];
+                angular.forEach(d.data.SelectPeriodos, function (value, key) {
+                    vm.arrOptionPlanifiacion.push(value);
+                });
+            });
+        }
         vm.ventanaModalSubsistema = function (subsistema) {
             $('.modal ').insertAfter($('body'));
             vm.modalsubsistema.Descripcion = subsistema.Descripcion;
             vm.modalsubsistema.SubsistemaId = subsistema.SubsistemaId;
         };
-
         vm.addSubsistema = function () {
             var requestResponse = SubsistemasServices.addSubsistemas(vm.subsistema);
             requestResponse.then(function successCallback(response) {
@@ -63,12 +70,10 @@
                 })
             });
         }
-
         vm.updateSubsistema = function () {
             var requestResponse = SubsistemasServices.updateSubsistemas(vm.modalsubsistema);
             Message(requestResponse);
         }
-
         vm.deleteSubsistema = function (id, index) {
             vm.listSubsistemas.splice(index, 1);
             vm.totalregistros -= 1;
@@ -83,7 +88,6 @@
                 })
             });
         }
-
         function Message(requestResponse) {
             requestResponse.then(function successCallback(response) {
                 cargar();

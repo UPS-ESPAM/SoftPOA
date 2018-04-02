@@ -59,7 +59,7 @@
                 </div>
                
                 <ul class="nav">
-                    <li ng-show="vm.rol=='Administrador'">{
+                    <li ng-show="vm.rol=='Administrador' && vm.status=='PEDI'">{
                         <a data-toggle="collapse" href="#subsistema">
                             <i class="material-icons">dialpad</i>
                             <p>
@@ -75,7 +75,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li ng-show="vm.rol=='Administrador'" data-status="@Request.RequestContext.HttpContext.Session["POAorPEDI"]" id="status">
+                    <li ng-show="vm.rol=='Administrador'  && vm.status=='PEDI'" data-status="@Request.RequestContext.HttpContext.Session["POAorPEDI"]" id="status">
                         <a data-toggle="collapse" href="#objetivoestrategico">
                             <i class="material-icons">gps_fixed</i>
                             <p>
@@ -94,7 +94,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li ng-show="vm.rol=='Administrador'">
+                    <li ng-show="vm.rol=='Administrador'  && vm.status=='PEDI'">
                         <a data-toggle="collapse" href="#objetivoespecifico">
                             <i class="material-icons">golf_course</i>
                             <p>

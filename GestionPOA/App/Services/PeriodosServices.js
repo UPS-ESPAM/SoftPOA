@@ -11,6 +11,9 @@
             });
             return request;
         }
+        fact.SelectPeriodos = function () {
+            return $http.get('../Periodos/SelectPeriodos');
+        }
         fact.getPeriodos = function () {
             return $http.get('../Periodos/getPeriodos');
         }

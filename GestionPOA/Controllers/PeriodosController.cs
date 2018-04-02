@@ -20,6 +20,15 @@ namespace GestionPOA.Controllers
             var periodos = db.spSelectPeriodos().ToList();
             return Json(new { listPeriodos = periodos }, JsonRequestBehavior.AllowGet);
         }
+        // GET: Periodos/SelectPeriodos
+        public JsonResult SelectPeriodos()
+        {
+            var periodos = db.periodo.Where(p => p.eliminado == false)
+                                .Select(p => new { idperiodo = p.periodoId, descripcion = p.Descripcion })
+                                .ToList();
+
+            return Json(new { SelectPeriodos = periodos }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Periodos/create
         public ActionResult create(string descripcion, DateTime inicio, DateTime fin)
         {
@@ -31,6 +40,21 @@ namespace GestionPOA.Controllers
             periodos.estado = true;
             db.periodo.Add(periodos);
             db.SaveChanges();
+
+            var idperiocidad = db.Periocidad.Where(p => p.eliminado == false)
+                                     .Where(p => p.Periodo == "Anual")
+                                    .Select(p => new { idPeriocidad = p.id })
+                                    .FirstOrDefault();
+
+            Planificacion planifiacion = new Planificacion();
+            planifiacion.DepartamentoID = Convert.ToInt32(Session["department"]);
+            planifiacion.TipoPlanificacionId = 1;
+            planifiacion.PeriocidadID = idperiocidad.idPeriocidad;
+            planifiacion.fecha= DateTime.Now;
+            planifiacion.eliminado = false;
+            db.Planificacion.Add(planifiacion);
+            db.SaveChanges();
+
             return Json(new { mensaje = "Periodos del PEDI registrados correctamente" }, JsonRequestBehavior.AllowGet);
         }
         // POST: Periodos/Update

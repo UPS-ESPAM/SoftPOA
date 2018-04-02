@@ -33,6 +33,7 @@
                     buttonsStyling: false
                 })
                 $('.modal').modal('hide');
+                cargarPeriocidad();
                 vm.cargarIntervalos(vm.modalIntervalo.PeriodoId, vm.periocidad)
                 vm.modalIntervalo.Descripcion = "";
                 vm.modalIntervalo.Orden = "";

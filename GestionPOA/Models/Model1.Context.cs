@@ -220,19 +220,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDepartamentoCorreoConsult_Result>("spDepartamentoCorreoConsult", idSubUnidadParameter);
         }
     
-        public virtual ObjectResult<string> POAorPEDI(string data, Nullable<int> deparmentID)
-        {
-            var dataParameter = data != null ?
-                new ObjectParameter("data", data) :
-                new ObjectParameter("data", typeof(string));
-    
-            var deparmentIDParameter = deparmentID.HasValue ?
-                new ObjectParameter("DeparmentID", deparmentID) :
-                new ObjectParameter("DeparmentID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("POAorPEDI", dataParameter, deparmentIDParameter);
-        }
-    
         public virtual ObjectResult<spEstrategiasbyDepartamentoandObjetivoEspecifico_Result> spEstrategiasbyDepartamentoandObjetivoEspecifico(Nullable<int> departamentoId, Nullable<int> objetivoEspecificoId, string pOAorPEDI)
         {
             var departamentoIdParameter = departamentoId.HasValue ?
@@ -404,14 +391,27 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMetaAndEjecucionPEDI_Result>("spMetaAndEjecucionPEDI", departmentParameter, pOAorPEDIParameter);
         }
     
-        public virtual ObjectResult<string> spCountPlanificacionEjecucion()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spCountPlanificacionEjecucion");
-        }
-    
         public virtual ObjectResult<spSelectPeriodos_Result> spSelectPeriodos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelectPeriodos_Result>("spSelectPeriodos");
+        }
+    
+        public virtual ObjectResult<string> POAorPEDI(string data, Nullable<int> deparmentID)
+        {
+            var dataParameter = data != null ?
+                new ObjectParameter("data", data) :
+                new ObjectParameter("data", typeof(string));
+    
+            var deparmentIDParameter = deparmentID.HasValue ?
+                new ObjectParameter("DeparmentID", deparmentID) :
+                new ObjectParameter("DeparmentID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("POAorPEDI", dataParameter, deparmentIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
         }
     }
 }

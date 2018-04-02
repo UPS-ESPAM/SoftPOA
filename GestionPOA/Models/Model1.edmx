@@ -1075,10 +1075,6 @@
             <End Role="Metas" EntitySet="Metas" />
             <End Role="Programacion" EntitySet="Programacion" />
           </AssociationSet>
-          <FunctionImport Name="POAorPEDI" ReturnType="Collection(String)">
-            <Parameter Name="data" Mode="In" Type="String" />
-            <Parameter Name="DeparmentID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="spEstrategiasbyDepartamentoandObjetivoEspecifico" ReturnType="Collection(PEDIModel.spEstrategiasbyDepartamentoandObjetivoEspecifico_Result)">
             <Parameter Name="DepartamentoId" Mode="In" Type="Int32" />
             <Parameter Name="ObjetivoEspecificoId" Mode="In" Type="Int32" />
@@ -1138,8 +1134,12 @@
             <End Role="periodo" EntitySet="periodo" />
             <End Role="Subsistema" EntitySet="Subsistema" />
           </AssociationSet>
-          <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(String)" />
           <FunctionImport Name="spSelectPeriodos" ReturnType="Collection(PEDIModel.spSelectPeriodos_Result)" />
+          <FunctionImport Name="POAorPEDI" ReturnType="Collection(String)">
+            <Parameter Name="data" Mode="In" Type="String" />
+            <Parameter Name="DeparmentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(Int32)" />
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1909,7 +1909,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="POAorPEDI" FunctionName="PEDIModel.Store.POAorPEDI" />
           <FunctionImportMapping FunctionImportName="spEstrategiasbyDepartamentoandObjetivoEspecifico" FunctionName="PEDIModel.Store.spEstrategiasbyDepartamentoandObjetivoEspecifico">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spEstrategiasbyDepartamentoandObjetivoEspecifico_Result">
@@ -2082,7 +2081,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
           <FunctionImportMapping FunctionImportName="spSelectPeriodos" FunctionName="PEDIModel.Store.spSelectPeriodos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spSelectPeriodos_Result">
@@ -2094,6 +2092,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="POAorPEDI" FunctionName="PEDIModel.Store.POAorPEDI" />
+          <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
