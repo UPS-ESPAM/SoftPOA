@@ -26,6 +26,7 @@ namespace GestionPOA.Controllers
             db.Planificacion.Add(Tplanificacion);
             db.SaveChanges();
             Session["Page"] = "verify";
+            Session["POAorPEDI"] = "POA";
             return Json(new { mensaje = "Planificación Registrada correctamente" }, JsonRequestBehavior.AllowGet);
         }
 

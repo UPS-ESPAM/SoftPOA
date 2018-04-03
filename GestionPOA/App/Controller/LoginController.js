@@ -18,7 +18,9 @@
                     window.location.href = '/Admin/Index';
                 } else if ((response.data.rol == "Existe") && (response.data.tipo == 'Administrador')) {
                     $("#myModalPOAPEDI").modal("show");
-                } else {
+                } else if ((response.data.rol == "No Existe") && (response.data.tipo == 'Administrador')) {
+                    window.location.href = '/Admin/Index';
+                }else {
                     $("#myModalss").modal("show");
                 }
             }, function errorCallback(error) {
@@ -83,7 +85,13 @@
         vm.SingInToPOAorPedi = function () {
             var requestResponse = LoginServices.POAorPEDI(vm.POAorPEDi);
             requestResponse.then(function successCallback(response) {
-                window.location.href = '/Admin/Index';
+                if ((response.data.status == "No Existe")) {
+                    $("#myModalPOAPEDI").modal("hide");
+                    $("#myModalss").modal("show");
+                } else {
+                    window.location.href = '/Admin/Index';
+                }
+
             }, function errorCallback(response) {
                 swal({
                     title: 'Error!',

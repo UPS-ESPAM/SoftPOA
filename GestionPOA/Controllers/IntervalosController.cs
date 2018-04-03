@@ -71,9 +71,19 @@ namespace GestionPOA.Controllers
         }
         // POST: Intervalos/Create
         [HttpPost]
-        public JsonResult Create(intervalo intervalos)
+        public JsonResult Create(intervalo _intervalos)
         {
-            db.intervalo.Add(intervalos);
+            intervalo inter = new intervalo();
+            inter.PeriodoId = _intervalos.PeriodoId;
+            inter.Orden = _intervalos.Orden;
+            inter.Descripcion = _intervalos.Descripcion;
+            if (_intervalos.CampoPivot == "Trimestral") {
+                inter.CampoPivot = "POAcol" + _intervalos.Orden;
+            }else {
+                inter.CampoPivot = "PEDIcol" + _intervalos.Orden;
+            }
+            inter.eliminado = false;
+            db.intervalo.Add(inter);
             db.SaveChanges();
             return Json(new { mensaje = "Intervalo registrado correctamente" });
         }

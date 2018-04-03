@@ -9,6 +9,12 @@
                 <h4 class="card-title">:: Registrar Subsistema ::</h4>
                 <form name="AddSubsistemasForm" ng-submit="vm.addSubsistema();" novalidate>
                     <div class="form-group label-floating">
+                        <label class="control-label">Plan Estratégico Institucional</label>
+                        <select class="form-control" ng-model="vm.subsistema.idperiodo" ng-options="arrOptionPlanifiacions.idperiodo as arrOptionPlanifiacions.descripcion for arrOptionPlanifiacions in vm.arrOptionPlanifiacion" required>
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating">
                         <label class="control-label">SUBSISTEMA</label>
                         <input type="text" class="form-control" ng-model="vm.subsistema.Descripcion" required>
                     </div>

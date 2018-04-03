@@ -45,6 +45,9 @@ namespace GestionPOA.Controllers
             if ((singIN == "POA") || (singIN == "PEDI"))
             {
                 var status = db.POAorPEDI(singIN, Convert.ToInt32(Session["department"])).FirstOrDefault();
+                if (status== "No Existe") {
+                    return Json(new { status }, JsonRequestBehavior.AllowGet);
+                }
                 Session["POAorPEDI"] = singIN;
                 Session["Page"] = "verify";
                 return Json(new { msj = "ok" }, JsonRequestBehavior.AllowGet);
@@ -79,8 +82,13 @@ namespace GestionPOA.Controllers
                     }
                     return Json(new { username, rol, tipo = "Usuario" }, JsonRequestBehavior.AllowGet);
                 }
-                else {
-                    var rol = db.POAorPEDI("POA", username.id_departamento).FirstOrDefault();
+                else 
+                {
+                    var rol = db.POAorPEDI("PEDI", username.id_departamento).FirstOrDefault();
+                    if (rol== "No Existe") {
+                        Session["Page"] = "verify";
+                        Session["POAorPEDI"] = "PEDI";
+                    }
                     return Json(new { username, rol, tipo="Administrador" }, JsonRequestBehavior.AllowGet);
                 }
             }

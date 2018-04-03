@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ObjetivosEspecificosController.cs" />
     <Compile Include="Controllers\ObjetivosEstrategicosController.cs" />
     <Compile Include="Controllers\PeriocidadesController.cs" />
+    <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PlanificacionsController.cs" />
     <Compile Include="Controllers\PresupuestosController.cs" />
     <Compile Include="Controllers\ProgramacionsController.cs" />
@@ -315,6 +316,9 @@
     <Compile Include="Models\spPorcentajeOEstrategico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spSelectPeriodos_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spShowPlanificacionEjecucionPEDI_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -357,6 +361,7 @@
     <Content Include="App\Controller\ObjetivosEspecificosDepartamentosController.js" />
     <Content Include="App\Controller\ObjetivosEstrategicosController.js" />
     <Content Include="App\Controller\PeriodicidadController.js" />
+    <Content Include="App\Controller\PeriodosController.js" />
     <Content Include="App\Controller\PlanificacionController.js" />
     <Content Include="App\Controller\SubsistemasController.js" />
     <Content Include="App\Directivas\decimalOnly.js" />
@@ -379,6 +384,7 @@
     <Content Include="App\Services\ObjetivosEspecificosServices.js" />
     <Content Include="App\Services\ObjetivosEstrategicosServices.js" />
     <Content Include="App\Services\PeriodicidadServices.js" />
+    <Content Include="App\Services\PeriodosServices.js" />
     <Content Include="App\Services\ProgramacionesServices.js" />
     <Content Include="App\Services\SubsistemasServices.js" />
     <Content Include="App\Views\acciones\index.html" />
@@ -397,6 +403,7 @@
     <Content Include="App\Views\objetivosestrategicos\index.html" />
     <Content Include="App\Views\estrategias\index.html" />
     <Content Include="App\Views\periodicidad\index.html" />
+    <Content Include="App\Views\periodo\index.html" />
     <Content Include="App\Views\subsistema\index.html" />
     <Content Include="Content\angular-datatables.min.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
@@ -465,6 +472,7 @@
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-datatables.js" />
+    <Content Include="Scripts\angular-input-masks-standalone.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-message-format.js" />
@@ -573,7 +581,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Evidencias\" />
-    <Folder Include="Views\Planificacions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

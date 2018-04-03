@@ -7,7 +7,7 @@
         cargarPeriocidad();
         function cargarPeriocidad() {
             PeriodicidadServices.getPeriocidad().then(function (response) {
-                 vm.listPeriocidiades = response.data.listperiocidiades;
+                vm.listPeriocidiades = response.data.listperiocidiades;
             })
         }
         vm.cargarIntervalos = function (id, periocidad) {
@@ -17,6 +17,7 @@
                 vm.listadoIntervalos = response.data.lisIntervalosxPeriocidad
                 vm.modalIntervalo.PeriodoId = id;
                 vm.periocidad = periocidad;
+                vm.modalIntervalo.CampoPivot = periocidad;
             });
         }
         vm.IntervaloModal = function () {
@@ -33,6 +34,7 @@
                     buttonsStyling: false
                 })
                 $('.modal').modal('hide');
+                cargarPeriocidad();
                 vm.cargarIntervalos(vm.modalIntervalo.PeriodoId, vm.periocidad)
                 vm.modalIntervalo.Descripcion = "";
                 vm.modalIntervalo.Orden = "";
@@ -57,7 +59,7 @@
                         type: 'error',
                         confirmButtonClass: "btn btn-danger",
                         buttonsStyling: false
-                    })
+                    });
                 } else {
                     vm.Periodo = " ";
                     swal({
@@ -67,6 +69,7 @@
                         confirmButtonClass: "btn btn-success",
                         buttonsStyling: false
                     })
+                    cargarPeriocidad();
                 }
             }, function errorCallback(response) {
                 swal({

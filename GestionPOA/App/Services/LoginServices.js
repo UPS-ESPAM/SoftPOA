@@ -32,7 +32,7 @@
 
         fact.checkStatus = function () {
             if ($cookies.rol != 'Administrador') {
-                var rutasPrivadas = ["/Subsistema", "/Periodicidad","/Planificacion/Alertas", "/Metas/Informacion/Adicional","/Metas/Asignacion","/Objetivo/Estrategico", "/Objetivo/Estrategico/Ejecucion", "/Objetivo/Especifico","/Objetivo/Especifico/Asignacion"];
+                var rutasPrivadas = ["/Subsistema", "/Periodicidad", "/Periodo","/Planificacion/Alertas", "/Metas/Informacion/Adicional","/Metas/Asignacion","/Objetivo/Estrategico", "/Objetivo/Estrategico/Ejecucion", "/Objetivo/Especifico","/Objetivo/Especifico/Asignacion"];
             }
             if (this.in_array($location.path(), rutasPrivadas) && typeof ($cookies.username) == "undefined") {
                 $location.path("/");

@@ -6,7 +6,8 @@ angular
       'ngTouch',
       'ngTable',
       'ngCookies',
-      'pusher-angular'
+      'pusher-angular',
+      'ui.utils.masks'
   ])
 
   .config(function ($routeProvider) {
@@ -73,6 +74,10 @@ angular
           .when('/Periodicidad', {
               templateUrl: '../../App/Views/periodicidad/index.html',
               controller: 'PeriodicidadController'
+          })
+          .when('/Periodo', {
+              templateUrl: '../../App/Views/periodo/index.html',
+              controller: 'PeriodosController'
           })
           .when('/Planificacion/Alertas', {
               templateUrl: '../../App/Views/alertas/index.html',

@@ -40,7 +40,7 @@
                                     <td style="font-size:12px;"><span data-toggle="modal" data-target="#myModalDetalleMeta" style="cursor:pointer;" ng-click="vm.detalleMeta(Programacion.MetaID)" class="text-success">ver más</span></td>
                                     <td class="text-center">
                                         <div class="ui center input">
-                                            <input size="2" type="text" ng-model="Programacion.Mes" ng-disabled="true" />
+                                            <input size="2" type="text" ng-model="vm.tiempoMeta[$index+''+Programacion.MetaID]" ng-disabled="true" ng-init="vm.tiempoMeta[$index+''+Programacion.MetaID]=Programacion.Mes"/>
                                         </div>
                                     </td>
                                     <td class="text-center">
@@ -69,7 +69,7 @@
                                         </div>
                                     </td>
                                     <td class="td-actions text-center">
-                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion)" class="btn btn-success btn-round">
+                                        <button type="submit" rel="tooltip" title="Actualizar" ng-click="vm.updateMetasProgramacion(Programacion,$index)" class="btn btn-success btn-round">
                                             <i class="material-icons">cached</i>
                                         </button>
                                     </td>
