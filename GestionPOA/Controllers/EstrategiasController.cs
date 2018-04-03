@@ -38,15 +38,16 @@ namespace GestionPOA.Controllers
         // GET: Estrategias/Create
         public JsonResult Create(Estrategias estrategias)
         {
+            int _DepartamentoId = int.Parse(Session["department"].ToString());
             if (Convert.ToString(Session["POAorPEDI"]) == "POA")
             {
-                int _DepartamentoId = int.Parse(Session["department"].ToString());
+               
                 db.spEstrategiasInsert(estrategias.ObjetivosEspecificosId, estrategias.Descripcion, _DepartamentoId);
                 return Json(new { mensaje = "Registrado correctamente" });
             }
             else
             {
-                db.spEstrategiasInsertPEDI(estrategias.ObjetivosEspecificosId, estrategias.Descripcion);
+                db.spEstrategiasInsertPEDI(estrategias.ObjetivosEspecificosId, estrategias.Descripcion, _DepartamentoId);
                 return Json(new { mensaje = "Registrado correctamente" });
             }
         }

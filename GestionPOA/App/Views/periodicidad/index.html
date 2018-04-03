@@ -117,8 +117,9 @@
                                 </select>
                             </div>
                         </div>
+                        <input type="hidden" ng-model="vm.modalIntervalo.CampoPivot" ng-value="vm.modalIntervalo.CampoPivot">
                         <input type="hidden" ng-model="vm.modalIntervalo.PeriodoId" ng-value="vm.modalIntervalo.PeriodoId">
-                        <input type="hidden" ng-model="vm.modalIntervalo.eliminado" ng-value="vm.modalIntervalo.eliminado = 0">
+                        <!--<input type="hidden" ng-model="vm.modalIntervalo.eliminado" ng-value="vm.modalIntervalo.eliminado = 0">-->
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-fill btn-success" ng-disabled="addIntervaloForm.$invalid">Registrar <i class="add icon"></i></button>

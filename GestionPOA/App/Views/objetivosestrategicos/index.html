@@ -9,7 +9,7 @@
                 <form name="AddObjetivosEstrategicosForm" ng-submit="vm.addObjetivoEstrategico();" novalidate>
                     <div class="form-group label-floating">
                         <label class="control-label">SUBSISTEMA</label>
-                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects">
+                        <select class="form-control" ng-model="vm.ObjetivoEstrategico.SubsistemaId" ng-options="arrOptionSelect.SubsistemaId as arrOptionSelect.Descripcion for arrOptionSelect in vm.arrOptionSelects" required>
                                <option value="">-- Seleccione --</option>
                         </select>
                     </div>

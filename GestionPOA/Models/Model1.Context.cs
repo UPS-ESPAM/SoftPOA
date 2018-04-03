@@ -80,23 +80,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObjetivosEspecificosbyDepartamento_Result>("spObjetivosEspecificosbyDepartamento", departmentParameter);
         }
     
-        public virtual int spEstrategiasInsert(Nullable<int> objetivosEspecificosId, string descripcion, Nullable<int> departamentId)
-        {
-            var objetivosEspecificosIdParameter = objetivosEspecificosId.HasValue ?
-                new ObjectParameter("ObjetivosEspecificosId", objetivosEspecificosId) :
-                new ObjectParameter("ObjetivosEspecificosId", typeof(int));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("Descripcion", descripcion) :
-                new ObjectParameter("Descripcion", typeof(string));
-    
-            var departamentIdParameter = departamentId.HasValue ?
-                new ObjectParameter("departamentId", departamentId) :
-                new ObjectParameter("departamentId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
-        }
-    
         public virtual int spMetasInsert(Nullable<int> indicadorId, string descripcion, Nullable<int> tipoCalificacionId)
         {
             var indicadorIdParameter = indicadorId.HasValue ?
@@ -285,19 +268,6 @@ namespace GestionPOA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEstrategiasbyDepartamentoandObjetivoEspecificoPEDI_Result>("spEstrategiasbyDepartamentoandObjetivoEspecificoPEDI", departamentoIdParameter, objetivoEspecificoIdParameter, pOAorPEDIParameter);
         }
     
-        public virtual int spEstrategiasInsertPEDI(Nullable<int> objetivosEspecificosId, string descripcion)
-        {
-            var objetivosEspecificosIdParameter = objetivosEspecificosId.HasValue ?
-                new ObjectParameter("ObjetivosEspecificosId", objetivosEspecificosId) :
-                new ObjectParameter("ObjetivosEspecificosId", typeof(int));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("Descripcion", descripcion) :
-                new ObjectParameter("Descripcion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsertPEDI", objetivosEspecificosIdParameter, descripcionParameter);
-        }
-    
         public virtual ObjectResult<spMetasDepartment_Result> spMetasDepartment(Nullable<int> department, string pOAorPEDI)
         {
             var departmentParameter = department.HasValue ?
@@ -412,6 +382,40 @@ namespace GestionPOA.Models
         public virtual ObjectResult<Nullable<int>> spCountPlanificacionEjecucion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCountPlanificacionEjecucion");
+        }
+    
+        public virtual int spEstrategiasInsert(Nullable<int> objetivosEspecificosId, string descripcion, Nullable<int> departamentId)
+        {
+            var objetivosEspecificosIdParameter = objetivosEspecificosId.HasValue ?
+                new ObjectParameter("ObjetivosEspecificosId", objetivosEspecificosId) :
+                new ObjectParameter("ObjetivosEspecificosId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var departamentIdParameter = departamentId.HasValue ?
+                new ObjectParameter("departamentId", departamentId) :
+                new ObjectParameter("departamentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsert", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
+        }
+    
+        public virtual int spEstrategiasInsertPEDI(Nullable<int> objetivosEspecificosId, string descripcion, Nullable<int> departamentId)
+        {
+            var objetivosEspecificosIdParameter = objetivosEspecificosId.HasValue ?
+                new ObjectParameter("ObjetivosEspecificosId", objetivosEspecificosId) :
+                new ObjectParameter("ObjetivosEspecificosId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var departamentIdParameter = departamentId.HasValue ?
+                new ObjectParameter("departamentId", departamentId) :
+                new ObjectParameter("departamentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEstrategiasInsertPEDI", objetivosEspecificosIdParameter, descripcionParameter, departamentIdParameter);
         }
     }
 }

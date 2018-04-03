@@ -18,7 +18,6 @@ namespace GestionPOA.Controllers
         public ActionResult GetPeriocidades()
         {
             var periocidiades = db.Periocidad.Where(p => p.eliminado == false)
-                                                .Where(p => p.Periodo == "Trimestral")
                                                 .Select(p => new { id = p.id, Periodo = p.Periodo })
                                                 .ToList();
             return Json(new { listperiocidiades = periocidiades }, JsonRequestBehavior.AllowGet);

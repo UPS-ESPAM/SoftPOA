@@ -133,7 +133,7 @@
             })
         }
         function cargarMetaEjecución() {
-                MetasServices.getMetasEjecucion().then(function (response) {
+            MetasServices.getMetasEjecucion().then(function (response) {
                 vm.listadoMetasEjecucion = response.data.listMetasEjecucionn;
             })
         }   
@@ -180,7 +180,7 @@
             var requestResponse = MetasServices.updateObservacionMeta(vm.observacion.id, vm.observacion.Observacion);
             Message(requestResponse);
         }
-        vm.updateMetasProgramacion = function (Programacion) {
+        vm.updateMetasProgramacion = function (Programacion,index) {
             if (vm.status == "PEDI") {
                 vm.arrayprogramacion = [];
                 vm.arrayprogramacion.push(
@@ -204,6 +204,13 @@
                 for (var i = 0; i < vm.arrayprogramacion.length; i++) {
                     var total = total + parseInt(vm.arrayprogramacion[i].valor);
                 }
+                cont = 0;
+                for (var j = 0; j < vm.arrayprogramacion.length; j++) {
+                    cont += 1;
+                    if (vm.arrayprogramacion[j].valor != 0) {
+                        vm.tiempoMeta[index + "" + vm.arrayprogramacion[j].MetasID] = 3 * cont;
+                    }
+                }
                 if (total == 100) {
                     var requestResponse = ProgramacionesServices.updateProgramacionesPOA(vm.arrayprogramacion, Programacion.MetaID, Programacion.Presupuesto );
                     Message(requestResponse);
@@ -224,10 +231,10 @@
             }
 
         }
-        vm.updateMetasEjecucion = function (id, MetaID,valor ) {
+        vm.updateMetasEjecucion = function (id, MetaID, valor) {
             if (valor > valorP) {
                 mensaje = "exceso";
-            } else {
+            } if (valor < valorP){
                 mensaje = "no cumplimiento";
             }
   

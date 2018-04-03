@@ -471,6 +471,7 @@
         <Function Name="spEstrategiasInsertPEDI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="ObjetivosEspecificosId" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="departamentId" Type="int" Mode="In" />
         </Function>
         <Function Name="spEstrategiasPeriodoActualConsult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="planificacion">
           <Parameter Name="ObjetivoEspecifico" Type="int" Mode="In" />
@@ -1001,11 +1002,6 @@
           <FunctionImport Name="spObjetivosEspecificosbyDepartamento" ReturnType="Collection(PEDIModel.spObjetivosEspecificosbyDepartamento_Result)">
           <Parameter Name="department" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spEstrategiasInsert">
-            <Parameter Name="ObjetivosEspecificosId" Mode="In" Type="Int32" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="departamentId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="spMetasInsert">
             <Parameter Name="IndicadorId" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1094,10 +1090,6 @@
             <Parameter Name="ObjetivoEspecificoId" Mode="In" Type="Int32" />
             <Parameter Name="POAorPEDI" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="spEstrategiasInsertPEDI">
-            <Parameter Name="ObjetivosEspecificosId" Mode="In" Type="Int32" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="spMetasDepartment" ReturnType="Collection(PEDIModel.spMetasDepartment_Result)">
             <Parameter Name="department" Mode="In" Type="Int32" />
             <Parameter Name="POAorPEDI" Mode="In" Type="String" />
@@ -1140,6 +1132,16 @@
             <Parameter Name="DeparmentID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spCountPlanificacionEjecucion" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spEstrategiasInsert">
+            <Parameter Name="ObjetivosEspecificosId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="departamentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEstrategiasInsertPEDI">
+            <Parameter Name="ObjetivosEspecificosId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="departamentId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spLoginIngreso_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1740,7 +1742,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spEstrategiasInsert" FunctionName="PEDIModel.Store.spEstrategiasInsert" />
           <FunctionImportMapping FunctionImportName="spMetasInsert" FunctionName="PEDIModel.Store.spMetasInsert" />
           <FunctionImportMapping FunctionImportName="spIndicadorDetalle" FunctionName="PEDIModel.Store.spIndicadorDetalle">
             <ResultMapping>
@@ -1952,7 +1953,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spEstrategiasInsertPEDI" FunctionName="PEDIModel.Store.spEstrategiasInsertPEDI" />
           <FunctionImportMapping FunctionImportName="spMetasDepartment" FunctionName="PEDIModel.Store.spMetasDepartment">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PEDIModel.spMetasDepartment_Result">
@@ -2094,6 +2094,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="POAorPEDI" FunctionName="PEDIModel.Store.POAorPEDI" />
           <FunctionImportMapping FunctionImportName="spCountPlanificacionEjecucion" FunctionName="PEDIModel.Store.spCountPlanificacionEjecucion" />
+          <FunctionImportMapping FunctionImportName="spEstrategiasInsert" FunctionName="PEDIModel.Store.spEstrategiasInsert" />
+          <FunctionImportMapping FunctionImportName="spEstrategiasInsertPEDI" FunctionName="PEDIModel.Store.spEstrategiasInsertPEDI" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
