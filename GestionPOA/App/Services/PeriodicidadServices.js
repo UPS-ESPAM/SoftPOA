@@ -18,6 +18,15 @@
             });
             return request;
         }
+        fact.UpdateEstado = function (estado) {
+            var request = $http({
+                method: 'POST',
+                url: '../Periocidades/UpdateEstado',
+                data: { 'estado': estado },
+                dataType: "json"
+            });
+            return request;
+        }
         fact.addPlanificacion = function (idtipoplanificacion, idperiocidad) {
             var request = $http({
                 method: 'POST',

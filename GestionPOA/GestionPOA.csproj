@@ -277,6 +277,9 @@
     <Compile Include="Models\spMetaAndProgramacionesPEDI_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spMetaAndProgramacionesPEDI_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spMetaAndProgramaciones_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
