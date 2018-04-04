@@ -31,11 +31,15 @@
                     <table class="table table-hover">
                         <thead class="text-warning">
                         <th>Descripción</th>
+                        <th>Estado</th>
                         </thead>
                         <tbody>
                             <tr ng-repeat="periocidad in vm.listPeriocidiades">
                                 <td ng-click="vm.cargarIntervalos(periocidad.id,periocidad.Periodo)" style="cursor:pointer;">{{periocidad.Periodo}}</td>
-                            </tr>
+                                <td>
+                                    <input type="radio" name="estado" ng-checked="periocidad.estado" ng-click="vm.changeEstado(periocidad.Periodo)" />Activo
+                                </td>
+                            </tr> 
                         </tbody>
                     </table>
                 </div>

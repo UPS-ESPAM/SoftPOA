@@ -121,7 +121,39 @@
                 })
                 vm.cargarIntervalos(vm.modalIntervalo.PeriodoId, vm.periocidad)
                 $('.modal').modal('hide');
-
+            });
+        }
+        vm.changeEstado = function (estado) {
+            var requestResponse = PeriodicidadServices.UpdateEstado(estado)
+                requestResponse.then(function successCallback(response) {
+                if (response.data.mensaje == 'no') {
+                    $.notify({
+                                  icon: "notifications",
+                                  message: "<b>Error: </b> No se puedo actulizar el estado"
+                             },{
+                                  type: 'danger',
+                                  timer: 10,
+                                  placement: {from: 'top',align: 'right'}
+                             });
+                } else {
+                    $.notify({
+                                 icon: "notifications",
+                                 message: "<b>Correcto: </b> Estado actualizado correctamente"
+                             },{
+                                 type: 'success',
+                                 timer: 10,
+                                 placement: {from: 'top', align: 'right'}
+                             });
+                }
+            }, function errorCallback(response) {
+                $.notify({
+                    icon: "notifications",
+                    message: "<b>Error: </b> No se puedo actulizar el estado"
+                }, {
+                        type: 'danger',
+                        timer: 10,
+                        placement: { from: 'top', align: 'right' }
+                    });
             });
         }
     });

@@ -18,7 +18,7 @@ namespace GestionPOA.Controllers
         public ActionResult GetPeriocidades()
         {
             var periocidiades = db.Periocidad.Where(p => p.eliminado == false)
-                                                .Select(p => new { id = p.id, Periodo = p.Periodo })
+                                                .Select(p => new { id = p.id, Periodo = p.Periodo, estado = p.estado })
                                                 .ToList();
             return Json(new { listperiocidiades = periocidiades }, JsonRequestBehavior.AllowGet);
         }
@@ -49,7 +49,7 @@ namespace GestionPOA.Controllers
             {
                 Periocidad periocidiades = new Periocidad();
                 periocidiades.Periodo = periodo;
-                periocidiades.estado = true;
+                periocidiades.estado = false;
                 periocidiades.eliminado = false;
                 db.Periocidad.Add(periocidiades);
                 db.SaveChanges();
@@ -66,7 +66,19 @@ namespace GestionPOA.Controllers
             db.SaveChanges();
             return Json(new { mensaje = "Registrado actualizado correctamente" });
         }
-
+        // POST: Periocidades/UpdateEstado
+        public ActionResult UpdateEstado(string estado)
+        {
+            if (estado != null)
+            {
+                var change = db.ChangeEstadoPeriocidad(estado);
+                return Json(new { mensaje = "ok" });
+            }
+            else {
+                return Json(new { mensaje = "no" });
+            }
+           
+        }
         // POST: Periocidades/Delete
         [HttpPost]
         public ActionResult Delete(int id)

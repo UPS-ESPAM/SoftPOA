@@ -34,7 +34,7 @@
                             vm.ejecu[index] = "Deficiente";
                             break;
                         default:
-                            vm.ejecu[index] = element.planificado+"%";
+                            vm.ejecu[index] = element.ejecutado+"%";
                     }
                 });
             })
