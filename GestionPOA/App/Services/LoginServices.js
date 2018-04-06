@@ -5,7 +5,7 @@
         fact.verifysLogin = function (user, password) {
             var request = $http({
                 method: 'POST',
-                url: '../Admin/Logearse/',
+                url: getBaseUrl() +'/Admin/Logearse/',
                 dataType: "json",
                 data: { 'usuario': user,'password': password}
             });
@@ -14,7 +14,7 @@
         fact.POAorPEDI = function (singIN) {
             var request = $http({
                 method: 'POST',
-                url: '../Admin/POAorPEDI/',
+                url: getBaseUrl() +'/Admin/POAorPEDI/',
                 dataType: "json",
                 data: { 'singIN': singIN }
             });
@@ -24,7 +24,7 @@
         fact.logout = function () {
             var request = $http({
                 method: 'POST',
-                url: '../Admin/Logout/',
+                url: getBaseUrl() +'/Admin/Logout/',
                 dataType: "json"
             });
             return request;

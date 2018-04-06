@@ -3,13 +3,13 @@
         var fact = {};
         
         fact.getMetas = function () {
-            return $http.get('../Metas/Metas');
+            return $http.get(getBaseUrl() +'/Metas/Metas');
         }
 
         fact.getMetasObservacion = function (id) {
             var request = $http({
                 method: 'GET',
-                url: '../Metas/Observacion/' + id,
+                url: getBaseUrl() + '/Metas/Observacion/' + id,
                 dataType: "json"
             });
             return request;
@@ -18,7 +18,7 @@
         fact.getDetalleMeta = function (id) {
             var request = $http({
                 method: 'GET',
-                url: '../Metas/MetaDetalle/' + id,
+                url: getBaseUrl() + '/Metas/MetaDetalle/' + id,
                 dataType: "json"
             });
             return request;
@@ -27,7 +27,7 @@
         fact.updateObservacionMeta= function (id, observacion) {
             var request = $http({
                 method: 'POST',
-                url: '../Metas/ObservacionUpdate/',
+                url: getBaseUrl() + '/Metas/ObservacionUpdate/',
                 data: {'id':id, 'observacion':observacion},
                 dataType: "json"
             });
@@ -35,13 +35,13 @@
         }
 
         fact.getMetasProgramacion = function () {
-            return $http.get('../Metas/Programacion');
+            return $http.get(getBaseUrl() +'/Metas/Programacion');
         }
 
         fact.getMetasbyIndicador = function (id) {
             var request = $http({
                 method: 'GET',
-                url: '../Metas/MetasbyIndicador/' + id,
+                url: getBaseUrl() + '/Metas/MetasbyIndicador/' + id,
                 dataType: "json"
             });
             return request;
@@ -51,7 +51,7 @@
             debugger
             var request = $http({
                 method: 'POST',
-                url: '../Metas/Create',
+                url: getBaseUrl() + '/Metas/Create',
                 data: metas,
                 dataType: "json"
             });
@@ -61,7 +61,7 @@
         fact.updateMetas = function (id, descripcion, tipo) {
             var request = $http({
                 method: 'POST',
-                url: '../Metas/Update',
+                url: getBaseUrl() + '/Metas/Update',
                 data: { 'id': id, 'descripcion': descripcion, 'idtipo': tipo},
                 dataType: "json"
             });
@@ -71,22 +71,22 @@
         fact.deleteMetas = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../Metas/Delete/' + id,
+                url: getBaseUrl() + '/Metas/Delete/' + id,
                 dataType: "json"
             });
             return request;
         }
 
         fact.getMetasEjecucion = function () {
-            return $http.get('../Metas/Ejecucion');
+            return $http.get(getBaseUrl() +'/Metas/Ejecucion');
         }
 
         fact.getMetasEjecucionPEDI = function () {
-            return $http.get('../Metas/EjecucionPEDI');
+            return $http.get(getBaseUrl() +'/Metas/EjecucionPEDI');
         }
 
         fact.getMetasPlanificacion = function () {
-            return $http.get('../Metas/MetasPlanificacion');
+            return $http.get(getBaseUrl() +'/Metas/MetasPlanificacion');
         }
         return fact;
     }]);

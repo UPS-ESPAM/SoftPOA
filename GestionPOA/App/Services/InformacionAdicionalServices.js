@@ -3,13 +3,13 @@
         var fact = {};
 
         fact.getFormulaCalculo = function (id) {
-            return $http.get('../InformacionAdicionals/getInformacionAdicional/'+id);
+            return $http.get(getBaseUrl() +'/InformacionAdicionals/getInformacionAdicional/'+id);
         }
 
         fact.addFormulaCalculo = function (informacionadicional) {
             var request = $http({
                 method: 'POST',
-                url: '../InformacionAdicionals/Create',
+                url: getBaseUrl() + '/InformacionAdicionals/Create',
                 data: informacionadicional,
                 dataType: "json"
             });
@@ -19,7 +19,7 @@
         fact.updateFormulaCalculo = function (informacionadicional) {
             var request = $http({
                 method: 'POST',
-                url: '../InformacionAdicionals/Update',
+                url: getBaseUrl() + '/InformacionAdicionals/Update',
                 data: informacionadicional,
                 dataType: "json"
             });
@@ -29,7 +29,7 @@
         fact.deleteFormulaCalculo = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../InformacionAdicionals/Delete/' + id,
+                url: getBaseUrl() + '/InformacionAdicionals/Delete/' + id,
                 dataType: "json"
             });
             return request;

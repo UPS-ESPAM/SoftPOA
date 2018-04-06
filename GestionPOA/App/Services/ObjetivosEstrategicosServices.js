@@ -3,19 +3,19 @@
         var fact = {};
 
         fact.getObjetivosEstrategicos = function () {
-            return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicos');
+            return $http.get(getBaseUrl() +'/ObjetivosEstrategicos/GetObjetivosEstrategicos');
         }
         fact.getCumplimintnoOEstrategicos = function () {
-            return $http.get('../ObjetivosEstrategicos/GetCumplimientoObjetivosEstrategicos');
+            return $http.get(getBaseUrl() +'/ObjetivosEstrategicos/GetCumplimientoObjetivosEstrategicos');
         }
         fact.getObjetivosEstrategicosBySubSistema = function (id) {
-            return $http.get('../ObjetivosEstrategicos/GetObjetivosEstrategicosPeriodoActual/'+id);
+            return $http.get(getBaseUrl() +'/ObjetivosEstrategicos/GetObjetivosEstrategicosPeriodoActual/'+id);
         }
  
         fact.addObjetivoEstrategico = function (ObjetivoEstrategico) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjetivosEstrategicos/Create',
+                url: getBaseUrl() + '/ObjetivosEstrategicos/Create',
                 data: ObjetivoEstrategico,
                 dataType: "json"
             });
@@ -26,7 +26,7 @@
             
             var request = $http({
                 method: 'POST',
-                url: '../ObjetivosEstrategicos/Update',
+                url: getBaseUrl() + '/ObjetivosEstrategicos/Update',
                 data: ObjetivoEstrategico,
                 dataType: "json"
             });
@@ -37,7 +37,7 @@
             debugger
             var request = $http({
                 method: 'POST',
-                url: '../ObjetivosEstrategicos/Delete/' + id,
+                url: getBaseUrl() + '/ObjetivosEstrategicos/Delete/' + id,
                 dataType: "json"
             });
             return request;

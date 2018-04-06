@@ -3,15 +3,15 @@
         var fact = {};
 
         fact.getSubsistemas = function () {
-            return $http.get('../Subsistemas/GetSubsistema');
+            return $http.get(getBaseUrl() +'/Subsistemas/GetSubsistema');
         }
         fact.getSubsistemasPeriodo = function () {
-            return $http.get('../Subsistemas/GetSubsistemaPeriodoActual');
+            return $http.get(getBaseUrl() +'/Subsistemas/GetSubsistemaPeriodoActual');
         }
         fact.addSubsistemas = function (subsistema) {
             var request = $http({
                 method: 'POST',
-                url: '../Subsistemas/Create',
+                url: getBaseUrl() + '/Subsistemas/Create',
                 data: subsistema,
                 dataType: "json"
             });
@@ -21,7 +21,7 @@
         fact.updateSubsistemas = function (subsistema) {
             var request = $http({
                 method: 'POST',
-                url: '../Subsistemas/Update',
+                url: getBaseUrl() + '/Subsistemas/Update',
                 data: subsistema,
                 dataType: "json"
             });
@@ -31,7 +31,7 @@
         fact.deleteSubsistemas = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../Subsistemas/Delete/'+id,
+                url: getBaseUrl() + '/Subsistemas/Delete/'+id,
                 dataType: "json"
             });
             return request;

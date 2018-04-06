@@ -3,7 +3,7 @@
         var fact = {};
 
         fact.getDepartamentos = function () {
-            return $http.get('../Departamentoes/Departamentos');
+            return $http.get(getBaseUrl() +'/Departamentoes/Departamentos');
         }
         return fact;
     }]);

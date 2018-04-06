@@ -5,7 +5,7 @@
         fact.getAcciones = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../Acciones/Acciones/' + id,
+                url: getBaseUrl() + '/Acciones/Acciones/' + id,
                 dataType: "json"
             });
             return request;
@@ -14,7 +14,7 @@
         fact.addAcciones = function (accion) {
             var request = $http({
                 method: 'POST',
-                url: '../Acciones/Create',
+                url: getBaseUrl() + '/Acciones/Create',
                 data: accion,
                 dataType: "json"
             });
@@ -24,7 +24,7 @@
         fact.updateAcciones = function (accion) {
             var request = $http({
                 method: 'POST',
-                url: '../Acciones/Update',
+                url: getBaseUrl() + '/Acciones/Update',
                 data: accion,
                 dataType: "json"
             });
@@ -34,7 +34,7 @@
         fact.deleteAcciones = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../Acciones/Delete/' + id,
+                url: getBaseUrl() + '/Acciones/Delete/' + id,
                 dataType: "json"
             });
             return request;

@@ -3,16 +3,16 @@
         var fact = {};
 
         fact.getIntervalos = function () {
-            return $http.get('../Intervalos/Intervalos');
+            return $http.get(getBaseUrl() +'/Intervalos/Intervalos');
         }
         fact.getIntervalosPEDI = function () {
-            return $http.get('../Intervalos/IntervalosPEDI');
+            return $http.get(getBaseUrl() +'/Intervalos/IntervalosPEDI');
         }
 
         fact.getIntervalosPeriocidad = function (id) {
             var request = $http({
                 method: 'GET',
-                url: '../Intervalos/GetIntervalos/' + id,
+               url: getBaseUrl() + '/Intervalos/GetIntervalos/' + id,
                 dataType: "json"
             });
             return request;
@@ -20,7 +20,7 @@
         fact.addIntervalos = function (intervalos) {
             var request = $http({
                 method: 'POST',
-                url: '../Intervalos/Create',
+               url: getBaseUrl() + '/Intervalos/Create',
                 data: intervalos,
                 dataType: "json"
             });
@@ -29,7 +29,7 @@
         fact.updateIntervalos = function (id, orden, _intervalo) {
             var request = $http({
                 method: 'POST',
-                url: '../Intervalos/Update',
+               url: getBaseUrl() + '/Intervalos/Update',
                 data: { 'id': id, 'orden': orden, '_intervalo': _intervalo},
                 dataType: "json"
             });
@@ -39,7 +39,7 @@
             debugger
             var request = $http({
                 method: 'POST',
-                url: '../Intervalos/Delete',
+               url: getBaseUrl() + '/Intervalos/Delete',
                 data: {'id': id},
                 dataType: "json"
             });

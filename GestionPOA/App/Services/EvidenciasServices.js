@@ -8,7 +8,7 @@
             formData.append("file", file);
             return $http({
                 method: 'POST',
-                url: '../Evidencias/upload',
+                url: getBaseUrl() + '/Evidencias/upload',
                 dataType: "json",
                 data: formData,
                 headers: { "Content-type": undefined },

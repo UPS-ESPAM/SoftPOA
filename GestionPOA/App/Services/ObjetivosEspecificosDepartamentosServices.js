@@ -2,12 +2,12 @@
     .factory('ObjetivosEspecificosDepartamentosServices', ['$http', function ($http) {
         var fact = {};
         fact.GetAsignacionObjetivosEspecificos= function () {
-            return $http.get('../ObjeEspecificosDepartamentoes/GetAsignacionObjetivosEspecificos');
+            return $http.get(getBaseUrl() +'/ObjeEspecificosDepartamentoes/GetAsignacionObjetivosEspecificos');
         }
         fact.addAsignacionObjetivosEspecificos = function (departamentoID, objetivoEspecificoID) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjeEspecificosDepartamentoes/Create',
+               url: getBaseUrl() + '/ObjeEspecificosDepartamentoes/Create',
                 data: { 'departamentoID': departamentoID, 'objetivoEspecificoID': objetivoEspecificoID},
                 dataType: "json"
             });
@@ -16,7 +16,7 @@
         fact.updateAsignacionObjetivosEspecificos = function (id, objetivosEspecificosId) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjeEspecificosDepartamentoes/Update',
+               url: getBaseUrl() + '/ObjeEspecificosDepartamentoes/Update',
                 data: { 'id': id, 'objetivosEspecificosId': objetivosEspecificosId },
                 dataType: "json"
             });
@@ -25,7 +25,7 @@
         fact.deleteAsignacionObjetivosEspecificos = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjeEspecificosDepartamentoes/Delete/' + id,
+               url: getBaseUrl() + '/ObjeEspecificosDepartamentoes/Delete/' + id,
                 dataType: "json"
             });
             return request;

@@ -5,7 +5,7 @@
         fact.getCountAlert = function () {
             var request = $http({
                 method: 'GET',
-                url: '../Alertas/getCountAlert',
+                url: getBaseUrl() + '/Alertas/getCountAlert',
                 dataType: "json"
             });
             return request;
@@ -13,7 +13,7 @@
         fact.getAlertas = function () {
             var request = $http({
                 method: 'GET',
-                url: '../Alertas/getAlertas',
+                url: getBaseUrl() + '/Alertas/getAlertas',
                 dataType: "json"
             });
             return request;
@@ -22,7 +22,7 @@
         fact.readAlertas = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../Alertas/ReadAlert',
+                url: getBaseUrl() + '/Alertas/ReadAlert',
                 data: { 'id': id },
                 dataType: "json"
             });

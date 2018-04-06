@@ -3,17 +3,17 @@
         var fact = {};
 
         fact.getObjetivosEspecificos = function () {
-            return $http.get('../ObjetivosEspecificos/getObjetivosEspecificos');
+            return $http.get(getBaseUrl() +'/ObjetivosEspecificos/getObjetivosEspecificos');
         }
 
         fact.getObjetivosEspecificosPeriodoActual = function (id) {
-            return $http.get('../ObjetivosEspecificos/getObjetivosEspecificosbyObjEstrategicoPeriodoActual/'+id);
+            return $http.get(getBaseUrl() +'/ObjetivosEspecificos/getObjetivosEspecificosbyObjEstrategicoPeriodoActual/'+id);
         }
 
         fact.addObjetivosEspecificos = function (objetivosEspecificos) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjetivosEspecificos/Create',
+               url: getBaseUrl() + '/ObjetivosEspecificos/Create',
                 data: objetivosEspecificos,
                 dataType: "json"
             });
@@ -23,7 +23,7 @@
         fact.updateObjetivosEspecificos = function (objetivosEspecificos) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjetivosEspecificos/Update',
+               url: getBaseUrl() + '/ObjetivosEspecificos/Update',
                 data: objetivosEspecificos,
                 dataType: "json"
             });
@@ -33,7 +33,7 @@
         fact.deleteObjetivosEspecificos = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../ObjetivosEspecificos/Delete/' + id,
+               url: getBaseUrl() + '/ObjetivosEspecificos/Delete/' + id,
                 dataType: "json"
             });
             return request;

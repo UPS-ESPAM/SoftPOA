@@ -5,7 +5,7 @@
         fact.getCumplimiento = function (idmeta) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/getCumplimiento',
+                url: getBaseUrl() + '/Programacions/getCumplimiento',
                 data: { 'idmeta': idmeta },
                 dataType: "json"
             });
@@ -15,7 +15,7 @@
         fact.getObservacion = function (metaid, id) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/getObservacion',
+                url: getBaseUrl() + '/Programacions/getObservacion',
                 data: { 'metaid': metaid, 'id': id },
                 dataType: "json"
             });
@@ -24,7 +24,7 @@
         fact.updateProgramacionesPEDI = function (programacion) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/UpdatePEDI',
+                url: getBaseUrl() + '/Programacions/UpdatePEDI',
                 data: programacion,
                 dataType: "json"
             });
@@ -34,7 +34,7 @@
         fact.updateEjecucionPEDI = function (programacion) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/EjecucionUpdatePEDI',
+                url: getBaseUrl() + '/Programacions/EjecucionUpdatePEDI',
                 data: programacion,
                 dataType: "json"
             });
@@ -44,7 +44,7 @@
         fact.getTrismetrePlanificiacion = function (idmeta, id) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/planificacion',
+                url: getBaseUrl() + '/Programacions/planificacion',
                 data: { 'idmeta': idmeta, 'id': id },
                 dataType: "json"
             });
@@ -54,7 +54,7 @@
         fact.updateProgramacionesPOA = function (programacion, id, valor) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/UpdatePOA',
+                url: getBaseUrl() + '/Programacions/UpdatePOA',
                 data: { 'programacion': programacion, 'id': id, 'valor': valor },
                 dataType: "json"
             });
@@ -63,7 +63,7 @@
         fact.updatePresupuesto = function ( MetasID, presupuesto) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/UpdatePresupuesto',
+                url: getBaseUrl() + '/Programacions/UpdatePresupuesto',
                 data: { 'MetasID': MetasID, 'presupuesto': presupuesto  },
                 dataType: "json"
             });
@@ -72,7 +72,7 @@
         fact.updateEjecucionPOA = function (id, MetasID, valor, observacion) {
             var request = $http({
                 method: 'POST',
-                url: '../Programacions/EjecucionUpdatePOA',
+                url: getBaseUrl() + '/Programacions/EjecucionUpdatePOA',
                 data: { 'id': id, 'MetasID': MetasID, 'valor': valor, 'observacion': observacion },
                 dataType: "json"
             });

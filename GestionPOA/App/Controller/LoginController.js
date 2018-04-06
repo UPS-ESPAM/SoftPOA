@@ -15,11 +15,11 @@
             var requestResponse = LoginServices.verifysLogin(vm.login.usuario, vm.login.password);
             requestResponse.then(function successCallback(response) {
                 if ((response.data.rol == "Existe") && (response.data.tipo == 'Usuario')){
-                    window.location.href = '/Admin/Index';
+                    window.location.href = getBaseUrl()+'/Admin/Index';
                 } else if ((response.data.rol == "Existe") && (response.data.tipo == 'Administrador')) {
                     $("#myModalPOAPEDI").modal("show");
                 } else if ((response.data.rol == "No Existe") && (response.data.tipo == 'Administrador')) {
-                    window.location.href = '/Admin/Index';
+                    window.location.href = getBaseUrl() +'/Admin/Index';
                 }else {
                     $("#myModalss").modal("show");
                 }
@@ -64,7 +64,7 @@
         vm.registerPlanificacion = function () {
             var requestResponse = PeriodicidadServices.addPlanificacion(vm.TipoPlanificacion, vm.Planificacionperiodo);
             requestResponse.then(function successCallback(response) {
-                window.location.href = '/Admin/Index';
+                window.location.href = getBaseUrl() +'/Admin/Index';
                 swal({
                       title: 'Correcto!',
                       text: response.data.mensaje,
@@ -89,7 +89,7 @@
                     $("#myModalPOAPEDI").modal("hide");
                     $("#myModalss").modal("show");
                 } else {
-                    window.location.href = '/Admin/Index';
+                    window.location.href = getBaseUrl() + '/Admin/Index';
                 }
 
             }, function errorCallback(response) {

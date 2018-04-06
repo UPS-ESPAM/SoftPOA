@@ -5,22 +5,22 @@
         fact.addPeriodos = function (descripcion, inicio, fin) {
             var request = $http({
                 method: 'POST',
-                url: '../Periodos/create',
+                url: getBaseUrl() + '/Periodos/create',
                 data: { 'descripcion': descripcion, 'inicio': inicio, 'fin': fin },
                 dataType: "json"
             });
             return request;
         }
         fact.SelectPeriodos = function () {
-            return $http.get('../Periodos/SelectPeriodos');
+            return $http.get(getBaseUrl() +'/Periodos/SelectPeriodos');
         }
         fact.getPeriodos = function () {
-            return $http.get('../Periodos/getPeriodos');
+            return $http.get(getBaseUrl() +'/Periodos/getPeriodos');
         }
         fact.updatePeriodos = function (periodo) {
             var request = $http({
                 method: 'POST',
-                url: '../Periodos/Update',
+                url: getBaseUrl() + '/Periodos/Update',
                 data: periodo,
                 dataType: "json"
             });
@@ -30,7 +30,7 @@
         fact.deletePeriodos = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../Periodos/Delete/' + id,
+                url: getBaseUrl() + '/Periodos/Delete/' + id,
                 dataType: "json"
             });
             return request;

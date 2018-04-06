@@ -3,14 +3,14 @@
         var fact = {};
 
         fact.getMetasDepartamentos = function () {
-            return $http.get('../MetasDepartamentoes/MetasAsignadas');
+            return $http.get(getBaseUrl() +'/MetasDepartamentoes/MetasAsignadas');
         }       
 
         fact.addMetasDepartamentos = function (metaid, departamentoid) {
             debugger
             var request = $http({
                 method: 'POST',
-                url: '../MetasDepartamentoes/Create',
+               url: getBaseUrl() + '/MetasDepartamentoes/Create',
                 data: { '_MetasId': metaid, '_DepartamentoID': departamentoid },
                 dataType: "json"
             });
@@ -21,7 +21,7 @@
         fact.updateMetasDepartamentos = function (id, metaid) {
             var request = $http({
                 method: 'POST',
-                url: '../MetasDepartamentoes/Update',
+               url: getBaseUrl() + '/MetasDepartamentoes/Update',
                 data: { 'id': id, '_MetasId': metaid },
                 dataType: "json"
             });
@@ -32,7 +32,7 @@
         fact.deleteMetasDepartamentos = function (id) {
             var request = $http({
                 method: 'POST',
-                url: '../MetasDepartamentoes/Delete/' + id,
+               url: getBaseUrl() + '/MetasDepartamentoes/Delete/' + id,
                 dataType: "json"
             });
             return request;

@@ -167,6 +167,68 @@
     @Scripts.Render("~/bundles/plantillaJS")
     @Scripts.Render("~/bundles/angular")
 
+
+    @Scripts.Render("~/App/app.js",
+                       "~/App/Services/SubsistemasServices.js",
+                       "~/App/Services/ObjetivosEspecificosServices.js",
+                       "~/App/Services/ObjetivosEstrategicosServices.js",
+                       "~/App/Services/IndicadoresServices.js",
+                       "~/App/Services/AccionesServices.js",
+                       "~/App/Services/EstrategiasServices.js",
+                       "~/App/Services/LoginServices.js",
+                       "~/App/Services/MetasServices.js",
+                       "~/App/Services/EvidenciasServices.js",
+                       "~/App/Services/IntervalosServices.js",
+                       "~/App/Services/ProgramacionesServices.js",
+                       "~/App/Services/DepartamentosServices.js",
+                       "~/App/Services/MetasDepartamentosServices.js",
+                       "~/App/Services/ObjetivosEspecificosDepartamentosServices.js",
+                       "~/App/Services/PeriodicidadServices.js",
+                       "~/App/Services/InformacionAdicionalServices.js",
+                       "~/App/Services/AlertasServices.js",
+                       "~/App/Services/PeriodosServices.js",
+                       "~/App/Controller/SubsistemasController.js",
+                       "~/App/Controller/ObjetivosEspecificosController.js",
+                       "~/App/Controller/ObjetivosEstrategicosController.js",
+                       "~/App/Controller/IndicadoresController.js",
+                       "~/App/Controller/AccionesController.js",
+                       "~/App/Controller/LoginController.js",
+                       "~/App/Controller/MetasController.js",
+                       "~/App/Controller/MetasDepartamentosController.js",
+                       "~/App/Controller/ObjetivosEspecificosDepartamentosController.js",
+                       "~/App/Controller/PeriodicidadController.js",
+                       "~/App/Controller/InformacionAdicionalController.js",
+                       "~/App/Controller/CumplimientoOEstrategicoController.js",
+                       "~/App/Controller/AlertasController.js",
+                       "~/App/Controller/PeriodosController.js",
+                       "~/App/Controller/HomeController.js",
+                       "~/App/Directivas/numbersOnly.js",
+                       "~/App/Controller/EstrategiasController.js",
+                       "~/App/Directivas/decimalOnly.js",
+                       "~/App/Directivas/formatCurrency.js", 
+                       "~/App/Directivas/uploadFile.js",
+                       "~/App/Directivas/loader.js"
+                        )
+
+    <!-- OBTENER RUTA PARA ANGULAR-->
+    <script>
+        var isdebug = false;
+
+        function getBaseUrl() {
+            var url = "";
+            isdebug = true;
+            if (isdebug) {
+                url = location.href.split("/");
+                return url[0] + "/" + url[1] + "/" + url[2];
+            }
+            else {
+                return url;
+            }
+        }
+
+    </script>
+
+
     <script type="text/javascript">
         $().ready(function () {
 
