@@ -54,7 +54,7 @@ namespace GestionPOA
                      "~/Content/assets/css/material-dashboard.css"
                      ));
 
-            bundles.Add(new StyleBundle("~/Content/plugins").Include(
+            bundles.Add(new StyleBundle("~/Content/plugin").Include(
                     "~/Content/plugins/modal.min.css",
                     "~/Content/plugins/icon.min.css"
                     ));

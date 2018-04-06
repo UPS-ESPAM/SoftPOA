@@ -13,7 +13,7 @@
     function loader($http) {
         return {
             restrict: 'A',
-            template: 'Cargando &nbsp;&nbsp; &nbsp;&nbsp;<img src="/Content/img/ajax-loader.gif" style="height:25px; width:25px;" />',
+            template: 'Cargando &nbsp;&nbsp; &nbsp;&nbsp;<img src="../Content/img/ajax-loader.gif" style="height:25px; width:25px;" />',
             link: function (scope, element, attributes) {
                 scope.$watch(function () {
                     return $http.pendingRequests.length;
