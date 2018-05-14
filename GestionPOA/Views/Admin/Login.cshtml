@@ -53,7 +53,7 @@
                                             </span>
                                             <div class="form-group">
                                                 <label class="control-label">Usuario</label>
-                                                <input type="text" class="form-control" ng-model="vm.login.usuario" ng-init="vm.login.usuario=1308648565" required>
+                                                <input type="text" class="form-control" ng-model="vm.login.usuario" ng-init="vm.login.usuario" required>
                                             </div>
                                         </div>
                                         <div class="input-group">
@@ -62,7 +62,7 @@
                                             </span>
                                             <div class="form-group">
                                                 <label class="control-label">Contraseña</label>
-                                                <input type="password" class="form-control" ng-model="vm.login.password" ng-init="vm.login.password=791081" required>
+                                                <input type="password" class="form-control" ng-model="vm.login.password" ng-init="vm.login.password" required>
                                             </div>
                                         </div>
                                     </div>
@@ -105,22 +105,16 @@
                     </div>
                     <form name="planificacionForm" class="ui form"  ng-submit="vm.registerPlanificacion()" novalidate>
                         <div class="modal-body">
-                            <div class="form-group label-floating">
-                                <label class="control-label">PLANIFICACIÓN</label>
-                                <div class="form-group">
-                                    <select class="form-group" ng-model="vm.TipoPlanificacion" ng-options="arrOptionSelectTP.id as arrOptionSelectTP.Descripcion for arrOptionSelectTP in vm.arrOptionTP" required>
-                                        <option value=""  >-- Seleccione --</option>
-                                    </select>
+                            <div class="form-group">
+                                <div class="form-group label-floating">
+                                    <p><b>Para continuar el acceso al sistema, debera confirmar la planificación del departamento a su cargo.</b></p>
                                 </div>
                             </div>
                             <div class="form-group label-floating">
-                                <label class="control-label">PERIOCIDAD</label>
-                                <div class="form-group">
-                                    <select class="form-group" ng-model="vm.Planificacionperiodo" ng-options="arrOptionSelect.id as arrOptionSelect.Periodo for arrOptionSelect in vm.arrOption" required>
-                                        <option value="">-- Seleccione --</option>
-                                    </select>
+                                <div class="form-group label-floating">
+                                    <label class="control-label"><span class="text-success"><b>TIPO DE PLANIFICACIÓN: </b> </span> POA </label>
                                 </div>
-                            </div>
+                            </div>    
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-fill btn-success" ng-disabled="planificacionForm.$invalid">Planificar <i class="next_week"></i></button>                         

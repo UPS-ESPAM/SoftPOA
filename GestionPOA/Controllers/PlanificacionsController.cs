@@ -15,19 +15,41 @@ namespace GestionPOA.Controllers
         private PEDIEntities db = new PEDIEntities();
 
         // GET: Planificacions/Create
-        public ActionResult Create(int idtipoplanificacion, int idperiocidad)
+        public ActionResult Create()
         {
-            Planificacion Tplanificacion = new Planificacion();
-            Tplanificacion.DepartamentoID = Convert.ToInt32(Session["department"]);
-            Tplanificacion.TipoPlanificacionId = idtipoplanificacion;
-            Tplanificacion.PeriocidadID = idperiocidad;
-            Tplanificacion.fecha = DateTime.Now;
-            Tplanificacion.eliminado = false;
-            db.Planificacion.Add(Tplanificacion);
-            db.SaveChanges();
-            Session["Page"] = "verify";
-            Session["POAorPEDI"] = "POA";
-            return Json(new { mensaje = "Planificación Registrada correctamente" }, JsonRequestBehavior.AllowGet);
+            try
+            {
+                int idtipoplanificacio = 2;
+                int idperiocidad = Convert.ToInt32(Session["Periodo"]);
+                int departamento = Convert.ToInt32(Session["department"]);
+
+                if (!db.Planificacion.Any(o => o.PeriocidadID == idperiocidad && o.DepartamentoID == departamento))
+                {
+                    Planificacion Tplanificacion = new Planificacion();
+                    Tplanificacion.DepartamentoID = Convert.ToInt32(Session["department"]);
+                    Tplanificacion.TipoPlanificacionId = idtipoplanificacio;
+                    Tplanificacion.PeriocidadID = idperiocidad;
+                    Tplanificacion.fecha = DateTime.Now;
+                    Tplanificacion.eliminado = false;
+                    db.Planificacion.Add(Tplanificacion);
+                    db.SaveChanges();
+                    Session["Page"] = "verify";
+                    Session["POAorPEDI"] = "POA";
+                    return Json(new { mensaje = "Planificación Registrada correctamente" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { mensaje = "Planificación, ya existente" }, JsonRequestBehavior.AllowGet);
+
+                }
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

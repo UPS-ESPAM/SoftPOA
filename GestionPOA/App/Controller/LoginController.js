@@ -2,10 +2,10 @@
     .controller('LoginController', function (LoginServices, $cookies, $location, PeriodicidadServices) {
         var vm = this;
         vm.login = {};  
-        cargarPeriocidad();
+        vm.modalplanificacion = {};  
         vm.arrOption = [];
-        cargarTipoPlanificacion();
         vm.arrOptionTP = [];
+        
         $cookies.deparmentID = $("#myDivDepartmentID").data('value');
         $cookies.rol = $("#myDivDepartmentID").data('strol');
         $cookies.status = $("#status").data('status');
@@ -14,14 +14,26 @@
         vm.verifylogin = function () {
             var requestResponse = LoginServices.verifysLogin(vm.login.usuario, vm.login.password);
             requestResponse.then(function successCallback(response) {
+                debugger
                 if ((response.data.rol == "Existe") && (response.data.tipo == 'Usuario')){
                     window.location.href = getBaseUrl()+'/Admin/Index';
-                } else if ((response.data.rol == "Existe") && (response.data.tipo == 'Administrador')) {
-                    $("#myModalPOAPEDI").modal("show");
-                } else if ((response.data.rol == "No Existe") && (response.data.tipo == 'Administrador')) {
-                    window.location.href = getBaseUrl() +'/Admin/Index';
-                }else {
+                } else if ((response.data.rol == "No Existe") && (response.data.tipo == 'Usuario')) {
                     $("#myModalss").modal("show");
+                }
+                else if ((response.data.tipo == 'Administrador')) {
+                    $("#myModalPOAPEDI").modal("show");
+                } else {
+                    $.notify({
+                        icon: "notifications",
+                        message: "<b>Error: </b> Error al ingresar, contactar al administrador del sistema"
+                    }, {
+                            type: 'danger',
+                            timer: 3000,
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            }
+                        });
                 }
             }, function errorCallback(error) {
                 $.notify({
@@ -62,7 +74,7 @@
             });
         }
         vm.registerPlanificacion = function () {
-            var requestResponse = PeriodicidadServices.addPlanificacion(vm.TipoPlanificacion, vm.Planificacionperiodo);
+            var requestResponse = PeriodicidadServices.addPlanificacion();
             requestResponse.then(function successCallback(response) {
                 window.location.href = getBaseUrl() +'/Admin/Index';
                 swal({

@@ -45,15 +45,17 @@ namespace GestionPOA.Controllers
                                      .Where(p => p.Periodo == "Anual")
                                     .Select(p => new { idPeriocidad = p.id })
                                     .FirstOrDefault();
-
-            Planificacion planifiacion = new Planificacion();
-            planifiacion.DepartamentoID = Convert.ToInt32(Session["department"]);
-            planifiacion.TipoPlanificacionId = 1;
-            planifiacion.PeriocidadID = idperiocidad.idPeriocidad;
-            planifiacion.fecha= DateTime.Now;
-            planifiacion.eliminado = false;
-            db.Planificacion.Add(planifiacion);
-            db.SaveChanges();
+            if (!db.Planificacion.Any(o => o.PeriocidadID == idperiocidad.idPeriocidad && o.DepartamentoID == Convert.ToInt32(Session["department"])))
+            {
+                Planificacion planifiacion = new Planificacion();
+                planifiacion.DepartamentoID = Convert.ToInt32(Session["department"]);
+                planifiacion.TipoPlanificacionId = 1;
+                planifiacion.PeriocidadID = idperiocidad.idPeriocidad;
+                planifiacion.fecha = DateTime.Now;
+                planifiacion.eliminado = false;
+                db.Planificacion.Add(planifiacion);
+                db.SaveChanges();
+            }         
 
             return Json(new { mensaje = "Periodos del PEDI registrados correctamente" }, JsonRequestBehavior.AllowGet);
         }

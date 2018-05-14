@@ -27,11 +27,10 @@
             });
             return request;
         }
-        fact.addPlanificacion = function (idtipoplanificacion, idperiocidad) {
+        fact.addPlanificacion = function () {
             var request = $http({
                 method: 'POST',
                 url: getBaseUrl() +'/Planificacions/Create',
-                data: { 'idtipoplanificacion': idtipoplanificacion, 'idperiocidad': idperiocidad },
                 dataType: "json"
             });
             return request;

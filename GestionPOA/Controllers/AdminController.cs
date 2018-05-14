@@ -66,31 +66,57 @@ namespace GestionPOA.Controllers
         public ActionResult Logearse(string usuario, string password)
         {
             var claveEncrypt = encrypt.Encriptar(password);
+            var  periocidades = db.Periocidad
+                .Select(c=> new { Periodo = c.Periodo, id=c.id, estado=c.estado , eliminado=c.eliminado})
+                                .Where(p => p.estado == true && p.eliminado == false).SingleOrDefault();
+
             var username =  db.spLoginIngreso(usuario, claveEncrypt).FirstOrDefault(); 
             if (username != null )
             {
                 Session["user"] = username.usuario;
                 Session["departamento"] = username.departamento;
                 Session["department"] = username.id_departamento;
+                Session["Periodo"] = periocidades.id;
                 Session["rol"] = username.TipoRol;
-                if (username.TipoRol != "Administrador")
+                var rol = db.POAorPEDI("POA", username.id_departamento).FirstOrDefault();
+                string tipo = "";
+
+                switch (username.TipoRol)
                 {
-                    var rol = db.POAorPEDI("POA", username.id_departamento).FirstOrDefault();
-                    if (rol=="Existe") {
-                        Session["Page"] = "verify";
-                        Session["POAorPEDI"] = "POA";
-                    }
-                    return Json(new { username, rol, tipo = "Usuario" }, JsonRequestBehavior.AllowGet);
+                    case "Administrador":
+                        tipo = "Administrador";
+                        if (rol == "Existe")
+                        {
+                            Session["Page"] = "verify";
+                            Session["POAorPEDI"] = "POA";
+                        }
+                        else
+                        {
+                            Session["Page"] = "verify";
+                            Session["POAorPEDI"] = "PEDI";
+                        }
+                        break;
+                    case "Usuario":
+                        tipo = "Usuario";
+                        if (rol == "Existe")
+                        {
+                            Session["Page"] = "verify";
+                            Session["POAorPEDI"] = "POA";
+                        }
+                        else
+                        {
+                            Session["Page"] = "No verify";
+                            Session["POAorPEDI"] = "POA";
+                        }
+                                            
+                        break;
+                    case "No autorizado":
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "No autorizado para ingresar al sistema");
+
+                    default:
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "usuario y/o contraseña incorrecta");
                 }
-                else 
-                {
-                    var rol = db.POAorPEDI("PEDI", username.id_departamento).FirstOrDefault();
-                    if (rol== "No Existe") {
-                        Session["Page"] = "verify";
-                        Session["POAorPEDI"] = "PEDI";
-                    }
-                    return Json(new { username, rol, tipo="Administrador" }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { username, rol, tipo }, JsonRequestBehavior.AllowGet);
             }
             else
             {
