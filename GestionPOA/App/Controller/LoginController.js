@@ -58,7 +58,7 @@
             requestResponse.then(function successCallback(response) {
                 $cookies.remove('deparmentID');
                 $cookies.remove('rol');
-                window.location.href = '/';
+                window.location.href = getBaseUrl() +'/';
             });
         }
         vm.registerPlanificacion = function () {
